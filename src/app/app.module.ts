@@ -9,6 +9,7 @@ import {RouterModule, RouterOutlet, Routes} from "@angular/router";
 import {TodayComponent} from './today/today.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
+import { SafePipe } from './safe.pipe';
 
 const routes: Routes = [
   {path: '', component: AppComponent},
@@ -20,7 +21,8 @@ const routes: Routes = [
     VoteComponent,
     HeaderComponent,
     SubmissionCardComponent,
-    TodayComponent
+    TodayComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,

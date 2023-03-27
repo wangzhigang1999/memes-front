@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {UserService} from "../service/user.service";
 
 @Component({
   selector: 'app-vote',
@@ -14,6 +15,10 @@ export class VoteComponent {
 
   activeBtn = "btn-outline btn-success btn-square"
   deactiveBtn = "btn-circle btn-ghost"
+
+  constructor(private service: UserService) {
+
+  }
 
 
   upClass() {
@@ -31,12 +36,14 @@ export class VoteComponent {
     this.downBtn = !isUpvote;
     console.log("voted " + name + " " + isUpvote)
 
-    if (isUpvote) {
-      this.up = this.up + 1;
-    } else {
-      this.down = this.down + 1;
-    }
-    console.log("up " + this.up + " down " + this.down)
+
+    this.service.vote(name, isUpvote).subscribe(() => {
+      if (isUpvote) {
+        this.up = this.up + 1;
+      } else {
+        this.down = this.down + 1;
+      }
+    })
   }
 
 }

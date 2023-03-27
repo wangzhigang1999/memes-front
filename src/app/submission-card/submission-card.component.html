@@ -1,24 +1,18 @@
-<div class="card w-fit  bg-base-100 shadow-xl" style="margin-top: 20px">
+<div class="card w-fit  bg-base-100 shadow-xl img-container " style="margin-top: 20px">
 
-  <div *ngIf="submission.submissionType==='IMAGE'">
-    <figure class="figure-padding">
-      <img src="{{submission.url}}" class="rounded-xl" alt=""/>
-    </figure>
-  </div>
+  <figure class="figure-padding" *ngIf="submission.submissionType==='IMAGE'">
+    <img src="{{submission.url}}" class="rounded-xl" alt=""/>
+  </figure>
 
-  <div *ngIf="submission.submissionType==='VIDEO'">
-    <figure class="figure-padding">
-      <video class="rounded-xl" controls>
-        <source src="{{submission.url}}" type="video/mp4">
-      </video>
-    </figure>
-  </div>
+  <figure class="figure-padding" *ngIf="submission.submissionType==='VIDEO'">
+    <video class="rounded-xl" controls>
+      <source src="{{submission.url}}" type="video/mp4">
+    </video>
+  </figure>
 
-  <div *ngIf="submission.submissionType==='bilibili'">
-    <figure class="figure-padding rounded">
-      <iframe src="{{submission.url}}" allowfullscreen></iframe>
-    </figure>
-  </div>
+  <figure class="figure-padding rounded" *ngIf="submission.submissionType==='BILIBILI'">
+    <iframe [src]="submission.url | safe" class="rounded" allowfullscreen></iframe>
+  </figure>
 
   <app-vote [name]="submission.name" [up]="submission.up" [down]="submission.down"></app-vote>
 </div>

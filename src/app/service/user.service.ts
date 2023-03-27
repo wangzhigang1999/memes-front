@@ -21,7 +21,12 @@ export class UserService {
   getTodaySubmissions(): Observable<any> {
     // get today YYYY-MM-DD
     let today = new Date().toISOString().slice(0, 10);
-    let url = this.host + '/submission/'+today
+    let url = this.host + '/submission/' + today
     return this.http.get(url);
+  }
+
+  vote(name: string, up: boolean): Observable<any> {
+    let url = this.host + `/submission/vote/${name}/${up}`;
+    return this.http.post(url, null);
   }
 }
