@@ -1,0 +1,12 @@
+#container {
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 40px;
+}
+
+#content {
+  align-items: center;
+  justify-content: center;
+
+}

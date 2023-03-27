@@ -1,0 +1,18 @@
+/* for desktop */
+@media screen and (min-width: 600px) {
+  .custom-text {
+    font-size: xxx-large;
+  }
+}
+
+/* for mobile */
+@media screen and (max-width: 600px) {
+  .custom-text {
+    font-size: xx-large;
+  }
+}
+
+#opt-btn {
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
