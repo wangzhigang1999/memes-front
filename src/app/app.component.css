@@ -1,12 +1,22 @@
-#container {
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  margin: 20px 40px;
+
+
+@media screen and (min-width: 600px) {
+  #container {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 40px;
+  }
+
 }
 
-#content {
-  /*align-items: center;*/
-  /*justify-content: center;*/
-  /*display: flex;*/
+
+@media screen and (max-width: 600px) {
+  #container {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 20px;
+
+  }
 }
