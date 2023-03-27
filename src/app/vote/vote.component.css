@@ -3,6 +3,12 @@
   .custom-text {
     font-size: xxx-large;
   }
+
+  .btn-me {
+    height: 4rem;
+    width: 4rem;
+  }
+
 }
 
 /* for mobile */

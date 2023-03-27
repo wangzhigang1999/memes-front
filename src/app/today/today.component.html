@@ -1,3 +1,13 @@
 <div id="today">
-    <app-submission-card class="w-full" [submission]="sub" *ngFor="let sub of submissions;"/>
+  <app-submission-card class="w-full" [submission]="sub" *ngFor="let sub of submissions;"/>
+
+  <div class="card w-fit bg-base-100 shadow-xl" style="margin-top: 20px">
+    <figure class="figure-padding" style="margin: 20px">
+      <img src="assets/welcome.webp" class="rounded-xl" alt=""/>
+    </figure>
+    <div style="margin-bottom: 20px;text-align: center">
+      <a routerLink="/submit" class="btn btn-wide btn-success btn-outline">没有更多了，去投稿</a>
+    </div>
+
+  </div>
 </div>

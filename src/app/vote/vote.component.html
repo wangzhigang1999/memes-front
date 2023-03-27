@@ -1,18 +1,18 @@
 <div class="columns-2 w-full">
   <div class=" w-full" style="text-align: center;">
-    <button class="btn btn-lg:btn-lg:hidden  custom-text" style="margin-right: 10px" [ngClass]="downClass()"
+    <button class="btn btn-me custom-text" style="margin-right: 10px" [ngClass]="downClass()"
             (click)="vote(name,false)">🥵
     </button>
   </div>
 
-<!--  <div class="w-full" style="text-align: center;">-->
-<!--    <button class=" btn btn-lg btn-ghost custom-text">-->
-<!--      {{down}}&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;{{up}}-->
-<!--    </button>-->
-<!--  </div>-->
+  <!--  <div class="w-full" style="text-align: center;">-->
+  <!--    <button class=" btn btn-lg btn-ghost custom-text">-->
+  <!--      {{down}}&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;{{up}}-->
+  <!--    </button>-->
+  <!--  </div>-->
 
   <div class="w-full " style="text-align: center;">
-    <button class=" btn btn-lg:hidden custom-text" style="margin-left: 10px" [ngClass]="upClass()"
+    <button class=" btn btn-me  custom-text" style="margin-left: 10px" [ngClass]="upClass()"
             (click)="vote(name,true)">🤣
     </button>
   </div>
