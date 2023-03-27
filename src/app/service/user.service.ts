@@ -37,4 +37,12 @@ export class UserService {
     formData.append('mime', mime);
     return this.http.post(url, formData);
   }
+
+  uploadBilibili(uri: string) {
+    let url = this.host + '/submission';
+    let formData = new FormData();
+    formData.append('uri', uri);
+    formData.append('mime', "text/bilibili");
+    return this.http.post(url, formData);
+  }
 }

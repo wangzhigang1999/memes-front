@@ -104,6 +104,16 @@ export class SubmitComponent {
       return
     }
 
+    // extract src from iframe
+    // @ts-ignore
+    let src = this.iframe.match(/src="(.+?)"/)[1];
+
+    this.service.uploadBilibili(src).subscribe(
+      () => {
+        this.title = "上传成功"
+      }
+    )
+
   }
 
   validateBilibiliIframe(): boolean {
@@ -113,7 +123,8 @@ export class SubmitComponent {
 
 
   bilibiliChange() {
-    if (this.iframe == null || this.iframe.startsWith("http")) {
+
+    if(!this.validateBilibiliIframe()){
       return
     }
     // @ts-ignore
