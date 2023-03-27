@@ -15,7 +15,8 @@ import {SubmitComponent} from './submit/submit.component';
 const routes: Routes = [
   {path: '', component: TodayComponent},
   {path: 'today', component: TodayComponent},
-  {path: 'submit', component: SubmitComponent}
+  {path: 'submit', component: SubmitComponent},
+  {path: '**', component: TodayComponent}
 ];
 
 @NgModule({
