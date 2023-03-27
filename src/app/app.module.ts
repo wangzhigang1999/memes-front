@@ -9,10 +9,13 @@ import {RouterModule, RouterOutlet, Routes} from "@angular/router";
 import {TodayComponent} from './today/today.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
-import { SafePipe } from './safe.pipe';
+import {SafePipe} from './safe.pipe';
+import {SubmitComponent} from './submit/submit.component';
 
 const routes: Routes = [
-  {path: '', component: AppComponent},
+  {path: '', component: TodayComponent},
+  {path: 'today', component: TodayComponent},
+  {path: 'submit', component: SubmitComponent}
 ];
 
 @NgModule({
@@ -22,7 +25,8 @@ const routes: Routes = [
     HeaderComponent,
     SubmissionCardComponent,
     TodayComponent,
-    SafePipe
+    SafePipe,
+    SubmitComponent
   ],
   imports: [
     BrowserModule,
