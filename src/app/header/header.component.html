@@ -8,7 +8,10 @@
       </label>
       <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
         <li>
-          <a routerLink="/history">历史投稿</a>
+          <a class="btn-ghost" routerLink="/history">历史投稿</a>
+        </li>
+        <li>
+          <a class="btn-ghost" routerLink="/review">审核</a>
         </li>
       </ul>
     </div>
@@ -17,7 +20,7 @@
     </div>
 
 
-    <div class="flex-none">
+    <div class="flex-none hidden sm:flex">
       <div class="menu menu-horizontal px-1">
         <a routerLink="/history" class="btn btn-ghost">历史投稿</a>
       </div>
@@ -32,7 +35,7 @@
     </div>
 
 
-<!--    <div class="flex-none items-center">-->
+    <!--    <div class="flex-none items-center">-->
     <!--      <a aria-label="Github"-->
     <!--         target="_blank"-->
     <!--         href="https://github.com/wangzhigang1999/memes"-->
@@ -46,7 +49,7 @@
     <!--    </div>-->
 
     <div class="flex-none">
-      <div class="tooltip tooltip-success tooltip-bottom" data-tip="点击投稿" >
+      <div class="tooltip tooltip-success tooltip-bottom" data-tip="点击投稿">
         <button routerLink="/submit" class="btn btn-outline btn-success">➕</button>
       </div>
     </div>

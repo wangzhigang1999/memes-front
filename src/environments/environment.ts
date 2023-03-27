@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  host: "http://k8s.personai.cn:31278",
+  host: "https://memes-dev.onrender.com",
 };
 
 /*
