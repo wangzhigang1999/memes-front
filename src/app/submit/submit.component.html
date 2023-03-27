@@ -1,1 +1,82 @@
-<p>submit works!</p>
+<div class="origin-center w-full ">
+
+  <div class="origin-center w-full" *ngIf="submissionType==='IMAGE'">
+    <div style="margin-top: 30px;margin-bottom: 60px;">
+      <img  class="rounded-box" id="img" width="300px" [src]="url" alt="" style="margin: auto;"/>
+    </div>
+  </div>
+
+  <div class="origin-center w-full" *ngIf="submissionType==='VIDEO'">
+    <div style="margin-top: 30px;margin-bottom: 60px;">
+      <video class="rounded-box" id="video" width="300px" controls [src]="url" style="margin: auto;"></video>
+    </div>
+  </div>
+
+  <div class="origin-center w-full" *ngIf="submissionType==='BILIBILI'">
+    <div style="margin-top: 30px;margin-bottom: 60px;">
+      <iframe class="rounded-box" id="bilibili" [src]="url | safe" style="margin: auto;"></iframe>
+    </div>
+  </div>
+
+
+  <!--  checkbox-->
+  <div class="border-success">
+    <div class="columns-3 rounded border-success" style="width: 300px;margin: auto">
+
+      <div class="select-box">
+        <span class="label-text">Video</span>
+        <input type="radio" name="radio-10" (change)="select('VIDEO')" class="radio checked:bg-success"/>
+      </div>
+
+      <div class="select-box">
+        <span class="label-text">Image</span>
+        <input type="radio" name="radio-10" (change)="select('IMAGE')" class="radio checked:bg-success" checked/>
+      </div>
+
+      <div class="select-box">
+        <span class="label-text">Bilibili</span>
+        <input type="radio" name="radio-10" (change)="select('BILIBILI')" class="radio checked:bg-success"/>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- operations-->
+  <div style="text-align: center;vertical-align: center">
+    <div style="margin-top: 20px;margin-bottom: 20px;">
+
+      <input id="iframe-input" type="text" accept="text/plain" *ngIf="submissionType=='BILIBILI'" [(ngModel)]="iframe"
+             (ngModelChange)="bilibiliChange()" class="file-input file-input-bordered file-input-success w-2/3 max-w-xs"
+             style="margin-top: 10px;text-align: center"/>
+      <input id="video-input" type="file" accept="video/mp4" *ngIf="submissionType=='VIDEO'" (change)="videoChange()"
+             class="file-input file-input-bordered file-input-success w-2/3 max-w-xs" style="margin-top: 10px"/>
+      <input id="image-input" type="file" accept="image/*" *ngIf="submissionType=='IMAGE'" (change)="imageChange()"
+             class="file-input file-input-bordered file-input-success w-2/3 max-w-xs" style="margin-top: 10px"/>
+
+      <label for="my-modal" style="margin-left: 20px;" (click)="submit()" class="btn   btn-success btn-md">
+        上传 </label>
+
+    </div>
+
+    <div id="test"></div>
+  </div>
+
+  <!--  upload-->
+  <div id="upload">
+
+  </div>
+
+
+  <!-- Put this part before </body> tag -->
+  <input type="checkbox" id="my-modal" class="modal-toggle"/>
+  <div class="modal">
+    <div class="modal-box ">
+      <h3 class="font-bold text-lg" id="title">{{title}}</h3>
+      <div class="py-4">{{message}}</div>
+      <div class="modal-action">
+        <label for="my-modal" class="btn btn-success btn-sm">OK</label>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -29,4 +29,12 @@ export class UserService {
     let url = this.host + `/submission/vote/${name}/${up}`;
     return this.http.post(url, null);
   }
+
+  uploadFile(tempFile: File, mime: string): Observable<any> {
+    let url = this.host + '/submission';
+    let formData = new FormData();
+    formData.append('file', tempFile);
+    formData.append('mime', mime);
+    return this.http.post(url, formData);
+  }
 }

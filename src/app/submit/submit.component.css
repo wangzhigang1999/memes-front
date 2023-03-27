@@ -1,0 +1,20 @@
+.select-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+
+.label-text {
+  margin-right: 10px;
+}
+
+.origin-center{
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
