@@ -109,10 +109,9 @@ export class SubmitComponent {
       return
     }
 
-    // extract src from iframe
     // @ts-ignore
     let src = this.iframe.match(/src="(.+?)"/)[1];
-
+    src = src.replace("//player.bilibili.com/player.html", "//www.bilibili.com/blackboard/html5mobileplayer.html");
     this.service.uploadBilibili(src).subscribe(
       (data: any) => {
         this.title = data.message
@@ -131,7 +130,6 @@ export class SubmitComponent {
 
 
   bilibiliChange() {
-
     if (!this.validateBilibiliIframe()) {
       return
     }
