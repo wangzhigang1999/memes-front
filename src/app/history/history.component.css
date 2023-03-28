@@ -2,6 +2,10 @@
   margin-top: 20px;
 }
 
+#header-page{
+  margin-top: 20px;
+}
+
 @media screen  and (min-width: 600px) {
   #today{
     margin: auto;

@@ -1,6 +1,18 @@
 <div id="history">
 
   <div id="today">
+
+    <div id="header-page" class="w-full">
+      <div class="btn-group grid grid-cols-3">
+        <button class="btn btn-success btn-outline" (click)="setCur(currentIndex-1)"
+                [disabled]="!hasPrev">{{preMessage}}</button>
+        <button class="btn btn-success btn-outline">{{currentMessage}}</button>
+
+        <button class="btn btn-success btn-outline" (click)="setCur(currentIndex+1)"
+                [disabled]="!hasNext">{{nextMessage}}</button>
+      </div>
+    </div>
+
     <app-submission-card class="w-full" [submission]="sub" *ngFor="let sub of submissions;"/>
 
     <div class="card w-fit bg-base-100 shadow-xl" style="margin-top: 20px">
