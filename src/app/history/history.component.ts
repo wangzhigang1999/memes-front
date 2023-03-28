@@ -26,13 +26,15 @@ export class HistoryComponent {
   ngOnInit(): void {
     this.service.getHistory().subscribe((data: any) => {
 
-      // history:  [YYYY-MM-DD, YYYY-MM-DD, ...]
       this.history = data.data;
       let total = this.history.length;
 
       if (total > 0) {
+        // sort by date YYYY-MM-DD
+        this.history = this.history.sort((a, b) => {
+          return new Date(a).getTime() - new Date(b).getTime();
+        })
         let last = this.history[total - 1];
-
         this.currentIndex = total - 1;
         this.hasNext = this.hashNext(this.currentIndex, total);
         this.hasPrev = this.hashPrev(this.currentIndex);
