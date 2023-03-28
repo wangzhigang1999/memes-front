@@ -22,11 +22,17 @@ export class UserService {
     // get today YYYY-MM-DD
     let today = new Date().toISOString().slice(0, 10);
     let url = this.host + '/submission/' + today
+    // let url = this.host + '/submission/2023-03-28'
     return this.http.get(url);
   }
 
-  vote(name: string, up: boolean): Observable<any> {
-    let url = this.host + `/submission/vote/${name}/${up}`;
+  getSubmission(date: string): Observable<any> {
+    let url = this.host + '/submission/' + date
+    return this.http.get(url);
+  }
+
+  vote(hash: number, up: boolean): Observable<any> {
+    let url = this.host + `/submission/vote/${hash}/${up}`;
     return this.http.post(url, null);
   }
 
@@ -44,5 +50,25 @@ export class UserService {
     formData.append('uri', uri);
     formData.append('mime', "text/bilibili");
     return this.http.post(url, formData);
+  }
+
+  getHistory() {
+    let url = this.host + '/submission/history';
+    return this.http.get(url);
+  }
+
+  review() {
+    let url = this.host + '/submission/review';
+    return this.http.get(url);
+  }
+
+  delete(hash: number) {
+    let url = this.host + `/submission/${hash}`;
+    return this.http.delete(url);
+  }
+
+  release() {
+    let url = this.host + `/submission/release`;
+    return this.http.post(url, null);
   }
 }

@@ -9,6 +9,7 @@ import {UserService} from "../service/user.service";
 export class VoteComponent {
   upBtn = false;
   downBtn = false;
+  @Input() hash: any
   @Input() name: any
   @Input() up: any
   @Input() down: any
@@ -31,13 +32,13 @@ export class VoteComponent {
   }
 
 
-  vote(name: string, isUpvote: boolean) {
+  vote(hash: number, isUpvote: boolean) {
     this.upBtn = isUpvote;
     this.downBtn = !isUpvote;
-    console.log("voted " + name + " " + isUpvote)
+    console.log("voted " + hash + " " + isUpvote)
 
 
-    this.service.vote(name, isUpvote).subscribe(() => {
+    this.service.vote(hash, isUpvote).subscribe(() => {
       if (isUpvote) {
         this.up = this.up + 1;
       } else {

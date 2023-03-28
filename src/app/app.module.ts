@@ -1,21 +1,27 @@
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
+import {Router} from "@angular/router";
+import * as Sentry from "@sentry/angular-ivy";
 import {AppComponent} from './app.component';
 import {VoteComponent} from './vote/vote.component';
 import {HeaderComponent} from './header/header.component';
 import {SubmissionCardComponent} from './submission-card/submission-card.component';
 import {RouterModule, RouterOutlet, Routes} from "@angular/router";
 import {TodayComponent} from './today/today.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {SafePipe} from './safe.pipe';
 import {SubmitComponent} from './submit/submit.component';
+import {UuidInterceptor} from "./uuid.interceptor";
+import {HistoryComponent} from './history/history.component';
+import {ReviewComponent} from './review/review.component';
 
 const routes: Routes = [
-  {path: '', component: TodayComponent},
+  {path: '', component: TodayComponent,},
   {path: 'today', component: TodayComponent},
   {path: 'submit', component: SubmitComponent},
+  {path: 'history', component: HistoryComponent},
+  {path: 'review', component: ReviewComponent},
   {path: '**', component: TodayComponent}
 ];
 
@@ -27,7 +33,9 @@ const routes: Routes = [
     SubmissionCardComponent,
     TodayComponent,
     SafePipe,
-    SubmitComponent
+    SubmitComponent,
+    HistoryComponent,
+    ReviewComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +45,28 @@ const routes: Routes = [
     FormsModule,
 
   ],
-  providers: [],
+  providers: [
+    {
+      provide: ErrorHandler,
+      useValue: Sentry.createErrorHandler({
+        showDialog: true,
+      }),
+    },
+    {
+      provide: Sentry.TraceService,
+      deps: [Router],
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: () => () => {
+      },
+      deps: [Sentry.TraceService],
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS, useClass: UuidInterceptor, multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

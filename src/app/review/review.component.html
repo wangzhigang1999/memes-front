@@ -1,0 +1,34 @@
+<div id="review">
+  <div id="token-input" *ngIf="!hasToken" style="text-align: center;margin-top: 100px">
+    <input type="text" placeholder="输入你的token" [(ngModel)]="token"
+           class="input input-bordered input-success w-3/5 max-w-xs"/>
+    <button class=" btn btn-success" (click)="submitToken()" style="margin-left: 5px">提交</button>
+  </div>
+
+  <div id="clear-token" *ngIf="hasToken" style="text-align: center;margin-top: 20px">
+    <button *ngIf="submissions.length<=0" class="btn btn-outline btn-success" (click)="removeToken()">
+      看不到内容? &nbsp; 点击重新输入token
+    </button>
+
+    <app-submission-card class="w-full" [submission]="sub" [review]="true" *ngFor="let sub of submissions;"/>
+
+    <div style="text-align: center;margin-top: 10px" *ngIf="submissions.length>0">
+      <label for="my-modal" class="btn btn-success btn-outline w-full" (click)="release()">发布</label>
+    </div>
+  </div>
+
+
+  <!-- Put this part before </body> tag -->
+  <input type="checkbox" id="my-modal" class="modal-toggle"/>
+  <div class="modal">
+    <div class="modal-box">
+      <h3 class="font-bold text-lg">{{title}}</h3>
+      <p class="py-4">{{message}}</p>
+      <div class="modal-action">
+        <label for="my-modal" class="btn btn-success btn-sm">Yay!</label>
+      </div>
+    </div>
+  </div>
+
+
+</div>

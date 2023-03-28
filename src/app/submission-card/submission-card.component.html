@@ -1,4 +1,4 @@
-<div class="card w-fit  bg-base-100 shadow-xl img-container " style="margin-top: 20px">
+<div class="card w-fit  bg-base-100 shadow-xl img-container" [id]="submission.hash" style="margin-top: 20px">
 
   <figure class="figure-padding" *ngIf="submission.submissionType==='IMAGE'">
     <img src="{{submission.url}}" class="rounded-xl" alt=""/>
@@ -14,6 +14,14 @@
     <iframe [src]="submission.url | safe" class="rounded" allowfullscreen></iframe>
   </figure>
 
-  <app-vote [name]="submission.name" [up]="submission.up" [down]="submission.down"></app-vote>
+  <div *ngIf="!review">
+    <app-vote [hash]="submission.hash" [name]="submission.name" [up]="submission.up"
+              [down]="submission.down"></app-vote>
+  </div>
+
+  <div *ngIf="review" style="text-align: center;">
+    <button style="margin-bottom: 20px" class="btn btn-wide btn-warning" (click)="delete(submission.hash)">Delete</button>
+  </div>
+
 </div>
 

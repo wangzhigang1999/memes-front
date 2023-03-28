@@ -2,7 +2,7 @@
 
   <div class="origin-center w-full" *ngIf="submissionType==='IMAGE'">
     <div style="margin-top: 30px;margin-bottom: 60px;">
-      <img  class="rounded-box" id="img" width="300px" [src]="url" alt="" style="margin: auto;"/>
+      <img class="rounded-box" id="img" width="300px" [src]="url" alt="" style="margin: auto;"/>
     </div>
   </div>
 
@@ -20,23 +20,23 @@
 
 
   <!--  checkbox-->
-    <div class="flex rounded border-success" style="width: 300px;margin: auto">
+  <div class="flex rounded border-success" style="width: 300px;margin: auto">
 
-      <div class="select-box w-full">
-        <span class="label-text">Video</span>
-        <input type="radio" name="radio-10" (change)="select('VIDEO')" class="radio checked:bg-success"/>
-      </div>
-
-      <div class="select-box w-full">
-        <span class="label-text">Image</span>
-        <input type="radio" name="radio-10" (change)="select('IMAGE')" class="radio checked:bg-success" checked/>
-      </div>
-
-      <div class="select-box w-full">
-        <span class="label-text">Bilibili</span>
-        <input type="radio" name="radio-10" (change)="select('BILIBILI')" class="radio checked:bg-success"/>
-      </div>
+    <div class="select-box w-full">
+      <span class="label-text">Video</span>
+      <input type="radio" name="radio-10" (change)="select('VIDEO')" class="radio checked:bg-success"/>
     </div>
+
+    <div class="select-box w-full">
+      <span class="label-text">Image</span>
+      <input type="radio" name="radio-10" (change)="select('IMAGE')" class="radio checked:bg-success" checked/>
+    </div>
+
+    <div class="select-box w-full">
+      <span class="label-text">Bilibili</span>
+      <input type="radio" name="radio-10" (change)="select('BILIBILI')" class="radio checked:bg-success"/>
+    </div>
+  </div>
 
 
   <!-- operations-->
@@ -55,19 +55,11 @@
         上传 </label>
 
     </div>
-
-    <div id="test"></div>
   </div>
-
-  <!--  upload-->
-  <div id="upload">
-
-  </div>
-
 
   <!-- Put this part before </body> tag -->
-  <input type="checkbox" id="my-modal" class="modal-toggle"/>
-  <div class="modal">
+  <input type="checkbox" id="my-modal" class="modal-toggle "/>
+  <div class="modal place-content-center">
     <div class="modal-box ">
       <h3 class="font-bold text-lg" id="title">{{title}}</h3>
       <div class="py-4">{{message}}</div>

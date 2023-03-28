@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  host: "https://memes-dev.onrender.com",
+  host: "http://192.168.31.137:8080",
 };
 
 /*
