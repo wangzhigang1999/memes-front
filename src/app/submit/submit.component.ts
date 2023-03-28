@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {UserService} from "../service/user.service";
 import {Submission} from "../model/submission";
 
@@ -10,14 +10,14 @@ import {Submission} from "../model/submission";
 export class SubmitComponent {
   submissionType = "IMAGE";
   defaultMap = {
-    "IMAGE": "https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1120w,f_auto,q_auto:best/rockcms/2022-01/210602-doge-meme-nft-mb-1715-8afb7e.jpg",
-    "VIDEO": "http://k8s.personai.cn:32106/zhigang/memes/7e76e4ae-c594-4372-b9fc-73c08eb6819f.mp4",
+    "IMAGE": "assets/welcome.webp",
+    "VIDEO": "assets/video-example.mp4",
     "BILIBILI": "//www.bilibili.com/blackboard/html5mobileplayer.html?aid=823618204&bvid=BV1wg4y1t7j6&cid=1057102166&page=1&danmaku=no",
   }
   url: string = ""
 
   // 10MB max
-  maxFileSize = 10 * 1024 * 1024 * 1024
+  maxFileSize = 10 * 1024 * 1024
   iframe = "在这里输入 iframe"
   tempFile: File | any
 
@@ -27,6 +27,30 @@ export class SubmitComponent {
   constructor(private service: UserService) {
   }
 
+  @HostListener('paste', ['$event']) onPaste(event: ClipboardEvent) {
+    // 在这里处理粘贴事件
+    const items = event.clipboardData && event.clipboardData.items;
+    let file;
+    if (items && items.length) {
+      // 检索剪切板items
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          file = items[i].getAsFile();
+          // @ts-ignore
+          this.renderImageFile(file)
+          this.submissionType = "IMAGE"
+          break;
+        } else if (items[i].type.indexOf('video') !== -1) {
+          file = items[i].getAsFile();
+          // @ts-ignore
+          this.renderVideoFile(file)
+          this.submissionType = "VIDEO"
+          break;
+        }
+      }
+    }
+
+  }
 
   ngOnInit(): void {
     // @ts-ignore
@@ -45,7 +69,7 @@ export class SubmitComponent {
     if (this.tempFile != null) {
       if (this.tempFile.size > this.maxFileSize) {
         this.title = "上传失败"
-        this.message = "文件过大"
+        this.message = "文件过大, 请上传小于 10MB 的文件"
         return
       }
     }
@@ -122,7 +146,6 @@ export class SubmitComponent {
   }
 
   validateBilibiliIframe(): any {
-    console.log(this.iframe)
     let regex = /<iframe.*?src="(.*?)".*?>.*?<\/iframe>/g
     let result = this.iframe.match(regex)
     return !(!result || result.length == 0);
@@ -142,39 +165,35 @@ export class SubmitComponent {
   imageChange() {
     // @ts-ignore
     let file = document.getElementById("image-input").files[0]
-    if (file == null) {
-      return
-    }
-    this.compressImg(file, 0.5).then(r => {
-      // @ts-ignore
-      this.tempFile = r;
-    })
+    this.renderImageFile(file)
+  }
 
-    // @ts-ignore
+  renderImageFile(file: File) {
+    if (file.type != "image/gif") {
+      this.compressImg(file, 0.5).then(r => {
+        this.tempFile = r;
+      })
+    } else {
+      this.tempFile = file
+    }
     let reader = new FileReader();
-    // @ts-ignore
     reader.readAsDataURL(file);
-    // @ts-ignore
     reader.onload = () => {
       // @ts-ignore
       this.url = reader.result;
     }
-
   }
 
   videoChange() {
     // @ts-ignore
     let file = document.getElementById("video-input").files[0]
-    if (file == null) {
-      return
-    }
-    this.tempFile = file
+    this.renderVideoFile(file)
+  }
 
-    // @ts-ignore
+  renderVideoFile(file: File) {
+    this.tempFile = file
     let reader = new FileReader();
-    // @ts-ignore
     reader.readAsDataURL(file);
-    // @ts-ignore
     reader.onload = () => {
       // @ts-ignore
       this.url = reader.result;
@@ -182,7 +201,6 @@ export class SubmitComponent {
   }
 
   compressImg(file: File, quality: number) {
-
     return new Promise((resolve) => {
       const reader = new FileReader() // 创建 FileReader
       // @ts-ignore
@@ -206,7 +224,6 @@ export class SubmitComponent {
           console.log('压缩前', file.size / 1024, 'KB')
           console.log('压缩后', miniFile.size / 1024, 'KB')
           console.log('压缩率', (miniFile.size / file.size * 100).toFixed(2) + '%')
-
           return resolve(miniFile)
         }
         image.src = src
@@ -214,6 +231,26 @@ export class SubmitComponent {
       reader.readAsDataURL(file)
     })
 
+  }
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    // @ts-ignore
+    const files = event.dataTransfer.files;
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      if (file.type.startsWith("image")) {
+        this.renderImageFile(file)
+        this.submissionType = "IMAGE"
+      } else if (file.type.startsWith("video")) {
+        this.renderVideoFile(file)
+        this.submissionType = "VIDEO"
+      }
+    }
   }
 }
 

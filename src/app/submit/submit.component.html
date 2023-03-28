@@ -1,6 +1,6 @@
 <div class="origin-center w-full ">
 
-  <div class="origin-center w-full" *ngIf="submissionType==='IMAGE'">
+  <div class="origin-center w-full" *ngIf="submissionType==='IMAGE'" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
     <div style="margin-top: 30px;margin-bottom: 60px;">
       <img class="rounded-box" id="img" width="300px" [src]="url" alt="" style="margin: auto;"/>
     </div>
@@ -24,17 +24,21 @@
 
     <div class="select-box w-full">
       <span class="label-text">Video</span>
-      <input type="radio" name="radio-10" (change)="select('VIDEO')" class="radio checked:bg-success"/>
+      <input type="radio" name="radio-10" (change)="select('VIDEO')" class="radio checked:bg-success"
+             [checked]="submissionType=='VIDEO'"/>
     </div>
 
     <div class="select-box w-full">
       <span class="label-text">Image</span>
-      <input type="radio" name="radio-10" (change)="select('IMAGE')" class="radio checked:bg-success" checked/>
+      <input type="radio" name="radio-10" (change)="select('IMAGE')" class="radio checked:bg-success"
+             [checked]="submissionType=='IMAGE'"/>
     </div>
 
     <div class="select-box w-full">
       <span class="label-text">Bilibili</span>
-      <input type="radio" name="radio-10" (change)="select('BILIBILI')" class="radio checked:bg-success"/>
+      <input type="radio" name="radio-10" (change)="select('BILIBILI')" class="radio checked:bg-success"
+             [checked]="submissionType=='BILIBILI'"
+      />
     </div>
   </div>
 
@@ -60,7 +64,7 @@
   <!-- Put this part before </body> tag -->
   <input type="checkbox" id="my-modal" class="modal-toggle "/>
   <div class="modal place-content-center">
-    <div class="modal-box ">
+    <div class="modal-box modal-bottom sm:modal-middle" style="text-align: center">
       <h3 class="font-bold text-lg" id="title">{{title}}</h3>
       <div class="py-4">{{message}}</div>
       <div class="modal-action">

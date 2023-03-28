@@ -28,7 +28,7 @@ export class ReviewComponent {
 
     this.hasToken = true;
     this.service.review().subscribe((data: any) => {
-      this.submissions = data.data;
+      this.submissions = data.data? data.data : [];
     })
 
 
@@ -39,7 +39,7 @@ export class ReviewComponent {
       localStorage.setItem('token', this.token);
       this.hasToken = true;
       this.service.review().subscribe((data: any) => {
-        this.submissions = data.data;
+        this.submissions = data.data? data.data : [];
       })
     }
 

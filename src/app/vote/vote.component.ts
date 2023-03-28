@@ -21,11 +21,9 @@ export class VoteComponent {
 
   }
 
-
   upClass() {
     return !this.upBtn && !this.downBtn ? this.deactiveBtn : this.upBtn ? this.activeBtn : this.deactiveBtn;
   }
-
 
   downClass() {
     return !this.upBtn && !this.downBtn ? this.deactiveBtn : this.upBtn ? this.deactiveBtn : this.activeBtn;
@@ -35,9 +33,6 @@ export class VoteComponent {
   vote(hash: number, isUpvote: boolean) {
     this.upBtn = isUpvote;
     this.downBtn = !isUpvote;
-    console.log("voted " + hash + " " + isUpvote)
-
-
     this.service.vote(hash, isUpvote).subscribe(() => {
       if (isUpvote) {
         this.up = this.up + 1;
