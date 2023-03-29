@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {UserService} from "../service/user.service";
 import {Response} from "../model/response";
+import {AdminService} from "../service/admin.service";
 
 @Component({
   selector: 'app-review',
@@ -16,7 +16,7 @@ export class ReviewComponent {
   title: any;
   message: any;
 
-  constructor(private service: UserService) {
+  constructor(private service: AdminService) {
   }
 
   ngOnInit() {
@@ -28,7 +28,7 @@ export class ReviewComponent {
 
     this.hasToken = true;
     this.service.review().subscribe((data: any) => {
-      this.submissions = data.data? data.data : [];
+      this.submissions = data.data ? data.data : [];
     })
 
 
@@ -39,7 +39,7 @@ export class ReviewComponent {
       localStorage.setItem('token', this.token);
       this.hasToken = true;
       this.service.review().subscribe((data: any) => {
-        this.submissions = data.data? data.data : [];
+        this.submissions = data.data ? data.data : [];
       })
     }
 

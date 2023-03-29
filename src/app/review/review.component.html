@@ -13,7 +13,9 @@
     <app-submission-card class="w-full" [submission]="sub" [review]="true" *ngFor="let sub of submissions;"/>
 
     <div style="text-align: center;margin-top: 10px" *ngIf="submissions.length>0">
-      <label for="my-modal" class="btn btn-success btn-outline w-full" (click)="release()">发布</label>
+      <label for="my-modal" class="btn btn-success btn-outline btn-wide" (click)="release()">发布</label>
+      <span>&nbsp;&nbsp;</span>
+      <span class="btn btn-success btn-outline" routerLink="/" style="margin-right: 10px">去主页</span>
     </div>
   </div>
 

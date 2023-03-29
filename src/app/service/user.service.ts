@@ -18,24 +18,48 @@ export class UserService {
     this.host = environment.host
   }
 
+  /**
+   * get today's submissions
+   */
   getTodaySubmissions(): Observable<any> {
-    // get today YYYY-MM-DD
-    let today = new Date().toISOString().slice(0, 10);
+    // get today YYYY-MM-DD with timezone shanghai
+    let today = new Date().toLocaleDateString('zh-CN', {timeZone: 'Asia/Shanghai'})
+    // if the day month year is 1,2,3,4,5,6,7,8,9,0,then add 0 before it
+    let todayArray = today.split('/')
+    for (let i = 0; i < todayArray.length; i++) {
+      if (todayArray[i].length == 1) {
+        todayArray[i] = '0' + todayArray[i]
+      }
+    }
+    today = todayArray.join('-')
     let url = this.host + '/submission/' + today
-    // let url = this.host + '/submission/2023-03-28'
     return this.http.get(url);
   }
 
+  /**
+   * get submissions by date
+   * @param date YYYY-MM-DD
+   */
   getSubmission(date: string): Observable<any> {
     let url = this.host + '/submission/' + date
     return this.http.get(url);
   }
 
+  /**
+   * vote for a submission
+   * @param hash the identifier of the submission
+   * @param up true for upvote, false for downvote
+   */
   vote(hash: number, up: boolean): Observable<any> {
     let url = this.host + `/submission/vote/${hash}/${up}`;
     return this.http.post(url, null);
   }
 
+  /**
+   * upload a file
+   * @param tempFile the file to be uploaded
+   * @param mime the mime type of the file
+   */
   uploadFile(tempFile: File, mime: string): Observable<any> {
     let url = this.host + '/submission';
     let formData = new FormData();
@@ -44,6 +68,10 @@ export class UserService {
     return this.http.post(url, formData);
   }
 
+  /**
+   * upload a bilibili video
+   * @param uri the uri of the bilibili video
+   */
   uploadBilibili(uri: string) {
     let url = this.host + '/submission';
     let formData = new FormData();
@@ -52,23 +80,12 @@ export class UserService {
     return this.http.post(url, formData);
   }
 
+  /**
+   * get the history of submissions, [YYYY-MM-DD, YYYY-MM-DD, ...]
+   */
   getHistory() {
     let url = this.host + '/submission/history';
     return this.http.get(url);
   }
 
-  review() {
-    let url = this.host + '/submission/review';
-    return this.http.get(url);
-  }
-
-  delete(hash: number) {
-    let url = this.host + `/submission/${hash}`;
-    return this.http.delete(url);
-  }
-
-  release() {
-    let url = this.host + `/submission/release`;
-    return this.http.post(url, null);
-  }
 }

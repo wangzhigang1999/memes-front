@@ -1,11 +1,9 @@
-
-
 @media screen and (min-width: 600px) {
   #container {
     height: 100%;
     align-items: center;
     justify-content: center;
-    margin: 20px 40px;
+    margin: 40px 80px;
   }
 
 }
