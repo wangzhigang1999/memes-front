@@ -19,10 +19,7 @@ export class TodayComponent {
 
   getTodaySubmissions() {
     this.service.getTodaySubmissions().subscribe(data => {
-      // data is {"status":100,"message":"操作成功","data":[],"timestamp":1679893131183}
-      let submissions = data.data
-      this.submissions = submissions
-      console.log(submissions)
+      this.submissions = data.data
     })
   }
 
