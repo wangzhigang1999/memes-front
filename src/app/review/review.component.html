@@ -1,17 +1,21 @@
 <div id="review">
-  <div id="token-input" *ngIf="!hasToken" style="text-align: center;margin-top: 100px">
-    <input type="text" placeholder="输入你的token" [(ngModel)]="token"
-           class="input input-bordered input-success w-3/5 max-w-xs"/>
-    <button class=" btn btn-success" (click)="submitToken()" style="margin-left: 5px">提交</button>
-  </div>
 
-  <div id="clear-token" *ngIf="hasToken" style="text-align: center;margin-top: 20px">
-    <button *ngIf="submissions.length<=0" class="btn btn-outline btn-success" (click)="removeToken()">
-      看不到内容? &nbsp; 点击重新输入token
-    </button>
-    <div style="text-align: center;">
+  <div id="today">
+    <div id="token-input" *ngIf="!hasToken" style="text-align: center;margin-top: 100px">
+      <input type="text" placeholder="输入你的token" [(ngModel)]="token"
+             class="input input-bordered input-success w-3/5 max-w-xs"/>
+      <button class=" btn btn-success" (click)="submitToken()" style="margin-left: 5px">提交</button>
+    </div>
+
+    <div id="clear-token" *ngIf="hasToken" style="text-align: center;margin-top: 20px">
+      <button *ngIf="submissions.length<=0" class="btn btn-outline btn-success" (click)="removeToken()">
+        看不到内容? &nbsp; 点击重新输入token
+      </button>
+      <div style="text-align: center;">
       <span class="text-lg">图片:{{imageCount}} &nbsp; &nbsp;视频:{{videoCount}}
         &nbsp; &nbsp;bilibili:{{bilibiliCount}}</span>
+      </div>
+
     </div>
 
     <app-submission-card class="w-full" [submission]="sub" [review]="true" *ngFor="let sub of submissions;"/>
@@ -21,17 +25,16 @@
       <span>&nbsp;&nbsp;</span>
       <span class="btn btn-success btn-outline" routerLink="/" style="margin-right: 10px">去主页</span>
     </div>
-  </div>
 
-
-  <!-- Put this part before </body> tag -->
-  <input type="checkbox" id="my-modal" class="modal-toggle"/>
-  <div class="modal">
-    <div class="modal-box" style="text-align: center">
-      <h3 class="font-bold text-lg">{{title}}</h3>
-      <p class="py-4">{{message}}</p>
-      <div class="modal-action">
-        <label for="my-modal" class="btn btn-success btn-sm">Yay!</label>
+    <!-- Put this part before </body> tag -->
+    <input type="checkbox" id="my-modal" class="modal-toggle"/>
+    <div class="modal">
+      <div class="modal-box" style="text-align: center">
+        <h3 class="font-bold text-lg">{{title}}</h3>
+        <p class="py-4">{{message}}</p>
+        <div class="modal-action">
+          <label for="my-modal" class="btn btn-success btn-sm">Yay!</label>
+        </div>
       </div>
     </div>
   </div>
