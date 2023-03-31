@@ -19,7 +19,7 @@ export class TodayComponent {
 
   getTodaySubmissions() {
     this.service.getTodaySubmissions().subscribe(data => {
-      this.submissions = data.data
+      this.submissions = data.data.reverse()
     })
   }
 

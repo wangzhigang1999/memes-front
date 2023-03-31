@@ -1,15 +1,20 @@
 <div class="columns-2 w-full">
-  <div class=" w-full" style="text-align: center;">
-    <button class="btn btn-me custom-text" style="margin-right: 10px" [ngClass]="downClass()"
-            (click)="vote(hash,false)">🥵
-    </button>
+  <div>
+    <div class=" w-full" style="text-align: center;">
+      <button class="btn btn-me custom-text" style="margin-right: 10px" [ngClass]="downClass()"
+              (click)="vote(hash,false)">🥵
+      </button>
+    </div>
+
+
+    <div class="w-full " style="text-align: center;">
+      <button class=" btn btn-me  custom-text" style="margin-left: 10px" [ngClass]="upClass()"
+              (click)="vote(hash,true)">🤣
+      </button>
+    </div>
   </div>
+  <div style="height: 10px">
 
-
-  <div class="w-full " style="text-align: center;">
-    <button class=" btn btn-me  custom-text" style="margin-left: 10px" [ngClass]="upClass()"
-            (click)="vote(hash,true)">🤣
-    </button>
   </div>
 
 </div>
