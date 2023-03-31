@@ -11,9 +11,9 @@ export class HistoryComponent {
   history: any[] = []
   currentIndex = 0;
 
-  preMessage = "No more submissions";
-  nextMessage = "No more submissions";
-  currentMessage = "No more submissions";
+  preMessage = "🙈";
+  nextMessage = "🙈";
+  currentMessage = "🙈";
 
 
   hasNext = false;
@@ -44,8 +44,8 @@ export class HistoryComponent {
         })
 
         this.currentMessage = this.history[this.currentIndex];
-        this.nextMessage = this.hashNext(this.currentIndex, total) ? this.history[this.currentIndex + 1] : "没有了";
-        this.preMessage = this.hashPrev(this.currentIndex) ? this.history[this.currentIndex - 1] : "没有了";
+        this.nextMessage = this.hashNext(this.currentIndex, total) ? "👉👉👉" : "🙈没有了🙈";
+        this.preMessage = this.hashPrev(this.currentIndex) ? "👈👈👈" : "🙈没有了🙈";
       }
     })
 
@@ -64,8 +64,8 @@ export class HistoryComponent {
     this.hasNext = this.hashNext(this.currentIndex, this.history.length);
     this.hasPrev = this.hashPrev(this.currentIndex);
     this.currentMessage = this.history[this.currentIndex];
-    this.nextMessage = this.hashNext(this.currentIndex, this.history.length) ? this.history[this.currentIndex + 1] : "没有了";
-    this.preMessage = this.hashPrev(this.currentIndex) ? this.history[this.currentIndex - 1] : "没有了";
+    this.nextMessage = this.hashNext(this.currentIndex, this.history.length) ? "👉👉👉" : "🙈没有了🙈";
+    this.preMessage = this.hashPrev(this.currentIndex) ? "👈👈👈" : "🙈没有了🙈";
     this.service.getSubmission(this.history[this.currentIndex]).subscribe((data: any) => {
       this.submissions = data.data;
     })
