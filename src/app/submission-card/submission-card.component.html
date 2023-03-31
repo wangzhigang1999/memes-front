@@ -11,7 +11,7 @@
   </figure>
 
   <figure class="figure-padding rounded" *ngIf="submission.submissionType==='BILIBILI'">
-    <iframe [src]="submission.url | safe" class="rounded" allowfullscreen></iframe>
+    <iframe width="640px" height="480px" [src]="submission.url | safe" class="rounded" allowfullscreen></iframe>
   </figure>
 
   <div *ngIf="!review">
