@@ -42,6 +42,13 @@ export class StatisticComponent {
         this.urlCountList = this.statistic.urlCountMap;
         this.uuidCountList = this.statistic.uuidCountMap;
 
+        // filter some url
+        this.urlCountList = this.urlCountList.filter((item: any) => {
+          return item.key != "https://api.memes.bupt.site/submission/statistic"
+            && item.key != "https://api.memes.bupt.site/submission/review"
+            && item.key != "https://api.memes.bupt.site/submission/release"
+        })
+
 
       }
     )
