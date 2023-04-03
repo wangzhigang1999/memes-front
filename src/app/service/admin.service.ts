@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,13 @@ export class AdminService {
   release() {
     let url = this.host + `/submission/release`;
     return this.http.post(url, null);
+  }
+
+  /**
+   * 获取统计信息
+   */
+  getStatistics() :Observable<any>{
+    let url = this.host + `/submission/statistic`;
+    return this.http.get(url);
   }
 }

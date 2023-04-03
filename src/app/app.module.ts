@@ -15,6 +15,7 @@ import {SubmitComponent} from './submit/submit.component';
 import {UuidInterceptor} from "./uuid.interceptor";
 import {HistoryComponent} from './history/history.component';
 import {ReviewComponent} from './review/review.component';
+import { StatisticComponent } from './statistic/statistic.component';
 
 const routes: Routes = [
   {path: '', component: TodayComponent,},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'submit', component: SubmitComponent},
   {path: 'history', component: HistoryComponent},
   {path: 'review', component: ReviewComponent},
+  {path: 'statistic', component: StatisticComponent},
   {path: '**', component: TodayComponent}
 ];
 
@@ -35,7 +37,8 @@ const routes: Routes = [
     SafePipe,
     SubmitComponent,
     HistoryComponent,
-    ReviewComponent
+    ReviewComponent,
+    StatisticComponent
   ],
   imports: [
     BrowserModule,
