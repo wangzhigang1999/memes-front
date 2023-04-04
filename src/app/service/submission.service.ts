@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class SubmissionService {
 
 
   private http: HttpClient;

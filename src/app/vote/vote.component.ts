@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {UserService} from "../service/user.service";
+import {SubmissionService} from "../service/submission.service";
 
 @Component({
   selector: 'app-vote',
@@ -17,7 +17,7 @@ export class VoteComponent {
   activeBtn = "btn-outline btn-success btn-square"
   deactiveBtn = "btn-circle btn-ghost"
 
-  constructor(private service: UserService) {
+  constructor(private service: SubmissionService) {
 
   }
 

@@ -18,35 +18,18 @@ export class AdminService {
   }
 
   /**
-   * 获取今日提交
-   */
-  review() {
-    let url = this.host + '/submission/review';
-    return this.http.get(url);
-  }
-
-  /**
-   * 删除提交
-   * @param hash identifier
-   */
-  delete(hash: number) {
-    let url = this.host + `/submission/${hash}`;
-    return this.http.delete(url);
-  }
-
-  /**
    * 发布今日提交
    */
   release() {
-    let url = this.host + `/submission/release`;
+    let url = this.host + `/admin/release`;
     return this.http.post(url, null);
   }
 
   /**
    * 获取统计信息
    */
-  getStatistics() :Observable<any>{
-    let url = this.host + `/submission/statistic`;
+  getStatistics(): Observable<any> {
+    let url = this.host + `/admin/statistic`;
     return this.http.get(url);
   }
 }

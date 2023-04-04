@@ -1,5 +1,5 @@
 import {Component, HostListener} from '@angular/core';
-import {UserService} from "../service/user.service";
+import {SubmissionService} from "../service/submission.service";
 import {Submission} from "../model/submission";
 
 @Component({
@@ -24,7 +24,7 @@ export class SubmitComponent {
   title = ""
   message = "";
 
-  constructor(private service: UserService) {
+  constructor(private service: SubmissionService) {
   }
 
   @HostListener('paste', ['$event']) onPaste(event: ClipboardEvent) {

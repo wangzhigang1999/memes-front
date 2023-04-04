@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Submission} from "../model/submission";
-import {AdminService} from "../service/admin.service";
+import {ReviewService} from "../service/review.service";
 
 @Component({
   selector: 'app-submission-card',
@@ -12,19 +12,30 @@ export class SubmissionCardComponent {
   @Input() submission!: Submission;
   @Input() review!: boolean;
 
-  constructor(private service: AdminService) {
+  constructor(private service: ReviewService) {
   }
 
 
-  delete(hash: number) {
-    this.service.delete(hash).subscribe(
+  reject(hash: number) {
+    this.service.reject(hash).subscribe(
       () => {
-        let dom = document.getElementById(hash.toString());
-        if (dom != null) {
-          dom.parentElement?.remove();
-        }
+        this.hidden(hash)
       }
     )
+  }
 
+  accept(hash: number) {
+    this.service.accept(hash).subscribe(
+      () => {
+        this.hidden(hash)
+      }
+    )
+  }
+
+  hidden(hash: number) {
+    let dom = document.getElementById(hash.toString());
+    if (dom != null) {
+      dom.parentElement?.remove();
+    }
   }
 }

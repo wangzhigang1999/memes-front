@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Response} from "../model/response";
 import {AdminService} from "../service/admin.service";
 import {Submission} from "../model/submission";
+import {ReviewService} from "../service/review.service";
 
 @Component({
   selector: 'app-review',
@@ -21,7 +22,7 @@ export class ReviewComponent {
   videoCount = 0;
   bilibiliCount = 0;
 
-  constructor(private service: AdminService) {
+  constructor(private service: ReviewService, private admin: AdminService) {
   }
 
   ngOnInit() {
@@ -32,8 +33,8 @@ export class ReviewComponent {
     }
 
     this.hasToken = true;
-    this.service.review().subscribe((data: any) => {
-      this.submissions = data.data ? data.data.reverse() : [];
+    this.service.listSubmissions().subscribe((data: any) => {
+      this.submissions = data.data ? data.data : [];
       this.count()
     })
 
@@ -44,8 +45,8 @@ export class ReviewComponent {
     if (this.token) {
       localStorage.setItem('token', this.token);
       this.hasToken = true;
-      this.service.review().subscribe((data: any) => {
-        this.submissions = data.data.reverse() ? data.data : [];
+      this.service.listSubmissions().subscribe((data: any) => {
+        this.submissions = data.data ? data.data : [];
         this.count()
       })
     }
@@ -63,7 +64,7 @@ export class ReviewComponent {
     this.title = '发布中';
     this.message = '请稍后';
     // @ts-ignore
-    this.service.release().subscribe((data: Response) => {
+    this.admin.release().subscribe((data: Response) => {
       this.title = data.message;
       this.message = data.message;
     })

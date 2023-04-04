@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {UserService} from "../service/user.service";
+import {SubmissionService} from "../service/submission.service";
 
 @Component({
   selector: 'app-today',
@@ -10,7 +10,7 @@ export class TodayComponent {
 
   public submissions = []
 
-  constructor(private service: UserService) {
+  constructor(private service: SubmissionService) {
   }
 
   ngOnInit(): void {

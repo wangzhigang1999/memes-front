@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {UserService} from "../service/user.service";
+import {SubmissionService} from "../service/submission.service";
 
 @Component({
   selector: 'app-history',
@@ -20,7 +20,7 @@ export class HistoryComponent {
   hasPrev = false;
   submissions: any;
 
-  constructor(private service: UserService) {
+  constructor(private service: SubmissionService) {
   }
 
   ngOnInit(): void {
