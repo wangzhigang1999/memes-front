@@ -7,24 +7,42 @@
       <button class=" btn btn-success" (click)="submitToken()" style="margin-left: 5px">提交</button>
     </div>
 
-    <div id="clear-token" *ngIf="hasToken" style="text-align: center;margin-top: 20px">
-      <button *ngIf="submissions.length<=0" class="btn btn-outline btn-success" (click)="removeToken()">
-        看不到内容? &nbsp; 点击重新输入token
-      </button>
-      <div style="text-align: center;">
-      <span class="text-lg">图片:{{imageCount}} &nbsp; &nbsp;视频:{{videoCount}}
-        &nbsp; &nbsp;bilibili:{{bilibiliCount}}</span>
-      </div>
 
+    <div id="count" class="shadow rounded" *ngIf="hasToken" >
+      <div class="stat place-items-center w-fit">
+        <div class="stat-title">图片</div>
+        <div class="stat-value">{{imageCount}}</div>
+      </div>
+      <div class="stat place-items-center w-fit f">
+        <div class="stat-title">视频</div>
+        <div class="stat-value text-secondary">{{videoCount}}</div>
+      </div>
+      <div class="stat place-items-center w-fit">
+        <div class="stat-title">BILIBILI</div>
+        <div class="stat-value text-success">{{bilibiliCount}}</div>
+      </div>
     </div>
 
     <app-submission-card class="w-full" [submission]="sub" [review]="true" *ngFor="let sub of submissions;"/>
 
-    <div style="text-align: center;margin-top: 10px" *ngIf="submissions.length>0">
-      <label for="my-modal" class="btn btn-success btn-outline btn-wide" (click)="release()">发布</label>
-      <span>&nbsp;&nbsp;</span>
-      <span class="btn btn-success btn-outline" routerLink="/" style="margin-right: 10px">去主页</span>
+
+    <div class="card w-fit bg-base-100 shadow-xl" style="margin-top: 20px" *ngIf="hasToken">
+      <figure class="figure-padding" style="margin: 20px">
+        <img src="assets/welcome.webp" class="rounded-xl" alt=""/>
+      </figure>
+      <div style="margin-bottom: 20px;text-align: center">
+        <div style="margin-bottom: 10px">🤖 ~没有更多了~ 🤖</div>
+        <div class="flex-auto">
+          <label for="my-modal" (click)="release()" class="btn btn-success btn-outline"
+                 style="margin-right: 10px">发布</label>
+          <button (click)="removeToken()" class="btn btn-success btn-outline" style="margin-right: 10px">清除token
+          </button>
+          <a routerLink="/" class="btn  btn-success btn-outline">去主页</a>
+        </div>
+      </div>
+
     </div>
+
 
     <!-- Put this part before </body> tag -->
     <input type="checkbox" id="my-modal" class="modal-toggle"/>
