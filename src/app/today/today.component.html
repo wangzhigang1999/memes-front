@@ -10,7 +10,9 @@
       <div class="flex-auto">
 
         <a routerLink="/submit" class="btn btn-success btn-outline" style="margin-right: 10px">去投稿</a>
-        <a routerLink="/history" class="btn  btn-success btn-outline">看看之前的</a>
+        <a routerLink="/history" class="btn  btn-success btn-outline" style="margin-right: 10px">看看之前的</a>
+        <button #topButton class="btn  btn-success btn-outline" (click)="scrollToTop()">回到顶部</button>
+
       </div>
     </div>
 

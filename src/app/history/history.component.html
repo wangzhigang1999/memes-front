@@ -21,7 +21,11 @@
       </figure>
       <div style="margin-bottom: 20px;text-align: center">
         <div style="margin-bottom: 10px">🤖 ~没有更多了~ 🤖</div>
-        <a routerLink="/submit" class="btn btn-wide btn-success btn-outline">去投稿</a>
+        <div class="flex-auto">
+          <a routerLink="/submit" class="btn btn-success btn-outline" style="margin-right: 10px">去投稿</a>
+          <a routerLink="/" class="btn btn-success btn-outline" style="margin-right: 10px">回主页</a>
+          <button #topButton class="btn  btn-success btn-outline" (click)="scrollToTop()">回到顶部</button>
+        </div>
       </div>
 
     </div>

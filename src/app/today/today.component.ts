@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {SubmissionService} from "../service/submission.service";
 
 @Component({
@@ -7,6 +7,9 @@ import {SubmissionService} from "../service/submission.service";
   styleUrls: ['./today.component.css']
 })
 export class TodayComponent {
+
+  @ViewChild('topButton') topButtonRef!: ElementRef;
+
 
   public submissions = []
 
@@ -23,4 +26,7 @@ export class TodayComponent {
     })
   }
 
+  scrollToTop() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
 }

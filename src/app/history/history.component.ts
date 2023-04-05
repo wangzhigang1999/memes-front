@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {SubmissionService} from "../service/submission.service";
 
 @Component({
@@ -19,6 +19,8 @@ export class HistoryComponent {
   hasNext = false;
   hasPrev = false;
   submissions: any;
+
+  @ViewChild('topButton') topButtonRef!: ElementRef;
 
   constructor(private service: SubmissionService) {
   }
@@ -72,4 +74,7 @@ export class HistoryComponent {
 
   }
 
+  scrollToTop() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
 }
