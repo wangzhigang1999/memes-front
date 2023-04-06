@@ -1,5 +1,6 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {SubmissionService} from "../service/submission.service";
+import {Submission} from "../model/submission";
 
 @Component({
   selector: 'app-history',
@@ -18,9 +19,16 @@ export class HistoryComponent {
 
   hasNext = false;
   hasPrev = false;
-  submissions: any;
+  submissions: Submission[] = [];
+  originalSubmissions: Submission[] = [];
 
   @ViewChild('topButton') topButtonRef!: ElementRef;
+
+  image = true;
+  video = true;
+
+  bottomMessage = "🤖 ~没有更多了~ 🤖";
+  img = "assets/welcome.webp";
 
   constructor(private service: SubmissionService) {
   }
@@ -42,7 +50,8 @@ export class HistoryComponent {
         this.hasPrev = this.hashPrev(this.currentIndex);
 
         this.service.getSubmission(last).subscribe((data: any) => {
-          this.submissions = data.data;
+          this.originalSubmissions = data.data;
+          this.filter()
         })
 
         this.currentMessage = this.history[this.currentIndex];
@@ -69,12 +78,45 @@ export class HistoryComponent {
     this.nextMessage = this.hashNext(this.currentIndex, this.history.length) ? "👉👉👉" : "🙈没有了🙈";
     this.preMessage = this.hashPrev(this.currentIndex) ? "👈👈👈" : "🙈没有了🙈";
     this.service.getSubmission(this.history[this.currentIndex]).subscribe((data: any) => {
-      this.submissions = data.data;
+      this.originalSubmissions = data.data;
+      this.filter()
     })
 
   }
 
   scrollToTop() {
     window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+
+  filter() {
+    if (!this.image && !this.video) {
+      this.submissions = []
+      this.bottomMessage = "😒 啥都不想看,搬砖去吧 😒";
+      this.img = "assets/brick.jpeg";
+      return
+    }
+
+    this.bottomMessage = "🤖 ~没有更多了~ 🤖";
+    this.img = "assets/welcome.webp";
+
+    if (this.image && this.video) {
+      this.submissions = this.originalSubmissions
+      return
+    }
+
+
+    let tmp = []
+    for (let i = 0; i < this.originalSubmissions.length; i++) {
+      if (this.originalSubmissions[i].submissionType === 'IMAGE' && this.image) {
+        tmp.push(this.originalSubmissions[i])
+      } else if (this.originalSubmissions[i].submissionType === 'BILIBILI' && this.video) {
+        tmp.push(this.originalSubmissions[i])
+      } else if (this.originalSubmissions[i].submissionType === 'VIDEO' && this.video) {
+        tmp.push(this.originalSubmissions[i])
+      }
+    }
+    this.submissions = tmp
+
   }
 }
