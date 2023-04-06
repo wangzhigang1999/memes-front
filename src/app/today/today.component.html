@@ -1,12 +1,29 @@
 <div id="today">
+  <div id="select" style="margin-top: 20px">
+    <div style="display:block;" class="columns-2">
+      <div class="form-control " style="width:100px">
+        <label class="cursor-pointer label">
+          <span class="label-text">看图</span>
+          <input type="checkbox" checked="checked" [(ngModel)]="image" (change)="filter()" class="checkbox checkbox-success"/>
+        </label>
+      </div>
+
+      <div class="form-control container" style="width: 100px;margin-left: 20px">
+        <label class="cursor-pointer label">
+          <span class="label-text">看视频</span>
+          <input type="checkbox" checked="checked" [(ngModel)]="video" (change)="filter()" class="checkbox checkbox-success"/>
+        </label>
+      </div>
+    </div>
+  </div>
   <app-submission-card class="w-full" [submission]="sub" *ngFor="let sub of submissions;"/>
 
-  <div class="card w-fit bg-base-100 shadow-xl" style="margin-top: 20px">
+  <div class="card w-fit bg-base-100 shadow-xl" style="margin-top: 1px">
     <figure class="figure-padding" style="margin: 20px">
-      <img src="assets/welcome.webp" class="rounded-xl" alt=""/>
+      <img [src]="img" class="rounded-xl" alt=""/>
     </figure>
     <div style="margin-bottom: 20px;text-align: center">
-      <div style="margin-bottom: 10px">🤖 ~没有更多了~ 🤖</div>
+      <div style="margin-bottom: 10px;font-size: x-large">{{bottomMessage}}</div>
       <div class="flex-auto">
 
         <a routerLink="/submit" class="btn btn-success btn-outline" style="margin-right: 10px">去投稿</a>
