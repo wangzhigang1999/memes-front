@@ -43,7 +43,7 @@ export class ReviewService {
   }
 
   batchAccept(hashcode: number[]) {
-    let url = this.host + `review/accept/batch`;
+    let url = this.host + `/review/accept/batch`;
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(url, hashcode, {headers: headers});

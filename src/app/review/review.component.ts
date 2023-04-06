@@ -33,10 +33,7 @@ export class ReviewComponent {
     }
 
     this.hasToken = true;
-    this.service.listSubmissions().subscribe((data: any) => {
-      this.submissions = data.data ? data.data : [];
-      this.count()
-    })
+    this.loadSubmissions()
 
 
   }
@@ -50,14 +47,11 @@ export class ReviewComponent {
         this.count()
       })
     }
-
-
   }
 
   removeToken() {
     localStorage.removeItem('token');
     this.hasToken = false;
-
   }
 
   release() {
@@ -84,5 +78,24 @@ export class ReviewComponent {
         this.bilibiliCount++;
       }
     }
+  }
+
+  batchAccept() {
+    let hashcode = this.submissions.map(submission => submission.hash);
+    this.service.batchAccept(hashcode).subscribe(() => {
+      this.loadSubmissions()
+    })
+  }
+
+  onReviewed(hashcode: number) {
+    this.submissions = this.submissions.filter(submission => submission.hash !== hashcode);
+    this.count()
+  }
+
+  loadSubmissions() {
+    this.service.listSubmissions().subscribe((data: any) => {
+      this.submissions = data.data ? data.data : [];
+      this.count()
+    })
   }
 }

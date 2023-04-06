@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Submission} from "../model/submission";
 import {ReviewService} from "../service/review.service";
 
@@ -11,6 +11,8 @@ export class SubmissionCardComponent {
 
   @Input() submission!: Submission;
   @Input() review!: boolean;
+
+  @Output() private reviewed = new EventEmitter<number>();
 
   constructor(private service: ReviewService) {
   }
@@ -36,6 +38,7 @@ export class SubmissionCardComponent {
     let dom = document.getElementById(hash.toString());
     if (dom != null) {
       dom.parentElement?.remove();
+      this.reviewed.emit(hash)
     }
   }
 }
