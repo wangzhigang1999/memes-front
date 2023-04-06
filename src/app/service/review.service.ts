@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 
 @Injectable({
@@ -40,6 +40,13 @@ export class ReviewService {
   reject(hashcode: number) {
     let url = this.host + `/review/reject/${hashcode}`;
     return this.http.post(url, null);
+  }
+
+  batchAccept(hashcode: number[]) {
+    let url = this.host + `review/accept/batch`;
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(url, hashcode, {headers: headers});
   }
 
 }

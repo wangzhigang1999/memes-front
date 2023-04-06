@@ -8,7 +8,7 @@
     </div>
 
 
-    <div id="count" class="shadow rounded" *ngIf="hasToken" >
+    <div id="count" class="shadow rounded" *ngIf="hasToken">
       <div class="stat place-items-center w-fit">
         <div class="stat-title">图片</div>
         <div class="stat-value">{{imageCount}}</div>
@@ -33,8 +33,7 @@
       <div style="margin-bottom: 20px;text-align: center">
         <div style="margin-bottom: 10px">🤖 ~没有更多了~ 🤖</div>
         <div class="flex-auto">
-          <label for="my-modal" (click)="release()" class="btn btn-success btn-outline"
-                 style="margin-right: 10px">发布</label>
+          <label for="my-modal" (click)="release()" class="btn btn-success btn-outline"  style="margin-right: 10px">发布</label>
           <button (click)="removeToken()" class="btn btn-success btn-outline" style="margin-right: 10px">清除token
           </button>
           <a routerLink="/" class="btn  btn-success btn-outline">去主页</a>
