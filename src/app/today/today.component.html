@@ -23,11 +23,10 @@
       <img [src]="img" class="rounded-xl" alt=""/>
     </figure>
     <div style="margin-bottom: 20px;text-align: center">
-      <div style="margin-bottom: 10px;font-size: x-large">{{bottomMessage}}</div>
+      <div style="margin-bottom: 10px;">{{bottomMessage}}</div>
       <div class="flex-auto">
 
         <a routerLink="/submit" class="btn btn-success btn-outline" style="margin-right: 10px">去投稿</a>
-        <a href="https://github.com/wangzhigang1999/memes" target="_blank" class="btn btn-success btn-outline" style="margin-right: 10px">Github</a>
         <a routerLink="/history" class="btn  btn-success btn-outline" style="margin-right: 10px">看看之前的</a>
         <button #topButton class="btn  btn-success btn-outline" (click)="scrollToTop()">回到顶部</button>
 
