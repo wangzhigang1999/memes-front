@@ -1,17 +1,30 @@
 <div id="today">
+  <div class="shadow rounded w-full" *ngIf="showCount>10" style="display:flex;flex-direction: row;flex-wrap: wrap;justify-content: space-around;margin-top: 20px">
+    <div class="stat place-items-center w-fit">
+      <div class="stat-title">图片</div>
+      <div class="stat-value">{{imgCount}}</div>
+    </div>
+    <div class="stat place-items-center w-fit f">
+      <div class="stat-title">视频</div>
+      <div class="stat-value text-secondary">{{videoCount}}</div>
+    </div>
+  </div>
+
   <div id="select" style="margin-top: 20px">
     <div style="display:block;" class="columns-2">
       <div class="form-control " style="width:100px">
         <label class="cursor-pointer label">
-          <span class="label-text">看图</span>
-          <input type="checkbox" checked="checked" [(ngModel)]="image" (change)="filter()" class="checkbox checkbox-success"/>
+          <span class="label-text" (click)="increase(1)">看图</span>
+          <input type="checkbox" checked="checked" [(ngModel)]="image" (change)="filter()"
+                 class="checkbox checkbox-success"/>
         </label>
       </div>
 
       <div class="form-control container" style="width: 100px;margin-left: 20px">
         <label class="cursor-pointer label">
-          <span class="label-text">看视频</span>
-          <input type="checkbox" checked="checked" [(ngModel)]="video" (change)="filter()" class="checkbox checkbox-success"/>
+          <span class="label-text" (click)="increase(-1)">看视频</span>
+          <input type="checkbox" checked="checked" [(ngModel)]="video" (change)="filter()"
+                 class="checkbox checkbox-success"/>
         </label>
       </div>
     </div>

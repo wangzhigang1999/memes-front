@@ -18,6 +18,9 @@ export class TodayComponent {
   video = true;
   bottomMessage = "🤖 ~没有更多了~ 🤖";
   img = "assets/welcome.webp";
+  imgCount: any;
+  videoCount: any;
+  showCount = 0;
 
   constructor(private service: SubmissionService) {
   }
@@ -30,6 +33,7 @@ export class TodayComponent {
     this.service.getTodaySubmissions().subscribe(data => {
       this.originalSubmissions = data.data.reverse()
       this.filter()
+      this.count()
     })
   }
 
@@ -66,5 +70,23 @@ export class TodayComponent {
     }
     this.submissions = tmp
 
+  }
+
+  private count() {
+    this.imgCount = 0
+    this.videoCount = 0
+    for (let i = 0; i < this.originalSubmissions.length; i++) {
+      if (this.originalSubmissions[i].submissionType === 'IMAGE') {
+        this.imgCount++
+      } else if (this.originalSubmissions[i].submissionType === 'BILIBILI') {
+        this.videoCount++
+      } else if (this.originalSubmissions[i].submissionType === 'VIDEO') {
+        this.videoCount++
+      }
+    }
+  }
+
+  increase(add: number) {
+    this.showCount += add
   }
 }
