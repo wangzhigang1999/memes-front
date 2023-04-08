@@ -13,6 +13,7 @@ export class SubmissionCardComponent {
   @Input() review!: boolean;
 
   @Output() private reviewed = new EventEmitter<number>();
+  defaultImage="../../assets/welcome.webp";
 
   constructor(private service: ReviewService) {
   }

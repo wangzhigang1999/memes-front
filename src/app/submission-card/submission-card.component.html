@@ -1,7 +1,7 @@
 <div class="card w-fit  bg-base-100 shadow-xl img-container" [id]="submission.hash" style="margin-top: 20px">
 
   <figure class="figure-padding" *ngIf="submission.submissionType==='IMAGE'">
-    <img src="{{submission.url}}" class="rounded-xl" alt=""/>
+    <img [defaultImage]="defaultImage"  class="rounded-xl" [lazyLoad]="submission.url" alt=""/>
   </figure>
 
   <figure class="figure-padding" *ngIf="submission.submissionType==='VIDEO'">

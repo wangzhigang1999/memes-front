@@ -16,6 +16,7 @@ import {UuidInterceptor} from "./uuid.interceptor";
 import {HistoryComponent} from './history/history.component';
 import {ReviewComponent} from './review/review.component';
 import { StatisticComponent } from './statistic/statistic.component';
+import {LazyLoadImageModule} from "ng-lazyload-image";
 
 const routes: Routes = [
   {path: '', component: TodayComponent,},
@@ -46,7 +47,7 @@ const routes: Routes = [
     [RouterModule.forRoot(routes)],
     HttpClientModule,
     FormsModule,
-
+    LazyLoadImageModule
   ],
   providers: [
     {
