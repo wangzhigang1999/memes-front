@@ -31,7 +31,7 @@
       <figure class="figure-padding" style="margin: 20px">
         <img src="assets/welcome.webp" class="rounded-xl" alt=""/>
       </figure>
-      <div style="margin-bottom: 20px;text-align: center">
+      <div style="margin-bottom: 20px;text-align: center;vertical-align: center">
         <div style="margin-bottom: 10px">🤖 ~没有更多了~ 🤖</div>
         <div class="flex-auto">
           <button (click)="batchAccept()" class="btn btn-success btn-outline" style="margin-right: 10px">AC
@@ -41,6 +41,15 @@
           <button (click)="removeToken()" class="btn btn-success btn-outline" style="margin-right: 10px">清除token
           </button>
           <a routerLink="/" class="btn  btn-success btn-outline">主页</a>
+        </div>
+
+        <div class="flex" style="display: flex;justify-content: space-around;margin-top: 10px">
+
+          <label class="cursor-pointer label">
+            <span class="label-text">BOT : </span>
+            <input style="margin-left: 10px" type="checkbox" class="toggle toggle-success" [(ngModel)]="bot" (change)="updateBot()" />
+          </label>
+
         </div>
       </div>
 

@@ -21,11 +21,17 @@ export class ReviewComponent {
   imageCount = 0;
   videoCount = 0;
   bilibiliCount = 0;
+  bot = false;
 
   constructor(private service: ReviewService, private admin: AdminService) {
   }
 
   ngOnInit() {
+    this.admin.getBotStatus().subscribe(
+      (data: any) => {
+        this.bot = data.data;
+      }
+    )
     let token = localStorage.getItem('token');
     if (!token) {
       this.hasToken = false;
@@ -97,5 +103,22 @@ export class ReviewComponent {
       this.submissions = data.data ? data.data : [];
       this.count()
     })
+  }
+
+  updateBot() {
+    if (this.bot) {
+      this.admin.enableBot().subscribe(
+        (data: any) => {
+          console.log(data)
+        }
+      )
+    } else {
+      this.admin.disableBot().subscribe(
+        (data: any) => {
+          console.log(data)
+        }
+      )
+    }
+
   }
 }

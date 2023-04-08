@@ -32,4 +32,28 @@ export class AdminService {
     let url = this.host + `/admin/statistic`;
     return this.http.get(url);
   }
+
+  /**
+   * 获取bot状态
+   */
+  getBotStatus(): Observable<any> {
+    let url = this.host + `/admin/bot/status`;
+    return this.http.get(url);
+  }
+
+  /**
+   * disable bot
+   */
+  disableBot(): Observable<any> {
+    let url = this.host + `/admin/bot/disable`;
+    return this.http.post(url, null);
+  }
+
+  /**
+   * enable bot
+   */
+  enableBot(): Observable<any> {
+    let url = this.host + `/admin/bot/enable`;
+    return this.http.post(url, null);
+  }
 }
