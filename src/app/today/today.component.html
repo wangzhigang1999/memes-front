@@ -1,5 +1,7 @@
 <div id="today">
-  <div class="shadow rounded w-full" *ngIf="showCount>10" style="display:flex;flex-direction: row;flex-wrap: wrap;justify-content: space-around;margin-top: 20px">
+  <app-fix-menu></app-fix-menu>
+  <div class="shadow rounded w-full" *ngIf="showCount>5"
+       style="display:flex;flex-direction: row;flex-wrap: wrap;justify-content: space-around;margin-top: 20px">
     <div class="stat place-items-center w-fit">
       <div class="stat-title">图片</div>
       <div class="stat-value">{{imgCount}}</div>
@@ -14,7 +16,7 @@
     <div style="display:block;" class="columns-2">
       <div class="form-control " style="width:100px">
         <label class="cursor-pointer label">
-          <span class="label-text" (click)="increase(1)">看图</span>
+          <span class="label-text" (click)="increase(-1)">看图</span>
           <input type="checkbox" checked="checked" [(ngModel)]="image" (change)="filter()"
                  class="checkbox checkbox-success"/>
         </label>
@@ -22,7 +24,7 @@
 
       <div class="form-control container" style="width: 100px;margin-left: 20px">
         <label class="cursor-pointer label">
-          <span class="label-text" (click)="increase(-1)">看视频</span>
+          <span class="label-text" (click)="increase(1)">看视频</span>
           <input type="checkbox" checked="checked" [(ngModel)]="video" (change)="filter()"
                  class="checkbox checkbox-success"/>
         </label>
@@ -41,7 +43,6 @@
 
         <a routerLink="/submit" class="btn btn-success btn-outline" style="margin-right: 10px">去投稿</a>
         <a routerLink="/history" class="btn  btn-success btn-outline" style="margin-right: 10px">看看之前的</a>
-        <button #topButton class="btn  btn-success btn-outline" (click)="scrollToTop()">回到顶部</button>
 
       </div>
     </div>

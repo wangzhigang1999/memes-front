@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {SubmissionService} from "../service/submission.service";
 import {Submission} from "../model/submission";
 
@@ -22,7 +22,6 @@ export class HistoryComponent {
   submissions: Submission[] = [];
   originalSubmissions: Submission[] = [];
 
-  @ViewChild('topButton') topButtonRef!: ElementRef;
 
   image = true;
   video = true;

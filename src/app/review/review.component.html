@@ -1,5 +1,7 @@
 <div id="review">
 
+  <app-fix-menu></app-fix-menu>
+
   <div id="today">
     <div id="token-input" *ngIf="!hasToken" style="text-align: center;margin-top: 100px">
       <input type="text" placeholder="输入你的token" [(ngModel)]="token"
@@ -47,7 +49,8 @@
 
           <label class="cursor-pointer label">
             <span class="label-text">BOT : </span>
-            <input style="margin-left: 10px" type="checkbox" class="toggle toggle-success" [(ngModel)]="bot" (change)="updateBot()" />
+            <input style="margin-left: 10px" type="checkbox" class="toggle toggle-success" [(ngModel)]="bot"
+                   (change)="updateBot()"/>
           </label>
 
         </div>

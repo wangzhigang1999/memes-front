@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {SubmissionService} from "../service/submission.service";
 import {Submission} from "../model/submission";
 
@@ -8,9 +8,6 @@ import {Submission} from "../model/submission";
   styleUrls: ['./today.component.css']
 })
 export class TodayComponent {
-
-  @ViewChild('topButton') topButtonRef!: ElementRef;
-
 
   public submissions: Submission[] = []
   public originalSubmissions: Submission[] = []
