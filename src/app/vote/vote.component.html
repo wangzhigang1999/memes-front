@@ -1,4 +1,4 @@
-<div class="columns-2 w-full">
+<div class="columns-3 w-full">
   <div>
     <div class=" w-full" style="text-align: center;">
       <button class="btn btn-me custom-text" style="margin-right: 10px" [ngClass]="downClass()"
@@ -6,6 +6,11 @@
       </button>
     </div>
 
+    <div class="w-full " style="text-align: center;">
+      <button class=" btn btn-me  custom-text" style="margin-left: 10px" [ngClass]="deactiveBtn"
+              (click)="love(hash)">🥰
+      </button>
+    </div>
 
     <div class="w-full " style="text-align: center;">
       <button class=" btn btn-me  custom-text" style="margin-left: 10px" [ngClass]="upClass()"

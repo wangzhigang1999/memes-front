@@ -42,4 +42,10 @@ export class VoteComponent {
     })
   }
 
+  love(hash: any) {
+    this.service.vote(hash, true).subscribe(() => {
+        this.up = this.up + 1;
+      }
+    )
+  }
 }
