@@ -9,6 +9,8 @@ import {SubmissionService} from "../service/submission.service";
 export class VoteComponent {
   upBtn = false;
   downBtn = false;
+  loveBtn = false;
+
   @Input() hash: any
   @Input() name: any
   @Input() up: any
@@ -22,17 +24,22 @@ export class VoteComponent {
   }
 
   upClass() {
-    return !this.upBtn && !this.downBtn ? this.deactiveBtn : this.upBtn ? this.activeBtn : this.deactiveBtn;
+    return this.upBtn ? this.activeBtn : this.deactiveBtn;
   }
 
   downClass() {
-    return !this.upBtn && !this.downBtn ? this.deactiveBtn : this.upBtn ? this.deactiveBtn : this.activeBtn;
+    return this.downBtn ? this.activeBtn : this.deactiveBtn;
+  }
+
+  loveClass() {
+    return !this.loveBtn ? this.deactiveBtn : this.activeBtn;
   }
 
 
   vote(hash: number, isUpvote: boolean) {
     this.upBtn = isUpvote;
     this.downBtn = !isUpvote;
+    this.loveBtn = false
     this.service.vote(hash, isUpvote).subscribe(() => {
       if (isUpvote) {
         this.up = this.up + 1;
@@ -43,6 +50,10 @@ export class VoteComponent {
   }
 
   love(hash: any) {
+    this.loveBtn = true
+    this.upBtn = false
+    this.downBtn = false
+
     this.service.vote(hash, true).subscribe(() => {
         this.up = this.up + 1;
       }
