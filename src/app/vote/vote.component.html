@@ -1,4 +1,4 @@
-<div class="columns-3 w-full">
+<div class="columns-3 w-full" *ngIf="!adminMode">
   <div>
     <div class=" w-full" style="text-align: center;">
       <button class="btn btn-me custom-text" style="margin-right: 10px" [ngClass]="downClass()"
@@ -15,6 +15,45 @@
     <div class="w-full " style="text-align: center;">
       <button class=" btn btn-me  custom-text" style="margin-left: 10px" [ngClass]="upClass()"
               (click)="vote(hash,true)">🤣
+      </button>
+    </div>
+  </div>
+  <div style="height: 10px">
+  </div>
+</div>
+
+
+<div class="columns-5 w-full" *ngIf="adminMode">
+  <div>
+
+    <div class="w-full " style="text-align: center;">
+      <button class=" btn btn-me  custom-text" style="margin-left: 10px" [ngClass]="deactiveBtn"
+              (click)="removeTop(hash)">
+        👇
+      </button>
+    </div>
+
+    <div class=" w-full" style="text-align: center;">
+      <button class="btn btn-me custom-text" style="margin-right: 10px" [ngClass]="downClass()"
+              (click)="vote(hash,false)">🥵
+      </button>
+    </div>
+
+    <div class="w-full " style="text-align: center;">
+      <button class=" btn btn-me  custom-text" style="margin-left: 10px" [ngClass]="loveClass()"
+              (click)="love(hash)">🥰
+      </button>
+    </div>
+
+    <div class="w-full " style="text-align: center;">
+      <button class=" btn btn-me  custom-text" style="margin-left: 10px" [ngClass]="upClass()"
+              (click)="vote(hash,true)">🤣
+      </button>
+    </div>
+
+    <div class="w-full " style="text-align: center;">
+      <button class=" btn btn-me  custom-text" style="margin-left: 10px" [ngClass]="deactiveBtn" (click)="addTop(hash)">
+        👆
       </button>
     </div>
   </div>

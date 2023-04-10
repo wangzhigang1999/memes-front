@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {SubmissionService} from "../service/submission.service";
 import {Submission} from "../model/submission";
+import {AdminService} from "../service/admin.service";
 
 @Component({
   selector: 'app-today',
@@ -19,10 +20,20 @@ export class TodayComponent {
   videoCount: any;
   showCount = 0;
 
-  constructor(private service: SubmissionService) {
+  // 置顶
+  public topSubmissions: Submission[] = []
+  adminMode = false;
+
+  constructor(private service: SubmissionService, private admin: AdminService) {
   }
 
+
   ngOnInit(): void {
+    let token = localStorage.getItem('token');
+    if (token != null) {
+      this.adminMode = true
+    }
+    this.admin.getTop().subscribe(data => this.topSubmissions = data.data)
     this.getTodaySubmissions()
   }
 

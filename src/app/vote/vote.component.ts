@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {SubmissionService} from "../service/submission.service";
+import {AdminService} from "../service/admin.service";
+import {Response} from "../model/response";
 
 @Component({
   selector: 'app-vote',
@@ -11,6 +13,9 @@ export class VoteComponent {
   downBtn = false;
   loveBtn = false;
 
+
+  @Input() adminMode = false
+
   @Input() hash: any
   @Input() name: any
   @Input() up: any
@@ -19,7 +24,7 @@ export class VoteComponent {
   activeBtn = "btn-outline btn-success btn-square"
   deactiveBtn = "btn-circle btn-ghost"
 
-  constructor(private service: SubmissionService) {
+  constructor(private service: SubmissionService, private admin: AdminService) {
 
   }
 
@@ -56,6 +61,27 @@ export class VoteComponent {
 
     this.service.vote(hash, true).subscribe(() => {
         this.up = this.up + 1;
+      }
+    )
+  }
+
+  addTop(hash: any) {
+    this.admin.setTop(hash).subscribe(
+      (data: Response) => {
+        if (data.code == 100) {
+          alert("置顶成功")
+        }
+      }
+    )
+
+  }
+
+  removeTop(hash: any) {
+    this.admin.cancelTop(hash).subscribe(
+      (data: Response) => {
+        if (data.code == 100) {
+          alert("取消置顶成功")
+        }
       }
     )
   }

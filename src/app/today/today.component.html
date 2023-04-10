@@ -31,7 +31,12 @@
       </div>
     </div>
   </div>
-  <app-submission-card class="w-full" [submission]="sub" *ngFor="let sub of submissions;"/>
+
+  <div *ngIf="topSubmissions.length>0">
+    <app-submission-card class="w-full" [submission]="sub" [admin]="adminMode" *ngFor="let sub of topSubmissions;"/>
+  </div>
+
+  <app-submission-card class="w-full" [submission]="sub" [admin]="adminMode" *ngFor="let sub of submissions;"/>
 
   <div class="card w-fit bg-base-100 shadow-xl" style="margin-top: 20px">
     <figure class="figure-padding" style="margin: 20px">

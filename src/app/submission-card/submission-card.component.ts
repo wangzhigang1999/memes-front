@@ -11,6 +11,7 @@ export class SubmissionCardComponent {
 
   @Input() submission!: Submission;
   @Input() review!: boolean;
+  @Input() admin = false;
 
   @Output() private reviewed = new EventEmitter<number>();
   defaultImage="../../assets/welcome.webp";

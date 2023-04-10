@@ -56,4 +56,37 @@ export class AdminService {
     let url = this.host + `/admin/bot/enable`;
     return this.http.post(url, null);
   }
+
+  /**
+   * 获取置顶
+   */
+  getTop(): Observable<any> {
+    let url = this.host + `/admin/top`;
+    return this.http.get(url);
+  }
+
+  /**
+   * 设置置顶
+   */
+  setTop(hash: number): Observable<any> {
+    let url = this.host + `/admin/top/${hash}`;
+    return this.http.post(url, null);
+  }
+
+  /**
+   * 取消置顶
+   */
+  cancelTop(hash: number): Observable<any> {
+    let url = this.host + `/admin/top/${hash}`;
+    return this.http.delete(url);
+  }
+
+  /**
+   * 验证token
+   */
+  verifyToken(token: string): Observable<any> {
+    console.log(token)
+    let url = this.host + `/admin/verify`;
+    return this.http.get(url);
+  }
 }

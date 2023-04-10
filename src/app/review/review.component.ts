@@ -27,30 +27,41 @@ export class ReviewComponent {
   }
 
   ngOnInit() {
-    this.admin.getBotStatus().subscribe(
-      (data: any) => {
-        this.bot = data.data;
-      }
-    )
+
     let token = localStorage.getItem('token');
     if (!token) {
       this.hasToken = false;
       return
     }
 
-    this.hasToken = true;
-    this.loadSubmissions()
+    this.admin.verifyToken(token).subscribe((data: Response) => {
+      if (data.data) {
+        this.hasToken = true;
+        this.loadSubmissions()
 
-
+        this.admin.getBotStatus().subscribe(
+          (data: any) => {
+            this.bot = data.data;
+          }
+        )
+      } else {
+        localStorage.removeItem("token")
+        this.hasToken = false
+      }
+    })
   }
 
   submitToken() {
     if (this.token) {
       localStorage.setItem('token', this.token);
-      this.hasToken = true;
-      this.service.listSubmissions().subscribe((data: any) => {
-        this.submissions = data.data ? data.data : [];
-        this.count()
+      this.admin.verifyToken(this.token).subscribe((data: Response) => {
+        if (data.data) {
+          this.hasToken = true;
+          this.loadSubmissions()
+        } else {
+          alert("Token错误")
+          localStorage.removeItem("token")
+        }
       })
     }
   }

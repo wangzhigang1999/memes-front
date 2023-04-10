@@ -11,7 +11,7 @@ export class StatisticComponent {
 
   statistic!: any;
 
-  reqNumber!: number;
+  reqNumber = 0;
   averageCost!: number;
   maxCost!: number;
   minCost!: number;
@@ -24,7 +24,13 @@ export class StatisticComponent {
   }
 
   ngOnInit() {
-    this.refresh()
+    let token = localStorage.getItem("token");
+    if (token === null) {
+      // no token, redirect to login page
+      window.location.href = "/review"
+    } else {
+      this.refresh()
+    }
   }
 
   refresh() {
