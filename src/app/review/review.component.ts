@@ -30,23 +30,22 @@ export class ReviewComponent {
 
     let token = localStorage.getItem('token');
     if (!token) {
-      this.hasToken = false;
+      this.removeToken()
       return
     }
 
+    // 说明已经验证过了
+    if (localStorage.getItem('token-ok') === "true") {
+      this.init()
+      return
+    }
+
+    // 有token但是没有验证过，需要验证
     this.admin.verifyToken(token).subscribe((data: Response) => {
       if (data.data) {
-        this.hasToken = true;
-        this.loadSubmissions()
-
-        this.admin.getBotStatus().subscribe(
-          (data: any) => {
-            this.bot = data.data;
-          }
-        )
+        this.init()
       } else {
-        localStorage.removeItem("token")
-        this.hasToken = false
+        this.removeToken()
       }
     })
   }
@@ -56,11 +55,9 @@ export class ReviewComponent {
       localStorage.setItem('token', this.token);
       this.admin.verifyToken(this.token).subscribe((data: Response) => {
         if (data.data) {
-          this.hasToken = true;
-          this.loadSubmissions()
+          this.init()
         } else {
-          alert("Token错误")
-          localStorage.removeItem("token")
+          this.removeToken()
         }
       })
     }
@@ -68,6 +65,7 @@ export class ReviewComponent {
 
   removeToken() {
     localStorage.removeItem('token');
+    localStorage.removeItem('token-ok');
     this.hasToken = false;
   }
 
@@ -130,6 +128,21 @@ export class ReviewComponent {
         }
       )
     }
-
   }
+
+  getBotStatus() {
+    this.admin.getBotStatus().subscribe(
+      (data: any) => {
+        this.bot = data.data;
+      }
+    )
+  }
+
+  init() {
+    localStorage.setItem('token-ok', "true")
+    this.hasToken = true;
+    this.loadSubmissions()
+    this.getBotStatus()
+  }
+
 }
