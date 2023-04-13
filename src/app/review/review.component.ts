@@ -23,6 +23,10 @@ export class ReviewComponent {
   bilibiliCount = 0;
   bot = false;
 
+  releaseStrategy = []
+  selectedReleaseStrategy = ''
+  maxValue = 50;
+
   constructor(private service: ReviewService, private admin: AdminService) {
   }
 
@@ -98,6 +102,8 @@ export class ReviewComponent {
   batchAccept() {
     let hashcode = this.submissions.map(submission => submission.hash);
     this.service.batchAccept(hashcode).subscribe(() => {
+      this.title = '批量通过成功';
+      this.message = '批量通过成功';
       this.loadSubmissions()
     })
   }
@@ -138,11 +144,50 @@ export class ReviewComponent {
     )
   }
 
+  getStrategy() {
+    this.admin.getReleaseStrategy().subscribe(
+      (data: Response) => {
+        this.releaseStrategy = data.data["releaseStrategy"];
+        this.selectedReleaseStrategy = data.data["selectedReleaseStrategy"];
+      }
+    )
+  }
+
   init() {
     localStorage.setItem('token-ok', "true")
     this.hasToken = true;
     this.loadSubmissions()
     this.getBotStatus()
+    this.getStrategy()
+    this.getMaxSubmissionLimit()
   }
 
+  setReleaseStrategy(item: string) {
+    if (item === this.selectedReleaseStrategy) {
+      return
+    }
+    this.admin.setReleaseStrategy(item).subscribe(
+      () => {
+        this.selectedReleaseStrategy = item;
+      }
+    )
+  }
+
+  updateMax() {
+    if (this.maxValue < 0) {
+      alert("最大值不能小于0")
+      return
+    }
+
+    this.admin.setMaxSubmission(this.maxValue).subscribe(() => {
+    })
+  }
+
+  getMaxSubmissionLimit() {
+    this.admin.getMaxSubmission().subscribe(
+      (data: Response) => {
+        this.maxValue = data.data;
+      }
+    )
+  }
 }

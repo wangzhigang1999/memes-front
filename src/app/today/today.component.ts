@@ -39,7 +39,20 @@ export class TodayComponent {
 
   getTodaySubmissions() {
     this.service.getTodaySubmissions().subscribe(data => {
-      this.originalSubmissions = data.data.reverse()
+
+      // 过滤掉置顶的
+      this.originalSubmissions = data.data.filter(
+        (submission: Submission) => {
+          // remove top
+          for (let i = 0; i < this.topSubmissions.length; i++) {
+            if (submission.hash === this.topSubmissions[i].hash) {
+              return false
+            }
+          }
+          return true
+        }
+      ).reverse()
+
       this.filter()
       this.count()
     })
@@ -76,6 +89,8 @@ export class TodayComponent {
         tmp.push(this.originalSubmissions[i])
       }
     }
+
+
     this.submissions = tmp
 
   }

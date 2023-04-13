@@ -1,7 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {SubmissionService} from "../service/submission.service";
 import {AdminService} from "../service/admin.service";
-import {Response} from "../model/response";
 
 @Component({
   selector: 'app-vote',
@@ -67,10 +66,8 @@ export class VoteComponent {
 
   addTop(hash: any) {
     this.admin.setTop(hash).subscribe(
-      (data: Response) => {
-        if (data.code == 100) {
-          alert("置顶成功")
-        }
+      () => {
+        alert("置顶成功")
       }
     )
 
@@ -78,10 +75,8 @@ export class VoteComponent {
 
   removeTop(hash: any) {
     this.admin.cancelTop(hash).subscribe(
-      (data: Response) => {
-        if (data.code == 100) {
-          alert("取消置顶成功")
-        }
+      () => {
+        alert("取消置顶成功")
       }
     )
   }

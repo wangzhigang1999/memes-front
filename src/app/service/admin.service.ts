@@ -89,4 +89,31 @@ export class AdminService {
     let url = this.host + `/admin/verify`;
     return this.http.get(url);
   }
+
+  getReleaseStrategy(): Observable<any> {
+    let url = this.host + `/admin/release/strategy`;
+    return this.http.get(url);
+  }
+
+  setReleaseStrategy(strategy: string): Observable<any> {
+    let url = this.host + `/admin/release/strategy`;
+    // send with form data
+    let data = new FormData();
+    data.append("strategy", strategy);
+    return this.http.post(url, data);
+  }
+
+  getMaxSubmission(): Observable<any> {
+    let url = this.host + `/admin/max/submission`;
+    return this.http.get(url);
+  }
+
+  setMaxSubmission(max: number): Observable<any> {
+    let url = this.host + `/admin/max/submission`;
+    // send with form data
+    let data = new FormData();
+    data.append("max", max.toString());
+    return this.http.post(url, data);
+  }
+
 }

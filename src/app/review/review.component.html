@@ -10,7 +10,7 @@
     </div>
 
 
-    <div id="count" class="shadow rounded" *ngIf="hasToken">
+    <div id="count" class="shadow rounded-xl" *ngIf="hasToken">
       <div class="stat place-items-center w-fit">
         <div class="stat-title">图片</div>
         <div class="stat-value">{{imageCount}}</div>
@@ -36,8 +36,8 @@
       <div style="margin-bottom: 20px;text-align: center;vertical-align: center">
         <div style="margin-bottom: 10px">🤖 ~没有更多了~ 🤖</div>
         <div class="flex-auto">
-          <button (click)="batchAccept()" class="btn btn-success btn-outline" style="margin-right: 10px">AC
-          </button>
+          <label for="my-modal" (click)="batchAccept()" class="btn btn-success btn-outline" style="margin-right: 10px">AC
+          </label>
           <label for="my-modal" (click)="release()" class="btn btn-success btn-outline"
                  style="margin-right: 10px">发布</label>
           <button (click)="removeToken()" class="btn btn-success btn-outline" style="margin-right: 10px">清除token
@@ -46,31 +46,46 @@
         </div>
 
         <div class="flex" style="display: flex;justify-content: space-around;margin-top: 10px">
+          <div class="w-fit">
+            <label class="cursor-pointer label ">
+              <span class="label-text">BOT : </span>
+              <input style="margin-left: 10px" type="checkbox" class="toggle toggle-success" [(ngModel)]="bot"
+                     (change)="updateBot()"/>
+            </label>
+          </div>
+          <div class="form-control w-fit" *ngFor="let item of releaseStrategy">
+            <label class="label cursor-pointer">
+              <span class="label-text">{{item}}</span>
+              <input style="margin-left: 10px" type="radio" name="radio-10" class="radio checked:bg-success"
+                     (click)="setReleaseStrategy(item)"
+                     [checked]="item==selectedReleaseStrategy"/>
+            </label>
+          </div>
+        </div>
 
-          <label class="cursor-pointer label">
-            <span class="label-text">BOT : </span>
-            <input style="margin-left: 10px" type="checkbox" class="toggle toggle-success" [(ngModel)]="bot"
-                   (change)="updateBot()"/>
-          </label>
-
+        <div class="flex" style="display: flex;justify-content: space-around;margin-top: 10px;">
+          <div class="w-full">
+            <label class="cursor-pointer label ">
+              <span class="label-text w-1/4">MAX : {{maxValue}} </span>
+              <input type="range" min="0" max="100" [(ngModel)]="maxValue" (change)="updateMax()" class="range range-success w-3/4"/>
+            </label>
+          </div>
         </div>
       </div>
 
-    </div>
 
-
-    <!-- Put this part before </body> tag -->
-    <input type="checkbox" id="my-modal" class="modal-toggle"/>
-    <div class="modal">
-      <div class="modal-box" style="text-align: center">
-        <h3 class="font-bold text-lg">{{title}}</h3>
-        <p class="py-4">{{message}}</p>
-        <div class="modal-action">
-          <label for="my-modal" class="btn btn-success btn-sm">Yay!</label>
+      <!-- Put this part before </body> tag -->
+      <input type="checkbox" id="my-modal" class="modal-toggle"/>
+      <div class="modal">
+        <div class="modal-box" style="text-align: center">
+          <h3 class="font-bold text-lg">{{title}}</h3>
+          <p class="py-4">{{message}}</p>
+          <div class="modal-action">
+            <label for="my-modal" class="btn btn-success btn-sm">Yay!</label>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
-
-
 </div>
