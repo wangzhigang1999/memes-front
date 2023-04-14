@@ -18,9 +18,9 @@ export class ReviewComponent {
   title: any;
   message: any;
 
-  imageCount = 0;
-  videoCount = 0;
-  bilibiliCount = 0;
+  reviewPassedNum = 0;
+  toBeReviewedNum = 0;
+  releasedNum = 0;
   bot = false;
 
   releaseStrategy = []
@@ -80,24 +80,10 @@ export class ReviewComponent {
     this.admin.release().subscribe((data: Response) => {
       this.title = data.message;
       this.message = data.message;
+      this.releasedNum = data.data
     })
   }
 
-  count() {
-    this.imageCount = 0;
-    this.videoCount = 0;
-    this.bilibiliCount = 0;
-
-    for (let submission of this.submissions) {
-      if (submission.submissionType === 'IMAGE') {
-        this.imageCount++;
-      } else if (submission.submissionType === 'VIDEO') {
-        this.videoCount++;
-      } else if (submission.submissionType === 'BILIBILI') {
-        this.bilibiliCount++;
-      }
-    }
-  }
 
   batchAccept() {
     let hashcode = this.submissions.map(submission => submission.hash);
@@ -108,15 +94,19 @@ export class ReviewComponent {
     })
   }
 
-  onReviewed(hashcode: number) {
-    this.submissions = this.submissions.filter(submission => submission.hash !== hashcode);
-    this.count()
+  onReviewed(hashcode: string) {
+    let realHashcode = Number.parseInt(hashcode.slice(0, -1), 10)
+    let accept = hashcode.slice(-1) === '+';
+    this.submissions = this.submissions.filter(submission => submission.hash !== realHashcode);
+    this.toBeReviewedNum--;
+    if (accept) {
+      this.reviewPassedNum++;
+    }
   }
 
   loadSubmissions() {
     this.service.listSubmissions().subscribe((data: any) => {
       this.submissions = data.data ? data.data : [];
-      this.count()
     })
   }
 
@@ -160,6 +150,7 @@ export class ReviewComponent {
     this.getBotStatus()
     this.getStrategy()
     this.getMaxSubmissionLimit()
+    this.getStatistic()
   }
 
   setReleaseStrategy(item: string) {
@@ -187,6 +178,16 @@ export class ReviewComponent {
     this.admin.getMaxSubmission().subscribe(
       (data: Response) => {
         this.maxValue = data.data;
+      }
+    )
+  }
+
+  private getStatistic() {
+    this.service.statistics().subscribe(
+      (data: Response) => {
+        this.reviewPassedNum = data.data.reviewPassedNum;
+        this.toBeReviewedNum = data.data.toBeReviewedNum;
+        this.releasedNum = data.data.releasedNum;
       }
     )
   }

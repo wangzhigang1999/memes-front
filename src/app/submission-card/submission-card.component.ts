@@ -13,8 +13,8 @@ export class SubmissionCardComponent {
   @Input() review!: boolean;
   @Input() admin = false;
 
-  @Output() private reviewed = new EventEmitter<number>();
-  defaultImage="../../assets/welcome.webp";
+  @Output() private reviewed = new EventEmitter<string>();
+  defaultImage = "../../assets/welcome.webp";
 
   constructor(private service: ReviewService) {
   }
@@ -23,7 +23,7 @@ export class SubmissionCardComponent {
   reject(hash: number) {
     this.service.reject(hash).subscribe(
       () => {
-        this.hidden(hash)
+        this.hidden(hash + "-")
       }
     )
   }
@@ -31,13 +31,14 @@ export class SubmissionCardComponent {
   accept(hash: number) {
     this.service.accept(hash).subscribe(
       () => {
-        this.hidden(hash)
+        this.hidden(hash + "+")
       }
     )
   }
 
-  hidden(hash: number) {
-    let dom = document.getElementById(hash.toString());
+  hidden(hash: string) {
+    let id = hash.toString().slice(0, -1);
+    let dom = document.getElementById(id);
     if (dom != null) {
       dom.parentElement?.remove();
       this.reviewed.emit(hash)
