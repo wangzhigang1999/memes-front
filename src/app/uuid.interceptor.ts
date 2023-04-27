@@ -9,21 +9,31 @@ export class UuidInterceptor implements HttpInterceptor {
   }
 
   getUUID() {
-    let uuid = localStorage.getItem('uuid');
-    if (uuid == null) {
+    let uuid: any;
+    // 在一些浏览器中，localStorage是不可用的，比如隐身模式，因此需要try catch
+    try {
+      uuid = localStorage.getItem('uuid');
+      if (uuid == null) {
+        uuid = this.generateUUID();
+        // @ts-ignore
+        localStorage.setItem('uuid', uuid);
+      }
+    } catch (e) {
       uuid = this.generateUUID();
-      // @ts-ignore
-      localStorage.setItem('uuid', uuid);
     }
     return uuid;
   }
 
   getToken(): string {
-    let token = localStorage.getItem('token');
-    if (token == null) {
+    try {
+      let token = localStorage.getItem('token');
+      if (token == null) {
+        return '';
+      }
+      return token;
+    } catch (e) {
       return '';
     }
-    return token;
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
