@@ -29,9 +29,14 @@ export class TodayComponent {
 
 
   ngOnInit(): void {
-    let token = localStorage.getItem('token');
-    if (token != null) {
-      this.adminMode = true
+
+    try {
+      let token = localStorage.getItem('token');
+      if (token != null) {
+        this.adminMode = true
+      }
+    } catch (e) {
+      console.log(e)
     }
     this.admin.getTop().subscribe(data => this.topSubmissions = data.data)
     this.getTodaySubmissions()
