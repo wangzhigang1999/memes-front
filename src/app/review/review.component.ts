@@ -25,7 +25,7 @@ export class ReviewComponent {
 
   releaseStrategy = []
   selectedReleaseStrategy = ''
-  maxValue = 50;
+  minValue = 50;
 
   constructor(private service: ReviewService, private admin: AdminService) {
   }
@@ -165,19 +165,19 @@ export class ReviewComponent {
   }
 
   updateMax() {
-    if (this.maxValue < 0) {
+    if (this.minValue < 0) {
       alert("最大值不能小于0")
       return
     }
 
-    this.admin.setMaxSubmission(this.maxValue).subscribe(() => {
+    this.admin.setMaxSubmission(this.minValue).subscribe(() => {
     })
   }
 
   getMaxSubmissionLimit() {
     this.admin.getMaxSubmission().subscribe(
       (data: Response) => {
-        this.maxValue = data.data;
+        this.minValue = data.data;
       }
     )
   }
