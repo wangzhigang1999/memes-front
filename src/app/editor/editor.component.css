@@ -1,0 +1,14 @@
+@media screen  and (min-width: 600px) {
+  #editor-wrapper {
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
+}
+
+@media screen  and (max-width: 600px) {
+  #editor-wrapper {
+    margin-top: 20px;
+  }
+}

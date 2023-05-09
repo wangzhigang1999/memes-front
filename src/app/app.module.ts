@@ -18,6 +18,7 @@ import {ReviewComponent} from './review/review.component';
 import { StatisticComponent } from './statistic/statistic.component';
 import {LazyLoadImageModule} from "ng-lazyload-image";
 import { FixMenuComponent } from './fix-menu/fix-menu.component';
+import { EditorComponent } from './editor/editor.component';
 
 const routes: Routes = [
   {path: '', component: TodayComponent,},
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'history', component: HistoryComponent},
   {path: 'review', component: ReviewComponent},
   {path: 'statistic', component: StatisticComponent},
+  {path: 'editor', component: EditorComponent},
   {path: '**', component: TodayComponent}
 ];
 
@@ -41,7 +43,8 @@ const routes: Routes = [
     HistoryComponent,
     ReviewComponent,
     StatisticComponent,
-    FixMenuComponent
+    FixMenuComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,
