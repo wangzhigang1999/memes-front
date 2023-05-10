@@ -14,6 +14,9 @@
           <a class="btn-ghost" routerLink="/history">历史投稿</a>
         </li>
         <li>
+          <a class="btn-ghost" routerLink="/docs">Docs</a>
+        </li>
+        <li>
           <a class="btn-ghost" routerLink="/review">审核</a>
         </li>
         <li>
@@ -25,6 +28,11 @@
       <a href="/" class="btn btn-ghost normal-case text-xl">memes</a>
     </div>
 
+    <div class="flex-1 hidden sm:flex" *ngIf="showEditorTitle()">
+      <div class="menu menu-horizontal px-1">
+        <input id="ghost-editor" class="btn btn-ghost">
+      </div>
+    </div>
 
     <div class="flex-none hidden sm:flex">
       <div class="menu menu-horizontal px-1">

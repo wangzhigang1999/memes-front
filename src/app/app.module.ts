@@ -19,6 +19,8 @@ import { StatisticComponent } from './statistic/statistic.component';
 import {LazyLoadImageModule} from "ng-lazyload-image";
 import { FixMenuComponent } from './fix-menu/fix-menu.component';
 import { EditorComponent } from './editor/editor.component';
+import { DocComponent } from './doc/doc.component';
+import { DocCardComponent } from './doc/doc-card/doc-card.component';
 
 const routes: Routes = [
   {path: '', component: TodayComponent,},
@@ -27,6 +29,7 @@ const routes: Routes = [
   {path: 'history', component: HistoryComponent},
   {path: 'review', component: ReviewComponent},
   {path: 'statistic', component: StatisticComponent},
+  {path: 'docs', component: DocComponent},
   {path: 'editor', component: EditorComponent},
   {path: '**', component: TodayComponent}
 ];
@@ -44,7 +47,9 @@ const routes: Routes = [
     ReviewComponent,
     StatisticComponent,
     FixMenuComponent,
-    EditorComponent
+    EditorComponent,
+    DocComponent,
+    DocCardComponent
   ],
   imports: [
     BrowserModule,
