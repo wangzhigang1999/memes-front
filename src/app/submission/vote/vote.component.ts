@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {SubmissionService} from "../service/submission.service";
-import {AdminService} from "../service/admin.service";
+import {SubmissionService} from "../../service/submission.service";
+import {AdminService} from "../../service/admin.service";
 
 @Component({
   selector: 'app-vote',

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {DocService} from "../service/doc.service";
+import {DocService} from "../../service/doc.service";
 import {ActivatedRoute} from "@angular/router";
 import Vditor from "vditor";
 
