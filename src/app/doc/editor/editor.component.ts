@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {DocService} from "../../service/doc.service";
 import {ActivatedRoute} from "@angular/router";
 import Vditor from "vditor";
+import {authorized} from "../../utils";
 
 @Component({
   selector: 'app-editor',
@@ -12,7 +13,7 @@ export class EditorComponent {
 
   docID !: string;
 
-  readonly = false;
+  readonly = true;
 
   defaultValue = '# Hello,World!';
 
@@ -25,11 +26,13 @@ export class EditorComponent {
     this.activatedRoute.queryParams.subscribe(
       (params: any) => {
         this.docID = params['id'];
+        if (authorized()){
+          this.readonly = false;
+        }
       })
   }
 
-  ngOnInit(): void {
-
+  ngOnInit() {
     if (this.docID == undefined) {
       this.readonly = false;
       this.defaultDoc = {
@@ -60,7 +63,7 @@ export class EditorComponent {
     this.vditor = new Vditor('editor', {
       height: "100%",
       outline: {
-        enable: false,
+        enable: true,
         position: 'left',
       },
       toolbarConfig: {
@@ -77,7 +80,7 @@ export class EditorComponent {
       },
       preview: {
         markdown: {
-          autoSpace: true,
+          autoSpace: false,
         }
       },
       input(value: string) {
@@ -89,6 +92,9 @@ export class EditorComponent {
   }
 
   upsert() {
+    if (this.readonly) {
+      return;
+    }
     this.defaultDoc.title = this.defaultTitle.trim();
     this.defaultDoc.content = this.defaultValue;
     this.docService.upsertDoc(this.defaultDoc).subscribe(

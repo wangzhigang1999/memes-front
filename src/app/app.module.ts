@@ -15,12 +15,13 @@ import {SubmitComponent} from './submission/submit/submit.component';
 import {UuidInterceptor} from "./uuid.interceptor";
 import {HistoryComponent} from './submission/history/history.component';
 import {ReviewComponent} from './submission/review/review.component';
-import { StatisticComponent } from './statistic/statistic.component';
+import {StatisticComponent} from './statistic/statistic.component';
 import {LazyLoadImageModule} from "ng-lazyload-image";
-import { FixMenuComponent } from './fix-menu/fix-menu.component';
-import { EditorComponent } from './doc/editor/editor.component';
-import { DocComponent } from './doc/doc.component';
-import { DocCardComponent } from './doc/doc-card/doc-card.component';
+import {FixMenuComponent} from './fix-menu/fix-menu.component';
+import {EditorComponent} from './doc/editor/editor.component';
+import {DocComponent} from './doc/doc.component';
+import {DocCardComponent} from './doc/doc-card/doc-card.component';
+import {AuthGuard} from "./auth.guard";
 
 const routes: Routes = [
   {path: '', component: TodayComponent,},
@@ -28,7 +29,7 @@ const routes: Routes = [
   {path: 'submit', component: SubmitComponent},
   {path: 'history', component: HistoryComponent},
   {path: 'review', component: ReviewComponent},
-  {path: 'statistic', component: StatisticComponent},
+  {path: 'statistic', component: StatisticComponent, canActivate: [AuthGuard]},
   {path: 'docs', component: DocComponent},
   {path: 'editor', component: EditorComponent},
   {path: '**', component: TodayComponent}
@@ -49,7 +50,7 @@ const routes: Routes = [
     FixMenuComponent,
     EditorComponent,
     DocComponent,
-    DocCardComponent
+    DocCardComponent,
   ],
   imports: [
     BrowserModule,

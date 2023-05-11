@@ -24,19 +24,7 @@ export class StatisticComponent {
   }
 
   ngOnInit() {
-    try {
-      let token = localStorage.getItem("token");
-      if (token === null) {
-        // no token, redirect to login page
-        window.location.href = "/review"
-      } else {
-        this.refresh()
-      }
-    } catch (e) {
-      console.log(e)
-      window.location.href = "/review"
-    }
-
+    this.refresh();
   }
 
   refresh() {
