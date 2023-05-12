@@ -13,9 +13,9 @@ export class DocCardComponent {
   }
 
   ngAfterContentInit() {
-    if (this.doc.cover_image == undefined) {
-      this.doc.cover_image = "assets/welcome.webp"
-    }
+    // if (this.doc.cover_image == undefined) {
+    //   this.doc.cover_image = "assets/welcome.webp"
+    // }
   }
 
 

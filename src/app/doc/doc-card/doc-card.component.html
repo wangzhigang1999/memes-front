@@ -1,6 +1,6 @@
-<div routerLink="/editor" [queryParams]="{id:doc.id}" target="_blank" class="card w-fit  bg-base-100 shadow-xl img-container"
+<div routerLink="/editor" [queryParams]="{id:doc.id}" target="_blank" class="card w-full  bg-base-100 shadow-xl img-container"
      style="margin-top: 20px">
-  <figure class="figure-padding rounded">
+  <figure class="figure-padding rounded" *ngIf="doc.cover_image">
     <img [src]="doc.cover_image" alt=""/>
   </figure>
   <div class="card-body">
@@ -9,3 +9,4 @@
   </div>
 </div>
 
+<app-fix-menu></app-fix-menu>

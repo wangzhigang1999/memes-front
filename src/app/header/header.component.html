@@ -14,7 +14,7 @@
           <a class="btn-ghost" routerLink="/history">历史投稿</a>
         </li>
         <li>
-          <a class="btn-ghost" routerLink="/docs">Docs</a>
+          <a class="btn-ghost" routerLink="/docs">看看文档</a>
         </li>
         <li>
           <a class="btn-ghost" routerLink="/review">审核</a>
@@ -34,19 +34,25 @@
       </div>
     </div>
 
-    <div class="flex-none hidden sm:flex" *ngIf="!showEditorTitle()">
+    <div class="flex-none hidden md:flex">
+      <div class="menu menu-horizontal px-1">
+        <a routerLink="/docs" class="btn btn-ghost">看看文档</a>
+      </div>
+    </div>
+
+    <div class="flex-none hidden md:flex" *ngIf="!showEditorTitle()">
       <div class="menu menu-horizontal px-1">
         <a routerLink="/history" class="btn btn-ghost">历史投稿</a>
       </div>
     </div>
 
-    <div class="flex-none  hidden sm:flex">
+    <div class="flex-none  hidden md:flex">
       <div class="menu menu-horizontal px-1">
         <a routerLink="/today" class="btn btn-ghost">今日投稿</a>
       </div>
     </div>
 
-    <div class="flex-none">
+    <div class="flex-none hidden md:flex">
       <span class="tooltip tooltip-bottom before:text-xs before:content-[attr(data-tip)]" data-tip="GitHub">
         <a aria-label="Github" target="_blank" href="https://github.com/wangzhigang1999/memes" rel="noopener"
            class="btn btn-ghost drawer-button btn-square normal-case"><svg
@@ -56,11 +62,29 @@
       </span>
     </div>
     <div class="flex-none" style="margin-left: 10px">
-      <div class="tooltip tooltip-success tooltip-bottom" data-tip="点击投稿">
-        <button routerLink="/submit" class="btn btn-outline btn-success">➕</button>
+      <div class="dropdown dropdown-end">
+        <!--        ➕-->
+        <button class="btn btn-ghost btn-circle text-success avatar" style="font-size: xx-large;">
+          +
+        </button>
+        <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+          <li>
+            <a class="justify-between" routerLink="/submit">去投稿
+              <span class="badge badge-ghost">👍</span>
+            </a>
+          </li>
+          <li>
+            <a class="justify-between" href="/editor" target="_blank">写文章
+              <span class="badge badge-ghost">🪄</span>
+            </a>
+          </li>
+        </ul>
       </div>
+
+
     </div>
   </div>
+  <!--  </div>-->
 
 
 </div>
