@@ -64,7 +64,7 @@ export class EditorComponent {
     });
     let that = this;
     this.vditor = new Vditor('editor', {
-      tab: '\t\t',
+      tab: '\t',
       icon: 'material',
       minHeight: 600,
       outline: {
