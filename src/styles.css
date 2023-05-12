@@ -7,11 +7,44 @@
 @tailwind components;
 @tailwind utilities;
 
-.vditor-toolbar{
+.vditor-toolbar {
   border: none !important;
   background: none !important;
 }
 
-.vditor-ir pre.vditor-reset{
+.vditor-ir pre.vditor-reset {
   background: none !important;
+}
+
+.vditor-tooltipped {
+  width: 34px !important;
+}
+
+
+.vditor-reset code:not(.hljs):not(.highlight-chroma) {
+  color: #d63200 !important;
+  background-color: transparent !important;
+  padding: .1rem .5rem !important;
+  border-radius: 2rem !important;
+  margin: 0 .2rem !important;
+  font-size: .95rem !important;
+}
+
+
+.vditor-reset blockquote {
+  /*background-color: #f8f8f8 !important;*/
+  border-left: .25em solid #d63200 !important;
+  border-radius: 2px !important;
+  padding: 0.5rem 1rem !important;
+}
+
+
+mark {
+  border: .1em solid #d63200;
+  color: #d63200;
+  background-color: transparent;
+  padding: .1rem .5rem;
+  border-radius: 2rem;
+  margin: 0 .2rem;
+  font-size: .95rem;
 }
