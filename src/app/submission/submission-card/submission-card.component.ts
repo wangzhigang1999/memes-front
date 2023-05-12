@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Submission} from "../model/submission";
-import {ReviewService} from "../service/review.service";
+import {Submission} from "../../model/submission";
+import {ReviewService} from "../../service/review.service";
 
 @Component({
   selector: 'app-submission-card',

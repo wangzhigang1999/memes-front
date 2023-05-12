@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {Response} from "../model/response";
-import {AdminService} from "../service/admin.service";
-import {Submission} from "../model/submission";
-import {ReviewService} from "../service/review.service";
+import {Response} from "../../model/response";
+import {AdminService} from "../../service/admin.service";
+import {Submission} from "../../model/submission";
+import {ReviewService} from "../../service/review.service";
 
 @Component({
   selector: 'app-review',

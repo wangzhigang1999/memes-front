@@ -1,0 +1,12 @@
+<div routerLink="/editor" [queryParams]="{id:doc.id}" target="_blank" class="card w-full  bg-base-100 shadow-xl img-container"
+     style="margin-top: 20px">
+  <figure class="figure-padding rounded" *ngIf="doc.cover_image">
+    <img [src]="doc.cover_image" alt=""/>
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title" style="text-align: center">{{doc.title}}</h2>
+    <p>{{doc.brief_content}}</p>
+  </div>
+</div>
+
+<app-fix-menu></app-fix-menu>

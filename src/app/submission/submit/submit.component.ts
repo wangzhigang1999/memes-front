@@ -1,6 +1,6 @@
 import {Component, HostListener} from '@angular/core';
-import {SubmissionService} from "../service/submission.service";
-import {Submission} from "../model/submission";
+import {SubmissionService} from "../../service/submission.service";
+import {Submission} from "../../model/submission";
 
 @Component({
   selector: 'app-submit',

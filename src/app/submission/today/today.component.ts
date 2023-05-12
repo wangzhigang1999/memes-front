@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {SubmissionService} from "../service/submission.service";
-import {Submission} from "../model/submission";
-import {AdminService} from "../service/admin.service";
+import {SubmissionService} from "../../service/submission.service";
+import {Submission} from "../../model/submission";
+import {AdminService} from "../../service/admin.service";
 
 @Component({
   selector: 'app-today',
