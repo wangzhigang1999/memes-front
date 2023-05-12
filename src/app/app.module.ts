@@ -1,7 +1,5 @@
-import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {Router} from "@angular/router";
-import * as Sentry from "@sentry/angular-ivy";
 import {AppComponent} from './app.component';
 import {VoteComponent} from './submission/vote/vote.component';
 import {HeaderComponent} from './header/header.component';
@@ -61,23 +59,23 @@ const routes: Routes = [
     LazyLoadImageModule
   ],
   providers: [
-    {
-      provide: ErrorHandler,
-      useValue: Sentry.createErrorHandler({
-        showDialog: true,
-      }),
-    },
-    {
-      provide: Sentry.TraceService,
-      deps: [Router],
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: () => () => {
-      },
-      deps: [Sentry.TraceService],
-      multi: true,
-    },
+    // {
+    //   provide: ErrorHandler,
+    //   useValue: Sentry.createErrorHandler({
+    //     showDialog: true,
+    //   }),
+    // },
+    // {
+    //   provide: Sentry.TraceService,
+    //   deps: [Router],
+    // },
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: () => () => {
+    //   },
+    //   deps: [Sentry.TraceService],
+    //   multi: true,
+    // },
     {
       provide: HTTP_INTERCEPTORS, useClass: UuidInterceptor, multi: true
     }
