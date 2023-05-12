@@ -28,13 +28,16 @@ export class EditorComponent {
         this.docID = params['id'];
         if (authorized()) {
           this.readonly = false;
+          this.defaultValue = '# Hello,World! \n **你是管理员,可以编辑文档!**';
+        }else {
+          this.readonly = true;
+          this.defaultValue = '# Hello,World! \n **你不是管理员,对文档的所有编辑都不会生效!**';
         }
       })
   }
 
   ngOnInit() {
     if (this.docID == undefined) {
-      this.readonly = false;
       this.defaultDoc = {
         title: this.defaultTitle,
       }
@@ -54,7 +57,6 @@ export class EditorComponent {
 
   initEditor() {
     let input = document.getElementById("ghost-editor");
-    console.log(input)
     input?.setAttribute("value", this.defaultDoc.title);
     input?.addEventListener("input", (event) => {
       this.defaultTitle = (event.target as HTMLInputElement).value;
