@@ -1,10 +1,10 @@
-<div id="docs">
+<div id="endless">
   <app-fix-menu></app-fix-menu>
 
   <div class="search-results" infiniteScroll
        [infiniteScrollDistance]="3"
        [infiniteScrollThrottle]="150"
        (scrolled)="onScroll()">
-    <app-doc-card class="flex-1" *ngFor="let doc of docs" [doc]="doc"></app-doc-card>
+    <app-submission-card class="w-full" [submission]="sub" *ngFor="let sub of submissions;"/>
   </div>
 </div>

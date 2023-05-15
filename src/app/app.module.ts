@@ -20,9 +20,12 @@ import {EditorComponent} from './doc/editor/editor.component';
 import {DocComponent} from './doc/doc.component';
 import {DocCardComponent} from './doc/doc-card/doc-card.component';
 import {AuthGuard} from "./auth.guard";
+import {InfiniteScrollModule} from "ngx-infinite-scroll";
+import { EndlessComponent } from './submission/endless/endless.component';
 
 const routes: Routes = [
   {path: '', component: TodayComponent,},
+  {path: 'endless', component: EndlessComponent},
   {path: 'today', component: TodayComponent},
   {path: 'submit', component: SubmitComponent},
   {path: 'history', component: HistoryComponent},
@@ -49,15 +52,17 @@ const routes: Routes = [
     EditorComponent,
     DocComponent,
     DocCardComponent,
+    EndlessComponent,
   ],
-  imports: [
-    BrowserModule,
-    RouterOutlet,
-    [RouterModule.forRoot(routes)],
-    HttpClientModule,
-    FormsModule,
-    LazyLoadImageModule
-  ],
+    imports: [
+        BrowserModule,
+        RouterOutlet,
+        [RouterModule.forRoot(routes)],
+        HttpClientModule,
+        FormsModule,
+        LazyLoadImageModule,
+        InfiniteScrollModule
+    ],
   providers: [
     // {
     //   provide: ErrorHandler,

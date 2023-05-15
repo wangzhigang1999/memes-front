@@ -1,14 +1,20 @@
 export interface Document {
 
-  id: string | null | undefined,
-  "cover_image": string | null | undefined,
-  "brief_content": string | null | undefined,
-  "title": string | null | undefined,
-  "content": string | null | undefined,
-  "author": string | null | undefined,
-  "createTime": number | null | undefined,
-  "updateTime": number | null | undefined,
-  "like": number | null | undefined,
-  "dislike": number | null | undefined,
+  id: string,
+  "cover_image": string,
+  "brief_content": string,
+  "title": string,
+  "content": string,
+  "author": string,
+  "createTime": number,
+  "updateTime": number,
+  "like": number,
+  "dislike": number,
+
+  "tags": string[],
+
+  "type": string,
+  "deleted": boolean,
+  "privateDoc": boolean
 
 }

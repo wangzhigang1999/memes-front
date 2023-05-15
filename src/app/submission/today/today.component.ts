@@ -63,10 +63,6 @@ export class TodayComponent {
     })
   }
 
-  scrollToTop() {
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  }
-
   filter() {
     if (!this.image && !this.video) {
       this.submissions = []

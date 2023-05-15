@@ -1,4 +1,5 @@
 export interface Submission {
+  "id": string,
   "submissionType": string,
   "url": string,
   "hash": number,
