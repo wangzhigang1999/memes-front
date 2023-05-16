@@ -94,6 +94,7 @@ export class EditorComponent {
           fixTermTypo: true,
           paragraphBeginningSpace: true,
           mark: true,
+          codeBlockPreview: false
         },
         math: {
           inlineDigit: true,
