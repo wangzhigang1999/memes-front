@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {SubmissionService} from "../../service/submission.service";
 import {Submission} from "../../model/submission";
-import {AdminService} from "../../service/admin.service";
 
 @Component({
   selector: 'app-today',
@@ -24,7 +23,7 @@ export class TodayComponent {
   public topSubmissions: Submission[] = []
   adminMode = false;
 
-  constructor(private service: SubmissionService, private admin: AdminService) {
+  constructor(private service: SubmissionService) {
   }
 
 
@@ -38,7 +37,7 @@ export class TodayComponent {
     } catch (e) {
       console.log(e)
     }
-    this.admin.getTop().subscribe(data => this.topSubmissions = data.data)
+    this.service.getTop().subscribe(data => this.topSubmissions = data.data)
     this.getTodaySubmissions()
   }
 

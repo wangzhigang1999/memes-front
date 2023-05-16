@@ -20,7 +20,7 @@ export class ReviewService {
    * 获取今日提交
    */
   listSubmissions() {
-    let url = this.host + '/review';
+    let url = this.host + '/admin/review';
     return this.http.get(url);
   }
 
@@ -30,7 +30,7 @@ export class ReviewService {
    * @param hashcode
    */
   accept(hashcode: number) {
-    let url = this.host + `/review/accept/${hashcode}`;
+    let url = this.host + `/admin/review/accept/${hashcode}`;
     return this.http.post(url, null);
   }
 
@@ -39,12 +39,12 @@ export class ReviewService {
    * @param hashcode
    */
   reject(hashcode: number) {
-    let url = this.host + `/review/reject/${hashcode}`;
+    let url = this.host + `/admin/review/reject/${hashcode}`;
     return this.http.post(url, null);
   }
 
   batchAccept(hashcode: number[]) {
-    let url = this.host + `/review/accept/batch`;
+    let url = this.host + `/admin/review/accept/batch`;
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post(url, hashcode, {headers: headers});
@@ -54,7 +54,7 @@ export class ReviewService {
    * 统计信息
    */
   statistics():Observable<any> {
-    let url = this.host + '/review/statistic';
+    let url = this.host + '/admin/review/statistic';
     return this.http.get(url);
   }
 

@@ -21,7 +21,7 @@ export class AdminService {
    * 发布今日提交
    */
   release() {
-    let url = this.host + `/admin/release`;
+    let url = this.host + `/admin/submission/release`;
     return this.http.post(url, null);
   }
 
@@ -57,19 +57,13 @@ export class AdminService {
     return this.http.post(url, null);
   }
 
-  /**
-   * 获取置顶
-   */
-  getTop(): Observable<any> {
-    let url = this.host + `/admin/top`;
-    return this.http.get(url);
-  }
+
 
   /**
    * 设置置顶
    */
   setTop(hash: number): Observable<any> {
-    let url = this.host + `/admin/top/${hash}`;
+    let url = this.host + `/admin/submission/top/${hash}`;
     return this.http.post(url, null);
   }
 
@@ -77,7 +71,7 @@ export class AdminService {
    * 取消置顶
    */
   cancelTop(hash: number): Observable<any> {
-    let url = this.host + `/admin/top/${hash}`;
+    let url = this.host + `/admin/submission/top/${hash}`;
     return this.http.delete(url);
   }
 
@@ -104,12 +98,12 @@ export class AdminService {
   }
 
   getMaxSubmission(): Observable<any> {
-    let url = this.host + `/admin/max/submission`;
+    let url = this.host + `/admin/submission/max`;
     return this.http.get(url);
   }
 
   setMaxSubmission(max: number): Observable<any> {
-    let url = this.host + `/admin/max/submission`;
+    let url = this.host + `/admin/submission/max`;
     // send with form data
     let data = new FormData();
     data.append("max", max.toString());

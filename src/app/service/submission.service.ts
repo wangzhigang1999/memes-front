@@ -92,4 +92,12 @@ export class SubmissionService {
     let url = this.host + `/submission/page?lastID=${lastId}&pageSize=${pageSize}&pageNum=${pageNum}`;
     return this.http.get(url);
   }
+
+  /**
+   * 获取置顶
+   */
+  getTop(): Observable<any> {
+    let url = this.host + `/submission/top`;
+    return this.http.get(url);
+  }
 }
