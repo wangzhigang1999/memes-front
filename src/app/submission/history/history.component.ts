@@ -30,10 +30,8 @@ export class HistoryComponent {
 
   ngOnInit(): void {
     this.service.getHistory().subscribe((data: any) => {
-
       this.history = data.data;
       let total = this.history.length;
-
       if (total > 0) {
         // sort by date YYYY-MM-DD
         this.history = this.history.sort((a, b) => {

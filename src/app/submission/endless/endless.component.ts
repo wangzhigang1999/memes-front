@@ -19,11 +19,11 @@ export class EndlessComponent {
   total: number = 0;
   lastId = "";
 
-  constructor(private submissionService: SubmissionService) {
-  }
+  bottomMessage = "🤖 ~没有更多了~ 🤖";
+  img = "assets/welcome.webp";
 
-  ngOnInit(): void {
-    this.init();
+  constructor(private submissionService: SubmissionService) {
+    this.init()
   }
 
   init() {

@@ -97,16 +97,16 @@ export class AdminService {
     return this.http.post(url, data);
   }
 
-  getMaxSubmission(): Observable<any> {
+  getMinSubmission(): Observable<any> {
     let url = this.host + `/admin/submission/max`;
     return this.http.get(url);
   }
 
-  setMaxSubmission(max: number): Observable<any> {
+  setMinSubmission(min: number): Observable<any> {
     let url = this.host + `/admin/submission/max`;
     // send with form data
     let data = new FormData();
-    data.append("max", max.toString());
+    data.append("max", min.toString());
     return this.http.post(url, data);
   }
 

@@ -170,12 +170,12 @@ export class ReviewComponent {
       return
     }
 
-    this.admin.setMaxSubmission(this.minValue).subscribe(() => {
+    this.admin.setMinSubmission(this.minValue).subscribe(() => {
     })
   }
 
   getMaxSubmissionLimit() {
-    this.admin.getMaxSubmission().subscribe(
+    this.admin.getMinSubmission().subscribe(
       (data: Response) => {
         this.minValue = data.data;
       }
