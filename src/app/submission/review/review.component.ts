@@ -26,6 +26,7 @@ export class ReviewComponent {
   releaseStrategy = []
   selectedReleaseStrategy = ''
   minValue = 50;
+  maxHistory: any;
 
   constructor(private service: ReviewService, private admin: AdminService) {
   }
@@ -151,6 +152,7 @@ export class ReviewComponent {
     this.getStrategy()
     this.getMaxSubmissionLimit()
     this.getStatistic()
+    this.getMaxHistory()
   }
 
   setReleaseStrategy(item: string) {
@@ -190,5 +192,23 @@ export class ReviewComponent {
         this.releasedNum = data.data.releasedNum;
       }
     )
+  }
+
+  getMaxHistory() {
+    this.admin.getMaxHistory().subscribe(
+      //@ts-ignore
+      (data: Response) => {
+        this.maxHistory = data.data;
+      }
+    )
+  }
+
+  updateMaxHistory() {
+    if (this.maxHistory < 0) {
+      alert("最大值不能小于0")
+      return
+    }
+
+    this.admin.setMaxHistory(this.maxHistory).subscribe()
   }
 }

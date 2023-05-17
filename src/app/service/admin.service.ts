@@ -110,4 +110,16 @@ export class AdminService {
     return this.http.post(url, data);
   }
 
+  setMaxHistory(maxHistory: number) {
+    let url = this.host + `/admin/history/max`;
+    // send with form data
+    let data = new FormData();
+    data.append("max", maxHistory.toString());
+    return this.http.post(url, data);
+  }
+
+  getMaxHistory() {
+    let url = this.host + `/admin/history/max`;
+    return this.http.get(url);
+  }
 }
