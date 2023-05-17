@@ -6,9 +6,4 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'memes-fe';
-
-  enableFooter(): boolean {
-    return window.location.pathname !== '/editor';
-  }
 }

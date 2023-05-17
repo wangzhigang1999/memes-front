@@ -20,11 +20,7 @@ export class HistoryComponent {
   hasNext = false;
   hasPrev = false;
   submissions: Submission[] = [];
-  originalSubmissions: Submission[] = [];
 
-
-  image = true;
-  video = true;
 
   bottomMessage = "🤖 ~没有更多了~ 🤖";
   img = "assets/welcome.webp";
@@ -49,8 +45,7 @@ export class HistoryComponent {
         this.hasPrev = this.hashPrev(this.currentIndex);
 
         this.service.getSubmission(last).subscribe((data: any) => {
-          this.originalSubmissions = data.data;
-          this.filter()
+          this.submissions = data.data;
         })
 
         this.currentMessage = this.history[this.currentIndex];
@@ -77,45 +72,7 @@ export class HistoryComponent {
     this.nextMessage = this.hashNext(this.currentIndex, this.history.length) ? "👉👉👉" : "🙈没有了🙈";
     this.preMessage = this.hashPrev(this.currentIndex) ? "👈👈👈" : "🙈没有了🙈";
     this.service.getSubmission(this.history[this.currentIndex]).subscribe((data: any) => {
-      this.originalSubmissions = data.data;
-      this.filter()
+      this.submissions = data.data;
     })
-
-  }
-
-  scrollToTop() {
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  }
-
-
-  filter() {
-    if (!this.image && !this.video) {
-      this.submissions = []
-      this.bottomMessage = "😒 啥都不想看,搬砖去吧 😒";
-      this.img = "assets/brick.jpeg";
-      return
-    }
-
-    this.bottomMessage = "🤖 ~没有更多了~ 🤖";
-    this.img = "assets/welcome.webp";
-
-    if (this.image && this.video) {
-      this.submissions = this.originalSubmissions
-      return
-    }
-
-
-    let tmp = []
-    for (let i = 0; i < this.originalSubmissions.length; i++) {
-      if (this.originalSubmissions[i].submissionType === 'IMAGE' && this.image) {
-        tmp.push(this.originalSubmissions[i])
-      } else if (this.originalSubmissions[i].submissionType === 'BILIBILI' && this.video) {
-        tmp.push(this.originalSubmissions[i])
-      } else if (this.originalSubmissions[i].submissionType === 'VIDEO' && this.video) {
-        tmp.push(this.originalSubmissions[i])
-      }
-    }
-    this.submissions = tmp
-
   }
 }

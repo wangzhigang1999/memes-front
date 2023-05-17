@@ -3,25 +3,6 @@
   <div id="today">
     <app-fix-menu></app-fix-menu>
 
-    <div id="select" style="margin-top: 20px">
-      <div style="display:block;" class="columns-2">
-        <div class="form-control " style="width:100px">
-          <label class="cursor-pointer label">
-            <span class="label-text">看图</span>
-            <input type="checkbox" checked="checked" [(ngModel)]="image" (change)="filter()" class="checkbox checkbox-success"/>
-          </label>
-        </div>
-
-        <div class="form-control container" style="width: 100px;margin-left: 20px">
-          <label class="cursor-pointer label">
-            <span class="label-text">看视频</span>
-            <input type="checkbox" checked="checked" [(ngModel)]="video" (change)="filter()" class="checkbox checkbox-success"/>
-          </label>
-        </div>
-      </div>
-    </div>
-
-
     <div id="header-page" class="w-full">
       <div class="btn-group grid grid-cols-3">
         <button class="btn btn-success btn-outline" (click)="setCur(currentIndex-1)"

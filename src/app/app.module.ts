@@ -16,12 +16,9 @@ import {ReviewComponent} from './submission/review/review.component';
 import {StatisticComponent} from './statistic/statistic.component';
 import {LazyLoadImageModule} from "ng-lazyload-image";
 import {FixMenuComponent} from './fix-menu/fix-menu.component';
-import {EditorComponent} from './doc/editor/editor.component';
-import {DocComponent} from './doc/doc.component';
-import {DocCardComponent} from './doc/doc-card/doc-card.component';
 import {AuthGuard} from "./auth.guard";
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
-import { EndlessComponent } from './submission/endless/endless.component';
+import {EndlessComponent} from './submission/endless/endless.component';
 
 const routes: Routes = [
   {path: '', component: TodayComponent,},
@@ -31,8 +28,6 @@ const routes: Routes = [
   {path: 'history', component: HistoryComponent},
   {path: 'review', component: ReviewComponent},
   {path: 'statistic', component: StatisticComponent, canActivate: [AuthGuard]},
-  {path: 'docs', component: DocComponent},
-  {path: 'editor', component: EditorComponent},
   {path: '**', component: TodayComponent}
 ];
 
@@ -49,38 +44,18 @@ const routes: Routes = [
     ReviewComponent,
     StatisticComponent,
     FixMenuComponent,
-    EditorComponent,
-    DocComponent,
-    DocCardComponent,
     EndlessComponent,
   ],
-    imports: [
-        BrowserModule,
-        RouterOutlet,
-        [RouterModule.forRoot(routes)],
-        HttpClientModule,
-        FormsModule,
-        LazyLoadImageModule,
-        InfiniteScrollModule
-    ],
+  imports: [
+    BrowserModule,
+    RouterOutlet,
+    [RouterModule.forRoot(routes)],
+    HttpClientModule,
+    FormsModule,
+    LazyLoadImageModule,
+    InfiniteScrollModule
+  ],
   providers: [
-    // {
-    //   provide: ErrorHandler,
-    //   useValue: Sentry.createErrorHandler({
-    //     showDialog: true,
-    //   }),
-    // },
-    // {
-    //   provide: Sentry.TraceService,
-    //   deps: [Router],
-    // },
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: () => () => {
-    //   },
-    //   deps: [Sentry.TraceService],
-    //   multi: true,
-    // },
     {
       provide: HTTP_INTERCEPTORS, useClass: UuidInterceptor, multi: true
     }
