@@ -98,15 +98,15 @@ export class AdminService {
   }
 
   getMinSubmission(): Observable<any> {
-    let url = this.host + `/admin/submission/max`;
+    let url = this.host + `/admin/submission/min`;
     return this.http.get(url);
   }
 
   setMinSubmission(min: number): Observable<any> {
-    let url = this.host + `/admin/submission/max`;
+    let url = this.host + `/admin/submission/min`;
     // send with form data
     let data = new FormData();
-    data.append("max", min.toString());
+    data.append("min", min.toString());
     return this.http.post(url, data);
   }
 
