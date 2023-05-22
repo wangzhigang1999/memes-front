@@ -4,6 +4,10 @@
     font-size: xxx-large;
   }
 
+  .custom-span{
+    font-size: xx-large;
+  }
+
   .btn-me {
     height: 4rem;
     width: 4rem;
@@ -16,5 +20,9 @@
   .custom-text {
     font-size: x-large;
   }
-}
 
+  .custom-span{
+    font-size: large;
+  }
+
+}

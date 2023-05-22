@@ -44,24 +44,22 @@ export class VoteComponent {
     this.upBtn = isUpvote;
     this.downBtn = !isUpvote;
     this.loveBtn = false
-    this.service.vote(hash, isUpvote).subscribe(() => {
-      if (isUpvote) {
-        this.up = this.up + 1;
-      } else {
-        this.down = this.down + 1;
-      }
-    })
+
+    if (isUpvote) {
+      this.up = this.up + 1;
+    } else {
+      this.down = this.down + 1;
+    }
+    this.service.vote(hash, isUpvote).subscribe()
   }
 
   love(hash: any) {
     this.loveBtn = true
     this.upBtn = false
     this.downBtn = false
+    this.up = this.up + 1;
 
-    this.service.vote(hash, true).subscribe(() => {
-        this.up = this.up + 1;
-      }
-    )
+    this.service.vote(hash, true).subscribe()
   }
 
   addTop(hash: any) {
