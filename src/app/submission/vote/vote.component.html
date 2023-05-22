@@ -4,6 +4,7 @@
       <button class="btn btn-me custom-text" style="margin-right: 10px" [ngClass]="downClass()"
               (click)="vote(hash,false)">🥵
       </button>
+      <span class="custom-span">{{down}}</span>
     </div>
 
     <div class="w-full " style="text-align: center;">
@@ -13,6 +14,7 @@
     </div>
 
     <div class="w-full " style="text-align: center;">
+      <span class="custom-span">{{up}}</span>
       <button class=" btn btn-me  custom-text" style="margin-left: 10px" [ngClass]="upClass()"
               (click)="vote(hash,true)">🤣
       </button>
