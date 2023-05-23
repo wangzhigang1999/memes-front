@@ -21,7 +21,7 @@ import {InfiniteScrollModule} from "ngx-infinite-scroll";
 import {EndlessComponent} from './submission/endless/endless.component';
 
 const routes: Routes = [
-  {path: '', component: TodayComponent,},
+  {path: '', component: EndlessComponent,},
   {path: 'endless', component: EndlessComponent},
   {path: 'today', component: TodayComponent},
   {path: 'submit', component: SubmitComponent},
