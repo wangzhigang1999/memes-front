@@ -43,7 +43,7 @@ export class ReviewService {
     return this.http.post(url, null);
   }
 
-  batchAccept(hashcode: number[]) {
+  batchAccept(hashcode: number[]): Observable<any> {
     let url = this.host + `/admin/review/accept/batch`;
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');

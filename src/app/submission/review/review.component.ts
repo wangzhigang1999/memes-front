@@ -87,10 +87,15 @@ export class ReviewComponent {
 
 
   batchAccept() {
+    this.title = '批量通过中...';
+    this.message = '批量通过中...';
     let hashcode = this.submissions.map(submission => submission.hash);
-    this.service.batchAccept(hashcode).subscribe(() => {
+    this.service.batchAccept(hashcode).subscribe((data: Response) => {
       this.title = '批量通过成功';
       this.message = '批量通过成功';
+      this.reviewPassedNum += data.data
+      this.toBeReviewedNum -= data.data
+
       this.loadSubmissions()
     })
   }
