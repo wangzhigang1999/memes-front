@@ -18,9 +18,17 @@ export class StatisticComponent {
   ipCountList!: any;
   urlCountList!: any;
   uuidCountList!: any;
+  date: number;
 
 
   constructor(private service: AdminService) {
+    let start = new Date("2023-03-11");
+    let end = new Date();
+
+    // find the gap between start and end
+    // @ts-ignore
+    let gap = (end - start) / 1000 / 60 / 60 / 24;
+    this.date = Math.round(gap);
   }
 
   ngOnInit() {
