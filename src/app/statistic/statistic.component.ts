@@ -12,7 +12,7 @@ export class StatisticComponent {
   statistic!: any;
 
   reqNumber = 0;
-  averageCost!: number;
+  averageCost: number = 0;
   maxCost!: number;
   minCost!: number;
   ipCountList!: any;
@@ -42,7 +42,7 @@ export class StatisticComponent {
         this.reqNumber = this.statistic.reqNumber;
 
         // keep .2f after point
-        this.averageCost = Math.round(this.statistic.averageCost * 100) / 100;
+        this.averageCost = Math.round(this.statistic.averageCost * 10) / 10;
         this.maxCost = Math.round(this.statistic.maxCost * 100) / 100;
         this.minCost = Math.round(this.statistic.minCost * 100) / 100;
 

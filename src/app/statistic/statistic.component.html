@@ -12,8 +12,8 @@
       <div class="stat-value">{{reqNumber}}</div>
     </div>
     <div class="stat place-items-center w-fit f">
-      <div class="stat-title">独立IP个数</div>
-      <div class="stat-value text-secondary">{{count(ipCountList)}} 个</div>
+      <div class="stat-title">平均耗时</div>
+      <div class="stat-value text-secondary">{{averageCost}} ms</div>
     </div>
     <div class="stat place-items-center w-fit">
       <div class="stat-title">独立UUID个数</div>
@@ -61,25 +61,24 @@
   </div>
 
 
-  <div style="margin-top: 20px">
-    <div class="overflow-x-auto">
-      <table class="table table-compact table-zebra w-full">
-        <thead>
-        <tr>
-          <th>IP</th>
-          <th>count</th>
-        </tr>
-        </thead>
+<!--  <div style="margin-top: 20px">-->
+<!--    <div class="overflow-x-auto">-->
+<!--      <table class="table table-compact table-zebra w-full">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--          <th>IP</th>-->
+<!--          <th>count</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
 
-        <tbody>
-        <tr *ngFor="let item of top(10,ipCountList)">
-          <td>{{item.key}}</td>
-          <td>{{item.value}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-
-  </div>
+<!--        <tbody>-->
+<!--        <tr *ngFor="let item of top(10,ipCountList)">-->
+<!--          <td>{{item.key}}</td>-->
+<!--          <td>{{item.value}}</td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--      </table>-->
+<!--    </div>-->
+<!--  </div>-->
 
 </div>
