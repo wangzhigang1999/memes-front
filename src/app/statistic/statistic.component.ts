@@ -52,12 +52,9 @@ export class StatisticComponent {
 
         // filter some url
         this.urlCountList = this.urlCountList.filter((item: any) => {
-          return item.key != "https://api.memes.bupt.site/submission/statistic"
-            && item.key != "https://api.memes.bupt.site/submission/review"
-            && item.key != "https://api.memes.bupt.site/submission/release"
+          // if contains "statistic", "review", "release", then filter
+          return !item.key.includes("statistic") && !item.key.includes("review") && !item.key.includes("release")
         })
-
-
       }
     )
   }
@@ -73,7 +70,7 @@ export class StatisticComponent {
 
 
   replace(key: any) {
-    return key.replace("https://api.memes.bupt.site", "")
+    return key.replace("https://api.memes.bupt.site", "").replace("http://api.memes.bupt.site", "")
   }
 
   top(k: number, list: any[]) {
