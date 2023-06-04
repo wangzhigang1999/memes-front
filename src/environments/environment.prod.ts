@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  host: "https://meems.onrender.com",
+  host: "https://api.memes.bupt.site",
 };
