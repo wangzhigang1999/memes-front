@@ -1,9 +1,6 @@
 <div id="today">
   <app-fix-menu></app-fix-menu>
-
-  <div *ngIf="topSubmissions.length>0">
-    <app-submission-card class="w-full" [submission]="sub" [admin]="adminMode" *ngFor="let sub of topSubmissions;"/>
-  </div>
+  <app-top-submission></app-top-submission>
 
   <app-submission-card class="w-full" [submission]="sub" [admin]="adminMode" *ngFor="let sub of submissions;"/>
 

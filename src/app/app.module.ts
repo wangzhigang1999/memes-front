@@ -19,6 +19,7 @@ import {FixMenuComponent} from './fix-menu/fix-menu.component';
 import {AuthGuard} from "./auth.guard";
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
 import {EndlessComponent} from './submission/endless/endless.component';
+import { TopSubmissionComponent } from './submission/top-submission/top-submission.component';
 
 const routes: Routes = [
   {path: '', component: EndlessComponent,},
@@ -45,6 +46,7 @@ const routes: Routes = [
     StatisticComponent,
     FixMenuComponent,
     EndlessComponent,
+    TopSubmissionComponent,
   ],
   imports: [
     BrowserModule,

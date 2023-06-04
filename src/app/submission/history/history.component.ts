@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {SubmissionService} from "../../service/submission.service";
 import {Submission} from "../../model/submission";
+import {authorized} from "../../utils";
 
 @Component({
   selector: 'app-history',
@@ -24,11 +25,15 @@ export class HistoryComponent {
 
   bottomMessage = "🤖 ~没有更多了~ 🤖";
   img = "assets/welcome.webp";
+  adminMode = false;
 
   constructor(private service: SubmissionService) {
   }
 
   ngOnInit(): void {
+    if (authorized()) {
+      this.adminMode = true
+    }
     this.service.getHistory().subscribe((data: any) => {
       this.history = data.data;
       let total = this.history.length;

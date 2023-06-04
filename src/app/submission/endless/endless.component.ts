@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Page} from "../../model/page";
 import {Submission} from "../../model/submission";
 import {SubmissionService} from "../../service/submission.service";
+import {authorized} from "../../utils";
 
 @Component({
   selector: 'app-endless',
@@ -21,9 +22,13 @@ export class EndlessComponent {
 
   bottomMessage = "🤖 ~没有更多了~ 🤖";
   img = "assets/welcome.webp";
+  adminMode = false;
 
   constructor(private submissionService: SubmissionService) {
     this.init()
+    if (authorized()) {
+      this.adminMode = true
+    }
   }
 
   init() {
