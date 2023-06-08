@@ -26,10 +26,7 @@ export class TodayComponent {
       this.adminMode = true
     }
     this.service.getTodaySubmissions().subscribe(data => {
-      this.submissions = data.data.reverse()
-      if (this.adminMode) {
-        this.submissions = this.submissions.reverse()
-      }
+      this.submissions = data.data
     })
   }
 }
