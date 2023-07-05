@@ -1,33 +1,16 @@
-@media screen and (max-width: 600px){
-  .fixed-button {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    margin: 20px;
+.fixed-button {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 20px;
 
-    padding: 10px;
-    cursor: pointer;
-    z-index: 9999;
-    font-size: x-large;
-  }
+  padding: 10px;
+  cursor: pointer;
+  z-index: 9999;
+  font-size: x-large;
 }
 
-@media screen and (min-width: 600px){
-  .fixed-button {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    margin: 70px;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 9999;
-    font-size: xx-large;
-
-  }
-
-}
-
-.no-bg{
+.no-bg {
   background: none !important;
 }
 

@@ -1,18 +1,5 @@
-/* for desktop */
-@media screen and (min-width: 600px) {
-  .figure-padding {
-    padding: 20px;
-  }
-
-}
-
-/* for mobile */
-@media screen and (max-width: 600px) {
-
-  .figure-padding {
-    padding: 10px;
-  }
-
+.figure-padding {
+  padding: 20px;
 }
 
 .img-container {
