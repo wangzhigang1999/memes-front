@@ -232,9 +232,20 @@ export class ReviewComponent {
       return
     }
 
+    let lastCrawlerTimestamp = Number.parseInt(localStorage.getItem("lastCrawlerTimestamp") || "0", 10);
+
+    // if the gap between last crawler and now is less than 1 hour, then do not trigger crawler
+    if (new Date().getTime() - lastCrawlerTimestamp < 60 * 60 * 1000) {
+      this.title = '触发爬虫错误';
+      this.message = '1小时内只能触发一次爬虫';
+      return
+    }
+
     if (this.pat) {
       this.title = '触发爬虫中...';
       this.message = '请稍后';
+      localStorage.setItem("lastCrawlerTimestamp", new Date().getTime().toString());
+
       this.admin.triggerCrawler(this.pat).subscribe(
         (data: any) => {
           this.title = '触发爬虫成功';
@@ -244,6 +255,7 @@ export class ReviewComponent {
           console.log(error)
           this.title = '触发爬虫错误';
           this.message = "请检查PAT是否正确";
+          localStorage.setItem("lastCrawlerTimestamp", "0");
         }
       )
     } else {
