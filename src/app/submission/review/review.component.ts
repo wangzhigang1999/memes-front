@@ -15,6 +15,8 @@ export class ReviewComponent {
 
   submissions: Submission[] = []
   token: any;
+
+  pat: any;
   title: any;
   message: any;
 
@@ -29,6 +31,11 @@ export class ReviewComponent {
   maxHistory: any;
 
   constructor(private service: ReviewService, private admin: AdminService) {
+    try {
+      this.pat = localStorage.getItem('pat');
+    } catch (e) {
+      this.pat = ''
+    }
   }
 
   ngOnInit() {
@@ -58,6 +65,7 @@ export class ReviewComponent {
   submitToken() {
     if (this.token) {
       localStorage.setItem('token', this.token);
+      localStorage.setItem("pat", this.pat);
       this.admin.verifyToken(this.token).subscribe((data: Response) => {
         if (data.data) {
           this.init()
@@ -215,5 +223,32 @@ export class ReviewComponent {
     }
 
     this.admin.setMaxHistory(this.maxHistory).subscribe()
+  }
+
+  triggerCrawler() {
+    if (!confirm("确定要触发爬虫吗？")) {
+      this.title = '取消触发爬虫';
+      this.message = '任务已取消';
+      return
+    }
+
+    if (this.pat) {
+      this.title = '触发爬虫中...';
+      this.message = '请稍后';
+      this.admin.triggerCrawler(this.pat).subscribe(
+        (data: any) => {
+          this.title = '触发爬虫成功';
+          this.message = data.state;
+        },
+        error => {
+          console.log(error)
+          this.title = '触发爬虫错误';
+          this.message = "请检查PAT是否正确";
+        }
+      )
+    } else {
+      this.title = '触发爬虫错误';
+      this.message = '缺少PAT';
+    }
   }
 }

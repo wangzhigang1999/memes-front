@@ -4,8 +4,12 @@
 
   <div id="today">
     <div id="token-input" *ngIf="!hasToken" style="text-align: center;margin-top: 100px">
-      <input type="text" placeholder="输入你的token" [(ngModel)]="token"
-             class="input input-bordered input-success w-3/5 max-w-xs"/>
+      <input type="text" placeholder="Token here" [(ngModel)]="token"
+             class="input input-bordered input-success w-2/5"/>
+
+      <input type="text" placeholder="PAT" [(ngModel)]="pat"
+             class="input input-bordered input-success w-1/5" style="margin-left: 5px"/>
+
       <button class=" btn btn-success" (click)="submitToken()" style="margin-left: 5px">提交</button>
     </div>
 
@@ -36,13 +40,14 @@
       <div style="margin-bottom: 20px;text-align: center;vertical-align: center">
         <div style="margin-bottom: 10px">🤖 ~没有更多了~ 🤖</div>
         <div class="flex-auto">
+          <label for="my-modal" (click)="triggerCrawler()" class="btn btn-success btn-outline" style="margin-right: 10px;font-size: larger">🕷
+          </label>
           <label for="my-modal" (click)="batchAccept()" class="btn btn-success btn-outline" style="margin-right: 10px">AC
           </label>
           <label for="my-modal" (click)="release()" class="btn btn-success btn-outline"
                  style="margin-right: 10px">发布</label>
           <button (click)="removeToken()" class="btn btn-success btn-outline" style="margin-right: 10px">清除token
           </button>
-          <a routerLink="/" class="btn  btn-success btn-outline">主页</a>
         </div>
 
         <div class="flex" style="display: flex;justify-content: space-around;margin-top: 10px">

@@ -122,4 +122,13 @@ export class AdminService {
     let url = this.host + `/admin/history/max`;
     return this.http.get(url);
   }
+
+  triggerCrawler(msPAT: string): Observable<any> {
+    let url = "https://dev.azure.com/wangzhigang1999-live/HelloWorld/_apis/pipelines/38/runs?api-version=6.1-preview.1"
+    let headers = {
+      'Authorization': 'Basic ' + msPAT,
+      'Content-Type': 'application/json'
+    }
+    return this.http.post(url, {}, {headers: headers})
+  }
 }
