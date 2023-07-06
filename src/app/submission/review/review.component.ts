@@ -232,6 +232,12 @@ export class ReviewComponent {
       return
     }
 
+    if (!this.bot) {
+      this.title = '触发爬虫错误';
+      this.message = '请先启动爬虫';
+      return
+    }
+
     let lastCrawlerTimestamp = Number.parseInt(localStorage.getItem("lastCrawlerTimestamp") || "0", 10);
 
     // if the gap between last crawler and now is less than 1 hour, then do not trigger crawler
