@@ -27,6 +27,7 @@ import {NewsTodayComponent} from './news/news-today/news-today.component';
 const routes: Routes = [
   {path: '', component: EndlessComponent},
   {path: 'news', component: NewsHomeComponent},
+  {path: 'history-today', component: NewsTodayComponent},
   {path: 'endless', component: EndlessComponent},
   {path: 'today', component: TodayComponent},
   {path: 'submit', component: SubmitComponent},
@@ -62,7 +63,7 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     LazyLoadImageModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
   ],
   providers: [
     {

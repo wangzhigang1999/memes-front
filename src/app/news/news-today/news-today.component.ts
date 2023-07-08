@@ -14,12 +14,12 @@ export class NewsTodayComponent {
     this.getHistory()
   }
 
-   getHistory() {
+  getHistory() {
     // get today of Asia/Shanghai
     let today = new Date()
-    today.setHours(today.getHours() + 8)
     let month = today.getMonth() + 1;
     let day = today.getDate();
+
     // build YYYY-MM-DD format
     let date = today.getFullYear() + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day)
     let MMDD = date.slice(4, date.length)
