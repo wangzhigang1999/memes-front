@@ -19,10 +19,14 @@ import {FixMenuComponent} from './fix-menu/fix-menu.component';
 import {AuthGuard} from "./auth.guard";
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
 import {EndlessComponent} from './submission/endless/endless.component';
-import { TopSubmissionComponent } from './submission/top-submission/top-submission.component';
+import {TopSubmissionComponent} from './submission/top-submission/top-submission.component';
+import {NewsCardComponent} from './news/news-card/news-card.component';
+import {NewsHomeComponent} from './news/news-home/news-home.component';
+import {NewsTodayComponent} from './news/news-today/news-today.component';
 
 const routes: Routes = [
-  {path: '', component: EndlessComponent,},
+  {path: '', component: EndlessComponent},
+  {path: 'news', component: NewsHomeComponent},
   {path: 'endless', component: EndlessComponent},
   {path: 'today', component: TodayComponent},
   {path: 'submit', component: SubmitComponent},
@@ -47,6 +51,9 @@ const routes: Routes = [
     FixMenuComponent,
     EndlessComponent,
     TopSubmissionComponent,
+    NewsCardComponent,
+    NewsHomeComponent,
+    NewsTodayComponent,
   ],
   imports: [
     BrowserModule,

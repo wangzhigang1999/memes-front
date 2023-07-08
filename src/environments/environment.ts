@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  host: "https://api.memes.bupt.site",
-  // host: "http://100.68.68.47:8080",
+  // host: "https://api.memes.bupt.site",
+  host: "http://100.68.68.47:8080",
 };
 
 /*

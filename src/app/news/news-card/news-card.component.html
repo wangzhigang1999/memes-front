@@ -1,0 +1,45 @@
+<div class="card card-compact  w-full bg-base-100 shadow-xl " style="margin-top: 20px">
+  <figure style="padding: 20px">
+    <img [defaultImage]="defaultCover" class="rounded-xl" width="100%" [lazyLoad]="news.coverImage" alt="" src=""/>
+  </figure>
+  <div class="card-body">
+    <div tabindex="0" class="collapse w-full">
+      <div>
+        <h2 class="card-title">
+          {{news.title}}
+        </h2>
+      </div>
+      <div class="collapse-content">
+        <div [id]="news.id" class="detail"></div>
+      </div>
+    </div>
+
+    <div class="card-actions justify-end">
+      <a class="badge badge-secondary" href="{{news.sourceURL}}">原文</a>
+      <div class="badge " *ngIf="news.author!=''">{{news.author}}</div>
+      <div class="badge badge-success" (click)="setDateTo(news.date)">{{news.date}}</div>
+      <div *ngFor="let tag of news.tag">
+        <div class="badge badge-outline" (click)="addToSelector(tag)" *ngIf="tag.length<5">{{tag}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="columns-2 w-full">
+    <div class=" w-full" style="text-align: center;">
+      <button class="btn btn-ghost" style="margin-right: 10px">💕
+      </button>
+      <span class="custom-span">{{news.dislike}}</span>
+    </div>
+
+    <div class="w-full " style="text-align: center;">
+      <button class=" btn btn-ghost " style="margin-left: 10px">❤️
+      </button>
+      <span class="custom-span">{{news.like}}</span>
+    </div>
+  </div>
+
+  <div style="height: 10px">
+
+  </div>
+
+</div>

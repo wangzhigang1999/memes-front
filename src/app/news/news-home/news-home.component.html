@@ -1,0 +1,30 @@
+<div>
+  <app-fix-menu></app-fix-menu>
+  <div class="py-5 search-badges bg-base-100 rounded-xl px-3" *ngIf="badges.length||specificDate">
+    <div *ngIf="specificDate" class="badge h-8 text-gray-500 bg-gray-100  gap-2 border-gray-100 text-lg py-2"
+         (click)="clearDate()"
+         style="margin-right: 5px;margin-top: 5px">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+           class="inline-block w-4 h-4 stroke-current">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+      date:{{specificDate}}
+    </div>
+    <div class="badge h-8 text-gray-500 bg-gray-100  gap-2 border-gray-100 text-lg py-2" (click)="removeTag(tag)"
+         *ngFor="let tag of badges"
+         style="margin-right: 5px;margin-top: 5px">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+           class="inline-block w-4 h-4 stroke-current">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+      {{tag}}
+    </div>
+  </div>
+  <div class="search-results" infiniteScroll
+       [infiniteScrollDistance]="3"
+       [infiniteScrollThrottle]="50"
+       (scrolled)="onScroll()">
+    <app-news-card *ngFor="let item of news" (addSelector)="addSelector($event)" (setDate)="setDate($event)"
+                   [news]="item"></app-news-card>
+  </div>
+</div>
