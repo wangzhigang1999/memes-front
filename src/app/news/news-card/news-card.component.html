@@ -1,4 +1,4 @@
-<div class="card card-compact  w-full bg-base-100 shadow-xl " style="margin-top: 20px">
+<div class="card card-compact  w-full bg-base-100 shadow-xl " style="margin-top: 20px" *ngIf="show">
   <figure style="padding: 20px">
     <img [defaultImage]="defaultCover" class="rounded-xl" width="100%" [lazyLoad]="news.coverImage" alt="" src=""/>
   </figure>
