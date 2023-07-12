@@ -24,6 +24,8 @@ export class EndlessComponent {
   img = "assets/welcome.webp";
   adminMode = false;
 
+  requesting = false
+
   constructor(private submissionService: SubmissionService) {
     this.init()
     if (authorized()) {
@@ -32,6 +34,7 @@ export class EndlessComponent {
   }
 
   init() {
+    this.requesting = true
     this.submissionService.getPage(this.lastId, this.pageNum, this.pageSize).subscribe(
       (data: any) => {
         const page: Page<Submission> = data.data
@@ -49,14 +52,16 @@ export class EndlessComponent {
         if (this.submissions.length > 0) {
           this.lastId = this.submissions[this.submissions.length - 1].id
         }
+        this.requesting = false
       })
 
   }
 
   onScroll() {
-    if (this.submissions.length >= this.total) {
+    if (this.submissions.length >= this.total || this.requesting) {
       return
     }
+    this.requesting = true
     this.submissionService.getPage(this.lastId, this.pageNum + 1, this.pageSize).subscribe(
       (data: any) => {
         const page: Page<Submission> = data.data
@@ -70,6 +75,7 @@ export class EndlessComponent {
         )
         this.pageNum = page.pageNum
         this.lastId = this.submissions[this.submissions.length - 1].id
+        this.requesting = false
       }
     )
   }

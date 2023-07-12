@@ -22,6 +22,8 @@ export class NewsHomeComponent {
   specificDate = ""
   badges: string[] = [];
 
+  requesting = false
+
   constructor(private newsService: NewsService) {
     this.init()
   }
@@ -35,6 +37,7 @@ export class NewsHomeComponent {
 
     let tag = this.badges.join(",")
 
+    this.requesting = true
     this.newsService.getByPageWithTag(this.lastId, this.pageNum, this.pageSize, tag).subscribe(
       (data: any) => {
         const page: Page<News> = data.data
@@ -50,18 +53,17 @@ export class NewsHomeComponent {
         if (this.news.length > 0) {
           this.lastId = this.news[this.news.length - 1].id
         }
+        this.requesting = false
       })
     window.scrollTo({top: 0, behavior: 'smooth'});
 
   }
 
   onScroll() {
-    if (this.specificDate !== "") {
+    if (this.specificDate !== "" || this.news.length >= this.total || this.requesting) {
       return
     }
-    if (this.news.length >= this.total) {
-      return
-    }
+    this.requesting = true
     let tag = this.badges.join(",")
     this.newsService.getByPageWithTag(this.lastId, this.pageNum + 1, this.pageSize, tag).subscribe(
       (data: any) => {
@@ -76,6 +78,7 @@ export class NewsHomeComponent {
         )
         this.pageNum = page.pageNum
         this.lastId = this.news[this.news.length - 1].id
+        this.requesting = false
       }
     )
   }
