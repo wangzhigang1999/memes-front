@@ -51,10 +51,10 @@ export class StatisticComponent {
         this.uuidCountList = this.statistic.uuidCountMap;
 
         // filter some url
-        this.urlCountList = this.urlCountList.filter((item: any) => {
+        this.urlCountList = this.mergeVoteCount(this.urlCountList.filter((item: any) => {
           // if contains "statistic", "review", "release", then filter
-          return !item.key.includes("statistic") && !item.key.includes("review") && !item.key.includes("release")
-        })
+          return !item.key.includes("statistic") && !item.key.includes("review") && !item.key.includes("release") && !item.key.includes("admin");
+        }))
       }
     )
   }
@@ -80,6 +80,24 @@ export class StatisticComponent {
     } catch (e) {
       return []
     }
+  }
+
+  mergeVoteCount(list: any[]): any[] {
+    // merge all '/submission/vote/***' into '/submission/vote'
+    let map = new Map();
+    map.set("/submission/vote", 0)
+    for (let item of list) {
+      if (item.key.includes("/submission/vote")) {
+        map.set("/submission/vote", map.get("/submission/vote") + item.value)
+      }
+    }
+    // remove all '/submission/vote/1630697354/true'
+    list = list.filter((item: any) => {
+      return !item.key.includes("/submission/vote")
+    })
+    // add '/submission/vote' into list
+    list.push(map)
+    return list
   }
 }
 
