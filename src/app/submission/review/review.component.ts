@@ -140,19 +140,17 @@ export class ReviewComponent {
     }
   }
 
-  getBotStatus() {
-    this.admin.getBotStatus().subscribe(
-      (data: any) => {
-        this.bot = data.data;
-      }
-    )
-  }
 
-  getStrategy() {
-    this.admin.getReleaseStrategy().subscribe(
+  getSys() {
+    this.admin.getSys().subscribe(
       (data: Response) => {
+        console.log(data)
         this.releaseStrategy = data.data["releaseStrategy"];
         this.selectedReleaseStrategy = data.data["selectedReleaseStrategy"];
+        this.bot = data.data["botUp"];
+        this.minValue = data.data["min_SUBMISSIONS"];
+        this.maxHistory = data.data["max_HISTORY"];
+        this.releaseStrategy = data.data["releaseStrategy"];
       }
     )
   }
@@ -161,11 +159,8 @@ export class ReviewComponent {
     localStorage.setItem('token-ok', "true")
     this.hasToken = true;
     this.loadSubmissions()
-    this.getBotStatus()
-    this.getStrategy()
-    this.getMaxSubmissionLimit()
     this.getStatistic()
-    this.getMaxHistory()
+    this.getSys()
   }
 
   setReleaseStrategy(item: string) {
@@ -189,13 +184,6 @@ export class ReviewComponent {
     })
   }
 
-  getMaxSubmissionLimit() {
-    this.admin.getMinSubmission().subscribe(
-      (data: Response) => {
-        this.minValue = data.data;
-      }
-    )
-  }
 
   private getStatistic() {
     this.service.statistics().subscribe(
@@ -207,21 +195,12 @@ export class ReviewComponent {
     )
   }
 
-  getMaxHistory() {
-    this.admin.getMaxHistory().subscribe(
-      //@ts-ignore
-      (data: Response) => {
-        this.maxHistory = data.data;
-      }
-    )
-  }
 
   updateMaxHistory() {
     if (this.maxHistory < 0) {
       alert("最大值不能小于0")
       return
     }
-
     this.admin.setMaxHistory(this.maxHistory).subscribe()
   }
 

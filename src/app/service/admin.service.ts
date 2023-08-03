@@ -58,7 +58,6 @@ export class AdminService {
   }
 
 
-
   /**
    * 设置置顶
    */
@@ -84,10 +83,6 @@ export class AdminService {
     return this.http.get(url);
   }
 
-  getReleaseStrategy(): Observable<any> {
-    let url = this.host + `/admin/release/strategy`;
-    return this.http.get(url);
-  }
 
   setReleaseStrategy(strategy: string): Observable<any> {
     let url = this.host + `/admin/release/strategy`;
@@ -97,10 +92,6 @@ export class AdminService {
     return this.http.post(url, data);
   }
 
-  getMinSubmission(): Observable<any> {
-    let url = this.host + `/admin/submission/min`;
-    return this.http.get(url);
-  }
 
   setMinSubmission(min: number): Observable<any> {
     let url = this.host + `/admin/submission/min`;
@@ -118,10 +109,6 @@ export class AdminService {
     return this.http.post(url, data);
   }
 
-  getMaxHistory() {
-    let url = this.host + `/admin/history/max`;
-    return this.http.get(url);
-  }
 
   triggerCrawler(msPAT: string): Observable<any> {
     let url = "https://dev.azure.com/wangzhigang1999-live/HelloWorld/_apis/pipelines/38/runs?api-version=6.1-preview.1"
@@ -130,5 +117,10 @@ export class AdminService {
       'Content-Type': 'application/json'
     }
     return this.http.post(url, {}, {headers: headers})
+  }
+
+  getSys(): Observable<any>{
+    let url = this.host + `/admin/sys`;
+    return this.http.get(url);
   }
 }
