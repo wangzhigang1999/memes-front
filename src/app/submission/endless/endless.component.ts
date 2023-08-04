@@ -20,8 +20,6 @@ export class EndlessComponent {
   total: number = 0;
   lastId = "";
 
-  bottomMessage = "🤖 ~没有更多了~ 🤖";
-  img = "assets/welcome.webp";
   adminMode = false;
 
   requesting = false

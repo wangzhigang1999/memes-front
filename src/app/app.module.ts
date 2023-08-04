@@ -23,6 +23,7 @@ import {TopSubmissionComponent} from './submission/top-submission/top-submission
 import {NewsCardComponent} from './news/news-card/news-card.component';
 import {NewsHomeComponent} from './news/news-home/news-home.component';
 import {NewsTodayComponent} from './news/news-today/news-today.component';
+import { EndComponent } from './end/end.component';
 
 const routes: Routes = [
   {path: '', component: EndlessComponent},
@@ -55,6 +56,7 @@ const routes: Routes = [
     NewsCardComponent,
     NewsHomeComponent,
     NewsTodayComponent,
+    EndComponent,
   ],
   imports: [
     BrowserModule,

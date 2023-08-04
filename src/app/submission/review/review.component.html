@@ -1,108 +1,98 @@
-<div id="review">
+<app-fix-menu></app-fix-menu>
 
-  <app-fix-menu></app-fix-menu>
-
-  <div id="today">
-    <div id="token-input" *ngIf="!hasToken" style="text-align: center;margin-top: 100px">
-      <input type="text" placeholder="Token here" [(ngModel)]="token"
-             class="input input-bordered input-success w-2/5"/>
-
-      <input type="text" placeholder="PAT" [(ngModel)]="pat"
-             class="input input-bordered input-success w-1/5" style="margin-left: 5px"/>
-
-      <button class=" btn btn-success" (click)="submitToken()" style="margin-left: 5px">提交</button>
-    </div>
+<div *ngIf="!hasToken" class="text-center mt-40 h-80">
+  <input type="text" placeholder="Token here" [(ngModel)]="token" class="input input-bordered input-success w-2/5"/>
+  <input type="text" placeholder="PAT" [(ngModel)]="pat" class="input input-bordered input-success w-1/5 mx-2"/>
+  <button class="btn btn-success" (click)="submitToken()">提交</button>
+</div>
 
 
-    <div id="count" class="shadow rounded-xl dark:bg-zinc-800" *ngIf="hasToken">
-      <div class="stat place-items-center w-fit">
-        <div class="stat-title">审核通过</div>
-        <div class="stat-value">{{reviewPassedNum}}</div>
-      </div>
-      <div class="stat place-items-center w-fit f">
-        <div class="stat-title">待审核</div>
-        <div class="stat-value text-secondary">{{toBeReviewedNum}}</div>
-      </div>
-      <div class="stat place-items-center w-fit">
-        <div class="stat-title">已发布</div>
-        <div class="stat-value text-success">{{releasedNum}}</div>
-      </div>
-    </div>
-
-    <app-submission-card class="w-full" (reviewed)="onReviewed($event)" [submission]="sub" [review]="true"
-                         *ngFor="let sub of submissions;"/>
-
-
-    <div class="card w-fit bg-base-100 shadow-xl" style="margin-top: 20px" *ngIf="hasToken">
-      <figure class="figure-padding" style="margin: 20px">
-        <img src="assets/welcome.webp" class="rounded-xl" alt=""/>
-      </figure>
-      <div style="margin-bottom: 20px;text-align: center;vertical-align: center">
-        <div style="margin-bottom: 10px">🤖 ~没有更多了~ 🤖</div>
-        <div class="flex-auto">
-          <label for="my-modal" (click)="triggerCrawler()" class="btn btn-success btn-outline" style="margin-right: 10px">🕷
-          </label>
-          <label for="my-modal" (click)="batchAccept()" class="btn btn-success btn-outline" style="margin-right: 10px">AC
-          </label>
-          <label for="my-modal" (click)="release()" class="btn btn-success btn-outline"
-                 style="margin-right: 10px">发布</label>
-          <button (click)="removeToken()" class="btn btn-success btn-outline" style="margin-right: 10px">清除token
-          </button>
-        </div>
-
-        <div class="flex" style="display: flex;justify-content: space-around;margin-top: 10px">
-          <div class="w-fit">
-            <label class="cursor-pointer label ">
-              <span class="label-text">BOT : </span>
-              <input style="margin-left: 10px" type="checkbox" class="toggle toggle-success" [(ngModel)]="bot"
-                     (change)="updateBot()"/>
-            </label>
-          </div>
-          <div class="form-control w-fit" *ngFor="let item of releaseStrategy">
-            <label class="label cursor-pointer">
-              <span class="label-text">{{item}}</span>
-              <input style="margin-left: 10px" type="radio" name="radio-10" class="radio checked:bg-success"
-                     (click)="setReleaseStrategy(item)"
-                     [checked]="item==selectedReleaseStrategy"/>
-            </label>
-          </div>
-        </div>
-
-        <div class="flex" style="display: flex;justify-content: space-around;margin-top: 10px;">
-          <div class="w-full">
-            <label class="cursor-pointer label ">
-              <span class="label-text w-1/4">MinSub : {{minValue}} </span>
-              <input type="range" min="0" max="100" [(ngModel)]="minValue" (change)="updateMax()"
-                     class="range range-success w-3/4"/>
-            </label>
-          </div>
-        </div>
-
-        <div class="flex" style="display: flex;justify-content: space-around;margin-top: 10px;">
-          <div class="w-full">
-            <label class="cursor-pointer label ">
-              <span class="label-text w-1/4">History : {{maxHistory}} </span>
-              <input type="range" min="7" max="30" [(ngModel)]="maxHistory" (change)="updateMaxHistory()"
-                     class="range range-success w-3/4"/>
-            </label>
-          </div>
-        </div>
-
-      </div>
-
-
-      <!-- Put this part before </body> tag -->
-      <input type="checkbox" id="my-modal" class="modal-toggle"/>
-      <div class="modal">
-        <div class="modal-box" style="text-align: center">
-          <h3 class="font-bold text-lg">{{title}}</h3>
-          <p class="py-4">{{message}}</p>
-          <div class="modal-action">
-            <label for="my-modal" class="btn btn-success btn-sm">Yay!</label>
-          </div>
-        </div>
-      </div>
-
-    </div>
+<div class=" rounded-xl flex justify-around" *ngIf="hasToken">
+  <div class="stat place-items-center w-fit">
+    <div class="stat-title">审核通过</div>
+    <div class="stat-value">{{reviewPassedNum}}</div>
+  </div>
+  <div class="stat place-items-center w-fit f">
+    <div class="stat-title">待审核</div>
+    <div class="stat-value text-secondary">{{toBeReviewedNum}}</div>
+  </div>
+  <div class="stat place-items-center w-fit">
+    <div class="stat-title">已发布</div>
+    <div class="stat-value text-success">{{releasedNum}}</div>
   </div>
 </div>
+
+<div *ngIf="hasToken">
+  <app-submission-card class="w-full" (reviewed)="onReviewed($event)" [submission]="sub" [review]="true"
+                       *ngFor="let sub of submissions;"/>
+</div>
+
+
+<div class="card w-fit bg-base-100  mt-5" *ngIf="hasToken">
+  <figure class="figure-padding m-5">
+    <img src="assets/welcome.webp" class="rounded-xl" alt=""/>
+  </figure>
+  <div class="mb-5 text-center">
+    <div>🤖 ~没有更多了~ 🤖</div>
+    <div class="flex-auto mt-2">
+      <label for="message" (click)="triggerCrawler()" class="btn btn-success btn-outline mx-2">🕷 </label>
+      <label for="message" (click)="batchAccept()" class="btn btn-success btn-outline mx-2">AC</label>
+      <label for="message" (click)="release()" class="btn btn-success btn-outline mx-2">发布</label>
+      <button (click)="removeToken()" class="btn btn-success btn-outline mx-2">清除token</button>
+    </div>
+
+    <div class="flex justify-around mt-2">
+      <div class="w-fit">
+        <div class="label">
+          <span class="label-text">BOT : </span>
+          <input type="checkbox" class="ml-2 toggle toggle-success" [(ngModel)]="bot" (change)="updateBot()"/>
+        </div>
+      </div>
+      <div class="w-fit rounded-xl flex justify-around bg-base-200">
+        <div class="form-control w-fit mx-4" *ngFor="let item of releaseStrategy">
+          <div class="label">
+            <span class="label-text">{{item}}</span>
+            <input type="radio" name="radio-10" class="ml-2 radio checked:bg-success"
+                   (click)="setReleaseStrategy(item)" [checked]="item==selectedReleaseStrategy"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-around mt-2">
+      <div class="w-full">
+        <label class="cursor-pointer label ">
+          <span class="label-text w-1/4">MinSub : {{minValue}} </span>
+          <input type="range" min="0" max="100" [(ngModel)]="minValue" (change)="updateMax()"
+                 class="range range-success w-3/4"/>
+        </label>
+      </div>
+    </div>
+
+    <div class="flex justify-around mt-2">
+      <div class="w-full">
+        <label class="cursor-pointer label ">
+          <span class="label-text w-1/4">History : {{maxHistory}} </span>
+          <input type="range" min="7" max="30" [(ngModel)]="maxHistory" (change)="updateMaxHistory()"
+                 class="range range-success w-3/4"/>
+        </label>
+      </div>
+    </div>
+
+  </div>
+
+
+  <input type="checkbox" id="message" class="modal-toggle"/>
+  <div class="modal">
+    <div class="modal-box" style="text-align: center">
+      <h3 class="font-bold text-lg">{{title}}</h3>
+      <p class="py-4">{{message}}</p>
+      <div class="modal-action">
+        <label for="message" class="btn btn-success btn-sm">Yay!</label>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+

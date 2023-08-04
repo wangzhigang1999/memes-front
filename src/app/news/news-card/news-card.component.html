@@ -1,4 +1,4 @@
-<div class="card card-compact  w-full bg-base-100 shadow-xl " style="margin-top: 20px" *ngIf="show">
+<div class="card card-compact  w-full  shadow-md  mb-4" *ngIf="show">
   <figure style="padding: 20px">
     <img [defaultImage]="defaultCover" class="rounded-xl" width="100%" [lazyLoad]="news.coverImage" alt="" src=""/>
   </figure>
@@ -10,7 +10,7 @@
         </h2>
       </div>
       <div class="collapse-content">
-        <div [id]="news.id" class="detail"></div>
+        <div [id]="news.id" class="indent-8 w-full leading-6"></div>
       </div>
     </div>
 
@@ -23,23 +23,4 @@
       </div>
     </div>
   </div>
-
-<!--  <div class="columns-2 w-full">-->
-<!--    <div class=" w-full" style="text-align: center;">-->
-<!--      <button class="btn btn-ghost" style="margin-right: 10px">💕-->
-<!--      </button>-->
-<!--      <span class="custom-span">{{news.dislike}}</span>-->
-<!--    </div>-->
-
-<!--    <div class="w-full " style="text-align: center;">-->
-<!--      <button class=" btn btn-ghost " style="margin-left: 10px">❤️-->
-<!--      </button>-->
-<!--      <span class="custom-span">{{news.like}}</span>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  <div style="height: 10px">-->
-
-<!--  </div>-->
-
 </div>

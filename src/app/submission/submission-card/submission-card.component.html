@@ -1,4 +1,4 @@
-<div class="card w-full  bg-base-100 shadow-xl my-5" [id]="submission.hash">
+<div class="card w-full bg-base-100 shadow-lg my-5" [id]="submission.hash">
 
   <figure class="p-4" *ngIf="submission.submissionType==='IMAGE'">
     <img [defaultImage]="defaultImage" class="rounded-xl" [lazyLoad]="submission.url" alt=""/>
@@ -15,19 +15,17 @@
   </figure>
 
   <div *ngIf="!review">
-    <app-vote [hash]="submission.hash" [name]="submission.name" [up]="submission.up"
-              [down]="submission.down" [adminMode]=admin></app-vote>
+    <app-vote [hash]="submission.hash" [name]="submission.name" [up]="submission.up" [down]="submission.down"
+              [adminMode]=admin></app-vote>
   </div>
 
-  <div *ngIf="review" class="w-full" style="text-align: center;">
+  <div *ngIf="review" class="w-full text-center">
     <div class="grid grid-cols-3">
-      <button class="btn w-fit mx-auto btn-sm btn-warning" (click)="reject(submission.hash)">Reject
-      </button>
+      <button class="btn w-fit mx-auto btn-sm btn-warning" (click)="reject(submission.hash)">Reject</button>
       <div class="m-auto"> {{submission.timestamp | date:'MM-dd HH:mm'}} </div>
-      <button class="btn w-fit mx-auto btn-sm btn-success" (click)="accept(submission.hash)">Yay!
-      </button>
+      <button class="btn w-fit mx-auto btn-sm btn-success" (click)="accept(submission.hash)">Yay!</button>
     </div>
-    <div class="mb-2" style="text-align: center;">
+    <div class="mb-2 text-center">
       {{submission.uploader}}
     </div>
   </div>

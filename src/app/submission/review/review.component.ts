@@ -33,6 +33,9 @@ export class ReviewComponent {
   constructor(private service: ReviewService, private admin: AdminService) {
     try {
       this.pat = localStorage.getItem('pat');
+      if (this.pat == null) {
+        this.pat = ''
+      }
     } catch (e) {
       this.pat = ''
     }

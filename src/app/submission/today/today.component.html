@@ -1,22 +1,6 @@
-<div id="today">
+<div>
   <app-fix-menu></app-fix-menu>
   <app-top-submission></app-top-submission>
-
   <app-submission-card class="w-full" [submission]="sub" [admin]="adminMode" *ngFor="let sub of submissions;"/>
-
-  <div class="card w-fit bg-base-100 shadow-xl" style="margin-top: 20px">
-    <figure class="figure-padding" style="margin: 20px">
-      <img [src]="img" class="rounded-xl" alt=""/>
-    </figure>
-    <div style="margin-bottom: 20px;text-align: center">
-      <div style="margin-bottom: 10px;">{{bottomMessage}}</div>
-      <div class="flex-auto">
-
-        <a routerLink="/submit" class="btn btn-success btn-outline" style="margin-right: 10px">去投稿</a>
-        <a routerLink="/history" class="btn  btn-success btn-outline" style="margin-right: 10px">看看之前的</a>
-
-      </div>
-    </div>
-
-  </div>
+  <app-end></app-end>
 </div>

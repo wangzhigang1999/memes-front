@@ -20,7 +20,6 @@ export class TodayComponent {
   constructor(private service: SubmissionService) {
   }
 
-
   ngOnInit(): void {
     if (authorized()) {
       this.adminMode = true

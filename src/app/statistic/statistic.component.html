@@ -1,7 +1,6 @@
 <div id="statistic">
 
-  <div class="shadow rounded-xl dark:bg-zinc-800"
-       style="display:flex;flex-direction: row;flex-wrap: wrap;justify-content: space-around">
+  <div class=" rounded-xl flex flex-wrap flex-row justify-around bg-zinc-100 dark:bg-zinc-900">
     <div class="stat place-items-center w-fit">
       <div class="stat-title">运营天数</div>
       <div class="stat-value">{{date}} 天</div>
@@ -20,54 +19,50 @@
     </div>
   </div>
 
-  <div style="margin-top: 20px">
-    <div class="overflow-x-auto">
-      <table class="table table-compact table-zebra w-full" style="text-align: center">
-        <thead>
-        <tr>
-          <th>uuid</th>
-          <th>count</th>
-          <th>avg</th>
-          <th>first</th>
-          <th>last</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let item of top(10,uuidCountList)">
-          <td>{{item._id.substring(0, 8)}}</td>
-          <td>{{item.count}}</td>
-          <td>{{msConvert(item.avgTimecost)}}</td>
-          <td>{{timestampToHHMM(item.firstTime)}}</td>
-          <td>{{timestampToHHMM(item.lastTime)}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="overflow-x-auto mt-4">
+    <table class="table table-compact table-zebra w-full" style="text-align: center">
+      <thead>
+      <tr>
+        <th>uuid</th>
+        <th>count</th>
+        <th>avg</th>
+        <th>first</th>
+        <th>last</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of top(10,uuidCountList)">
+        <td>{{item._id.substring(0, 8)}}</td>
+        <td>{{item.count}}</td>
+        <td>{{msConvert(item.avgTimecost)}}</td>
+        <td>{{timestampToHHMM(item.firstTime)}}</td>
+        <td>{{timestampToHHMM(item.lastTime)}}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 
-  <div style="margin-top: 20px">
-    <div class="overflow-x-auto">
-      <table class="table table-compact table-zebra w-full" style="text-align: center">
-        <thead>
-        <tr>
-          <th>url</th>
-          <th>count</th>
-          <th>avg</th>
-          <th>max</th>
-          <th>min</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let item of top(100,urlCountList)">
-          <td>{{replace(item._id)}}</td>
-          <td>{{item.count}}</td>
-          <td>{{msConvert(item.avgTimecost)}}</td>
-          <td>{{msConvert(item.maxTimecost)}}</td>
-          <td>{{msConvert(item.minTimecost)}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="overflow-x-auto mt-4">
+    <table class="table table-compact table-zebra w-full" style="text-align: center">
+      <thead>
+      <tr>
+        <th>url</th>
+        <th>count</th>
+        <th>avg</th>
+        <th>max</th>
+        <th>min</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of top(100,urlCountList)">
+        <td>{{replace(item._id)}}</td>
+        <td>{{item.count}}</td>
+        <td>{{msConvert(item.avgTimecost)}}</td>
+        <td>{{msConvert(item.maxTimecost)}}</td>
+        <td>{{msConvert(item.minTimecost)}}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 
 </div>
