@@ -1,20 +1,20 @@
-<div class="origin-center w-full ">
+<div class="w-full">
 
-  <div class="origin-center w-full" *ngIf="submissionType==='IMAGE'" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
-    <div style="margin-top: 30px;margin-bottom: 60px;">
-      <img class="rounded-box" id="img" width="300px" [src]="url" alt="" style="margin: auto;"/>
+  <div class="my-auto" *ngIf="submissionType==='IMAGE'" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+    <div class="w-full my-8">
+      <img class="rounded-box mx-auto w-3/4" id="img" [src]="url" alt=""/>
     </div>
   </div>
 
-  <div class="origin-center w-full" *ngIf="submissionType==='VIDEO'">
-    <div style="margin-top: 30px;margin-bottom: 60px;">
-      <video class="rounded-box" id="video" width="300px" controls [src]="url" style="margin: auto;"></video>
+  <div class=" m-auto" *ngIf="submissionType==='VIDEO'">
+    <div class="mx-auto my-8">
+      <video class="rounded-box mx-auto w-3/4" id="video" controls [src]="url"></video>
     </div>
   </div>
 
-  <div class="origin-center w-full" *ngIf="submissionType==='BILIBILI'">
-    <div style="margin-top: 30px;margin-bottom: 60px;">
-      <iframe class="rounded-box" id="bilibili" [src]="url | safe" style="margin: auto;"></iframe>
+  <div class="m-auto" *ngIf="submissionType==='BILIBILI'">
+    <div class="mx-auto my-8">
+      <iframe class="rounded-box mx-auto" id="bilibili" [src]="url | safe"></iframe>
     </div>
   </div>
 
@@ -65,7 +65,7 @@
   <input type="checkbox" id="my-modal" class="modal-toggle "/>
   <div class="modal place-content-center">
     <div class="modal-box modal-bottom sm:modal-middle" style="text-align: center">
-      <h3 class="font-bold text-lg" id="title">{{title}}</h3>
+      <h3 class="font-bold text-lg mb-2" id="title">{{title}}</h3>
       <div class="py-4">{{message}}</div>
       <div class="modal-action">
         <label for="my-modal" class="btn btn-success btn-sm">OK</label>

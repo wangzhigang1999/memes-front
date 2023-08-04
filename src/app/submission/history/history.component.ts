@@ -28,6 +28,12 @@ export class HistoryComponent {
   adminMode = false;
 
   constructor(private service: SubmissionService) {
+    window.scrollTo(
+      {
+        top: 0,
+        behavior: "smooth"
+      }
+    )
   }
 
   ngOnInit(): void {
@@ -76,6 +82,12 @@ export class HistoryComponent {
     this.preMessage = this.hashPrev(this.currentIndex) ? "👈👈👈" : "🙈没有了🙈";
     this.service.getSubmission(this.history[this.currentIndex]).subscribe((data: any) => {
       this.submissions = data.data;
+      window.scrollTo(
+        {
+          top: 0,
+          behavior: "smooth"
+        }
+      )
     })
   }
 }
