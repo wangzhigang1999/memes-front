@@ -1,25 +1,25 @@
 <div class="card w-full bg-base-100 shadow-lg my-5" [id]="submission.hash">
 
-  <figure class="p-4" *ngIf="submission.submissionType==='IMAGE'">
+  <figure class="p-2" *ngIf="submission.submissionType==='IMAGE'">
     <img [defaultImage]="defaultImage" class="rounded-xl" [lazyLoad]="submission.url" alt=""/>
   </figure>
 
-  <figure class="p-4" *ngIf="submission.submissionType==='VIDEO'">
+  <figure class="p-2" *ngIf="submission.submissionType==='VIDEO'">
     <video class="rounded-xl" controls>
       <source src="{{submission.url}}" type="video/mp4">
     </video>
   </figure>
 
-  <figure class="p-4 rounded" *ngIf="submission.submissionType==='BILIBILI'">
+  <figure class="p-2 rounded" *ngIf="submission.submissionType==='BILIBILI'">
     <iframe width="640px" height="480px" [src]="submission.url | safe" class="rounded" allowfullscreen></iframe>
   </figure>
 
-  <div *ngIf="!review">
+  <div *ngIf="!review && showVoteBar">
     <app-vote [hash]="submission.hash" [name]="submission.name" [up]="submission.up" [down]="submission.down"
               [adminMode]=admin></app-vote>
   </div>
 
-  <div *ngIf="review" class="w-full text-center">
+  <div *ngIf="review && showVoteBar" class="w-full text-center">
     <div class="grid grid-cols-3">
       <button class="btn w-fit mx-auto btn-sm btn-warning" (click)="reject(submission.hash)">Reject</button>
       <div class="m-auto"> {{submission.timestamp | date:'MM-dd HH:mm'}} </div>

@@ -12,6 +12,7 @@ export class SubmissionCardComponent {
   @Input() submission!: Submission;
   @Input() review!: boolean;
   @Input() admin = false;
+  @Input() showVoteBar = true;
 
   @Output() private reviewed = new EventEmitter<string>();
   defaultImage = "../../assets/welcome.webp";
