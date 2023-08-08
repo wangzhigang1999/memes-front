@@ -37,9 +37,9 @@ export class EndlessComponent {
 
   // listen key event
   @HostListener('window:keydown', ['$event']) handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+    if (event.key === 'ArrowLeft') {
       this.toPre()
-    } else if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+    } else if (event.key === 'ArrowRight') {
       this.toNext()
     }
   }
