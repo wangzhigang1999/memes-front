@@ -1,3 +1,88 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.article h1 {
+  @apply text-3xl py-2 font-bold
+}
+
+.article h2 {
+  @apply text-2xl py-2 font-semibold
+}
+
+.article h3 {
+  @apply text-xl py-2 font-semibold
+}
+
+.article h4 {
+  @apply text-lg py-2 font-semibold
+}
+
+.article h5 {
+  @apply text-base py-2 font-semibold
+}
+
+.article blockquote p {
+  @apply pt-2 text-justify leading-8
+}
+
+.article p {
+  @apply text-justify leading-7 mb-4 indent-8
+}
+
+.article hr {
+  @apply border-0 border-t-2 border-success my-4
+}
+
+.article blockquote {
+  @apply pb-2 px-2 max-h-fit border-l-4 border-l-success bg-gray-100 dark:bg-gray-800 mb-2 rounded-sm dark:text-success
+}
+
+.article blockquote p {
+  @apply text-justify mb-0
+}
+
+.article ol {
+  @apply pb-4 indent-4
+}
+
+.article ul {
+  @apply pb-4 indent-4
+}
+
+.article ol li {
+  @apply list-decimal list-inside py-1
+}
+
+.article ul li {
+  @apply list-disc list-inside py-1
+}
+
+.article img {
+  @apply mx-auto my-4 block max-w-full  rounded-md
+}
+
+.article thead {
+  @apply bg-success text-white dark:bg-gray-500
+}
+
+.article tbody {
+  @apply rounded-xl overflow-hidden shadow-md
+}
+
+.article table {
+  @apply w-full  rounded-xl overflow-hidden shadow-md mb-2 dark:bg-gray-800
+}
+
+.article table td {
+  @apply leading-10  border-b-2 border-gray-200 dark:border-gray-700
+}
+
+.article a {
+  @apply text-success
+}
+
+.article strong {
+  @apply font-extrabold text-gray-800 dark:text-gray-400
+}
