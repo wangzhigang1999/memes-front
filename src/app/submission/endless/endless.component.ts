@@ -44,20 +44,6 @@ export class EndlessComponent {
     }
   }
 
-  // listen mouse event
-  @HostListener('window:wheel', ['$event']) handleMouseWheel(event: WheelEvent) {
-    // if hotkey is pressed, do nothing
-    if (event.ctrlKey || event.altKey || event.shiftKey) {
-      return
-    }
-
-    if (event.deltaY > 0) {
-      this.toNext()
-    } else if (event.deltaY < 0) {
-      this.toPre()
-    }
-  }
-
   constructor(private submissionService: SubmissionService) {
     this.init()
     if (authorized()) {
@@ -88,7 +74,6 @@ export class EndlessComponent {
 
         if (this.submissions.length > 0) {
           this.cur = this.submissions[0]
-
           if (this.submissions.length > 1) {
             this.next = this.submissions[1]
           } else {
@@ -131,7 +116,6 @@ export class EndlessComponent {
     this.currentIndex -= 1
     this.next = this.cur
     this.cur = this.pre
-
     if (this.currentIndex == 0) {
       this.pre = this.default
     } else {

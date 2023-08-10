@@ -24,6 +24,7 @@ import {NewsCardComponent} from './news/news-card/news-card.component';
 import {NewsHomeComponent} from './news/news-home/news-home.component';
 import {NewsTodayComponent} from './news/news-today/news-today.component';
 import { EndComponent } from './end/end.component';
+import { SinglePageSlideComponent } from './submission/single-page-slide/single-page-slide.component';
 
 const routes: Routes = [
   {path: '', component: EndlessComponent},
@@ -57,6 +58,7 @@ const routes: Routes = [
     NewsHomeComponent,
     NewsTodayComponent,
     EndComponent,
+    SinglePageSlideComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,13 +9,13 @@
   <div class="mx-4 my-auto">
     <div class="flex flex-row justify-center items-center">
       <div class="mx-auto w-1/4 h-full hover:scale-105" (click)="toPre()">
-        <app-submission-card [submission]="pre" [showVoteBar]="false"></app-submission-card>
+        <app-submission-card [submission]="pre" [showVoteBar]="showVoteBar"></app-submission-card>
       </div>
       <div class="mx-auto w-2/5 z-10 h-full scale-110 hover:scale-125">
-        <app-submission-card [submission]="cur" [showVoteBar]="false"></app-submission-card>
+        <app-submission-card [submission]="cur" [showVoteBar]="showVoteBar"></app-submission-card>
       </div>
       <div class="mx-auto w-1/4 h-full hover:scale-105 " (click)="toNext()">
-        <app-submission-card [submission]="next" [showVoteBar]="false"></app-submission-card>
+        <app-submission-card [submission]="next" [showVoteBar]="showVoteBar"></app-submission-card>
       </div>
     </div>
   </div>
@@ -26,16 +26,4 @@
     </div>
   </div>
 
-</div>
-
-<div id="endless" class="block  lg:hidden">
-  <app-fix-menu></app-fix-menu>
-  <app-top-submission></app-top-submission>
-  <div class="search-results" infiniteScroll
-       [infiniteScrollDistance]="3"
-       [infiniteScrollThrottle]="150"
-       (scrolled)="onScroll()">
-    <app-submission-card class="w-full" [submission]="sub" [admin]="adminMode" *ngFor="let sub of submissions;"/>
-  </div>
-  <app-end></app-end>
 </div>
