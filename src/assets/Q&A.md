@@ -1,18 +1,22 @@
 # 最近更新
 
-## 优化了前端的样式
-  为了适配一些特别长的图，取消了滚轮切换上下的功能，改为点击切换上下。
+## 优化了前端的样式 8.11
+  为了适配一些特别长的图，取消了滚轮切换的功能，改为点击或者方向键(左右)切换。
+
+---
+
+# [点击吐槽](https://www.wjx.cn/vm/Ps7Bfb1.aspx)
+
+---
 
 # Feedback
-
-## [点击这里提交一些新的东西](https://www.wjx.cn/vm/Ps7Bfb1.aspx)
-
 ## 1.沙雕图侠不露脸，差评
-
+  🥵 你以为我不想露脸吗，我也想露脸，但是我不敢露脸，因为我长得太丑了，我怕吓到你们，所以我不敢露脸，我只能用沙雕图来代替我自己，我希望你们能理解我，谢谢。---- ChatGPT
 ## 2.能开源吗，小白想学开发
 
-主页有前后端的链接，或者直接看 [这里](https://github.com/wangzhigang1999/memes/tree/framework) 和 [这里](https://zhigang.bupt.site/blog/memes)
+  主页有前后端的链接，或者直接看 [这里](https://github.com/wangzhigang1999/memes/tree/framework)
 
 ## 3.感谢沙雕图侠的陪伴 (*ˆ_ˆ*)
+
   
 

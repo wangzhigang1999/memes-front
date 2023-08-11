@@ -28,7 +28,7 @@
 }
 
 .article p {
-  @apply text-justify leading-7 mb-4
+  @apply text-justify leading-7 mb-4 indent-8
 }
 
 .article hr {
