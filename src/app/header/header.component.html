@@ -88,7 +88,7 @@
           </li>
         </ul>
       </div>
-      <div class="dropdown hidden md:block">
+      <div class="dropdown">
         <label tabindex="0" class="btn btn-ghost normal-case text-xl">news</label>
         <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
           <li routerLink="/news">
@@ -129,7 +129,7 @@
       </div>
     </div>
 
-    <div class="flex-none" (click)="openFullscreen()">
+    <div class="flex-none hidden md:block" (click)="openFullscreen()">
       <span class="tooltip tooltip-bottom before:text-xs before:content-[attr(data-tip)]" data-tip="全屏">
         <div class="btn btn-ghost drawer-button btn-square normal-case">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

@@ -24,6 +24,9 @@ export class NewsHomeComponent {
 
   requesting = false
 
+  tagBlackList = ["新时代", "中国特色", "总书记", "社会主义", "理论学习", "挂职锻炼", "工作部署", "艰苦奋斗", "指导工作", "从严治党"]
+
+
   constructor(private newsService: NewsService) {
     this.init()
   }
@@ -46,6 +49,13 @@ export class NewsHomeComponent {
         this.total = page.total
         this.news.forEach(
           (news: News) => {
+            for (let i = 0; i < this.tagBlackList.length; i++) {
+              for (let j = 0; j < news.tag.length; j++) {
+                if (news.tag[j] === this.tagBlackList[i]) {
+                  return;
+                }
+              }
+            }
             this.curElement.add(news.id)
           }
         )
@@ -71,6 +81,13 @@ export class NewsHomeComponent {
         page.list.forEach(
           (news: News) => {
             if (!this.curElement.has(news.id)) {
+              for (let i = 0; i < this.tagBlackList.length; i++) {
+                for (let j = 0; j < news.tag.length; j++) {
+                  if (news.tag[j] === this.tagBlackList[i]) {
+                    return;
+                  }
+                }
+              }
               this.news.push(news)
               this.curElement.add(news.id)
             }
