@@ -56,13 +56,19 @@ export class ReviewComponent {
     }
 
     // 有token但是没有验证过，需要验证
-    this.admin.verifyToken(token).subscribe((data: Response) => {
-      if (data.data) {
-        this.init()
-      } else {
+    this.admin.verifyToken(token).subscribe(
+      (data: Response) => {
+        if (data.data) {
+          this.init()
+        } else {
+          this.removeToken()
+        }
+      },
+      error => {
+        console.log(error)
         this.removeToken()
       }
-    })
+    )
   }
 
   submitToken() {
@@ -70,12 +76,16 @@ export class ReviewComponent {
       localStorage.setItem('token', this.token);
       localStorage.setItem("pat", this.pat);
       this.admin.verifyToken(this.token).subscribe((data: Response) => {
-        if (data.data) {
-          this.init()
-        } else {
+          if (data.data) {
+            this.init()
+          } else {
+            this.removeToken()
+          }
+        }, error => {
+          console.log(error)
           this.removeToken()
         }
-      })
+      )
     }
   }
 
