@@ -33,13 +33,6 @@ export class AdminService {
     return this.http.get(url);
   }
 
-  /**
-   * 获取bot状态
-   */
-  getBotStatus(): Observable<any> {
-    let url = this.host + `/admin/bot/status`;
-    return this.http.get(url);
-  }
 
   /**
    * disable bot
@@ -119,7 +112,7 @@ export class AdminService {
     return this.http.post(url, {}, {headers: headers})
   }
 
-  getSys(): Observable<any>{
+  getSys(): Observable<any> {
     let url = this.host + `/admin/sys`;
     return this.http.get(url);
   }
