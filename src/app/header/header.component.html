@@ -88,7 +88,7 @@
           </li>
         </ul>
       </div>
-      <div class="dropdown">
+      <div class="dropdown hidden md:block">
         <label tabindex="0" class="btn btn-ghost normal-case text-xl">news</label>
         <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
           <li routerLink="/news">
@@ -113,6 +113,9 @@
             </label>
           </li>
         </ul>
+      </div>
+      <div class="" routerLink="/search">
+        <label tabindex="0" class="btn btn-ghost normal-case text-xl">experiment</label>
       </div>
     </div>
 
@@ -142,7 +145,7 @@
     </div>
 
 
-    <div class="flex-none">
+    <div class="flex-none hidden md:block">
       <span class="tooltip tooltip-bottom before:text-xs before:content-[attr(data-tip)]" data-tip="GitHub">
         <a aria-label="Github" target="_blank" href="https://github.com/wangzhigang1999/memes" rel="noopener"
            class="btn btn-ghost drawer-button btn-square normal-case">

@@ -1,0 +1,52 @@
+<div class="mt-4 flex items-center">
+  <!--a search badge-->
+  <button class=" w-12 h-12 inline-block bg-success rounded-l-xl">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+         class="w-9 h-9">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+    </svg>
+  </button>
+  <input type="text" placeholder="Type to search by user, board or keyword."
+         class="w-full h-12  md:max-w-5xl border border-success  rounded-r-2xl text-center" [(ngModel)]="keyword"
+         (change)="search(keyword)"/>
+
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-2 m-2">
+  <div *ngFor="let post of results" class="bg-base-100 shadow-xl rounded-xl p-4">
+    <a class="font-bold text-lg mb- hover:text-success decoration-dashed hidden md:block" [href]="post.link"
+       target="_blank">{{post.title|truncate:25}}
+    </a>
+
+    <a class="font-bold text-lg mb- hover:text-success decoration-dashed block sm:hidden" [href]="post.link"
+       target="_blank">{{post.title}}
+    </a>
+
+    <div class="flex items-center gap-2 w-full my-2">
+      <div class="font-bold w-full  text-left">{{post.author}}</div>
+      <div class="font-bold w-full  text-center">{{post.board}}</div>
+      <div class="font-bold w-full block sm:hidden">{{post.pubDate.substring(0, 10)}}</div>
+      <div class="font-bold w-full hidden sm:block">{{post.pubDate.substring(0, 16)}}</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- for empty result-->
+
+<div class="card w-full text-center" *ngIf="results.length==0 && !loading">
+  <figure >
+    <img [src]="randomCode" class="rounded-xl scale-100 md:scale-75"  alt=""/>
+  </figure>
+  <div class="w-full text-center font-bold text-xl my-2"> This is a HTTP Cat!</div>
+</div>
+
+
+<div>
+  <!--  show while loading-->
+  <div *ngIf="loading" class="flex justify-center  items-center my-48">
+    <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-success">
+    </div>
+  </div>
+</div>
