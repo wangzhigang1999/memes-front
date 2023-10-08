@@ -42,15 +42,22 @@ export class StatisticComponent {
         this.uuidCountList = this.statistic.uuidCountMap;
 
         // filter some url
-        this.urlCountList = this.mergeVoteCount(
-          this.statistic.urlCountMap.filter((item: any) => {
-            return !item._id.includes("statistic") && !item._id.includes("review") && !item._id.includes("release") && !item._id.includes("admin");
-          })).sort((a: any, b: any) => {
-          return b.count - a.count
-        })
+        this.urlCountList = this.mergePostCount(
+          this.mergeVoteCount(
+            this.statistic.urlCountMap.filter((item: any) => {
+                return !item._id.includes("statistic") && !item._id.includes("review") && !item._id.includes("release") && !item._id.includes("admin");
+              }
+            )
+          )
+        ).sort(
+          (a: any, b: any) => {
+            return b.count - a.count
+          }
+        )
       }
     )
   }
+
 
   count(map: Object) {
     // count the number of key-value pairs in map
@@ -112,6 +119,30 @@ export class StatisticComponent {
     })
 
     // add '/submission/vote' into list
+    list.push(obj)
+    return list
+  }
+
+  // merge all /post
+  mergePostCount(list: any[]): any[] {
+    let obj = {_id: '/post', count: 0, avgTimecost: 0, maxTimecost: 0, minTimecost: 0}
+    let totalTimeCost = 0;
+    for (let item of list) {
+      if (item._id.includes("/post")) {
+        obj.count += item.count
+        totalTimeCost += item.avgTimecost * item.count
+        obj.maxTimecost = Math.max(obj.maxTimecost, item.maxTimecost)
+        obj.minTimecost = Math.min(obj.minTimecost, item.minTimecost)
+      }
+    }
+    obj.avgTimecost = Math.round(totalTimeCost / obj.count * 10) / 10
+
+    // remove all '/post/1630697354/true'
+    list = list.filter((item: any) => {
+      return !item._id.includes("/post")
+    })
+
+    // add '/post' into list
     list.push(obj)
     return list
   }
