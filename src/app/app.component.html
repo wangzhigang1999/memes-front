@@ -1,9 +1,16 @@
-<div class="justify-center mx-auto max-w-6xl items-center text-zinc-700  dark:text-zinc-100 px-3 sm:px-6  rounded-lg">
-  <app-header></app-header>
-  <router-outlet>
-  </router-outlet>
-</div>
+<app-header class="sticky top-0 left-0  z-10"></app-header>
 
-<!--<footer class="my-4 gap-4 footer place-content-center flex">-->
-<!--  <img src="https://api.netlify.com/api/v1/badges/7252fd66-7076-4b0b-afdd-36432ccd9ba0/deploy-status">-->
-<!--</footer>-->
+<div class="px-1 flex gap-2">
+    <!--    <div id="left" class="hidden md:block max-w-[33%] xl:max-w-[25%] mx-auto">-->
+    <div class="hidden xl:block max-w-[25%]  mx-auto" id="left">
+        <div class="h-[80vh] overflow-y-scroll sticky top-28 left-0 p-2">
+            <!--            <markdown src="assets/example.md"></markdown>-->
+        </div>
+    </div>
+    <div class="overflow-y-scroll w-full md:w-2/3 xl:w-1/2 mx-auto rounded-xl">
+        <router-outlet>
+        </router-outlet>
+    </div>
+    <div class="hidden xl:block max-w-[25%]  mx-auto" id="right">
+    </div>
+</div>
