@@ -29,6 +29,7 @@ import {SearchComponent} from './search/search.component';
 import {TruncatePipe} from './truncate.pipe';
 import {NgOptimizedImage} from "@angular/common";
 import {MarkdownModule} from "ngx-markdown";
+import {BbsToptenComponent} from './bbs-topten/bbs-topten.component';
 
 const routes: Routes = [
     {path: '', component: EndlessComponent},
@@ -66,6 +67,7 @@ const routes: Routes = [
         SinglePageSlideComponent,
         SearchComponent,
         TruncatePipe,
+        BbsToptenComponent,
     ],
     imports: [
         BrowserModule,

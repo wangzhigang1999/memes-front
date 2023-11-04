@@ -44,5 +44,7 @@ export class SubmissionCardComponent {
       dom.parentElement?.remove();
       this.reviewed.emit(hash)
     }
+    // scroll to top
+    window.scrollTo(0, 0);
   }
 }

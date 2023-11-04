@@ -1,16 +1,19 @@
 <app-header class="sticky top-0 left-0 z-10"></app-header>
 
-<div class="px-1 flex gap-2">
+<div class="px-1 flex gap-4 w-full">
     <!--    <div id="left" class="hidden md:block max-w-[33%] xl:max-w-[25%] mx-auto">-->
-    <div class="hidden xl:block max-w-[25%]  mx-auto" id="left">
-        <div class="h-[80vh] overflow-y-scroll sticky top-28 left-0 p-2">
-            <!--            <markdown src="assets/example.md"></markdown>-->
+    <div class="hidden md:block md:max-w-[38%] xl:max-w-[25%] xl:min-w-[25%] " id="left">
+        <div class="h-[90vh] overflow-y-scroll sticky top-10 left-0 ">
+            <app-bbs-topten></app-bbs-topten>
         </div>
     </div>
-    <div class="w-full md:w-2/3 xl:w-1/2 mx-auto rounded-xl">
+    <div class="w-full md:w-[50%]  mx-auto rounded-xl">
         <router-outlet>
         </router-outlet>
     </div>
-    <div class="hidden xl:block max-w-[25%]  mx-auto" id="right">
-    </div>
+    <!--    <div class="hidden xl:block max-w-[25%] mx-auto" id="right">-->
+    <!--        <div class="h-[90vh] overflow-y-scroll sticky top-10  left-0 ">-->
+    <!--            <app-search></app-search>-->
+    <!--        </div>-->
+    <!--    </div>-->
 </div>
