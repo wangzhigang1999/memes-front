@@ -1,3 +1,5 @@
+<app-fix-menu></app-fix-menu>
+
 <div class="mt-4 mx-2 flex items-center">
     <!--a search badge-->
     <button class="w-12 h-12  inline-block bg-success rounded-l-xl">
@@ -15,19 +17,16 @@
 
 <div class="grid grid-cols-1  gap-2 m-2 place-items-center">
     <div *ngFor="let post of results" class="bg-base-100 shadow-xl rounded-xl p-4 w-full">
-        <a [href]="post.link" class="font-bold text-lg mb- hover:text-success decoration-dashed hidden md:block"
-           target="_blank">{{post.title|truncate:25}}
-        </a>
-
-        <a [href]="post.link" class="font-bold text-lg mb- hover:text-success decoration-dashed block sm:hidden"
+        <a [href]="post.link" class="font-bold text-lg mb- hover:text-success decoration-dashed"
            target="_blank">{{post.title}}
         </a>
+
 
         <div class="flex items-center gap-2 w-full my-2">
             <div class="font-bold w-full  text-left">{{post.author}}</div>
             <div class="font-bold w-full  text-center">{{post.board}}</div>
             <div class="font-bold w-full block sm:hidden">{{post.pubDate.substring(0, 10)}}</div>
-            <div class="font-bold w-full hidden sm:block">{{post.pubDate.substring(0, 16)}}</div>
+            <div class="font-bold w-full hidden sm:block">{{post.pubDate}}</div>
         </div>
     </div>
     <p *ngIf="results.length>0" class="my-1">默认只显示 20 条</p>
