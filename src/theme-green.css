@@ -1,104 +1,118 @@
-/*.article code {*/
+/*markdown code {*/
 /*  font-family: "LXGW WenKai Screen", sans-serif;*/
 /*}*/
 
-.article video{
-  @apply mx-auto my-4 block max-w-full  rounded-md
+
+markdown h1 {
+    @apply text-3xl py-2 font-bold
 }
 
-.article h1 {
-  @apply text-3xl py-2 font-bold hover:underline hover:cursor-pointer
+markdown h2 {
+    @apply text-2xl py-2 font-semibold
 }
 
-.article h2 {
-  @apply text-2xl py-2 font-semibold hover:underline hover:cursor-pointer
+markdown h3 {
+    @apply text-xl py-2 font-semibold
 }
 
-.article h3 {
-  @apply text-xl py-2 font-semibold hover:underline hover:cursor-pointer
+markdown h4 {
+    @apply text-lg py-2 font-semibold
 }
 
-.article h4 {
-  @apply text-lg py-2 font-semibold hover:underline hover:cursor-pointer
+markdown h5 {
+    @apply text-base py-2 font-semibold
 }
 
-.article h5 {
-  @apply text-base py-2 font-semibold hover:underline hover:cursor-pointer
+markdown blockquote p {
+    @apply pt-2 text-justify leading-8
 }
 
-.article blockquote p {
-  @apply pt-2 text-justify leading-8
+markdown p {
+    @apply text-justify leading-7 mb-2 text-[#4c4948]
 }
 
-.article p {
-  @apply text-justify leading-7 mb-2 text-[#4c4948]
+markdown hr {
+    @apply border-0 border-t-2 border-success my-2
 }
 
-.article hr {
-  @apply border-0 border-t-2 border-success my-2
+markdown blockquote {
+    @apply pb-2 px-2 max-h-fit border-l-4 border-l-success bg-gray-100  mb-2 rounded-sm
 }
 
-.article blockquote {
-  @apply pb-2 px-2 max-h-fit border-l-4 border-l-success bg-gray-100 dark:bg-gray-800 mb-2 rounded-sm dark:text-success
+markdown blockquote p {
+    @apply text-justify mb-0
 }
 
-.article blockquote p {
-  @apply text-justify mb-0
+markdown ol {
+    @apply pb-4 indent-4
 }
 
-.article ol {
-  @apply pb-4 indent-4
+markdown ul {
+    @apply pb-4 indent-4
 }
 
-.article ul {
-  @apply pb-4 indent-4
+markdown ol li {
+    @apply list-decimal list-inside py-1
 }
 
-.article ol li {
-  @apply list-decimal list-inside py-1
+markdown ul li {
+    @apply list-disc list-inside py-1
 }
 
-.article ul li {
-  @apply list-disc list-inside py-1
+markdown img {
+    /*  make it center*/
+    @apply mx-auto my-4 block max-w-full  rounded-md
 }
 
-.article img {
-  /*  make it center*/
-  @apply mx-auto my-4 block max-w-full  rounded-md
+markdown thead {
+    @apply bg-success
 }
 
-.article thead {
-  @apply bg-success  dark:bg-gray-500
+markdown tbody {
+    @apply rounded-sm overflow-hidden
 }
 
-.article tbody {
-  @apply rounded-sm overflow-hidden
+markdown table {
+    @apply w-full  rounded-sm overflow-hidden  mb-2
 }
 
-.article table {
-  @apply w-full  rounded-sm overflow-hidden  mb-2 dark:bg-gray-800
+markdown table td {
+    @apply leading-10  border-b-2 border-gray-200
 }
 
-.article table td {
-  @apply leading-10  border-b-2 border-gray-200 dark:border-gray-700 text-center
+markdown a {
+    @apply text-success
 }
 
-.article a {
-  @apply text-success
+markdown p code {
+    @apply bg-success rounded-md py-0.5 px-2  bg-opacity-50 mx-0.5
 }
 
-.article p code {
-  @apply bg-success rounded-md py-0.5 px-2  bg-opacity-50 mx-0.5   dark:text-success dark:bg-opacity-10
+markdown strong code {
+    @apply bg-success rounded-md py-0.5 px-2  bg-opacity-20 mx-0.5   font-bold
 }
 
-.article strong code {
-  @apply bg-success rounded-md py-0.5 px-2  bg-opacity-20 mx-0.5  dark:bg-gray-800 dark:text-gray-400 font-bold
+markdown .mermaid {
+    @apply mx-auto my-4 block max-w-full  rounded-md bg-gray-100 p-4 shadow-md w-fit
 }
 
-.article .mermaid {
-  @apply mx-auto my-4 block max-w-full  rounded-md bg-gray-100 p-4 shadow-md w-fit
+markdown strong {
+    @apply font-extrabold text-gray-800
 }
 
-.article strong {
-  @apply font-extrabold text-gray-800 dark:text-gray-400
+
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+    border-radius: 2px;
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    @apply bg-success
 }
