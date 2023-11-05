@@ -14,6 +14,10 @@
     <iframe width="640px" height="480px" [src]="submission.url | safe" class="rounded" allowfullscreen></iframe>
   </figure>
 
+  <markdown *ngIf="submission.submissionType==='MD'" class="p-2 rounded max-h-[50vh] xl:max-h-[80vh] overflow-y-scroll"
+            src="assets/hello.md"></markdown>
+
+
   <div *ngIf="!review && showVoteBar">
     <app-vote [hash]="submission.hash" [name]="submission.name" [up]="submission.up" [down]="submission.down"
               [adminMode]=admin></app-vote>
