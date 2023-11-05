@@ -30,6 +30,7 @@ import {TruncatePipe} from './truncate.pipe';
 import {NgOptimizedImage} from "@angular/common";
 import {MarkdownModule} from "ngx-markdown";
 import {BbsToptenComponent} from './bbs-topten/bbs-topten.component';
+import {FixPanelComponent} from './fix-panel/fix-panel.component';
 
 const routes: Routes = [
     {path: '', component: EndlessComponent},
@@ -68,6 +69,7 @@ const routes: Routes = [
         SearchComponent,
         TruncatePipe,
         BbsToptenComponent,
+      FixPanelComponent,
     ],
     imports: [
         BrowserModule,

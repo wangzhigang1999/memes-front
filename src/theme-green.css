@@ -107,5 +107,5 @@ markdown strong {
 /* 滚动条滑块 */
 ::-webkit-scrollbar-thumb {
     border-radius: 2px;
-    @apply bg-success
+  @apply bg-base-200
 }
