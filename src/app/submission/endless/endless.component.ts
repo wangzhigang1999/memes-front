@@ -38,24 +38,24 @@ export class EndlessComponent {
     }
 
     init() {
-        let cache = localStorage.getItem("firstPage")
-        if (cache) {
-            let data = JSON.parse(cache)
-            let now = new Date().getMilliseconds()
-            // cache for 1 minute
-            if (now - data.timestamp < 1000 * 60) {
-                let cachePage = data.page
-                this.submissions = cachePage.list
-                this.pageNum = cachePage.pageNum
-                this.pageSize = cachePage.pageSize
-                this.total = cachePage.total
-                this.submissions.forEach((submission: Submission) => this.curElement.add(submission.id))
-                if (this.submissions.length > 0) {
-                    this.lastId = this.submissions[this.submissions.length - 1].id
-                }
-                return
-            }
-        }
+      // let cache = localStorage.getItem("firstPage")
+      // if (cache) {
+      //     let data = JSON.parse(cache)
+      //     let now = new Date().getMilliseconds()
+      //     // cache for 1 minute
+      //     if (now - data.timestamp < 1000 * 60) {
+      //         let cachePage = data.page
+      //         this.submissions = cachePage.list
+      //         this.pageNum = cachePage.pageNum
+      //         this.pageSize = cachePage.pageSize
+      //         this.total = cachePage.total
+      //         this.submissions.forEach((submission: Submission) => this.curElement.add(submission.id))
+      //         if (this.submissions.length > 0) {
+      //             this.lastId = this.submissions[this.submissions.length - 1].id
+      //         }
+      //         return
+      //     }
+      // }
 
 
         this.requesting = true
@@ -74,11 +74,11 @@ export class EndlessComponent {
                 }
                 this.requesting = false
 
-                if (page.list.length > 0) {
-                    // cache it for offline use, key is timestamp
-                    let now = new Date().getMilliseconds()
-                    localStorage.setItem("firstPage", JSON.stringify({timestamp: now, page: page}))
-                }
+              // if (page.list.length > 0) {
+              //     // cache it for offline use, key is timestamp
+              //     let now = new Date().getMilliseconds()
+              //     localStorage.setItem("firstPage", JSON.stringify({timestamp: now, page: page}))
+              // }
             })
 
     }
