@@ -1,3 +1,26 @@
-<div *ngIf="num>0" class="w-full">
-  <p *ngIf="num>0" class="w-full text-center">当前共有<b class="text-success">{{num}}</b>人在浏览</p>
+<div *ngIf="num>1" class="w-full">
+    <p class="w-full text-center">当前共有<b class="text-success">{{num}}</b>人在浏览</p>
+
+    <div class="max-h-[50vh] overflow-y-scroll flex flex-col gap-2 px-2" id="whisper">
+        <div *ngFor="let msg of whisperList">
+            <div *ngIf="msg.from!=this.sessionId" class="chat chat-start">
+                <div class="chat-image avatar ">
+                    <div class="h-full w-full text-center">{{msg.from}}</div>
+                </div>
+                <p class="chat-bubble-accent chat-bubble break-words">
+                    {{msg.message}}
+                </p>
+            </div>
+            <div *ngIf="msg.from==this.sessionId" class="chat chat-end ">
+                <p class="chat-bubble-success chat-bubble break-words">{{msg.message}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="mt-2 mx-2 flex items-center ">
+        <input [(ngModel)]="userInput" class="input input-success input-sm w-full text-center"
+               maxlength="{{MAX_WHISPER_LENGTH}}" placeholder="打个招呼吧~">
+        <p class="mx-1 px-1"> {{userInput.length}}/{{MAX_WHISPER_LENGTH}}</p>
+        <button (click)="sendWhisper(this.userInput)" class="btn btn-success btn-sm mx-2 w-1/5">发送</button>
+    </div>
+
 </div>
