@@ -48,10 +48,9 @@ export class HeaderComponent {
   notify(notifyMsg: string) {
     // add child node
     let node = document.createElement("div")
+    node.className = "chat chat-end"
     node.style.opacity = "1"
-    node.innerHTML = `<div class="chat-end chat">
-                            <p class=" chat-bubble chat-bubble-success">${notifyMsg}</p>
-                           </div>`
+    node.innerHTML = `<p class="chat-bubble chat-bubble-success">${notifyMsg}</p>`
     this.notificationDom.appendChild(node)
     let nodeRemoved = false
     // fade out
