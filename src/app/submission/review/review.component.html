@@ -78,6 +78,12 @@
         </label>
       </div>
     </div>
+    <div class="flex flex-wrap items-center gap-4  mx-auto  my-2">
+      <input [(ngModel)]="notification" class="input input-bordered input-sm w-3/4 input-success" placeholder="通知内容"
+             type="text"/>
+      <button (click)="sendNotification()" class="btn btn-success btn-sm w-1/5">📢</button>
+    </div>
+
 
   </div>
 

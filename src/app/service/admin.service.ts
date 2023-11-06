@@ -116,4 +116,11 @@ export class AdminService {
     let url = this.host + `/admin/sys`;
     return this.http.get(url);
   }
+
+  sendNotification(msg: string) {
+    let url = this.host + `/admin/notification`;
+    let data = new FormData();
+    data.append("notification", msg);
+    return this.http.post(url, data);
+  }
 }

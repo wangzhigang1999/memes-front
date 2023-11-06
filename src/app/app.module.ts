@@ -29,65 +29,61 @@ import {SearchComponent} from './search/search.component';
 import {TruncatePipe} from './truncate.pipe';
 import {NgOptimizedImage} from "@angular/common";
 import {MarkdownModule} from "ngx-markdown";
-import {BbsToptenComponent} from './bbs-topten/bbs-topten.component';
-import {FixPanelComponent} from './fix-panel/fix-panel.component';
 
 const routes: Routes = [
-    {path: '', component: EndlessComponent},
-    {path: 'search', component: SearchComponent},
-    {path: 'news', component: NewsHomeComponent},
-    {path: 'history-today', component: NewsTodayComponent},
-    {path: 'endless', component: EndlessComponent},
-    {path: 'today', component: TodayComponent},
-    {path: 'submit', component: SubmitComponent},
-    {path: 'history', component: HistoryComponent},
-    {path: 'review', component: ReviewComponent},
-    {path: 'statistic', component: StatisticComponent, canActivate: [AuthGuard]},
-    {path: '**', component: SearchComponent}
+  {path: '', component: EndlessComponent},
+  {path: 'search', component: SearchComponent},
+  {path: 'news', component: NewsHomeComponent},
+  {path: 'history-today', component: NewsTodayComponent},
+  {path: 'endless', component: EndlessComponent},
+  {path: 'today', component: TodayComponent},
+  {path: 'submit', component: SubmitComponent},
+  {path: 'history', component: HistoryComponent},
+  {path: 'review', component: ReviewComponent},
+  {path: 'statistic', component: StatisticComponent, canActivate: [AuthGuard]},
+  {path: '**', component: SearchComponent}
 ];
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        VoteComponent,
-        HeaderComponent,
-        SubmissionCardComponent,
-        TodayComponent,
-        SafePipe,
-        SubmitComponent,
-        HistoryComponent,
-        ReviewComponent,
-        StatisticComponent,
-        FixMenuComponent,
-        EndlessComponent,
-        TopSubmissionComponent,
-        NewsCardComponent,
-        NewsHomeComponent,
-        NewsTodayComponent,
-        EndComponent,
-        SinglePageSlideComponent,
-        SearchComponent,
-        TruncatePipe,
-        BbsToptenComponent,
-      FixPanelComponent,
-    ],
-    imports: [
-        BrowserModule,
-        RouterOutlet,
-        [RouterModule.forRoot(routes)],
-        HttpClientModule,
-        FormsModule,
-        LazyLoadImageModule,
-        InfiniteScrollModule,
-        NgOptimizedImage,
-        MarkdownModule.forRoot()
-    ],
-    providers: [
-        {
-            provide: HTTP_INTERCEPTORS, useClass: UuidInterceptor, multi: true
-        }
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    VoteComponent,
+    HeaderComponent,
+    SubmissionCardComponent,
+    TodayComponent,
+    SafePipe,
+    SubmitComponent,
+    HistoryComponent,
+    ReviewComponent,
+    StatisticComponent,
+    FixMenuComponent,
+    EndlessComponent,
+    TopSubmissionComponent,
+    NewsCardComponent,
+    NewsHomeComponent,
+    NewsTodayComponent,
+    EndComponent,
+    SinglePageSlideComponent,
+    SearchComponent,
+    TruncatePipe,
+  ],
+  imports: [
+    BrowserModule,
+    RouterOutlet,
+    [RouterModule.forRoot(routes)],
+    HttpClientModule,
+    FormsModule,
+    LazyLoadImageModule,
+    InfiniteScrollModule,
+    NgOptimizedImage,
+    MarkdownModule.forRoot()
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: UuidInterceptor, multi: true
+    }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }
