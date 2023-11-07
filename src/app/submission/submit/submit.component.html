@@ -22,8 +22,8 @@
     </div>
     <!--       preview-->
     <div class="max-h-[50vh] overflow-y-scroll rounded-xl py-4 px-8 my-2">
-      <markdown *ngIf="textIsUrl" [src]="text" class="rounded-box w-full "></markdown>
-      <markdown *ngIf="!textIsUrl" [data]="text" class="rounded-box w-full"></markdown>
+      <markdown *ngIf="textIsUrl" [src]="text" class="rounded-box w-full break-words"></markdown>
+      <markdown *ngIf="!textIsUrl" [data]="text" class="rounded-box w-full break-words"></markdown>
     </div>
 
   </div>

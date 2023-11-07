@@ -17,11 +17,11 @@
   <div *ngIf="submission.submissionType=='MARKDOWN'&& (submission.url || submission.content )"
        class="p-4 md:p-8 max-h-[50vh] xl:max-h-[80vh] overflow-y-scroll">
     <div *ngIf="submission.url">
-      <markdown [src]="submission.url" class="rounded  ">
+      <markdown [src]="submission.url" class="rounded break-words ">
       </markdown>
     </div>
     <div *ngIf="submission.content">
-      <markdown [data]="submission.content" class="rounded">
+      <markdown [data]="submission.content" class="rounded break-words">
       </markdown>
     </div>
   </div>
