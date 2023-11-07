@@ -1,65 +1,74 @@
-<div class="w-full">
-
-  <div class="my-auto" *ngIf="submissionType==='IMAGE'" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
-    <div class="w-full my-8">
-      <img class="rounded-box mx-auto w-3/4" id="img" [src]="url" alt=""/>
-    </div>
+<div class="h-[80vh] w-full grid grid-cols-1 place-items-center bg-base-100">
+  <div (dragover)="onDragOver($event)" (drop)="onDrop($event)" *ngIf="submissionType==='IMAGE'"
+       class="w-full  mx-auto">
+    <img [src]="text" alt="" class="rounded-box  mx-auto" id="img"/>
   </div>
 
-  <div class=" m-auto" *ngIf="submissionType==='VIDEO'">
-    <div class="mx-auto my-8">
-      <video class="rounded-box mx-auto w-3/4" id="video" controls [src]="url"></video>
-    </div>
+  <div *ngIf="submissionType==='VIDEO'" class="w-full  mx-auto">
+    <video [src]="text" class="rounded-box  mx-auto" controls id="video"></video>
   </div>
 
-  <div class="m-auto" *ngIf="submissionType==='BILIBILI'">
-    <div class="mx-auto my-8">
-      <iframe class="rounded-box mx-auto" id="bilibili" [src]="url | safe"></iframe>
+  <div *ngIf="submissionType==='BILIBILI'" class="w-full  mx-auto">
+    <iframe [src]="text | safe" class="rounded-box mx-auto w-full"></iframe>
+  </div>
+
+  <div *ngIf="submissionType==='MARKDOWN'" class="w-full  mx-auto ">
+
+    <div class="border border-base-200 rounded-xl ">
+      <textarea (ngModelChange)="detectMD()" [(ngModel)]="text"
+                class="w-full p-4 outline-none bg-transparent"
+                placeholder="输入 Markdown 源码或者链接">
+      </textarea>
     </div>
+    <!--       preview-->
+    <div class="max-h-[50vh] overflow-y-scroll rounded-xl py-4 px-8 my-2">
+      <markdown *ngIf="textIsUrl" [src]="text" class="rounded-box w-full "></markdown>
+      <markdown *ngIf="!textIsUrl" [data]="text" class="rounded-box w-full"></markdown>
+    </div>
+
   </div>
 
 
   <!--  checkbox-->
-  <div class="flex rounded border-success" style="width: 300px;margin: auto">
-
-    <div class="select-box w-full">
-      <span class="label-text">Video</span>
-      <input type="radio" name="radio-10" (change)="select('VIDEO')" class="radio checked:bg-success"
-             [checked]="submissionType=='VIDEO'"/>
+  <div class="flex flex-wrap mt-2 mb-4  items-center justify-center w-full gap-1">
+    <div (click)="select('VIDEO')"
+         class="flex items-center justify-center  gap-2 p-2 bg-base-200 rounded-xl hover:cursor-pointer"><span class="label-text">Video</span>
+      <input [checked]="submissionType=='VIDEO'" class="radio checked:bg-success" type="radio"/>
     </div>
 
-    <div class="select-box w-full">
+    <div (click)="select('IMAGE')"
+         class="flex items-center justify-center  gap-2 p-2 bg-base-200 rounded-xl hover:cursor-pointer">
       <span class="label-text">Image</span>
-      <input type="radio" name="radio-10" (change)="select('IMAGE')" class="radio checked:bg-success"
-             [checked]="submissionType=='IMAGE'"/>
+      <input [checked]="submissionType=='IMAGE'" class="radio checked:bg-success" type="radio"/>
     </div>
 
-    <div class="select-box w-full">
+    <div (click)="select('BILIBILI')"
+         class="flex items-center justify-center  gap-2 p-2 bg-base-200 rounded-xl hover:cursor-pointer">
       <span class="label-text">Bilibili</span>
-      <input type="radio" name="radio-10" (change)="select('BILIBILI')" class="radio checked:bg-success"
-             [checked]="submissionType=='BILIBILI'"
-      />
+      <input [checked]="submissionType=='BILIBILI'" class="radio checked:bg-success" type="radio"/>
     </div>
+
+    <div (click)="select('MARKDOWN')"
+         class="flex items-center justify-center  gap-2 p-2 bg-base-200 rounded-xl hover:cursor-pointer">
+      <span class="label-text">MD</span>
+      <input [checked]="submissionType=='MARKDOWN'" class="radio checked:bg-success" type="radio"/>
+    </div>
+
+    <div class="flex gap-4 items-center justify-center mt-2">
+      <input (ngModelChange)="bilibiliChange()" *ngIf="submissionType=='BILIBILI'" [(ngModel)]="iframe" accept="text/plain"
+             class="file-input  w-2/3 max-w-xs text-center  file-input-success" type="text"/>
+
+      <input (change)="videoChange()" *ngIf="submissionType=='VIDEO'" accept="video/mp4" class="file-input file-input-bordered file-input-success w-2/3 max-w-xs"
+             type="file"/>
+
+      <input (change)="imageChange()" *ngIf="submissionType=='IMAGE'" accept="image/*" class="file-input file-input-bordered file-input-success w-2/3 max-w-xs"
+             type="file"/>
+
+      <label (click)="submit()" class="btn  btn-success btn-sm" for="my-modal"> 上传 </label>
+    </div>
+
   </div>
 
-
-  <!-- operations-->
-  <div style="text-align: center;vertical-align: center">
-    <div style="margin-top: 20px;margin-bottom: 20px;">
-
-      <input id="iframe-input" type="text" accept="text/plain" *ngIf="submissionType=='BILIBILI'" [(ngModel)]="iframe"
-             (ngModelChange)="bilibiliChange()" class="file-input file-input-bordered file-input-success w-2/3 max-w-xs"
-             style="margin-top: 10px;text-align: center"/>
-      <input id="video-input" type="file" accept="video/mp4" *ngIf="submissionType=='VIDEO'" (change)="videoChange()"
-             class="file-input file-input-bordered file-input-success w-2/3 max-w-xs" style="margin-top: 10px"/>
-      <input id="image-input" type="file" accept="image/*" *ngIf="submissionType=='IMAGE'" (change)="imageChange()"
-             class="file-input file-input-bordered file-input-success w-2/3 max-w-xs" style="margin-top: 10px"/>
-
-      <label for="my-modal" style="margin-left: 20px;" (click)="submit()" class="btn   btn-success btn-md">
-        上传 </label>
-
-    </div>
-  </div>
 
   <!-- Put this part before </body> tag -->
   <input type="checkbox" id="my-modal" class="modal-toggle "/>

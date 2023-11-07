@@ -13,8 +13,12 @@ export class SubmitComponent {
     "IMAGE": "assets/welcome.webp",
     "VIDEO": "assets/video-example.mp4",
     "BILIBILI": "//www.bilibili.com/blackboard/html5mobileplayer.html?aid=823618204&bvid=BV1wg4y1t7j6&cid=1057102166&page=1&danmaku=no",
+    "MARKDOWN": ""
   }
-  url: string = ""
+
+  text: string = ""
+
+  textIsUrl = false
 
   // 10MB max
   maxFileSize = 10 * 1024 * 1024
@@ -54,13 +58,13 @@ export class SubmitComponent {
 
   ngOnInit(): void {
     // @ts-ignore
-    this.url = this.defaultMap[this.submissionType];
+    this.text = this.defaultMap[this.submissionType];
   }
 
   select(type: string) {
     this.submissionType = type;
     // @ts-ignore
-    this.url = this.defaultMap[type];
+    this.text = this.defaultMap[type];
   }
 
   submit() {
@@ -83,6 +87,9 @@ export class SubmitComponent {
       case "BILIBILI":
         this.uploadBilibili();
         break;
+      case "MARKDOWN":
+        this.uploadMarkdown();
+        break
       default:
         this.title = "上传失败"
         this.message = "未知类型"
@@ -159,7 +166,7 @@ export class SubmitComponent {
     // @ts-ignore
     let src = this.iframe.match(/src="(.+?)"/)[1];
     src = src.replace("//player.bilibili.com/player.html", "//www.bilibili.com/blackboard/html5mobileplayer.html");
-    this.url = src;
+    this.text = src;
   }
 
   imageChange() {
@@ -180,7 +187,7 @@ export class SubmitComponent {
     reader.readAsDataURL(file);
     reader.onload = () => {
       // @ts-ignore
-      this.url = reader.result;
+      this.text = reader.result;
     }
   }
 
@@ -196,7 +203,7 @@ export class SubmitComponent {
     reader.readAsDataURL(file);
     reader.onload = () => {
       // @ts-ignore
-      this.url = reader.result;
+      this.text = reader.result;
     }
   }
 
@@ -251,6 +258,39 @@ export class SubmitComponent {
         this.submissionType = "VIDEO"
       }
     }
+  }
+
+  detectMD() {
+    setTimeout(
+      () => {
+        this.textIsUrl = this.text.trim().startsWith("http") && this.text.trim().endsWith(".md")
+      }, 200
+    )
+  }
+
+  private uploadMarkdown() {
+
+    let text = this.text.trim()
+    if (text.startsWith("http") && !text.endsWith(".md")) {
+      this.title = "上传失败"
+      this.message = "请输入正确的链接"
+      return
+    }
+
+    if (text.length <= 20) {
+      this.title = "上传失败"
+      this.message = "太短啦，再多写点吧~"
+      return
+    }
+
+    this.service.uploadMarkdown(this.text).subscribe(
+      (data: any) => {
+        this.title = data.message
+        this.message = "上传成功!😀"
+      }
+    )
+
+
   }
 }
 

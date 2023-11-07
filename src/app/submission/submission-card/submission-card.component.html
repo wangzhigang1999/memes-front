@@ -14,8 +14,17 @@
     <iframe width="640px" height="480px" [src]="submission.url | safe" class="rounded" allowfullscreen></iframe>
   </figure>
 
-  <markdown *ngIf="submission.submissionType==='MD'" class="p-2 rounded max-h-[50vh] xl:max-h-[80vh] overflow-y-scroll"
-            src="assets/hello.md"></markdown>
+  <div *ngIf="submission.submissionType=='MARKDOWN'&& (submission.url || submission.content )"
+       class="p-4 md:p-8 max-h-[50vh] xl:max-h-[80vh] overflow-y-scroll">
+    <div *ngIf="submission.url">
+      <markdown [src]="submission.url" class="rounded  ">
+      </markdown>
+    </div>
+    <div *ngIf="submission.content">
+      <markdown [data]="submission.content" class="rounded">
+      </markdown>
+    </div>
+  </div>
 
 
   <div *ngIf="!review && showVoteBar">
@@ -23,7 +32,7 @@
               [adminMode]=admin></app-vote>
   </div>
 
-  <div *ngIf="review && showVoteBar" class="w-full text-center">
+  <div *ngIf="review && showVoteBar" class="w-full text-center mt-2">
     <div class="grid grid-cols-3">
       <button class="btn w-fit mx-auto btn-sm btn-warning" (click)="reject(submission.hash)">Reject</button>
       <div class="m-auto"> {{submission.timestamp | date:'MM-dd HH:mm'}} </div>

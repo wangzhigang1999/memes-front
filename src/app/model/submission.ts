@@ -2,6 +2,7 @@ export interface Submission {
   "id": string,
   "submissionType": string,
   "url": string,
+  "content": string,
   "uploader": string,
   "hash": number,
   "name": string,

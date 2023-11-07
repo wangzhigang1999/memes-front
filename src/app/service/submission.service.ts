@@ -70,15 +70,25 @@ export class SubmissionService {
 
   /**
    * upload a bilibili video
-   * @param uri the uri of the bilibili video
+   * @param text the text of the bilibili video
    */
-  uploadBilibili(uri: string) {
+  uploadBilibili(text: string) {
     let url = this.host + '/submission';
     let formData = new FormData();
-    formData.append('uri', uri);
+    formData.append('text', text);
     formData.append('mime', "text/bilibili");
     return this.http.post(url, formData);
   }
+
+  uploadMarkdown(text: string) {
+    let url = this.host + '/submission';
+    let formData = new FormData();
+    formData.append('text', text);
+    formData.append('mime', "text/markdown");
+    return this.http.post(url, formData);
+  }
+
+
 
   /**
    * get the history of submissions, [YYYY-MM-DD, YYYY-MM-DD, ...]
