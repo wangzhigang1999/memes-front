@@ -54,16 +54,16 @@ export class AdminService {
   /**
    * 设置置顶
    */
-  setTop(hash: number): Observable<any> {
-    let url = this.host + `/admin/submission/top/${hash}`;
+  setTop(id: string): Observable<any> {
+    let url = this.host + `/admin/submission/top/${id}`;
     return this.http.post(url, null);
   }
 
   /**
    * 取消置顶
    */
-  cancelTop(hash: number): Observable<any> {
-    let url = this.host + `/admin/submission/top/${hash}`;
+  cancelTop(id: string): Observable<any> {
+    let url = this.host + `/admin/submission/top/${id}`;
     return this.http.delete(url);
   }
 
@@ -115,12 +115,5 @@ export class AdminService {
   getSys(): Observable<any> {
     let url = this.host + `/admin/sys`;
     return this.http.get(url);
-  }
-
-  sendNotification(msg: string) {
-    let url = this.host + `/admin/notification`;
-    let data = new FormData();
-    data.append("notification", msg);
-    return this.http.post(url, data);
   }
 }

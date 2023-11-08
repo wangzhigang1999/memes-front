@@ -27,33 +27,33 @@ export class ReviewService {
 
   /**
    * 接受投稿
-   * @param hashcode
+   * @param id
    */
-  accept(hashcode: number) {
-    let url = this.host + `/admin/review/accept/${hashcode}`;
+  accept(id: string) {
+    let url = this.host + `/admin/review/accept/${id}`;
     return this.http.post(url, null);
   }
 
   /**
    * 拒绝投稿
-   * @param hashcode
+   * @param id
    */
-  reject(hashcode: number) {
-    let url = this.host + `/admin/review/reject/${hashcode}`;
+  reject(id: string) {
+    let url = this.host + `/admin/review/reject/${id}`;
     return this.http.post(url, null);
   }
 
-  batchAccept(hashcode: number[]): Observable<any> {
+  batchAccept(id: string[]): Observable<any> {
     let url = this.host + `/admin/review/accept/batch`;
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(url, hashcode, {headers: headers});
+    return this.http.post(url, id, {headers: headers});
   }
 
   /**
    * 统计信息
    */
-  statistics():Observable<any> {
+  statistics(): Observable<any> {
     let url = this.host + '/admin/review/statistic';
     return this.http.get(url);
   }

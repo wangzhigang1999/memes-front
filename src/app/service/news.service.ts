@@ -15,10 +15,6 @@ export class NewsService {
     this.host = environment.host
   }
 
-  getById(id: string) {
-    let url = this.host + `/news/${id}`;
-    return this.http.get(url);
-  }
 
   getByDate(date: string) {
     let url = this.host + `/news/date/${date}`;

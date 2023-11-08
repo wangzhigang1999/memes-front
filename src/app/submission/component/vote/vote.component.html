@@ -1,0 +1,50 @@
+<div class="columns-3 w-full" *ngIf="!adminMode">
+  <div>
+    <div class=" w-full text-center">
+        <button (click)="vote(false)" [ngClass]="downClass()" class="btn  text-xl mx-2">🥵</button>
+      <span class="text-lg">{{down}}</span>
+    </div>
+
+    <div class="w-full text-center">
+        <button (click)="love()" [ngClass]="loveClass()" class=" btn text-xl mx-2">🥰</button>
+    </div>
+
+    <div class="w-full text-center">
+      <span class="text-lg">{{up}}</span>
+        <button (click)="vote(true)" [ngClass]="upClass()" class="btn text-xl mx-2">🤣</button>
+    </div>
+  </div>
+  <div class="h-2">
+  </div>
+</div>
+
+
+<div class="columns-5 w-full" *ngIf="adminMode">
+  <div>
+    <div class="w-full text-center">
+        <button (click)="removeTop()" [ngClass]="deactivateBtn" class=" btn text-lg mx-2"> 👇</button>
+    </div>
+
+    <div class="w-full text-center">
+        <button (click)="vote(false)" [ngClass]="downClass()" class="btn text-lg mx-2">🥵</button>
+    </div>
+
+    <div class="w-full text-center">
+        <button (click)="love()" [ngClass]="loveClass()" class=" btn text-lg mx-2">🥰</button>
+    </div>
+
+    <div class="w-full " style="text-align: center;">
+        <button (click)="vote(true)" [ngClass]="upClass()" class=" btn text-lg mx-2">🤣
+      </button>
+    </div>
+
+    <div class="w-full text-center">
+        <button (click)="addTop()" [ngClass]="deactivateBtn" class=" btn text-lg mx-2"> 👆</button>
+    </div>
+  </div>
+  <div style="height: 10px">
+  </div>
+
+</div>
+
+

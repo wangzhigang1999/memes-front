@@ -4,11 +4,8 @@
 
 export const environment = {
   production: false,
-  host: "https://api.memes.bupt.site",
-  // host: "http://100.68.68.47:8080",
-  websocket: "wss://api.memes.bupt.site/ws",
-  // websocket: "ws://localhost:8080/ws",
-
+    // host: "https://api.memes.bupt.site",
+    host: "http://zhigang:8080",
 };
 
 /*

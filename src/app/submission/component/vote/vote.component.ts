@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {SubmissionService} from "../../service/submission.service";
-import {AdminService} from "../../service/admin.service";
+import {SubmissionService} from "../../../service/submission.service";
+import {AdminService} from "../../../service/admin.service";
 
 @Component({
   selector: 'app-vote',
@@ -15,32 +15,32 @@ export class VoteComponent {
 
   @Input() adminMode = false
 
-  @Input() hash: any
+  @Input() id: any
   @Input() name: any
   @Input() up: any
   @Input() down: any
 
   activeBtn = "btn-outline btn-success btn-square"
-  deactiveBtn = "btn-circle btn-ghost"
+  deactivateBtn = "btn-circle btn-ghost"
 
   constructor(private service: SubmissionService, private admin: AdminService) {
 
   }
 
   upClass() {
-    return this.upBtn ? this.activeBtn : this.deactiveBtn;
+    return this.upBtn ? this.activeBtn : this.deactivateBtn;
   }
 
   downClass() {
-    return this.downBtn ? this.activeBtn : this.deactiveBtn;
+    return this.downBtn ? this.activeBtn : this.deactivateBtn;
   }
 
   loveClass() {
-    return !this.loveBtn ? this.deactiveBtn : this.activeBtn;
+    return !this.loveBtn ? this.deactivateBtn : this.activeBtn;
   }
 
 
-  vote(hash: number, isUpvote: boolean) {
+  vote(isUpvote: boolean) {
     this.upBtn = isUpvote;
     this.downBtn = !isUpvote;
     this.loveBtn = false
@@ -50,20 +50,20 @@ export class VoteComponent {
     } else {
       this.down = this.down + 1;
     }
-    this.service.vote(hash, isUpvote).subscribe()
+    this.service.vote(this.id, isUpvote).subscribe()
   }
 
-  love(hash: any) {
+  love() {
     this.loveBtn = true
     this.upBtn = false
     this.downBtn = false
     this.up = this.up + 1;
 
-    this.service.vote(hash, true).subscribe()
+    this.service.vote(this.id, true).subscribe()
   }
 
-  addTop(hash: any) {
-    this.admin.setTop(hash).subscribe(
+  addTop() {
+    this.admin.setTop(this.id).subscribe(
       () => {
         alert("置顶成功")
       }
@@ -71,8 +71,8 @@ export class VoteComponent {
 
   }
 
-  removeTop(hash: any) {
-    this.admin.cancelTop(hash).subscribe(
+  removeTop() {
+    this.admin.cancelTop(this.id).subscribe(
       () => {
         alert("取消置顶成功")
       }
