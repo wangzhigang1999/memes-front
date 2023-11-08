@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Packet} from "../model/packet";
 import {WSPacketType} from "../model/packet_type";
+import {environment} from "../../environments/environment";
 
 @Component({
     selector: 'app-header',
@@ -9,46 +10,60 @@ import {WSPacketType} from "../model/packet_type";
 })
 export class HeaderComponent {
 
-
-    num: number = 0
     ws: WebSocket
     notificationDom: any
+    wsUrl: string = "ws://localhost:8080/ws"
+    currentOnlineNumber: number = 0
 
-    lastNeeMemeNotifyTimestamp: number = 0
 
     constructor() {
-        this.ws = new WebSocket('wss://api.memes.bupt.site/ws')
+        this.wsUrl = environment.websocket
+
+        this.ws = new WebSocket(this.wsUrl)
+        let firstOpen = true
+        let lastNeeMemeNotifyTimestamp: number = 0
+
         this.ws.onmessage = (event) => {
             if (!this.notificationDom) {
                 this.notificationDom = document.getElementById("notification")
             }
 
             let data: Packet = JSON.parse(event.data)
-            let notifyMsg = ""
-
-            let showNotification = false
-
             let now = new Date().getTime();
+
 
             switch (data.type) {
                 case WSPacketType.WHISPER:
-                    notifyMsg = data.payload
-                    showNotification = true
+                    this.notify(data.payload)
                     break
                 case WSPacketType.REVIEW:
-                    if (!this.lastNeeMemeNotifyTimestamp || (now - this.lastNeeMemeNotifyTimestamp > 30 * 1000)) {
-                        notifyMsg = `有新的 meme 图啦，稍后刷新查看`
-                        showNotification = true
-                        this.lastNeeMemeNotifyTimestamp = now;
+                    if (!lastNeeMemeNotifyTimestamp || (now - lastNeeMemeNotifyTimestamp > 30 * 1000)) {
+                        this.notify("有新的 meme 图啦，稍后刷新查看")
+                        lastNeeMemeNotifyTimestamp = now;
                     }
-                    console.log(now)
-                    console.log(this.lastNeeMemeNotifyTimestamp)
+                    break
+                case WSPacketType.ONLINE_NUMBER:
+                    if (firstOpen) {
+                        this.notify("当前共有 " + data.payload + " 人在线")
+                        firstOpen = false
+                    } else if (data.payload > this.currentOnlineNumber) {
+                        this.notify("有新的用户上线啦, 当前共有 " + data.payload + " 人在线")
+                    }
+                    this.currentOnlineNumber = data.payload
                     break
             }
 
-            if (showNotification) {
-                this.notify(notifyMsg)
-            }
+
+        }
+
+        this.ws.onclose = (event) => {
+            this.notify("连接已断开，正在尝试重连...")
+            this.ws = new WebSocket(this.wsUrl)
+        }
+
+        this.ws.onerror = (event) => {
+            this.notify(event.type + "，正在尝试重连...")
+            this.ws = new WebSocket(this.wsUrl)
         }
 
     }
@@ -65,14 +80,14 @@ export class HeaderComponent {
         // fade out
         setInterval(() => {
             let opacity = parseFloat(node.style.opacity)
-            if (opacity <= 0.2) {
+            if (opacity <= 0) {
                 // remove node
                 if (nodeRemoved) {
                     return
                 }
                 node.remove()
             }
-            node.style.opacity = `${opacity - 0.01}`
-        }, 100)
+            node.style.opacity = `${opacity - 0.02}`
+        }, 60)
     }
 }
