@@ -28,7 +28,7 @@ export class HeaderComponent {
 
             let showNotification = false
 
-            let now = new Date().getMilliseconds();
+            let now = new Date().getTime();
 
             switch (data.type) {
                 case WSPacketType.WHISPER:
@@ -36,11 +36,13 @@ export class HeaderComponent {
                     showNotification = true
                     break
                 case WSPacketType.REVIEW:
-                    if (!this.lastNeeMemeNotifyTimestamp || (now - this.lastNeeMemeNotifyTimestamp > 10 * 1000)) {
+                    if (!this.lastNeeMemeNotifyTimestamp || (now - this.lastNeeMemeNotifyTimestamp > 30 * 1000)) {
                         notifyMsg = `有新的 meme 图啦，稍后刷新查看`
                         showNotification = true
+                        this.lastNeeMemeNotifyTimestamp = now;
                     }
-                    this.lastNeeMemeNotifyTimestamp = now;
+                    console.log(now)
+                    console.log(this.lastNeeMemeNotifyTimestamp)
                     break
             }
 
