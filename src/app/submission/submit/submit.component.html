@@ -32,7 +32,8 @@
   <!--  checkbox-->
   <div class="flex flex-wrap mt-2 mb-4  items-center justify-center w-full gap-1">
     <div (click)="select('VIDEO')"
-         class="flex items-center justify-center  gap-2 p-2 bg-base-200 rounded-xl hover:cursor-pointer"><span class="label-text">Video</span>
+         class="flex items-center justify-center  gap-2 p-2 bg-base-200 rounded-xl hover:cursor-pointer"><span
+            class="label-text">Video</span>
       <input [checked]="submissionType=='VIDEO'" class="radio checked:bg-success" type="radio"/>
     </div>
 
@@ -55,13 +56,16 @@
     </div>
 
     <div class="flex gap-4 items-center justify-center mt-2">
-      <input (ngModelChange)="bilibiliChange()" *ngIf="submissionType=='BILIBILI'" [(ngModel)]="iframe" accept="text/plain"
+        <input (ngModelChange)="bilibiliChange()" *ngIf="submissionType=='BILIBILI'" [(ngModel)]="iframe"
+               accept="text/plain"
              class="file-input  w-2/3 max-w-xs text-center  file-input-success" type="text"/>
 
-      <input (change)="videoChange()" *ngIf="submissionType=='VIDEO'" accept="video/mp4" class="file-input file-input-bordered file-input-success w-2/3 max-w-xs"
+        <input (change)="videoChange()" *ngIf="submissionType=='VIDEO'" accept="video/mp4" class="file-input file-input-bordered file-input-success w-2/3 max-w-xs"
+               id="video-input"
              type="file"/>
 
-      <input (change)="imageChange()" *ngIf="submissionType=='IMAGE'" accept="image/*" class="file-input file-input-bordered file-input-success w-2/3 max-w-xs"
+        <input (change)="imageChange()" *ngIf="submissionType=='IMAGE'" accept="image/*" class="file-input file-input-bordered file-input-success w-2/3 max-w-xs"
+               id="image-input"
              type="file"/>
 
       <label (click)="submit()" class="btn  btn-success btn-sm" for="my-modal"> 上传 </label>
