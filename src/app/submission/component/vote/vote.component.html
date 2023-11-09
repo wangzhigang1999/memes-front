@@ -1,17 +1,17 @@
 <div class="columns-3 w-full" *ngIf="!adminMode">
   <div>
     <div class=" w-full text-center">
-      <button class="btn  text-xl mx-2" [ngClass]="downClass()" (click)="vote(hash,false)">🥵</button>
+        <button (click)="vote(false)" [ngClass]="downClass()" class="btn  text-xl mx-2">🥵</button>
       <span class="text-lg">{{down}}</span>
     </div>
 
     <div class="w-full text-center">
-      <button class=" btn text-xl mx-2" [ngClass]="loveClass()" (click)="love(hash)">🥰</button>
+        <button (click)="love()" [ngClass]="loveClass()" class=" btn text-xl mx-2">🥰</button>
     </div>
 
     <div class="w-full text-center">
       <span class="text-lg">{{up}}</span>
-      <button class="btn text-xl mx-2" [ngClass]="upClass()" (click)="vote(hash,true)">🤣</button>
+        <button (click)="vote(true)" [ngClass]="upClass()" class="btn text-xl mx-2">🤣</button>
     </div>
   </div>
   <div class="h-2">
@@ -22,24 +22,24 @@
 <div class="columns-5 w-full" *ngIf="adminMode">
   <div>
     <div class="w-full text-center">
-      <button class=" btn text-lg mx-2" [ngClass]="deactiveBtn" (click)="removeTop(hash)"> 👇</button>
+        <button (click)="removeTop()" [ngClass]="deactivateBtn" class=" btn text-lg mx-2"> 👇</button>
     </div>
 
     <div class="w-full text-center">
-      <button class="btn text-lg mx-2" [ngClass]="downClass()" (click)="vote(hash,false)">🥵</button>
+        <button (click)="vote(false)" [ngClass]="downClass()" class="btn text-lg mx-2">🥵</button>
     </div>
 
     <div class="w-full text-center">
-      <button class=" btn text-lg mx-2" [ngClass]="loveClass()" (click)="love(hash)">🥰</button>
+        <button (click)="love()" [ngClass]="loveClass()" class=" btn text-lg mx-2">🥰</button>
     </div>
 
     <div class="w-full " style="text-align: center;">
-      <button class=" btn text-lg mx-2" [ngClass]="upClass()" (click)="vote(hash,true)">🤣
+        <button (click)="vote(true)" [ngClass]="upClass()" class=" btn text-lg mx-2">🤣
       </button>
     </div>
 
     <div class="w-full text-center">
-      <button class=" btn text-lg mx-2" [ngClass]="deactiveBtn" (click)="addTop(hash)"> 👆</button>
+        <button (click)="addTop()" [ngClass]="deactivateBtn" class=" btn text-lg mx-2"> 👆</button>
     </div>
   </div>
   <div style="height: 10px">

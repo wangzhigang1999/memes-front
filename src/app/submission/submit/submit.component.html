@@ -9,7 +9,7 @@
   </div>
 
   <div *ngIf="submissionType==='BILIBILI'" class="w-full  mx-auto">
-    <iframe [src]="text | safe" class="rounded-box mx-auto w-full"></iframe>
+      <iframe [src]="text | safe" class="rounded-box mx-auto"></iframe>
   </div>
 
   <div *ngIf="submissionType==='MARKDOWN'" class="w-full  mx-auto ">
@@ -55,17 +55,19 @@
       <input [checked]="submissionType=='MARKDOWN'" class="radio checked:bg-success" type="radio"/>
     </div>
 
-    <div class="flex gap-4 items-center justify-center mt-2">
-        <input (ngModelChange)="bilibiliChange()" *ngIf="submissionType=='BILIBILI'" [(ngModel)]="iframe"
-               accept="text/plain"
+      <div class="flex gap-4 items-center justify-center my-4">
+          <input (ngModelChange)="bilibiliChange()" *ngIf="submissionType=='BILIBILI'" [(ngModel)]="iframe"
+                 accept="text/plain"
              class="file-input  w-2/3 max-w-xs text-center  file-input-success" type="text"/>
 
-        <input (change)="videoChange()" *ngIf="submissionType=='VIDEO'" accept="video/mp4" class="file-input file-input-bordered file-input-success w-2/3 max-w-xs"
-               id="video-input"
+          <input (change)="videoChange()" *ngIf="submissionType=='VIDEO'" accept="video/mp4"
+                 class="file-input file-input-bordered file-input-success w-2/3 max-w-xs"
+                 id="video-input"
              type="file"/>
 
-        <input (change)="imageChange()" *ngIf="submissionType=='IMAGE'" accept="image/*" class="file-input file-input-bordered file-input-success w-2/3 max-w-xs"
-               id="image-input"
+          <input (change)="imageChange()" *ngIf="submissionType=='IMAGE'" accept="image/*"
+                 class="file-input file-input-bordered file-input-success w-2/3 max-w-xs"
+                 id="image-input"
              type="file"/>
 
       <label (click)="submit()" class="btn  btn-success btn-sm" for="my-modal"> 上传 </label>
@@ -77,7 +79,7 @@
   <!-- Put this part before </body> tag -->
   <input type="checkbox" id="my-modal" class="modal-toggle "/>
   <div class="modal place-content-center">
-    <div class="modal-box modal-bottom sm:modal-middle" style="text-align: center">
+      <div class="modal-box modal-bottom sm:modal-middle text-center">
       <h3 class="font-bold text-lg mb-2" id="title">{{title}}</h3>
       <div class="py-4">{{message}}</div>
       <div class="modal-action">

@@ -28,7 +28,7 @@
 </div>
 
 
-<div class="card w-fit bg-base-100  mt-5" *ngIf="hasToken">
+<div *ngIf="hasToken" class="card w-fit bg-base-100  my-5">
   <figure class="figure-padding m-5">
     <img src="assets/welcome.webp" class="rounded-xl" alt=""/>
   </figure>
@@ -45,7 +45,7 @@
       <div class="w-fit">
         <div class="label">
           <span class="label-text">BOT : </span>
-          <input type="checkbox" class="ml-2 toggle toggle-success" [(ngModel)]="bot" (change)="updateBot()"/>
+          <input (change)="updateBot()" [(ngModel)]="botEnable" class="ml-2 toggle toggle-success" type="checkbox"/>
         </div>
       </div>
       <div class="w-fit rounded-xl flex justify-around bg-base-200">
@@ -83,7 +83,7 @@
 
   <input type="checkbox" id="message" class="modal-toggle"/>
   <div class="modal">
-    <div class="modal-box" style="text-align: center">
+    <div class="modal-box text-center">
       <h3 class="font-bold text-lg">{{title}}</h3>
       <p class="py-4">{{message}}</p>
       <div class="modal-action">

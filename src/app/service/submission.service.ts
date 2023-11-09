@@ -47,11 +47,11 @@ export class SubmissionService {
 
   /**
    * vote for a submission
-   * @param hash the identifier of the submission
-   * @param up true for upvote, false for downvote
+   * @param id
+   * @param up true for like, false for dislike
    */
-  vote(hash: number, up: boolean): Observable<any> {
-    let url = this.host + `/submission/vote/${hash}/${up}`;
+  vote(id: string, up: boolean): Observable<any> {
+      let url = this.host + `/submission/vote/${id}/${up}`;
     return this.http.post(url, null);
   }
 
@@ -87,7 +87,6 @@ export class SubmissionService {
     formData.append('mime', "text/markdown");
     return this.http.post(url, formData);
   }
-
 
 
   /**

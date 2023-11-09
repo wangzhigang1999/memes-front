@@ -17,8 +17,6 @@ export class StatisticComponent {
   uuidCountList!: any;
   date: number;
 
-  protected readonly Math = Math;
-
   constructor(private service: AdminService) {
     let start = new Date("2023-03-11");
     let end = new Date();
@@ -71,8 +69,6 @@ export class StatisticComponent {
 
   replace(key: string) {
     return key.replace("https://api.memes.bupt.site", "")
-      .replace("http://api.memes.bupt.site", "")
-    // .replace("http://100.68.68.47:8080", "")
   }
 
   timestampToHHMM(timestamp: number) {

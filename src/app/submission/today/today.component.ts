@@ -4,28 +4,26 @@ import {Submission} from "../../model/submission";
 import {authorized} from "../../utils";
 
 @Component({
-  selector: 'app-today',
-  templateUrl: './today.component.html',
-  styleUrls: ['./today.component.css']
+    selector: 'app-today',
+    templateUrl: './today.component.html',
+    styleUrls: ['./today.component.css']
 })
 export class TodayComponent {
 
-  public submissions: Submission[] = []
+    public submissions: Submission[] = []
 
-  bottomMessage = "🤖 ~没有更多了~ 🤖";
-  img = "assets/welcome.webp";
 
-  adminMode = false;
+    adminMode = false;
 
-  constructor(private service: SubmissionService) {
-  }
-
-  ngOnInit(): void {
-    if (authorized()) {
-      this.adminMode = true
+    constructor(private service: SubmissionService) {
     }
-    this.service.getTodaySubmissions().subscribe(data => {
-      this.submissions = data.data
-    })
-  }
+
+    ngOnInit(): void {
+        if (authorized()) {
+            this.adminMode = true
+        }
+        this.service.getTodaySubmissions().subscribe(data => {
+            this.submissions = data.data
+        })
+    }
 }

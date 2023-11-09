@@ -15,34 +15,26 @@ export class CardComponent {
   @Input() showVoteBar = true;
 
   @Output() private reviewed = new EventEmitter<string>();
-  defaultImage = "../../assets/welcome.webp";
+    defaultImage = "assets/welcome.webp";
 
   constructor(private service: ReviewService) {
   }
 
 
-  reject(hash: number) {
-    this.service.reject(hash).subscribe(
-      () => {
-        this.hidden(hash + "-")
-      }
-    )
+    reject(id: string) {
+        this.service.reject(id).subscribe(() => this.hidden(id, false))
   }
 
-  accept(hash: number) {
-    this.service.accept(hash).subscribe(
-      () => {
-        this.hidden(hash + "+")
-      }
-    )
+    accept(id: string) {
+        this.service.accept(id).subscribe(() => this.hidden(id, true))
   }
 
-  hidden(hash: string) {
-    let id = hash.toString().slice(0, -1);
+    hidden(id: string, accept: boolean = true) {
     let dom = document.getElementById(id);
     if (dom != null) {
       dom.parentElement?.remove();
-      this.reviewed.emit(hash)
+        let emitMessage = id + (accept ? "+" : "-");
+        this.reviewed.emit(emitMessage);
     }
     // scroll to top
     window.scrollTo(0, 0);
