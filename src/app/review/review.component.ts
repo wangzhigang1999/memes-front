@@ -123,7 +123,6 @@ export class ReviewComponent {
     }
 
     onReviewed(id: string) {
-        alert(id)
         let realID = id.slice(0, -1);
         let accept = id.slice(-1) === '+';
         this.submissions = this.submissions.filter(submission => submission.id !== realID);
