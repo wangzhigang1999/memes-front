@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {Response} from "../../model/response";
-import {AdminService} from "../../service/admin.service";
-import {Submission} from "../../model/submission";
-import {ReviewService} from "../../service/review.service";
+import {Response} from "../model/response";
+import {AdminService} from "../service/admin.service";
+import {Submission} from "../model/submission";
+import {ReviewService} from "../service/review.service";
 
 @Component({
   selector: 'app-review',
@@ -261,20 +261,5 @@ export class ReviewComponent {
       this.title = '触发爬虫错误';
       this.message = '缺少PAT';
     }
-  }
-
-  sendNotification() {
-    if (!this.notification) {
-      alert("请输入消息内容")
-      return
-    }
-    if (!confirm("确定要发送消息吗？\n\n" + this.notification)) {
-      return;
-    }
-    this.admin.sendNotification(this.notification).subscribe(
-      (data: any) => {
-        console.log(data)
-      }
-    )
   }
 }

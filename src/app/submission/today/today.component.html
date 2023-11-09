@@ -1,7 +1,4 @@
 <app-fix-menu></app-fix-menu>
-<app-top-submission></app-top-submission>
-<app-submission-card *ngFor="let sub of submissions;" [admin]="adminMode" [submission]="sub" class="w-full"/>
+<app-top></app-top>
+<app-card *ngFor="let sub of submissions;" [admin]="adminMode" [submission]="sub" class="w-full"/>
 <app-end></app-end>
-
-
-<!--<app-single-page-slide class="hidden lg:block" [submissions]="submissions"></app-single-page-slide>-->

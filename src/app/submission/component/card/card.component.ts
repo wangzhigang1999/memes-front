@@ -1,13 +1,13 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Submission} from "../../model/submission";
-import {ReviewService} from "../../service/review.service";
+import {Submission} from "../../../model/submission";
+import {ReviewService} from "../../../service/review.service";
 
 @Component({
-  selector: 'app-submission-card',
-  templateUrl: './submission-card.component.html',
-  styleUrls: ['./submission-card.component.css']
+  selector: 'app-card',
+  templateUrl: './card.component.html',
+  styleUrls: ['./card.component.css']
 })
-export class SubmissionCardComponent {
+export class CardComponent {
 
   @Input() submission!: Submission;
   @Input() review!: boolean;
