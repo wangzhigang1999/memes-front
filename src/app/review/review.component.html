@@ -34,20 +34,26 @@
   </figure>
   <div class="mb-5 text-center">
     <div>🤖 ~没有更多了~ 🤖</div>
-    <div class="flex-auto mt-2">
-      <label for="message" (click)="triggerCrawler()" class="btn btn-success btn-outline mx-2">🕷 </label>
-      <label for="message" (click)="batchAccept()" class="btn btn-success btn-outline mx-2">AC</label>
-      <label for="message" (click)="release()" class="btn btn-success btn-outline mx-2">发布</label>
-      <button (click)="removeToken()" class="btn btn-success btn-outline mx-2">清除token</button>
+    <div class="flex-auto items-center my-2 block md:hidden">
+      <label (click)="triggerCrawler()" class="btn btn-sm btn-success btn-outline mx-1 " for="message">🕷 </label>
+      <label (click)="batchAccept()" class="btn btn-sm  btn-success btn-outline mx-1" for="message">AC</label>
+      <label (click)="release()" class="btn btn-sm btn-success btn-outline mx-1 " for="message">发布</label>
+      <button (click)="removeToken()" class="btn btn-sm btn-warning btn-outline mx-1">清除token</button>
+      <label (click)="removeCache()" class="btn btn-sm btn-error btn-outline mx-1" for="message">清除缓存</label>
+    </div>
+    <div class="flex-auto items-center my-2 hidden md:block">
+      <label (click)="triggerCrawler()" class="btn  btn-success btn-outline mx-2 " for="message">🕷 </label>
+      <label (click)="batchAccept()" class="btn   btn-success btn-outline mx-2" for="message">AC</label>
+      <label (click)="release()" class="btn  btn-success btn-outline mx-2 " for="message">发布</label>
+      <button (click)="removeToken()" class="btn  btn-warning btn-outline mx-2">清除token</button>
+      <label (click)="removeCache()" class="btn  btn-error btn-outline mx-2" for="message">清除缓存</label>
     </div>
 
     <div class="flex justify-around mt-2">
-      <div class="w-fit">
         <div class="label">
           <span class="label-text">BOT : </span>
           <input (change)="updateBot()" [(ngModel)]="botEnable" class="ml-2 toggle toggle-success" type="checkbox"/>
         </div>
-      </div>
       <div class="w-fit rounded-xl flex justify-around bg-base-200">
         <div class="form-control w-fit mx-4" *ngFor="let item of releaseStrategy">
           <div class="label">

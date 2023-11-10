@@ -116,4 +116,9 @@ export class AdminService {
     let url = this.host + `/admin/sys`;
     return this.http.get(url);
   }
+
+  removeCache(): Observable<any> {
+    let url = this.host + `/admin/cache/clean`;
+    return this.http.get(url);
+  }
 }
