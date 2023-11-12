@@ -68,7 +68,7 @@ export class StatisticComponent {
 
 
   replace(key: string) {
-    return key.replace("https://api.memes.bupt.site", "")
+    return key.replace("https://api.memes.bupt.site", "").replace("http://api.memes.bupt.site", "")
   }
 
   timestampToHHMM(timestamp: number) {
