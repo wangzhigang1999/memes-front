@@ -1,4 +1,4 @@
-/*@import url("https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/lxgwwenkaiscreen.css");*/
+@import 'lxgw-wenkai-screen-webfont/style.css';
 
 @tailwind base;
 @tailwind components;
@@ -9,9 +9,9 @@
 /*  -webkit-filter: grayscale(100%);*/
 /*}*/
 
-/*body {*/
-/*  font-family: "LXGW WenKai Screen", sans-serif;*/
-/*}*/
+body {
+  font-family: "LXGW WenKai Screen", sans-serif;
+}
 
 
 markdown h1 {

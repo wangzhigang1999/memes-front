@@ -20,6 +20,7 @@
     "@angular/router": "^16.2.12",
     "@types/marked": "^4.3.0",
     "daisyui": "^2.51.5",
+    "lxgw-wenkai-screen-webfont": "^1.7.0",
     "marked": "^4.3.0",
     "ng-lazyload-image": "^9.1.3",
     "ngx-infinite-scroll": "^15.0.0",
