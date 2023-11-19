@@ -1,4 +1,4 @@
-<div [id]="submission.id" class="card w-full bg-base-200  my-4">
+<div (click)="center()" [id]="submission.id" class="card w-full bg-base-200  my-4">
 
   <figure class="p-2" *ngIf="submission.submissionType==='IMAGE'">
     <img [defaultImage]="defaultImage" [lazyLoad]="submission.url" alt="" class="rounded-xl" src=""/>

@@ -57,4 +57,11 @@ export class CardComponent {
     }
 
   }
+
+  center() {
+    let dom = document.getElementById(this.submission.id);
+    if (dom != null) {
+      dom.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+    }
+  }
 }
