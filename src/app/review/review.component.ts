@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Response} from "../model/response";
 import {AdminService} from "../service/admin.service";
 import {Submission} from "../model/submission";
@@ -9,7 +9,7 @@ import {ReviewService} from "../service/review.service";
   templateUrl: './review.component.html',
   styleUrls: ['./review.component.css']
 })
-export class ReviewComponent {
+export class ReviewComponent implements OnInit {
 
   hasToken = false;
 
@@ -58,6 +58,7 @@ export class ReviewComponent {
           this.handleTokenValidation(data);
         },
         error: error => {
+          console.error(error)
           this.removeToken()
         }
       }
@@ -74,6 +75,7 @@ export class ReviewComponent {
             this.handleTokenValidation(data);
           },
           error: error => {
+            console.error(error)
             this.removeToken()
           }
         }
@@ -121,14 +123,24 @@ export class ReviewComponent {
     })
   }
 
-  onReviewed(id: string) {
-    let realID = id.slice(0, -1);
-    let accept = id.slice(-1) === '+';
-    this.submissions = this.submissions.filter(submission => submission.id !== realID);
-    this.toBeReviewedNum--;
-    if (accept) {
-      this.reviewPassedNum++;
+  onReviewed(ids: string[]) {
+    if (ids.length === 0) {
+      return
     }
+    if (ids.length === 1) {
+      let id = ids[0]
+      let realID = id.slice(0, -1);
+      let accept = id.slice(-1) === '+';
+      this.submissions = this.submissions.filter(submission => submission.id !== realID);
+      this.toBeReviewedNum--;
+      if (accept) {
+        this.reviewPassedNum++;
+      }
+    } else {
+      this.getStatistic()
+      this.loadSubmissions()
+    }
+
   }
 
   loadSubmissions() {

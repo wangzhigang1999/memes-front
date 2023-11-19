@@ -24,6 +24,7 @@
 
 <div *ngIf="hasToken">
   <app-card (reviewed)="onReviewed($event)" *ngFor="let sub of submissions;" [review]="true" [submission]="sub"
+            [nextID]="submissions.indexOf(sub) + 1==submissions.length?'':submissions[submissions.indexOf(sub) + 1].id"
             class="w-full"/>
 </div>
 
@@ -50,10 +51,10 @@
     </div>
 
     <div class="flex justify-around mt-2">
-        <div class="label">
-          <span class="label-text">BOT : </span>
-          <input (change)="updateBot()" [(ngModel)]="botEnable" class="ml-2 toggle toggle-success" type="checkbox"/>
-        </div>
+      <div class="label">
+        <span class="label-text">BOT : </span>
+        <input (change)="updateBot()" [(ngModel)]="botEnable" class="ml-2 toggle toggle-success" type="checkbox"/>
+      </div>
       <div class="w-fit rounded-xl flex justify-around bg-base-200">
         <div class="form-control w-fit mx-4" *ngFor="let item of releaseStrategy">
           <div class="label">
