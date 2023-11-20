@@ -1,6 +1,7 @@
 <div class="fixed z-10  bottom-5 right-4   m-4  hover:cursor-pointer hover:bg-base-200 p-2 rounded-xl"
      (click)="showMenu=!showMenu">
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+  <svg fill="none" id="menu" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+       xmlns="http://www.w3.org/2000/svg"
        class="w-8 h-8 text-zinc-900 dark:text-zinc-100">
     <path stroke-linecap="round" stroke-linejoin="round"
           d="M21.75 6.75a4.5 4.5 0 01-4.884 4.484c-1.076-.091-2.264.071-2.95.904l-7.152 8.684a2.548 2.548 0 11-3.586-3.586l8.684-7.152c.833-.686.995-1.874.904-2.95a4.5 4.5 0 016.336-4.486l-3.276 3.276a3.004 3.004 0 002.25 2.25l3.276-3.276c.256.565.398 1.192.398 1.852z"/>
@@ -9,7 +10,8 @@
 </div>
 
 
-<div *ngIf="showMenu" class="fixed z-10 bottom-20 right-5 m-3 flex flex-col gap-2  rounded-xl  items-center">
+<div *ngIf="showMenu" class="fixed z-10 bottom-20 right-5 m-3 flex flex-col gap-2  rounded-xl  items-center"
+     id="feedback">
   <a class="btn  btn-square bg-base-200 border-none" href="https://www.wjx.cn/vm/mbk5k5S.aspx#">
     <svg class="w-6 h-6 text-zinc-900 dark:text-zinc-100" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
          xmlns="http://www.w3.org/2000/svg">
@@ -19,7 +21,7 @@
   </a>
 
 
-  <button (click)="moveToTop()" class="btn btn-square bg-base-200 border-none">
+  <button (click)="moveToTop()" class="btn btn-square bg-base-200 border-none" id="to-top">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
          class="w-6 h-6 text-zinc-900 dark:text-zinc-100">
       <path stroke-linecap="round" stroke-linejoin="round" d="M5 11l7-7 7 7M5 19l7-7 7 7"/>

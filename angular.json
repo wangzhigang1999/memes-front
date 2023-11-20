@@ -38,6 +38,7 @@
             "scripts": [
               "node_modules/marked/marked.min.js",
               "node_modules/prismjs/prism.js",
+              "node_modules/driver.js/dist/driver.js.iife.js",
               "node_modules/prismjs/components/prism-java.min.js",
               "node_modules/prismjs/components/prism-go.min.js",
               "node_modules/prismjs/components/prism-python.min.js",
