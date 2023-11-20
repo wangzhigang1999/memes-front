@@ -1,34 +1,36 @@
-<div (click)="center()" [id]="submission.id" class="card w-full bg-base-200  my-4">
+<div [id]="submission.id" class="card w-full bg-base-200  my-4">
 
-  <figure class="p-2" *ngIf="submission.submissionType==='IMAGE'">
-    <img [defaultImage]="defaultImage" [lazyLoad]="submission.url" alt="" class="rounded-xl" src=""/>
-  </figure>
+  <div (click)="center()">
+    <figure *ngIf="submission.submissionType==='IMAGE'" class="p-2">
+      <img [defaultImage]="defaultImage" [lazyLoad]="submission.url" alt="" class="rounded-xl" src=""/>
+    </figure>
 
-  <figure class="p-2" *ngIf="submission.submissionType==='VIDEO'">
-    <video class="rounded-xl" controls>
-      <source src="{{submission.url}}" type="video/mp4">
-    </video>
-  </figure>
+    <figure *ngIf="submission.submissionType==='VIDEO'" class="p-2">
+      <video class="rounded-xl" controls>
+        <source src="{{submission.url}}" type="video/mp4">
+      </video>
+    </figure>
 
-  <figure class="p-2 rounded" *ngIf="submission.submissionType==='BILIBILI'">
-    <iframe width="640px" height="480px" [src]="submission.url | safe" class="rounded" allowfullscreen></iframe>
-  </figure>
+    <figure *ngIf="submission.submissionType==='BILIBILI'" class="p-2 rounded">
+      <iframe [src]="submission.url | safe" allowfullscreen class="rounded" height="480px" width="640px"></iframe>
+    </figure>
 
-  <div *ngIf="submission.submissionType=='MARKDOWN'&& (submission.url || submission.content )"
-       class="p-4 md:p-8 max-h-[50vh] xl:max-h-[80vh] overflow-y-scroll">
-    <div *ngIf="submission.url">
-      <markdown [src]="submission.url" class="rounded break-words ">
-      </markdown>
+    <div *ngIf="submission.submissionType=='MARKDOWN'&& (submission.url || submission.content )"
+         class="p-4 md:p-8 max-h-[50vh] xl:max-h-[80vh] overflow-y-scroll">
+      <div *ngIf="submission.url">
+        <markdown [src]="submission.url" class="rounded break-words ">
+        </markdown>
+      </div>
+      <div *ngIf="submission.content">
+        <markdown [data]="submission.content" class="rounded break-words">
+        </markdown>
+      </div>
     </div>
-    <div *ngIf="submission.content">
-      <markdown [data]="submission.content" class="rounded break-words">
-      </markdown>
-    </div>
-  </div>
 
-  <div *ngIf="submission.submissionType=='BATCH'" class="max-h-[70vh] overflow-y-scroll">
-    <div *ngFor="let child of submission.children">
-      <app-card [showVoteBar]="false" [submission]="child"></app-card>
+    <div *ngIf="submission.submissionType=='BATCH'" class="max-h-[70vh] overflow-y-scroll">
+      <div *ngFor="let child of submission.children">
+        <app-card [showVoteBar]="false" [submission]="child"></app-card>
+      </div>
     </div>
   </div>
 
@@ -47,9 +49,9 @@
       </button>
       <button (click)="accept(submission.id)" class="btn w-fit btn-sm mx-auto btn-success">Yay!</button>
     </div>
-    <div class="mb-2 text-center">
-      <div class="m-auto"> {{submission.timestamp | date:'MM-dd HH:mm'}} </div>
-      {{submission.uploader}}
+    <div class="flex flex-wrap text-center items-center my-1">
+      <div class="mx-auto"> {{submission.timestamp | date:'MM-dd HH:mm'}} </div>
+      <div class="mx-auto">{{submission.uploader}}</div>
     </div>
   </div>
 
