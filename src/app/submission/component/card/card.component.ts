@@ -51,7 +51,7 @@ export class CardComponent {
       return
     }
     if (this.submission.submissionType === "BATCH") {
-      this.groupService.addImageToGroup(id, [nextID]).subscribe(() => this.hidden([nextID], true))
+      this.groupService.addImageToGroup(id, [nextID]).subscribe(() => this.hidden([id, nextID], true))
     } else {
       this.groupService.createImageGroup([id, nextID]).subscribe(() => this.hidden([id, nextID], true))
     }

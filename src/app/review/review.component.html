@@ -33,19 +33,11 @@
   </figure>
   <div class="mb-5 text-center">
     <div>🤖 ~没有更多了~ 🤖</div>
-    <div class="flex-auto items-center my-2 block md:hidden">
-      <label (click)="triggerCrawler()" class="btn btn-sm btn-success btn-outline mx-1 " for="message">🕷 </label>
-      <label (click)="batchAccept()" class="btn btn-sm  btn-success btn-outline mx-1" for="message">AC</label>
-      <label (click)="release()" class="btn btn-sm btn-success btn-outline mx-1 " for="message">发布</label>
-      <button (click)="removeToken()" class="btn btn-sm btn-warning btn-outline mx-1">清除token</button>
-      <label (click)="removeCache()" class="btn btn-sm btn-error btn-outline mx-1" for="message">清除缓存</label>
-    </div>
-    <div class="flex-auto items-center my-2 hidden md:block">
+    <div class="flex-auto items-center my-2">
       <label (click)="triggerCrawler()" class="btn  btn-success btn-outline mx-2 " for="message">🕷 </label>
       <label (click)="batchAccept()" class="btn   btn-success btn-outline mx-2" for="message">AC</label>
       <label (click)="release()" class="btn  btn-success btn-outline mx-2 " for="message">发布</label>
       <button (click)="removeToken()" class="btn  btn-warning btn-outline mx-2">清除token</button>
-      <label (click)="removeCache()" class="btn  btn-error btn-outline mx-2" for="message">清除缓存</label>
     </div>
 
     <div class="flex justify-around mt-2">
