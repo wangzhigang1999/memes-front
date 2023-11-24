@@ -91,10 +91,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "memes-fe:build:production"
+              "buildTarget": "memes-fe:build:production"
             },
             "development": {
-              "browserTarget": "memes-fe:build:development"
+              "buildTarget": "memes-fe:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -102,7 +102,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "memes-fe:build"
+            "buildTarget": "memes-fe:build"
           }
         },
         "test": {
