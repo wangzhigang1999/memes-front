@@ -223,6 +223,7 @@ export class SubmitComponent {
         this.service.uploadFile(this.tempFile, mime).subscribe(
             {
                 next: (data) => {
+
                     let resp: Submission = data.data
                     this.title = data.message
                     this.message = resp.url
@@ -247,7 +248,7 @@ export class SubmitComponent {
         this.service.uploadFile(this.tempFile, mime).subscribe(
             (data) => {
                 this.title = data.message
-                this.message = data.data.url
+              this.message = "上传成功!😀"
             }
         )
     }
@@ -265,7 +266,7 @@ export class SubmitComponent {
         this.service.uploadBilibili(src).subscribe(
             (data: any) => {
                 this.title = data.message
-                this.message = data.data.url
+              this.message = "上传成功!😀"
             }
         )
 

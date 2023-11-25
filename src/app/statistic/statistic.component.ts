@@ -79,12 +79,7 @@ export class StatisticComponent {
   }
 
   msConvert(ms: number) {
-    // if <1000ms, return ms
-    if (ms < 1000) {
-      return Math.round(ms * 100) / 100 + " ms"
-    } else {
-      return Math.round(ms / 1000 * 10) / 10 + " s"
-    }
+    return Math.round(ms * 100) / 100
   }
 
   top(k: number, list: any[]) {

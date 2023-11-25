@@ -1,4 +1,4 @@
-<div class="card card-compact  w-full max-w-2xl mx-auto  shadow-md  mb-4">
+<div class="card card-compact  w-full  mx-auto  bg-base-200  mb-4">
   <figure class="p-4">
     <img [defaultImage]="defaultCover" class="w-full h-full rounded-xl"  [lazyLoad]="news.coverImage" alt="" src=""/>
   </figure>
@@ -15,12 +15,9 @@
     </div>
 
     <div class="card-actions justify-end">
-      <a class="badge badge-secondary" href="{{news.sourceURL}}">原文</a>
-      <div class="badge " *ngIf="news.author!=''">{{news.author}}</div>
+      <a class="badge badge-secondary" href="{{news.sourceURL}}" target="_blank">原文</a>
+      <div *ngIf="news.author!=''" class="badge badge-info">{{news.author}}</div>
       <div class="badge badge-success" (click)="setDateTo(news.date)">{{news.date}}</div>
-      <div *ngFor="let tag of news.tag">
-        <div class="badge badge-outline" (click)="addToSelector(tag)" *ngIf="tag.length<5">{{tag}}</div>
-      </div>
     </div>
   </div>
 </div>
