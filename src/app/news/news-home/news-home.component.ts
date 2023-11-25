@@ -19,8 +19,6 @@ export class NewsHomeComponent {
   total: number = 0;
   lastId = "";
 
-  specificDate = ""
-  badges: string[] = [];
 
   requesting = false
 
@@ -38,10 +36,8 @@ export class NewsHomeComponent {
     this.lastId = "";
 
 
-    let tag = this.badges.join(",")
-
     this.requesting = true
-    this.newsService.getByPageWithTag(this.lastId, this.pageNum, this.pageSize, tag).subscribe(
+    this.newsService.getByPage(this.lastId, this.pageNum, this.pageSize).subscribe(
       (data: any) => {
         const page: Page<News> = data.data
         this.news = page.list
@@ -70,16 +66,14 @@ export class NewsHomeComponent {
   }
 
   onScroll() {
-    if (this.specificDate !== "" || this.news.length >= this.total || this.requesting) {
+    if (this.news.length >= this.total || this.requesting) {
       return
     }
     this.requesting = true
-    let tag = this.badges.join(",")
-    this.newsService.getByPageWithTag(this.lastId, this.pageNum + 1, this.pageSize, tag).subscribe(
+    this.newsService.getByPage(this.lastId, this.pageNum + 1, this.pageSize).subscribe(
       (data: any) => {
         const page: Page<News> = data.data
-        page.list.forEach(
-          (news: News) => {
+        page.list.forEach((news: News) => {
             if (!this.curElement.has(news.id)) {
               for (let i = 0; i < this.tagBlackList.length; i++) {
                 for (let j = 0; j < news.tag.length; j++) {
@@ -100,41 +94,4 @@ export class NewsHomeComponent {
     )
   }
 
-  addSelector(tag: string) {
-    // remove date
-    this.specificDate = ""
-    if (!this.badges.includes(tag)) {
-      this.badges.push(tag)
-      this.init()
-    }
-  }
-
-  removeTag(tag: string) {
-    this.badges = this.badges.filter(
-      (t: string) => {
-        return t !== tag
-      }
-    )
-    this.init()
-  }
-
-  setDate(date: string) {
-    if (this.specificDate === date) {
-      return
-    }
-    // clear badges
-    this.badges = []
-    this.specificDate = date
-    this.newsService.getByDate(date).subscribe(
-      (data: any) => {
-        this.news = data.data
-        window.scrollTo({top: 0, behavior: 'smooth'});
-      }
-    )
-  }
-
-  clearDate() {
-    this.specificDate = ""
-    this.init()
-  }
 }
