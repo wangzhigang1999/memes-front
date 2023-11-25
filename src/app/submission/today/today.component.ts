@@ -22,8 +22,6 @@ export class TodayComponent {
         if (authorized()) {
             this.adminMode = true
         }
-        this.service.getTodaySubmissions().subscribe(data => {
-            this.submissions = data.data
-        })
+        this.service.getTodaySubmissions().subscribe(data => this.submissions = data.data)
     }
 }

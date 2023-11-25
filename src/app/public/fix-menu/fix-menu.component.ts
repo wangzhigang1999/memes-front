@@ -1,4 +1,5 @@
 import {Component, ElementRef, HostListener} from '@angular/core';
+import {scrollToTop} from "../../utils";
 
 @Component({
   selector: 'app-fix-menu',
@@ -22,6 +23,6 @@ export class FixMenuComponent {
 
   moveToTop() {
     this.showMenu = !this.showMenu;
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    scrollToTop()
   }
 }

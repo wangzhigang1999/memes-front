@@ -1,26 +1,8 @@
 <div>
-  <div class="py-5 search-badges bg-base-100  px-3" *ngIf="badges.length||specificDate">
-    <div *ngIf="specificDate" class="badge h-8  gap-2  text-sm py-2"
-         (click)="clearDate()">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-           class="inline-block w-4 h-4 stroke-current">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-      </svg>
-      date:{{specificDate}}
-    </div>
-    <div class="badge h-6  text-sm mx-1" (click)="removeTag(tag)"
-         *ngFor="let tag of badges">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-           class="inline-block w-4 h-4 stroke-current">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-      </svg>
-      {{tag}}
-    </div>
-  </div>
+
   <div class="search-results" infiniteScroll [infiniteScrollDistance]="3" [infiniteScrollThrottle]="50"
        (scrolled)="onScroll()">
-    <app-news-card *ngFor="let item of news" (addSelector)="addSelector($event)" (setDate)="setDate($event)"
-                   [news]="item"></app-news-card>
+    <app-news-card *ngFor="let item of news" [news]="item"></app-news-card>
   </div>
 </div>
 

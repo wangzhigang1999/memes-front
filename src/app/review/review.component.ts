@@ -13,22 +13,18 @@ export class ReviewComponent implements OnInit {
 
   hasToken = false;
 
-  submissions: Submission[] = []
+  waitingList: Submission[] = []
   token: any;
 
   pat: any;
   title: any;
   message: any;
 
-  reviewPassedNum = 0;
-  toBeReviewedNum = 0;
-  releasedNum = 0;
+  passedNum = 0;
+  waitingNum = 0;
   botEnable = false;
 
-  releaseStrategy = []
-  selectedReleaseStrategy = ''
   minValue = 50;
-  maxHistory: any;
 
   constructor(private service: ReviewService, private admin: AdminService) {
     this.pat = localStorage.getItem('pat');
@@ -97,29 +93,40 @@ export class ReviewComponent implements OnInit {
     this.hasToken = false;
   }
 
-  release() {
-    this.title = '发布中';
-    this.message = '请稍后';
-    // @ts-ignore
-    this.admin.release().subscribe((data: Response) => {
-      this.title = data.message;
-      this.message = data.message;
-      this.releasedNum = data.data
-    })
-  }
-
 
   batchAccept() {
+    if (!confirm("确定要批量通过吗？")) {
+      this.title = '取消批量通过';
+      this.message = '任务已取消';
+      return
+    }
     this.title = '批量通过中...';
     this.message = '批量通过中...';
-    let ids = this.submissions.map(submission => submission.id);
+    let ids = this.waitingList.map(submission => submission.id);
     this.service.batchAccept(ids).subscribe((data: Response) => {
       this.title = '批量通过成功';
       this.message = '批量通过成功';
-      this.reviewPassedNum += data.data
-      this.toBeReviewedNum -= data.data
+      this.passedNum += data.data
+      this.waitingNum -= data.data
 
-      this.loadSubmissions()
+      this.loadWaitingList()
+    })
+  }
+
+  batchReject() {
+    if (!confirm("确定要批量拒绝吗？")) {
+      this.title = '取消批量拒绝';
+      this.message = '任务已取消';
+      return
+    }
+    this.title = '批量拒绝中...';
+    this.message = '批量拒绝中...';
+    let ids = this.waitingList.map(submission => submission.id);
+    this.service.batchReject(ids).subscribe((data: Response) => {
+      this.title = '批量拒绝成功';
+      this.message = '批量拒绝成功';
+      this.waitingNum -= data.data
+      this.loadWaitingList()
     })
   }
 
@@ -131,22 +138,19 @@ export class ReviewComponent implements OnInit {
       let id = ids[0]
       let realID = id.slice(0, -1);
       let accept = id.slice(-1) === '+';
-      this.submissions = this.submissions.filter(submission => submission.id !== realID);
-      this.toBeReviewedNum--;
+      this.waitingList = this.waitingList.filter(submission => submission.id !== realID);
+      this.waitingNum--;
       if (accept) {
-        this.reviewPassedNum++;
+        this.passedNum++;
       }
     } else {
       this.getStatistic()
-      this.loadSubmissions()
+      this.loadWaitingList()
     }
-
   }
 
-  loadSubmissions() {
-    this.service.listSubmissions().subscribe((data: any) => {
-      this.submissions = data.data ? data.data : [];
-    })
+  loadWaitingList() {
+    this.service.loadWaitingList().subscribe((data: any) => this.waitingList = data.data ? data.data : [])
   }
 
   updateBot() {
@@ -161,13 +165,8 @@ export class ReviewComponent implements OnInit {
   getSys() {
     this.admin.getSys().subscribe(
       (data: Response) => {
-        console.log(data)
-        this.releaseStrategy = data.data["releaseStrategy"];
-        this.selectedReleaseStrategy = data.data["selectedReleaseStrategy"];
         this.botEnable = data.data["botUp"];
         this.minValue = data.data["min_SUBMISSIONS"];
-        this.maxHistory = data.data["max_HISTORY"];
-        this.releaseStrategy = data.data["releaseStrategy"];
       }
     )
   }
@@ -175,39 +174,16 @@ export class ReviewComponent implements OnInit {
   init() {
     localStorage.setItem('token-ok', "true")
     this.hasToken = true;
-    this.loadSubmissions()
+    this.loadWaitingList()
     this.getStatistic()
     this.getSys()
   }
 
-  setReleaseStrategy(item: string) {
-    if (item === this.selectedReleaseStrategy) {
-      return
-    }
-    this.admin.setReleaseStrategy(item).subscribe(
-      () => {
-        this.selectedReleaseStrategy = item;
-      }
-    )
-  }
 
   updateMax() {
-    if (this.minValue < 0) {
-      alert("最大值不能小于0")
-      return
-    }
-
-    this.admin.setMinSubmission(this.minValue).subscribe(() => {
-    })
+    this.admin.setMinSubmission(this.minValue).subscribe(() => alert("设置成功"))
   }
 
-  updateMaxHistory() {
-    if (this.maxHistory < 0) {
-      alert("最大值不能小于0")
-      return
-    }
-    this.admin.setMaxHistory(this.maxHistory).subscribe()
-  }
 
   triggerCrawler() {
     if (!confirm("确定要触发爬虫吗？")) {
@@ -248,23 +224,12 @@ export class ReviewComponent implements OnInit {
     }
   }
 
-  removeCache() {
-    this.title = '清除缓存中...';
-    this.message = '请稍后';
-    this.admin.removeCache().subscribe(
-      (data: Response) => {
-        this.title = '清除缓存成功';
-        this.message = data.message;
-      }
-    )
-  }
 
   private getStatistic() {
     this.service.statistics().subscribe(
       (data: Response) => {
-        this.reviewPassedNum = data.data.reviewPassedNum;
-        this.toBeReviewedNum = data.data.toBeReviewedNum;
-        this.releasedNum = data.data.releasedNum;
+        this.passedNum = data.data.passedNum;
+        this.waitingNum = data.data.waitingNum;
       }
     )
   }

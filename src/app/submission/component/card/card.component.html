@@ -36,7 +36,7 @@
 
 
   <div *ngIf="!review && showVoteBar">
-    <app-vote [down]="submission.down" [id]="submission.id" [name]="submission.name" [up]="submission.up"
+    <app-vote [dislike]="submission.down" [id]="submission.id" [like]="submission.up" [name]="submission.name"
               [adminMode]=admin></app-vote>
   </div>
 

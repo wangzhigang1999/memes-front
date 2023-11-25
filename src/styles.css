@@ -15,335 +15,335 @@ body {
 
 
 markdown h1 {
-    @apply text-3xl py-2 font-bold
+  @apply text-3xl py-2 font-bold
 }
 
 markdown h2 {
-    @apply text-2xl py-2 font-semibold
+  @apply text-2xl py-2 font-semibold
 }
 
 markdown h3 {
-    @apply text-xl py-2 font-semibold
+  @apply text-xl py-2 font-semibold
 }
 
 markdown h4 {
-    @apply text-lg py-2 font-semibold
+  @apply text-lg py-2 font-semibold
 }
 
 markdown h5 {
-    @apply text-base py-2 font-semibold
+  @apply text-base py-2 font-semibold
 }
 
 markdown blockquote p {
-    @apply pt-2 text-justify leading-8
+  @apply pt-2 text-justify leading-8
 }
 
 markdown p {
-    @apply text-justify leading-7 mb-2 text-[#4c4948] dark:text-zinc-400
+  @apply text-justify leading-7 mb-2
 }
 
 markdown hr {
-    @apply border-0 border-t-2 border-success my-2
+  @apply border-0 border-t-2 border-success my-2
 }
 
 markdown blockquote {
-    @apply pb-2 px-2 max-h-fit border-l-4 border-l-success bg-gray-100  mb-2 rounded-sm dark:bg-zinc-800
+  @apply pb-2 px-2 max-h-fit border-l-4 border-l-success  mb-2 rounded-sm
 }
 
 markdown blockquote p {
-    @apply text-justify mb-0
+  @apply text-justify mb-0
 }
 
 markdown ol {
-    @apply pb-4 indent-4
+  @apply pb-4 indent-4
 }
 
 markdown ul {
-    @apply pb-4 indent-4
+  @apply pb-4 indent-4
 }
 
 markdown ol li {
-    @apply list-decimal list-inside py-1
+  @apply list-decimal list-inside py-1
 }
 
 markdown ul li {
-    @apply list-disc list-inside py-1
+  @apply list-disc list-inside py-1
 }
 
 markdown img {
-    /*  make it center*/
-    @apply mx-auto my-4 block max-w-full  rounded-md
+  /*  make it center*/
+  @apply mx-auto my-4 block max-w-full  rounded-md
 }
 
 markdown thead {
-    @apply bg-success
+  @apply bg-success
 }
 
 markdown tbody {
-    @apply rounded-sm overflow-hidden
+  @apply rounded-sm overflow-hidden
 }
 
 markdown table {
-    @apply w-full  rounded-sm overflow-hidden  mb-2
+  @apply w-full  rounded-sm overflow-hidden  mb-2
 }
 
 markdown table td {
-    @apply leading-10  border-b-2 border-gray-200
+  @apply leading-10  border-b-2 border-gray-200
 }
 
 markdown a {
-    @apply text-success
+  @apply text-success
 }
 
 markdown p code {
-    @apply bg-success rounded-md py-0.5 px-2  bg-opacity-50 mx-0.5
+  @apply bg-success rounded-md py-0.5 px-2  bg-opacity-50 mx-0.5
 }
 
 markdown strong code {
-    @apply bg-success rounded-md py-0.5 px-2  bg-opacity-20 mx-0.5   font-bold
+  @apply bg-success rounded-md py-0.5 px-2  bg-opacity-20 mx-0.5   font-bold
 }
 
 
 markdown strong {
-    @apply font-extrabold text-gray-800 dark:text-zinc-400
+  @apply font-extrabold text-gray-800
 }
 
 
 /* 设置滚动条的样式 */
 ::-webkit-scrollbar {
-    width: 3px;
+  width: 3px;
 }
 
 /* 滚动槽 */
 ::-webkit-scrollbar-track {
-    border-radius: 2px;
+  border-radius: 2px;
 }
 
 /* 滚动条滑块 */
 ::-webkit-scrollbar-thumb {
-    border-radius: 2px;
-    @apply bg-base-200
+  border-radius: 2px;
+  @apply bg-base-200
 }
 
 
 .driver-active .driver-overlay, .driver-active * {
-    pointer-events: none
+  pointer-events: none
 }
 
 .driver-active .driver-active-element, .driver-active .driver-active-element *, .driver-popover, .driver-popover * {
-    pointer-events: auto
+  pointer-events: auto
 }
 
 @keyframes animate-fade-in {
-    0% {
-        opacity: 0
-    }
-    to {
-        opacity: 1
-    }
+  0% {
+    opacity: 0
+  }
+  to {
+    opacity: 1
+  }
 }
 
 .driver-fade .driver-overlay {
-    animation: animate-fade-in .2s ease-in-out
+  animation: animate-fade-in .2s ease-in-out
 }
 
 .driver-fade .driver-popover {
-    animation: animate-fade-in .2s
+  animation: animate-fade-in .2s
 }
 
 .driver-popover {
-    all: unset;
-    box-sizing: border-box;
-    color: #2d2d2d;
-    margin: 0;
-    padding: 15px;
-    border-radius: 5px;
-    min-width: 250px;
-    max-width: 300px;
-    box-shadow: 0 1px 10px #0006;
-    z-index: 1000000000;
-    position: fixed;
-    top: 0;
-    right: 0;
-    background-color: #fff
+  all: unset;
+  box-sizing: border-box;
+  color: #2d2d2d;
+  margin: 0;
+  padding: 15px;
+  border-radius: 5px;
+  min-width: 250px;
+  max-width: 300px;
+  box-shadow: 0 1px 10px #0006;
+  z-index: 1000000000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #fff
 }
 
 .driver-popover * {
-    font-family: Helvetica Neue, Inter, ui-sans-serif, "Apple Color Emoji", Helvetica, Arial, sans-serif
+  font-family: Helvetica Neue, Inter, ui-sans-serif, "Apple Color Emoji", Helvetica, Arial, sans-serif
 }
 
 .driver-popover-title {
-    font: 19px/normal sans-serif;
-    font-weight: 700;
-    display: block;
-    position: relative;
-    line-height: 1.5;
-    zoom: 1;
-    margin: 0
+  font: 19px/normal sans-serif;
+  font-weight: 700;
+  display: block;
+  position: relative;
+  line-height: 1.5;
+  zoom: 1;
+  margin: 0
 }
 
 .driver-popover-close-btn {
-    all: unset;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 32px;
-    height: 28px;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 500;
-    color: #d2d2d2;
-    z-index: 1;
-    text-align: center;
-    transition: color;
-    transition-duration: .2s
+  all: unset;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+  color: #d2d2d2;
+  z-index: 1;
+  text-align: center;
+  transition: color;
+  transition-duration: .2s
 }
 
 .driver-popover-close-btn:hover, .driver-popover-close-btn:focus {
-    color: #2d2d2d
+  color: #2d2d2d
 }
 
 .driver-popover-title[style*=block] + .driver-popover-description {
-    margin-top: 5px
+  margin-top: 5px
 }
 
 .driver-popover-description {
-    margin-bottom: 0;
-    font: 14px/normal sans-serif;
-    line-height: 1.5;
-    font-weight: 400;
-    zoom: 1
+  margin-bottom: 0;
+  font: 14px/normal sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  zoom: 1
 }
 
 .driver-popover-footer {
-    margin-top: 15px;
-    text-align: right;
-    zoom: 1;
-    display: flex;
-    align-items: center;
-    justify-content: space-between
+  margin-top: 15px;
+  text-align: right;
+  zoom: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between
 }
 
 .driver-popover-progress-text {
-    font-size: 13px;
-    font-weight: 400;
-    color: #727272;
-    zoom: 1
+  font-size: 13px;
+  font-weight: 400;
+  color: #727272;
+  zoom: 1
 }
 
 .driver-popover-footer button {
-    all: unset;
-    display: inline-block;
-    box-sizing: border-box;
-    padding: 3px 7px;
-    text-decoration: none;
-    text-shadow: 1px 1px 0 #fff;
-    background-color: #fff;
-    color: #2d2d2d;
-    font: 12px/normal sans-serif;
-    cursor: pointer;
-    outline: 0;
-    zoom: 1;
-    line-height: 1.3;
-    border: 1px solid #ccc;
-    border-radius: 3px
+  all: unset;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 3px 7px;
+  text-decoration: none;
+  text-shadow: 1px 1px 0 #fff;
+  background-color: #fff;
+  color: #2d2d2d;
+  font: 12px/normal sans-serif;
+  cursor: pointer;
+  outline: 0;
+  zoom: 1;
+  line-height: 1.3;
+  border: 1px solid #ccc;
+  border-radius: 3px
 }
 
 .driver-popover-footer .driver-popover-btn-disabled {
-    opacity: .5;
-    pointer-events: none
+  opacity: .5;
+  pointer-events: none
 }
 
 :not(body):has(>.driver-active-element) {
-    overflow: hidden !important
+  overflow: hidden !important
 }
 
 .driver-no-interaction, .driver-no-interaction * {
-    pointer-events: none !important
+  pointer-events: none !important
 }
 
 .driver-popover-footer button:hover, .driver-popover-footer button:focus {
-    background-color: #f7f7f7
+  background-color: #f7f7f7
 }
 
 .driver-popover-navigation-btns {
-    display: flex;
-    flex-grow: 1;
-    justify-content: flex-end
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end
 }
 
 .driver-popover-navigation-btns button + button {
-    margin-left: 4px
+  margin-left: 4px
 }
 
 .driver-popover-arrow {
-    content: "";
-    position: absolute;
-    border: 5px solid #fff
+  content: "";
+  position: absolute;
+  border: 5px solid #fff
 }
 
 .driver-popover-arrow-side-over {
-    display: none
+  display: none
 }
 
 .driver-popover-arrow-side-left {
-    left: 100%;
-    border-right-color: transparent;
-    border-bottom-color: transparent;
-    border-top-color: transparent
+  left: 100%;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-top-color: transparent
 }
 
 .driver-popover-arrow-side-right {
-    right: 100%;
-    border-left-color: transparent;
-    border-bottom-color: transparent;
-    border-top-color: transparent
+  right: 100%;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-top-color: transparent
 }
 
 .driver-popover-arrow-side-top {
-    top: 100%;
-    border-right-color: transparent;
-    border-bottom-color: transparent;
-    border-left-color: transparent
+  top: 100%;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent
 }
 
 .driver-popover-arrow-side-bottom {
-    bottom: 100%;
-    border-left-color: transparent;
-    border-top-color: transparent;
-    border-right-color: transparent
+  bottom: 100%;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  border-right-color: transparent
 }
 
 .driver-popover-arrow-side-center {
-    display: none
+  display: none
 }
 
 .driver-popover-arrow-side-left.driver-popover-arrow-align-start, .driver-popover-arrow-side-right.driver-popover-arrow-align-start {
-    top: 15px
+  top: 15px
 }
 
 .driver-popover-arrow-side-top.driver-popover-arrow-align-start, .driver-popover-arrow-side-bottom.driver-popover-arrow-align-start {
-    left: 15px
+  left: 15px
 }
 
 .driver-popover-arrow-align-end.driver-popover-arrow-side-left, .driver-popover-arrow-align-end.driver-popover-arrow-side-right {
-    bottom: 15px
+  bottom: 15px
 }
 
 .driver-popover-arrow-side-top.driver-popover-arrow-align-end, .driver-popover-arrow-side-bottom.driver-popover-arrow-align-end {
-    right: 15px
+  right: 15px
 }
 
 .driver-popover-arrow-side-left.driver-popover-arrow-align-center, .driver-popover-arrow-side-right.driver-popover-arrow-align-center {
-    top: 50%;
-    margin-top: -5px
+  top: 50%;
+  margin-top: -5px
 }
 
 .driver-popover-arrow-side-top.driver-popover-arrow-align-center, .driver-popover-arrow-side-bottom.driver-popover-arrow-align-center {
-    left: 50%;
-    margin-left: -5px
+  left: 50%;
+  margin-left: -5px
 }
 
 .driver-popover-arrow-none {
-    display: none
+  display: none
 }

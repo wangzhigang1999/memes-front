@@ -9,8 +9,6 @@ import {Response} from "../model/response";
 })
 export class StatisticComponent {
 
-  statistic!: any;
-
   reqNumber = 0;
   averageCost: number = 0;
   urlCountList!: any;
@@ -25,33 +23,36 @@ export class StatisticComponent {
     let gap = (end - start) / 1000 / 60 / 60 / 24;
     this.date = Math.round(gap);
     this.refresh();
-
   }
 
 
   refresh() {
     this.service.getStatistics().subscribe(
       (response: Response) => {
-        this.statistic = response.data;
-        this.reqNumber = this.statistic.reqNumber;
+        let statistic = response.data;
+        this.reqNumber = statistic.reqNumber;
 
         // keep .2f after point
-        this.averageCost = Math.round(this.statistic.averageCost * 10) / 10;
-        this.uuidCountList = this.statistic.uuidCountMap;
+        this.averageCost = Math.round(statistic.averageCost * 10) / 10;
+        this.uuidCountList = statistic.uuidCountMap;
 
         // filter some url
-        this.urlCountList = this.mergePostCount(
-          this.mergeVoteCount(
-            this.statistic.urlCountMap.filter((item: any) => {
-                return !item._id.includes("statistic") && !item._id.includes("review") && !item._id.includes("release") && !item._id.includes("admin");
-              }
-            )
-          )
-        ).sort(
+        let tmp = statistic.urlCountMap.filter((item: any) => {
+          return !item._id.includes("admin")
+        })
+
+        // remove host
+        tmp.forEach((item: any) => {
+          const regex = /(https?:\/\/)?[^\/:]+(:[0-9]+)?\//;
+          item._id = item._id.replace(regex, "/");
+        })
+
+        this.urlCountList = this.mergeCounts(tmp).sort(
           (a: any, b: any) => {
-            return b.count - a.count
+            return b.count - a.count;
           }
         )
+
       }
     )
   }
@@ -66,10 +67,6 @@ export class StatisticComponent {
     return count;
   }
 
-
-  replace(key: string) {
-    return key.replace("https://api.memes.bupt.site", "").replace("http://api.memes.bupt.site", "")
-  }
 
   timestampToHHMM(timestamp: number) {
     let date = new Date(timestamp);
@@ -91,52 +88,47 @@ export class StatisticComponent {
     }
   }
 
-  mergeVoteCount(list: any[]): any[] {
-    let obj = {_id: '/submission/vote', count: 0, avgTimecost: 0, maxTimecost: 0, minTimecost: 0}
-    let totalTimeCost = 0;
-    for (let item of list) {
-      if (item._id.includes("/submission/vote")) {
-        obj.count += item.count
-        totalTimeCost += item.avgTimecost * item.count
-        obj.maxTimecost = Math.max(obj.maxTimecost, item.maxTimecost)
-        obj.minTimecost = Math.min(obj.minTimecost, item.minTimecost)
-      }
-    }
-    obj.avgTimecost = Math.round(totalTimeCost / obj.count * 10) / 10
+  mergeCounts(list: any[]): any[] {
 
-    // remove all '/submission/vote/1630697354/true'
-    list = list.filter((item: any) => {
-      return !item._id.includes("/submission/vote")
+    list.forEach((item: any) => {
+      item._id = item._id.replace(/\/http:\/\/[0-9a-z.:]+\//, "");
     })
 
-    // add '/submission/vote' into list
-    list.push(obj)
-    return list
-  }
+    const merge = (regex: RegExp, idFilter: string, objId: string): any => {
+      let obj = {_id: objId, count: 0, avgTimecost: 0, maxTimecost: 0, minTimecost: 0};
+      let totalTimeCost = 0;
 
-  // merge all /post
-  mergePostCount(list: any[]): any[] {
-    let obj = {_id: '/post', count: 0, avgTimecost: 0, maxTimecost: 0, minTimecost: 0}
-    let totalTimeCost = 0;
-    for (let item of list) {
-      if (item._id.includes("/post")) {
-        obj.count += item.count
-        totalTimeCost += item.avgTimecost * item.count
-        obj.maxTimecost = Math.max(obj.maxTimecost, item.maxTimecost)
-        obj.minTimecost = Math.min(obj.minTimecost, item.minTimecost)
+      for (let item of list) {
+
+        if (regex.test(item._id)) {
+          obj.count += item.count;
+          totalTimeCost += item.avgTimecost * item.count;
+          obj.maxTimecost = Math.max(obj.maxTimecost, item.maxTimecost);
+          obj.minTimecost = Math.min(obj.minTimecost, item.minTimecost);
+        }
       }
-    }
-    obj.avgTimecost = Math.round(totalTimeCost / obj.count * 10) / 10
 
-    // remove all '/post/1630697354/true'
-    list = list.filter((item: any) => {
-      return !item._id.includes("/post")
-    })
+      obj.avgTimecost = Math.round(totalTimeCost / obj.count * 10) / 10;
 
-    // add '/post' into list
-    list.push(obj)
-    return list
+      list = list.filter((item: any) => !regex.test(item._id));
+
+      // Remove specified substring from _id
+      list.forEach((item: any) => {
+        item._id = item._id.replace(idFilter, "");
+      });
+
+      list.push(obj);
+    };
+
+    merge(/\/submission\/[0-9a-z]+\/(like|dislike)/, "/https?:\/\/[0-9a-z.:]+/", '/submission/vote');
+    merge(/\/post/, '/post', '/submission/post');
+    merge(/\/submission\/date\/[0-9]{4}-[0-9]{2}-[0-9]{2}/, "/\/submission\/date/", '/submission/date');
+    merge(/\/news\/month\/[0-9]{2}/, "/news/date", '/news/date');
+    merge(/\/submission\/id\/[0-9a-z]+/, "/submission/id/", '/submission/id');
+
+    return list;
   }
+
 }
 
 
