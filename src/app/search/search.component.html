@@ -1,16 +1,25 @@
 <div class="mt-4 mx-2 flex items-center">
+
+  <input (change)="search(keyword)" [(ngModel)]="keyword"
+         class="w-full h-12  md:max-w-5xl border border-success rounded-l-2xl   text-center"
+         placeholder="Type to search by user, board or keyword."
+         type="text"/>
+
   <!--a search badge-->
-  <button class="w-12 h-12  inline-block bg-success rounded-l-xl">
-    <svg class="w-9 h-9 pl-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+  <button class="w-12 h-12  inline-block bg-success rounded-r-2xl">
+    <svg *ngIf="keyword.length==0" class="w-9 h-9 pl-2" fill="none" stroke="currentColor" stroke-width="1.5"
+         viewBox="0 0 24 24"
          xmlns="http://www.w3.org/2000/svg">
       <path d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" stroke-linecap="round"
             stroke-linejoin="round"/>
     </svg>
+    <svg (click)="this.keyword='';getLatest(20)" *ngIf="keyword.length>0" class="w-9 h-9 pl-2" fill="none"
+         stroke="currentColor" stroke-width="1.5"
+         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+
   </button>
-  <input (change)="search(keyword)" [(ngModel)]="keyword"
-         class="w-full h-12  md:max-w-5xl border border-success  rounded-r-2xl text-center"
-         placeholder="Type to search by user, board or keyword."
-         type="text"/>
 
 </div>
 

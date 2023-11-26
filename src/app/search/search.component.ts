@@ -86,8 +86,9 @@ export class SearchComponent {
     this.searchService.getByKeyword(keyword).subscribe((res: any) => this.results.push(...res.data))
   }
 
-  private getLatest(number: number) {
+  public getLatest(number: number) {
     this.searchService.getLatest(number).subscribe((res) => {
+      this.results = [];
       this.results.push(...res.data)
     })
   }
