@@ -29,4 +29,11 @@ export class NewsCardComponent {
   setDateTo(date: string) {
     this.setDate.emit(date)
   }
+
+  center() {
+    let dom = document.getElementById(this.news.id + '-');
+    if (dom != null) {
+      dom.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
+    }
+  }
 }

@@ -9,19 +9,19 @@
   </div>
 
   <div *ngIf="submissionType==='BILIBILI'" class="w-full  mx-auto">
-      <iframe [src]="text | safe" class="rounded-box mx-auto"></iframe>
+    <iframe [src]="text | safe" class="rounded-box mx-auto"></iframe>
   </div>
 
   <div *ngIf="submissionType==='MARKDOWN'" class="w-full  mx-auto ">
 
-    <div class="border border-base-200 rounded-xl ">
+    <div class="border border-success rounded-xl ">
       <textarea (ngModelChange)="detectMD()" [(ngModel)]="text"
                 class="w-full p-4 outline-none bg-transparent"
-                placeholder="输入 Markdown 源码或者链接">
+                placeholder="输入 Markdown 源码或者链接~">
       </textarea>
     </div>
     <!--       preview-->
-    <div class="max-h-[50vh] overflow-y-scroll rounded-xl py-4 px-8 my-2">
+    <div *ngIf="text.length>20" class="max-h-[50vh] overflow-y-scroll  py-4 px-8 my-2 border border-success rounded-xl">
       <markdown *ngIf="textIsUrl" [src]="text" class="rounded-box w-full break-words"></markdown>
       <markdown *ngIf="!textIsUrl" [data]="text" class="rounded-box w-full break-words"></markdown>
     </div>
@@ -33,7 +33,7 @@
   <div class="flex flex-wrap mt-2 mb-4  items-center justify-center w-full gap-1">
     <div (click)="select('VIDEO')"
          class="flex items-center justify-center  gap-2 p-2 bg-base-200 rounded-xl hover:cursor-pointer"><span
-            class="label-text">Video</span>
+      class="label-text">Video</span>
       <input [checked]="submissionType=='VIDEO'" class="radio checked:bg-success" type="radio"/>
     </div>
 
@@ -44,34 +44,33 @@
     </div>
 
     <div (click)="select('BILIBILI')"
-         class="flex items-center justify-center  gap-2 p-2 bg-base-200 rounded-xl hover:cursor-pointer">
+         class="hidden lg:flex items-center justify-center  gap-2 p-2 bg-base-200 rounded-xl hover:cursor-pointer">
       <span class="label-text">Bilibili</span>
       <input [checked]="submissionType=='BILIBILI'" class="radio checked:bg-success" type="radio"/>
     </div>
 
     <div (click)="select('MARKDOWN')"
          class="flex items-center justify-center  gap-2 p-2 bg-base-200 rounded-xl hover:cursor-pointer">
-      <span class="label-text">MD</span>
+      <span class="label-text">Markdown</span>
       <input [checked]="submissionType=='MARKDOWN'" class="radio checked:bg-success" type="radio"/>
     </div>
 
-      <div class="flex gap-4 items-center justify-center my-4">
-        <input (change)="bilibiliChange()" *ngIf="submissionType=='BILIBILI'" [(ngModel)]="iframe"
-                 accept="text/plain"
-             class="file-input  w-2/3 max-w-xs text-center  file-input-success" type="text"/>
+    <div class="flex gap-8 items-center justify-center my-4">
+      <input (change)="bilibiliChange()" *ngIf="submissionType=='BILIBILI'" [(ngModel)]="iframe"
+             accept="text/plain" class="file-input  w-2/3 max-w-xs text-center  file-input-success" type="text"/>
 
-          <input (change)="videoChange()" *ngIf="submissionType=='VIDEO'" accept="video/mp4"
-                 class="file-input file-input-bordered file-input-success w-2/3 max-w-xs"
-                 id="video-input"
-             type="file"/>
+      <input (change)="videoChange()" *ngIf="submissionType=='VIDEO'" accept="video/mp4"
+             class="file-input file-input-bordered file-input-success w-2/3 max-w-xs" id="video-input" type="file"/>
 
-          <input (change)="imageChange()" *ngIf="submissionType=='IMAGE'" accept="image/*"
-                 class="file-input file-input-bordered file-input-success w-2/3 max-w-xs"
-                 id="image-input"
-             type="file"/>
+      <input (change)="imageChange()" *ngIf="submissionType=='IMAGE'" accept="image/*"
+             class="file-input file-input-bordered file-input-success w-2/3 max-w-xs" id="image-input" type="file"/>
 
-      <label (click)="submit()" class="btn  btn-success btn-sm" for="my-modal"> 上传 </label>
+      <input (change)="markdownChange()" *ngIf="submissionType=='MARKDOWN'" accept="text/*"
+             class="file-input file-input-bordered file-input-success w-2/3 max-w-xs" id="md-input" type="file"/>
+
+      <label (click)="submit()" class="btn  btn-success btn-md" for="my-modal"> 上传 </label>
     </div>
+
 
   </div>
 
