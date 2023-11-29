@@ -1,14 +1,14 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SubmissionService} from "../../service/submission.service";
 import {Submission} from "../../model/submission";
-import {authorized} from "../../utils";
+import {authorized, scrollToTop} from "../../utils";
 
 @Component({
     selector: 'app-history',
     templateUrl: './history.component.html',
     styleUrls: ['./history.component.css']
 })
-export class HistoryComponent {
+export class HistoryComponent implements OnInit {
 
     history: any[] = []
     currentIndex = 0;
@@ -25,12 +25,7 @@ export class HistoryComponent {
     adminMode = false;
 
     constructor(private service: SubmissionService) {
-        window.scrollTo(
-            {
-                top: 0,
-                behavior: "smooth"
-            }
-        )
+        scrollToTop()
     }
 
     ngOnInit(): void {
@@ -77,12 +72,7 @@ export class HistoryComponent {
         this.preMessage = this.hashPrev(this.currentIndex) ? "👈👈👈" : "🙈没有了🙈";
         this.service.getSubmissionByDate(this.history[this.currentIndex]).subscribe((data: any) => {
             this.submissions = data.data;
-            window.scrollTo(
-                {
-                    top: 0,
-                    behavior: "smooth"
-                }
-            )
         })
+        scrollToTop()
     }
 }

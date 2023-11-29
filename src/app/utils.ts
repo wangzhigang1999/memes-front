@@ -58,3 +58,9 @@ export function getToken(): string {
 export function copyToClipboard(text: string) {
     navigator.clipboard.writeText(text).then(() => alert('复制成功'))
 }
+
+
+// scroll to top
+export function scrollToTop() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
