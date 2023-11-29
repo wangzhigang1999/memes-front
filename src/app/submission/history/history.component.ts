@@ -47,12 +47,10 @@ export class HistoryComponent {
                 })
                 let last = this.history[total - 1];
                 this.currentIndex = total - 1;
+
                 this.hasNext = this.hashNext(this.currentIndex, total);
                 this.hasPrev = this.hashPrev(this.currentIndex);
-
-                this.service.getSubmission(last).subscribe((data: any) => {
-                    this.submissions = data.data;
-                })
+                this.service.getSubmissionByDate(last).subscribe((data: any) => this.submissions = data.data)
 
                 this.currentMessage = this.history[this.currentIndex];
                 this.nextMessage = this.hashNext(this.currentIndex, total) ? "👉👉👉" : "🙈没有了🙈";
@@ -77,7 +75,7 @@ export class HistoryComponent {
         this.currentMessage = this.history[this.currentIndex];
         this.nextMessage = this.hashNext(this.currentIndex, this.history.length) ? "👉👉👉" : "🙈没有了🙈";
         this.preMessage = this.hashPrev(this.currentIndex) ? "👈👈👈" : "🙈没有了🙈";
-        this.service.getSubmission(this.history[this.currentIndex]).subscribe((data: any) => {
+        this.service.getSubmissionByDate(this.history[this.currentIndex]).subscribe((data: any) => {
             this.submissions = data.data;
             window.scrollTo(
                 {

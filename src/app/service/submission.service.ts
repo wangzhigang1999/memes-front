@@ -40,7 +40,7 @@ export class SubmissionService {
    * get submissions by date
    * @param date YYYY-MM-DD
    */
-  getSubmission(date: string): Observable<any> {
+  getSubmissionByDate(date: string): Observable<any> {
     let url = this.host + '/submission/' + date
     return this.http.get(url);
   }
@@ -107,6 +107,11 @@ export class SubmissionService {
    */
   getTop(): Observable<any> {
     let url = this.host + `/submission/top`;
+    return this.http.get(url);
+  }
+
+  getById(id: string): Observable<any> {
+    let url = this.host + `/submission/${id}`;
     return this.http.get(url);
   }
 }

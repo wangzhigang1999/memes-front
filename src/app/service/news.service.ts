@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,11 @@ export class NewsService {
 
   getMMDD(date: string) {
     let url = this.host + `/news/mm-dd/${date}`;
+    return this.http.get(url);
+  }
+
+  getByID(id: string): Observable<any> {
+    let url = this.host + `/new/${id}`;
     return this.http.get(url);
   }
 }

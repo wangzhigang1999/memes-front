@@ -1,0 +1,10 @@
+<div *ngIf="data!=null" class="h-[80vh] overflow-y-scroll grid grid-cols-1 place-content-center">
+  <div *ngIf="mode=='meme'">
+    <app-card [showVoteBar]="false" [submission]="data"></app-card>
+  </div>
+
+  <div *ngIf="mode=='news'">
+    <app-news-card [news]="data"></app-news-card>
+  </div>
+
+</div>

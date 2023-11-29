@@ -28,6 +28,7 @@ import {SearchComponent} from './search/search.component';
 import {TruncatePipe} from './truncate.pipe';
 import {NgOptimizedImage} from "@angular/common";
 import {MarkdownModule} from "ngx-markdown";
+import {ShareComponent} from "./share/share.component";
 
 const routes: Routes = [
   {path: '', component: EndlessComponent},
@@ -40,6 +41,7 @@ const routes: Routes = [
   {path: 'history', component: HistoryComponent},
   {path: 'review', component: ReviewComponent},
   {path: 'statistic', component: StatisticComponent, canActivate: [AuthGuard]},
+  {path: 'share/:type/:id', component: ShareComponent},
   {path: '**', component: EndlessComponent}
 ];
 
@@ -64,6 +66,7 @@ const routes: Routes = [
     EndComponent,
     SearchComponent,
     TruncatePipe,
+    ShareComponent
   ],
   imports: [
     BrowserModule,
