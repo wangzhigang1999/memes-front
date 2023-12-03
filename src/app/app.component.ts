@@ -24,6 +24,9 @@ export class AppComponent implements AfterViewInit {
     }
 
     shouldNotice(): boolean {
+      if (window.location.pathname !== '/') {
+        return false;
+      }
         return localStorage.getItem('menu') === null;
     }
 }
