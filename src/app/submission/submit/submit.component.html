@@ -16,7 +16,7 @@
 
     <div class="border border-success rounded-xl ">
       <textarea (ngModelChange)="detectMD()" [(ngModel)]="text"
-                class="w-full p-4 outline-none bg-transparent"
+                class="w-full p-4 outline-none bg-transparent h-[40vh]"
                 placeholder="输入 Markdown 源码或者链接~">
       </textarea>
     </div>
@@ -30,7 +30,8 @@
 
 
   <!--  checkbox-->
-  <div class="flex flex-wrap mt-2 mb-4  items-center justify-center w-full gap-1">
+  <div
+    class="flex flex-wrap mt-2 mb-4  items-center justify-center w-full gap-1 border pt-4 md:pt-0 border-success rounded-xl">
     <div (click)="select('VIDEO')"
          class="flex items-center justify-center  gap-2 p-2 bg-base-200 rounded-xl hover:cursor-pointer"><span
       class="label-text">Video</span>
