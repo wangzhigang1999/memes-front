@@ -39,7 +39,7 @@ export class ShareComponent {
     }
 
     fetchMeme(id: string) {
-        this.submissionService.getById(id).subscribe((res: Response) => this.data = res.data[0])
+      this.submissionService.getById(id).subscribe((res: Response) => this.data = res.data)
     }
 
     fetchNews(id: string) {

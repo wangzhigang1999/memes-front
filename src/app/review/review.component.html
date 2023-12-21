@@ -8,21 +8,18 @@
 <div class=" rounded-xl flex justify-around" *ngIf="hasToken">
   <div class="stat place-items-center w-fit">
     <div class="stat-title">审核通过</div>
-    <div class="stat-value">{{reviewPassedNum}}</div>
+    <div class="stat-value">{{ passedNum }}</div>
   </div>
   <div class="stat place-items-center w-fit f">
     <div class="stat-title">待审核</div>
-    <div class="stat-value text-secondary">{{toBeReviewedNum}}</div>
-  </div>
-  <div class="stat place-items-center w-fit">
-    <div class="stat-title">已发布</div>
-    <div class="stat-value text-success">{{releasedNum}}</div>
+    <div class="stat-value text-secondary">{{ waitingNum }}</div>
   </div>
 </div>
 
 <div *ngIf="hasToken">
-  <app-card (reviewed)="onReviewed($event)" *ngFor="let sub of submissions;" [review]="true" [submission]="sub"
-            [nextID]="submissions.indexOf(sub) + 1==submissions.length?'':submissions[submissions.indexOf(sub) + 1].id"
+  <app-card (reviewed)="onReviewed($event)" *ngFor="let sub of waitingList;"
+            [nextID]="waitingList.indexOf(sub) + 1==waitingList.length?'':waitingList[waitingList.indexOf(sub) + 1].id" [review]="true"
+            [submission]="sub"
             class="w-full"/>
 </div>
 
@@ -36,8 +33,8 @@
     <div class="flex-auto items-center my-2">
       <label (click)="triggerCrawler()" class="btn  btn-success btn-outline mx-2 " for="message">🕷 </label>
       <label (click)="batchAccept()" class="btn   btn-success btn-outline mx-2" for="message">AC</label>
-      <label (click)="release()" class="btn  btn-success btn-outline mx-2 " for="message">发布</label>
-      <button (click)="removeToken()" class="btn  btn-warning btn-outline mx-2">清除token</button>
+      <label (click)="batchReject()" class="btn   btn-warning btn-outline mx-2" for="message">NA</label>
+      <button (click)="removeToken()" class="btn  btn-error btn-outline mx-2">清除token</button>
     </div>
 
     <div class="flex justify-around mt-2">
@@ -45,32 +42,13 @@
         <span class="label-text">BOT : </span>
         <input (change)="updateBot()" [(ngModel)]="botEnable" class="ml-2 toggle toggle-success" type="checkbox"/>
       </div>
-      <div class="w-fit rounded-xl flex justify-around bg-base-200">
-        <div class="form-control w-fit mx-4" *ngFor="let item of releaseStrategy">
-          <div class="label">
-            <span class="label-text">{{item}}</span>
-            <input type="radio" name="radio-10" class="ml-2 radio checked:bg-success"
-                   (click)="setReleaseStrategy(item)" [checked]="item==selectedReleaseStrategy"/>
-          </div>
-        </div>
-      </div>
     </div>
 
     <div class="flex justify-around mt-2">
       <div class="w-full">
         <label class="cursor-pointer label ">
-          <span class="label-text w-1/4">MinSub : {{minValue}} </span>
+          <span class="label-text w-1/4">MinSub : {{ minValue }} </span>
           <input (change)="updateMax()" [(ngModel)]="minValue" max="200" min="0" type="range"
-                 class="range range-success w-3/4"/>
-        </label>
-      </div>
-    </div>
-
-    <div class="flex justify-around mt-2">
-      <div class="w-full">
-        <label class="cursor-pointer label ">
-          <span class="label-text w-1/4">History : {{maxHistory}} </span>
-          <input type="range" min="7" max="30" [(ngModel)]="maxHistory" (change)="updateMaxHistory()"
                  class="range range-success w-3/4"/>
         </label>
       </div>
@@ -81,8 +59,8 @@
   <input type="checkbox" id="message" class="modal-toggle"/>
   <div class="modal">
     <div class="modal-box text-center">
-      <h3 class="font-bold text-lg">{{title}}</h3>
-      <p class="py-4">{{message}}</p>
+      <h3 class="font-bold text-lg">{{ title }}</h3>
+      <p class="py-4">{{ message }}</p>
       <div class="modal-action">
         <label for="message" class="btn btn-success btn-sm">Yay!</label>
       </div>

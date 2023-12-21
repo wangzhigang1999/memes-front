@@ -10,7 +10,7 @@ import {authorized, scrollToTop} from "../../utils";
 })
 export class HistoryComponent implements OnInit {
 
-    history: any[] = []
+  history: string[] = []
     currentIndex = 0;
 
     preMessage = "🙈";
@@ -32,26 +32,35 @@ export class HistoryComponent implements OnInit {
         if (authorized()) {
             this.adminMode = true
         }
-        this.service.getHistory().subscribe((data: any) => {
-            this.history = data.data;
-            let total = this.history.length;
-            if (total > 0) {
-                // sort by date YYYY-MM-DD
-                this.history = this.history.sort((a, b) => {
-                    return new Date(a).getTime() - new Date(b).getTime();
-                })
-                let last = this.history[total - 1];
-                this.currentIndex = total - 1;
 
-                this.hasNext = this.hashNext(this.currentIndex, total);
-                this.hasPrev = this.hashPrev(this.currentIndex);
-                this.service.getSubmissionByDate(last).subscribe((data: any) => this.submissions = data.data)
+      let today = new Date()
 
-                this.currentMessage = this.history[this.currentIndex];
-                this.nextMessage = this.hashNext(this.currentIndex, total) ? "👉👉👉" : "🙈没有了🙈";
-                this.preMessage = this.hashPrev(this.currentIndex) ? "👈👈👈" : "🙈没有了🙈";
-            }
-        })
+      // YYYY-MM-DD for 7 days ago
+      for (let i = 0; i < 7; i++) {
+        let date = new Date(today.getTime() - i * 24 * 60 * 60 * 1000)
+        let month = date.getMonth() + 1
+        let day = date.getDate()
+        let year = date.getFullYear()
+        this.history.push(`${year}-${month}-${day}`)
+      }
+
+      // sort by date
+      this.history.sort((a: string, b: string) => {
+        return a < b ? -1 : 1
+      })
+
+      this.currentIndex = this.history.length - 1;
+
+      let last = this.history[this.history.length - 1];
+
+      this.hasNext = this.hashNext(this.currentIndex, this.history.length);
+      this.hasPrev = this.hashPrev(this.currentIndex);
+
+      this.service.getSubmissionByDate(last).subscribe((data: any) => this.submissions = data.data)
+
+      this.currentMessage = this.history[this.currentIndex];
+      this.nextMessage = this.hashNext(this.currentIndex, this.history.length) ? "👉👉👉" : "🙈没有了🙈";
+      this.preMessage = this.hashPrev(this.currentIndex) ? "👈👈👈" : "🙈没有了🙈";
 
     }
 

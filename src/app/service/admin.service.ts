@@ -17,13 +17,6 @@ export class AdminService {
     this.host = environment.host
   }
 
-  /**
-   * 发布今日提交
-   */
-  release() {
-    let url = this.host + `/admin/submission/release`;
-    return this.http.post(url, null);
-  }
 
   /**
    * 获取统计信息
@@ -38,7 +31,7 @@ export class AdminService {
    * disable bot
    */
   disableBot(): Observable<any> {
-    let url = this.host + `/admin/bot/disable`;
+    let url = this.host + `/admin/bot/status/disable`;
     return this.http.post(url, null);
   }
 
@@ -46,7 +39,7 @@ export class AdminService {
    * enable bot
    */
   enableBot(): Observable<any> {
-    let url = this.host + `/admin/bot/enable`;
+    let url = this.host + `/admin/bot/status/enable`;
     return this.http.post(url, null);
   }
 
@@ -77,29 +70,9 @@ export class AdminService {
   }
 
 
-  setReleaseStrategy(strategy: string): Observable<any> {
-    let url = this.host + `/admin/release/strategy`;
-    // send with form data
-    let data = new FormData();
-    data.append("strategy", strategy);
-    return this.http.post(url, data);
-  }
-
-
   setMinSubmission(min: number): Observable<any> {
-    let url = this.host + `/admin/submission/min`;
-    // send with form data
-    let data = new FormData();
-    data.append("min", min.toString());
-    return this.http.post(url, data);
-  }
-
-  setMaxHistory(maxHistory: number) {
-    let url = this.host + `/admin/history/max`;
-    // send with form data
-    let data = new FormData();
-    data.append("max", maxHistory.toString());
-    return this.http.post(url, data);
+    let url = this.host + `/admin/submission/minimum/${min}`;
+    return this.http.post(url, null);
   }
 
 
@@ -114,11 +87,6 @@ export class AdminService {
 
   getSys(): Observable<any> {
     let url = this.host + `/admin/sys`;
-    return this.http.get(url);
-  }
-
-  removeCache(): Observable<any> {
-    let url = this.host + `/admin/cache/clean`;
     return this.http.get(url);
   }
 }

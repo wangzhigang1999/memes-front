@@ -19,7 +19,7 @@ export class ReviewService {
   /**
    * 获取今日提交
    */
-  listSubmissions() {
+  loadWaitingList() {
     let url = this.host + '/admin/review';
     return this.http.get(url);
   }
@@ -58,4 +58,10 @@ export class ReviewService {
     return this.http.get(url);
   }
 
+  batchReject(ids: string[]): Observable<any> {
+    let url = this.host + `/admin/review/reject/batch`;
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(url, ids, {headers: headers});
+  }
 }

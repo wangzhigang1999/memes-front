@@ -15,8 +15,8 @@ export class VoteComponent {
     @Input() adminMode = false
     @Input() id: any
     @Input() name: any
-    @Input() up: any
-    @Input() down: any
+  @Input() like: any
+  @Input() dislike: any
 
     activeBtn = "btn-outline btn-success btn-circle"
     deactivateBtn = "btn-circle btn-ghost"
@@ -24,25 +24,24 @@ export class VoteComponent {
     constructor(private service: SubmissionService, private admin: AdminService) {
     }
 
-    upClass() {
+  likeClass() {
         return this.upBtn ? this.activeBtn : this.deactivateBtn;
     }
 
-    downClass() {
+  dislikeClass() {
         return this.downBtn ? this.activeBtn : this.deactivateBtn;
     }
 
     vote(isUpvote: boolean) {
         this.upBtn = isUpvote;
         this.downBtn = !isUpvote;
-        isUpvote ? this.up++ : this.down++
+      isUpvote ? this.like++ : this.dislike++
         this.service.vote(this.id, isUpvote).subscribe()
     }
 
 
     addTop() {
         this.admin.setTop(this.id).subscribe(() => alert("置顶成功"))
-
     }
 
     removeTop() {

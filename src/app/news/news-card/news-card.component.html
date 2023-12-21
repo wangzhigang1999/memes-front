@@ -6,18 +6,24 @@
     <div tabindex="0" class="collapse w-full">
       <div>
         <h2 class="card-title">
-          {{news.title}}
+          {{ news.title }}
         </h2>
       </div>
       <div class="collapse-content">
-        <div [id]="news.id" class="indent-8 w-full leading-6"></div>
+        <div [id]="news.id" class="indent-8 w-full leading-6">
+          <div class="text-base-content">
+            <div class="text-justify">
+              {{ news.introduction }}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="card-actions justify-end">
       <a class="badge badge-secondary" href="{{news.sourceURL}}" target="_blank">原文</a>
-      <div *ngIf="news.author!=''" class="badge badge-info">{{news.author}}</div>
-      <div class="badge badge-success" (click)="setDateTo(news.date)">{{news.date}}</div>
+      <div *ngIf="news.author!=''" class="badge badge-info">{{ news.author }}</div>
+      <div class="badge badge-success">{{ news.date }}</div>
     </div>
   </div>
 </div>

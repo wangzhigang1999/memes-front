@@ -32,7 +32,7 @@ export class SubmissionService {
       }
     }
     today = todayArray.join('-')
-    let url = this.host + '/submission/' + today
+    let url = this.host + '/submission/date/' + today
     return this.http.get(url);
   }
 
@@ -41,7 +41,7 @@ export class SubmissionService {
    * @param date YYYY-MM-DD
    */
   getSubmissionByDate(date: string): Observable<any> {
-    let url = this.host + '/submission/' + date
+    let url = this.host + '/submission/date/' + date
     return this.http.get(url);
   }
 
@@ -51,7 +51,13 @@ export class SubmissionService {
    * @param up true for like, false for dislike
    */
   vote(id: string, up: boolean): Observable<any> {
-      let url = this.host + `/submission/vote/${id}/${up}`;
+    let url: string;
+
+    if (up) {
+      url = this.host + `/submission/${id}/like`;
+    } else {
+      url = this.host + `/submission/${id}/dislike`;
+    }
     return this.http.post(url, null);
   }
 
@@ -89,14 +95,6 @@ export class SubmissionService {
   }
 
 
-  /**
-   * get the history of submissions, [YYYY-MM-DD, YYYY-MM-DD, ...]
-   */
-  getHistory() {
-    let url = this.host + '/submission/history';
-    return this.http.get(url);
-  }
-
   getPage(lastId: string, pageNum: number, pageSize: number) {
     let url = this.host + `/submission/page?lastID=${lastId}&pageSize=${pageSize}&pageNum=${pageNum}`;
     return this.http.get(url);
@@ -111,7 +109,7 @@ export class SubmissionService {
   }
 
   getById(id: string): Observable<any> {
-    let url = this.host + `/submission/${id}`;
+    let url = this.host + `/submission/id/${id}`;
     return this.http.get(url);
   }
 }
