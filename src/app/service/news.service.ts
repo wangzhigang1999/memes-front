@@ -33,7 +33,7 @@ export class NewsService {
   }
 
   getByID(id: string): Observable<any> {
-    let url = this.host + `/new/${id}`;
+    let url = this.host + `/new/id/${id}`;
     return this.http.get(url);
   }
 }
