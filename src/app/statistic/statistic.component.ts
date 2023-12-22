@@ -124,6 +124,7 @@ export class StatisticComponent {
     merge(/\/post/, '/post', '/submission/post');
     merge(/\/submission\/date\/[0-9]{4}-[0-9]{2}-[0-9]{2}/, "/\/submission\/date/", '/submission/date');
     merge(/\/news\/month\/[0-9]{2}/, "/news/date", '/news/date');
+    merge(/\/submission\/id\/[0-9a-z]+/, "/submission/id/", '/submission/id');
 
     return list;
   }
