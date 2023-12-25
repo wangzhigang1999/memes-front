@@ -15,13 +15,9 @@ export class EndlessComponent {
 
   curElement: Set<string> = new Set<string>();
   pageSize: number = 6;
-  pageNum: number = 1;
-
-  total: number = 0;
   lastId = "";
 
   adminMode = false;
-
   requesting = false
 
   default: { submissionType: string; url: string } = {
@@ -39,13 +35,11 @@ export class EndlessComponent {
 
   init() {
     this.requesting = true
-    this.submissionService.getPage(this.lastId, this.pageNum, this.pageSize).subscribe(
+    this.submissionService.getPage(this.lastId, this.pageSize).subscribe(
       (data: any) => {
         const page: Page<Submission> = data.data
         this.submissions = page.list
-        this.pageNum = page.pageNum
         this.pageSize = page.pageSize
-        this.total = page.total
 
 
         this.submissions.forEach((submission: Submission) => this.curElement.add(submission.id))
@@ -60,11 +54,11 @@ export class EndlessComponent {
   }
 
   onScroll() {
-    if (this.submissions.length >= this.total || this.requesting) {
+    if (this.requesting) {
       return
     }
     this.requesting = true
-    this.submissionService.getPage(this.lastId, this.pageNum + 1, this.pageSize).subscribe(
+    this.submissionService.getPage(this.lastId, this.pageSize).subscribe(
       (data: any) => {
         const page: Page<Submission> = data.data
         page.list.forEach(
@@ -75,7 +69,6 @@ export class EndlessComponent {
             }
           }
         )
-        this.pageNum = page.pageNum
         this.lastId = this.submissions[this.submissions.length - 1].id
         this.requesting = false
       }
