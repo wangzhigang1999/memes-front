@@ -14,9 +14,6 @@ export class NewsHomeComponent {
 
   curElement: Set<string> = new Set<string>();
   pageSize: number = 10;
-  pageNum: number = 1;
-
-  total: number = 0;
   lastId = "";
 
 
@@ -32,17 +29,14 @@ export class NewsHomeComponent {
   init() {
     //reset
     this.curElement = new Set<string>();
-    this.pageNum = 1;
     this.lastId = "";
 
 
     this.requesting = true
-    this.newsService.getByPage(this.lastId, this.pageNum, this.pageSize).subscribe(
+    this.newsService.getByPage(this.lastId, this.pageSize).subscribe(
       (data: any) => {
         const page: Page<News> = data.data
         this.news = page.list
-        this.pageNum = page.pageNum
-        this.total = page.total
         this.news.forEach(
           (news: News) => {
             for (let i = 0; i < this.tagBlackList.length; i++) {
@@ -66,11 +60,11 @@ export class NewsHomeComponent {
   }
 
   onScroll() {
-    if (this.news.length >= this.total || this.requesting) {
+    if (this.requesting) {
       return
     }
     this.requesting = true
-    this.newsService.getByPage(this.lastId, this.pageNum + 1, this.pageSize).subscribe(
+    this.newsService.getByPage(this.lastId, this.pageSize).subscribe(
       (data: any) => {
         const page: Page<News> = data.data
         page.list.forEach((news: News) => {
@@ -87,7 +81,6 @@ export class NewsHomeComponent {
             }
           }
         )
-        this.pageNum = page.pageNum
         this.lastId = this.news[this.news.length - 1].id
         this.requesting = false
       }

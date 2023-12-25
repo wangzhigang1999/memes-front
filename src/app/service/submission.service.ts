@@ -95,8 +95,8 @@ export class SubmissionService {
   }
 
 
-  getPage(lastId: string, pageNum: number, pageSize: number) {
-    let url = this.host + `/submission/page?lastID=${lastId}&pageSize=${pageSize}&pageNum=${pageNum}`;
+  getPage(lastId: string, pageSize: number) {
+    let url = this.host + `/submission/page?lastID=${lastId}&pageSize=${pageSize}`;
     return this.http.get(url);
   }
 
