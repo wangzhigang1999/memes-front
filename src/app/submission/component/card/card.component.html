@@ -16,7 +16,7 @@
     </figure>
 
     <div *ngIf="submission.submissionType=='MARKDOWN'&& (submission.url || submission.content )"
-         class="p-4 md:p-8 max-h-[50vh] xl:max-h-[80vh] overflow-y-scroll">
+         class="p-4 md:p-8 max-h-[75vh] xl:max-h-[85vh] overflow-y-scroll">
       <div *ngIf="submission.url">
         <markdown [src]="submission.url" class="rounded break-words ">
         </markdown>
@@ -50,8 +50,8 @@
       <button (click)="accept(submission.id)" class="btn w-fit btn-sm mx-auto btn-success">Yay!</button>
     </div>
     <div class="flex flex-wrap text-center items-center my-1">
-      <div class="mx-auto"> {{submission.timestamp | date:'MM-dd HH:mm'}} </div>
-      <div class="mx-auto">{{submission.uploader}}</div>
+      <div class="mx-auto"> {{ submission.timestamp | date:'MM-dd HH:mm' }}</div>
+      <div class="mx-auto">{{ submission.uploader }}</div>
     </div>
   </div>
 
