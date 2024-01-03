@@ -48,21 +48,11 @@ export class HistoryComponent implements OnInit {
 
     // sort by date
     this.history.sort((a: string, b: string) => {
-      return a < b ? -1 : 1
-    })
+        return a < b ? -1 : 1;
+      }
+    )
 
-    this.currentIndex = this.history.length - 1;
-
-    let last = this.history[this.history.length - 1];
-
-    this.hasNext = this.hashNext(this.currentIndex, this.history.length);
-    this.hasPrev = this.hashPrev(this.currentIndex);
-
-    this.service.getSubmissionByDate(last).subscribe((data: any) => this.submissions = data.data)
-
-    this.currentMessage = this.history[this.currentIndex];
-    this.nextMessage = this.hashNext(this.currentIndex, this.history.length) ? "👉👉👉" : "🙈没有了🙈";
-    this.preMessage = this.hashPrev(this.currentIndex) ? "👈👈👈" : "🙈没有了🙈";
+    this.setIndex(this.history.length - 1)
 
   }
 
@@ -74,7 +64,10 @@ export class HistoryComponent implements OnInit {
     return cur > 0;
   }
 
-  setCur(index: number) {
+  setIndex(index: number) {
+    if (index < 0 || index >= this.history.length || index == this.currentIndex) {
+      return;
+    }
     this.currentIndex = index;
     this.hasNext = this.hashNext(this.currentIndex, this.history.length);
     this.hasPrev = this.hashPrev(this.currentIndex);
