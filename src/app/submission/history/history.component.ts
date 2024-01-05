@@ -72,8 +72,8 @@ export class HistoryComponent implements OnInit {
     this.hasNext = this.hashNext(this.currentIndex, this.history.length);
     this.hasPrev = this.hashPrev(this.currentIndex);
     this.currentMessage = this.history[this.currentIndex];
-    this.nextMessage = this.hashNext(this.currentIndex, this.history.length) ? "👉👉👉" : "🙈没有了🙈";
-    this.preMessage = this.hashPrev(this.currentIndex) ? "👈👈👈" : "🙈没有了🙈";
+    this.nextMessage = this.hasNext ? "👉👉👉" : "🙈没有了🙈";
+    this.preMessage = this.hasPrev ? "👈👈👈" : "🙈没有了🙈";
     this.service.getSubmissionByDate(this.history[this.currentIndex]).subscribe((data: any) => {
       this.submissions = data.data;
     })
