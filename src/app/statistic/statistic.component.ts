@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import {AdminService} from "../service/admin.service";
-import {Response} from "../model/response";
+import { Component } from '@angular/core';
+import { AdminService } from "../service/admin.service";
+import { Response } from "../model/response";
 
 @Component({
   selector: 'app-statistic',
@@ -95,7 +95,7 @@ export class StatisticComponent {
     })
 
     const merge = (regex: RegExp, idFilter: string, objId: string): any => {
-      let obj = {_id: objId, count: 0, avgTimecost: 0, maxTimecost: 0, minTimecost: 0};
+      let obj = { _id: objId, count: 0, avgTimecost: 0, maxTimecost: 0, minTimecost: 0 };
       let totalTimeCost = 0;
 
       for (let item of list) {

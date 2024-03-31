@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {Response} from "../model/response";
-import {AdminService} from "../service/admin.service";
-import {Submission} from "../model/submission";
-import {ReviewService} from "../service/review.service";
+import { Component, OnInit } from '@angular/core';
+import { Response } from "../model/response";
+import { AdminService } from "../service/admin.service";
+import { Submission } from "../model/submission";
+import { ReviewService } from "../service/review.service";
 
 @Component({
   selector: 'app-review',
@@ -47,7 +47,7 @@ export class ReviewComponent implements OnInit {
       return
     }
 
-    // 有token但是没有验证过，需要验证
+    // 有 token 但是没有验证过，需要验证
     this.admin.verifyToken(token).subscribe(
       {
         next: (data: Response) => {
@@ -220,7 +220,7 @@ export class ReviewComponent implements OnInit {
       )
     } else {
       this.title = '触发爬虫错误';
-      this.message = '缺少PAT';
+      this.message = '缺少 PAT';
     }
   }
 

@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {News} from "../../model/news";
-import {Page} from "../../model/page";
-import {NewsService} from "../../service/news.service";
+import { Component } from '@angular/core';
+import { News } from "../../model/news";
+import { Page } from "../../model/page";
+import { NewsService } from "../../service/news.service";
 
 @Component({
   selector: 'app-news-home',
@@ -31,7 +31,6 @@ export class NewsHomeComponent {
     this.curElement = new Set<string>();
     this.lastId = "";
 
-
     this.requesting = true
     this.newsService.getByPage(this.lastId, this.pageSize).subscribe(
       (data: any) => {
@@ -55,7 +54,7 @@ export class NewsHomeComponent {
         }
         this.requesting = false
       })
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
   }
 
@@ -68,18 +67,18 @@ export class NewsHomeComponent {
       (data: any) => {
         const page: Page<News> = data.data
         page.list.forEach((news: News) => {
-            if (!this.curElement.has(news.id)) {
-              for (let i = 0; i < this.tagBlackList.length; i++) {
-                for (let j = 0; j < news.tag.length; j++) {
-                  if (news.tag[j] === this.tagBlackList[i]) {
-                    return;
-                  }
+          if (!this.curElement.has(news.id)) {
+            for (let i = 0; i < this.tagBlackList.length; i++) {
+              for (let j = 0; j < news.tag.length; j++) {
+                if (news.tag[j] === this.tagBlackList[i]) {
+                  return;
                 }
               }
-              this.news.push(news)
-              this.curElement.add(news.id)
             }
+            this.news.push(news)
+            this.curElement.add(news.id)
           }
+        }
         )
         this.lastId = this.news[this.news.length - 1].id
         this.requesting = false

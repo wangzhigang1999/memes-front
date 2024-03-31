@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environment";
-import {Observable} from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../environments/environment";
+import { Observable } from "rxjs";
 
 
 @Injectable({
@@ -23,7 +23,7 @@ export class SubmissionService {
    */
   getTodaySubmissions(): Observable<any> {
     // get today YYYY-MM-DD with timezone shanghai
-    let today = new Date().toLocaleDateString('zh-CN', {timeZone: 'Asia/Shanghai'})
+    let today = new Date().toLocaleDateString('zh-CN', { timeZone: 'Asia/Shanghai' })
     // if the day month year is 1,2,3,4,5,6,7,8,9,0,then add 0 before it
     let todayArray = today.split('/')
     for (let i = 0; i < todayArray.length; i++) {

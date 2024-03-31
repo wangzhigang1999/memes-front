@@ -12,7 +12,7 @@
     <div class="stat-value text-secondary">{{ averageCost }} ms</div>
   </div>
   <div class="stat place-items-center w-fit">
-    <div class="stat-title">独立UUID</div>
+    <div class="stat-title">独立 UUID</div>
     <div class="stat-value text-success">{{ count(uuidCountList) }} 个</div>
   </div>
 </div>
@@ -20,22 +20,22 @@
 <div class="overflow-x-auto mt-4 border rounded-xl border-success">
   <table class="table  table-zebra w-full text-center">
     <thead>
-    <tr>
-      <th>uuid</th>
-      <th>count</th>
-      <th>avg/ms</th>
-      <th>first</th>
-      <th>last</th>
-    </tr>
+      <tr>
+        <th>uuid</th>
+        <th>count</th>
+        <th>avg/ms</th>
+        <th>first</th>
+        <th>last</th>
+      </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let item of top(10,uuidCountList)">
-      <td>{{ item._id.substring(0, 8) }}</td>
-      <td>{{ item.count }}</td>
-      <td>{{ msConvert(item.avgTimecost) }}</td>
-      <td>{{ timestampToHHMM(item.firstTime) }}</td>
-      <td>{{ timestampToHHMM(item.lastTime) }}</td>
-    </tr>
+      <tr *ngFor="let item of top(10,uuidCountList)">
+        <td>{{ item._id.substring(0, 8) }}</td>
+        <td>{{ item.count }}</td>
+        <td>{{ msConvert(item.avgTimecost) }}</td>
+        <td>{{ timestampToHHMM(item.firstTime) }}</td>
+        <td>{{ timestampToHHMM(item.lastTime) }}</td>
+      </tr>
     </tbody>
   </table>
 </div>
@@ -43,24 +43,22 @@
 <div class="overflow-x-auto mt-4 border rounded-xl border-success">
   <table class="table table-compact table-zebra w-full text-center">
     <thead>
-    <tr>
-      <th>url</th>
-      <th>count</th>
-      <th>avg/ms</th>
-      <th>max</th>
-      <th>min</th>
-    </tr>
+      <tr>
+        <th>url</th>
+        <th>count</th>
+        <th>avg/ms</th>
+        <th>max</th>
+        <th>min</th>
+      </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let item of top(100,urlCountList)">
-      <td>{{ item._id }}</td>
-      <td>{{ item.count }}</td>
-      <td>{{ msConvert(item.avgTimecost) }}</td>
-      <td>{{ msConvert(item.maxTimecost) }}</td>
-      <td>{{ msConvert(item.minTimecost) }}</td>
-    </tr>
+      <tr *ngFor="let item of top(100,urlCountList)">
+        <td>{{ item._id }}</td>
+        <td>{{ item.count }}</td>
+        <td>{{ msConvert(item.avgTimecost) }}</td>
+        <td>{{ msConvert(item.maxTimecost) }}</td>
+        <td>{{ msConvert(item.minTimecost) }}</td>
+      </tr>
     </tbody>
   </table>
 </div>
-
-

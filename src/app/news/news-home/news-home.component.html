@@ -1,7 +1,6 @@
 <div>
-
   <div class="search-results" infiniteScroll [infiniteScrollDistance]="3" [infiniteScrollThrottle]="50"
-       (scrolled)="onScroll()">
+    (scrolled)="onScroll()">
     <app-news-card *ngFor="let item of news" [news]="item"></app-news-card>
   </div>
 </div>

@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Submission} from "../../../model/submission";
-import {ReviewService} from "../../../service/review.service";
-import {ImageGroupService} from "../../../service/image-group.service";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Submission } from "../../../model/submission";
+import { ReviewService } from "../../../service/review.service";
+import { ImageGroupService } from "../../../service/image-group.service";
 
 @Component({
   selector: 'app-card',
@@ -61,7 +61,7 @@ export class CardComponent {
   center() {
     let dom = document.getElementById(this.submission.id);
     if (dom != null) {
-      dom.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+      dom.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
     }
   }
 }

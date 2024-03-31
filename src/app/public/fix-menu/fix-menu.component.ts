@@ -1,6 +1,6 @@
-import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
-import {scrollToTop} from "../../utils";
-import {NavigationEnd, Router} from "@angular/router";
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { scrollToTop } from "../../utils";
+import { NavigationEnd, Router } from "@angular/router";
 
 @Component({
   selector: 'app-fix-menu',

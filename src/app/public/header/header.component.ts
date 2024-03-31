@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {NavigationEnd, Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -32,14 +32,12 @@ export class HeaderComponent implements OnInit {
     "12-25": "🎄",
   }
 
-  emojiList = ['😀', '😃', '😄', '😁', '😆', '😂', '🤣', '🥲',
-    '☺️', '😊', '😇', '🙂', '🙃', '😉', '😌', '😍', '🥰', '😘', '😗', '😙',
-    '😚', '😋', '😛', '😝', '😜', '🤪', '🤨', '🧐', '🤓', '😎', '🥸', '🤩', '🥳']
+  emojiList = ['😀', '😃', '😄', '😁', '😆', '😂', '🤣', '🥳',
+    '😊', '😇', '🙂', '🙃', '😉', '😌', '😍', '🥰', '😘', '😗', '😙',
+    '😚', '😋', '😛', '😝', '😜', '🤪', '🤨', '🧐', '🤓', '😎', '🥸', '🤩']
   selectedEmoji = "😀";
 
   constructor(private router: Router) {
-
-
     // if it's holiday, show holiday emoji
     const today = new Date();
     const month = today.getMonth() + 1;
@@ -49,7 +47,6 @@ export class HeaderComponent implements OnInit {
       this.selectedEmoji = this.holidayEmoji[date];
       return
     }
-
     // choose random emoji
     this.selectedEmoji = this.emojiList[Math.floor(Math.random() * this.emojiList.length)];
 

@@ -2,7 +2,7 @@
 
   <div (click)="center()">
     <figure *ngIf="submission.submissionType==='IMAGE'" class="p-2">
-      <img [defaultImage]="defaultImage" [lazyLoad]="submission.url" alt="" class="rounded-xl" src=""/>
+      <img [defaultImage]="defaultImage" [lazyLoad]="submission.url" alt="" class="rounded-xl" src="" />
     </figure>
 
     <figure *ngIf="submission.submissionType==='VIDEO'" class="p-2">
@@ -16,7 +16,7 @@
     </figure>
 
     <div *ngIf="submission.submissionType=='MARKDOWN'&& (submission.url || submission.content )"
-         class="p-4 md:p-8 max-h-[75vh] xl:max-h-[85vh] overflow-y-scroll">
+      class="p-4 md:p-8 max-h-[75vh] xl:max-h-[85vh] overflow-y-scroll">
       <div *ngIf="submission.url">
         <markdown [src]="submission.url" class="rounded break-words ">
         </markdown>
@@ -37,14 +37,14 @@
 
   <div *ngIf="!review && showVoteBar">
     <app-vote [dislike]="submission.down" [id]="submission.id" [like]="submission.up" [name]="submission.name"
-              [adminMode]=admin></app-vote>
+      [adminMode]=admin></app-vote>
   </div>
 
   <div *ngIf="review && showVoteBar" class="w-full text-center mt-2">
     <div class="grid grid-cols-3 place-content-center">
       <button (click)="reject(submission.id)" class="btn w-fit mx-auto btn-sm btn-error">Reject</button>
       <button (click)="merge(submission.id,nextID)" [disabled]="nextID==''"
-              class="btn w-fit mx-auto btn-sm btn-warning">
+        class="btn w-fit mx-auto btn-sm btn-warning">
         MergeNext
       </button>
       <button (click)="accept(submission.id)" class="btn w-fit btn-sm mx-auto btn-success">Yay!</button>
@@ -56,4 +56,3 @@
   </div>
 
 </div>
-

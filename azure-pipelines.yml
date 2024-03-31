@@ -11,7 +11,7 @@ resources:
   - repo: self
 pool: "Azure Pipelines"
 variables:
-  image-repo: 'bupt2018/memes-fe'
+  image-repo: "bupt2018/memes-fe"
 
 stages:
   - stage: BuildAndPush
@@ -27,8 +27,8 @@ stages:
 
           - task: Docker@2
             inputs:
-              containerRegistry: 'ACR'
+              containerRegistry: "ACR"
               repository: "$(image-repo)"
-              command: 'buildAndPush'
-              tags: 'latest'
-              Dockerfile: '**/Dockerfile'
+              command: "buildAndPush"
+              tags: "latest"
+              Dockerfile: "**/Dockerfile"

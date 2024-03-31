@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {environment} from "../../environments/environment";
-import {Observable} from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { environment } from "../../environments/environment";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +47,7 @@ export class ReviewService {
     let url = this.host + `/admin/review/accept/batch`;
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(url, id, {headers: headers});
+    return this.http.post(url, id, { headers: headers });
   }
 
   /**
@@ -62,6 +62,6 @@ export class ReviewService {
     let url = this.host + `/admin/review/reject/batch`;
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(url, ids, {headers: headers});
+    return this.http.post(url, ids, { headers: headers });
   }
 }
