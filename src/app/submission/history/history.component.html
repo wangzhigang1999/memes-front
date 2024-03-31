@@ -5,9 +5,9 @@
     <button class="btn btn-ghost btn-sm w-full" role="button" tabindex="0">{{ currentMessage }}</button>
     <ul class="dropdown-content z-[1] menu bg-base-100 rounded-box w-full" tabindex="0">
       @for (date of history.slice().reverse();track date) {
-        <li class="w-full text-center m-1  z-[1]" (click)="setIndex(history.indexOf(date))">
-          <button class="btn btn-ghost btn-sm w-full">{{ date }}</button>
-        </li>
+      <li class="w-full text-center m-1  z-[1]" (click)="setIndex(history.indexOf(date))">
+        <button class="btn btn-ghost btn-sm w-full">{{ date }}</button>
+      </li>
       }
     </ul>
   </div>
@@ -16,7 +16,7 @@
 </div>
 
 
-<app-card *ngFor="let sub of submissions;" [admin]="adminMode" [submission]="sub" class="w-full"/>
+<app-card *ngFor="let sub of submissions;" [admin]="adminMode" [submission]="sub" class="w-full" />
 <app-end></app-end>
 
 <div class="btn-group grid grid-cols-3 w-full my-2">
@@ -26,4 +26,3 @@
   <button (click)="setIndex(currentIndex+1)" [disabled]="!hasNext" class="btn btn-ghost btn-sm">{{ nextMessage }}
   </button>
 </div>
-

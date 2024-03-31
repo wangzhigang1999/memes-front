@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {SubmissionService} from "../../service/submission.service";
-import {Submission} from "../../model/submission";
-import {authorized, scrollToTop} from "../../utils";
+import { Component, OnInit } from '@angular/core';
+import { SubmissionService } from "../../service/submission.service";
+import { Submission } from "../../model/submission";
+import { authorized, scrollToTop } from "../../utils";
 
 @Component({
   selector: 'app-history',
@@ -48,8 +48,8 @@ export class HistoryComponent implements OnInit {
 
     // sort by date
     this.history.sort((a: string, b: string) => {
-        return a < b ? -1 : 1;
-      }
+      return a < b ? -1 : 1;
+    }
     )
 
     this.setIndex(this.history.length - 1)

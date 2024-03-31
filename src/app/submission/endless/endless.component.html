@@ -1,5 +1,5 @@
 <app-top></app-top>
 <div (scrolled)="onScroll()" [infiniteScrollDistance]="3" [infiniteScrollThrottle]="150" infiniteScroll>
-  <app-card *ngFor="let sub of submissions;" [admin]="adminMode" [submission]="sub" class="w-full"/>
+  <app-card *ngFor="let sub of submissions;" [admin]="adminMode" [submission]="sub" class="w-full" />
 </div>
 <app-end></app-end>

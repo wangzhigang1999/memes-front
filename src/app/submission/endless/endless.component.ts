@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
-import {Page} from "../../model/page";
-import {Submission} from "../../model/submission";
-import {SubmissionService} from "../../service/submission.service";
-import {authorized} from "../../utils";
+import { Component } from '@angular/core';
+import { Page } from "../../model/page";
+import { Submission } from "../../model/submission";
+import { SubmissionService } from "../../service/submission.service";
+import { authorized } from "../../utils";
 
 @Component({
   selector: 'app-endless',
