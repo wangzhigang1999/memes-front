@@ -1,30 +1,22 @@
 export function authorized(): boolean {
   try {
-    let item = localStorage.getItem('token-ok');
-    if (item == null) {
-      return false;
-    }
-    if (item == 'true') {
-      return true;
-    }
+    const item = localStorage.getItem('token-ok');
+    return item === 'true';
   } catch (e) {
     return false;
   }
-  return false
 }
 
 
 export function generateUUID() {
-  let d = new Date().getTime();
-  if (window.performance && typeof window.performance.now === "function") {
-    d += performance.now(); //use high-precision timer if available
-  }
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    let r = (d + Math.random() * 16) % 16 | 0;
-    d = Math.floor(d / 16);
-    return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
+  return uuid.replace(/[xy]/g, function (c) {
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
   });
 }
+
 
 export function getUUID() {
   let uuid: any;
@@ -43,16 +35,15 @@ export function getUUID() {
 }
 
 export function getToken(): string {
+  let token = '';
   try {
-    let token = localStorage.getItem('token');
-    if (token == null) {
-      return '';
-    }
-    return token;
+    token = localStorage.getItem('token') || '';
   } catch (e) {
-    return '';
+    token = '';
   }
+  return token;
 }
+
 
 // write to clipboard
 export function copyToClipboard(text: string) {

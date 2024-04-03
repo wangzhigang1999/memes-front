@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { getToken, getUUID } from "./utils";
 
 @Injectable()
-export class UuidInterceptor implements HttpInterceptor {
+export class UUIDInterceptor implements HttpInterceptor {
 
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {

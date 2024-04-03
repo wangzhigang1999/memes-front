@@ -10,7 +10,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { SafePipe } from './safe.pipe';
 import { SubmitComponent } from './submission/submit/submit.component';
-import { UuidInterceptor } from "./uuid.interceptor";
+import { UUIDInterceptor } from "./uuid.interceptor";
 import { HistoryComponent } from './submission/history/history.component';
 import { ReviewComponent } from './review/review.component';
 import { StatisticComponent } from './statistic/statistic.component';
@@ -81,7 +81,7 @@ const routes: Routes = [
   ],
   providers: [
     {
-      provide: HTTP_INTERCEPTORS, useClass: UuidInterceptor, multi: true
+      provide: HTTP_INTERCEPTORS, useClass: UUIDInterceptor, multi: true
     }
   ],
   bootstrap: [AppComponent]
