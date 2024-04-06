@@ -1,6 +1,6 @@
-import { Component, HostListener } from '@angular/core';
-import { SubmissionService } from "../../service/submission.service";
-import { Submission } from "../../model/submission";
+import {Component, HostListener} from '@angular/core';
+import {SubmissionService} from "../../service/submission.service";
+import {Submission} from "../../model/submission";
 
 @Component({
   selector: 'app-submit',
@@ -155,7 +155,7 @@ export class SubmitComponent {
     return new Promise((resolve) => {
       const reader = new FileReader() // 创建 FileReader
       // @ts-ignore
-      reader.onload = ({ target: { result: src } }) => {
+      reader.onload = ({target: {result: src}}) => {
         const image = new Image() // 创建 img 元素
         image.onload = async () => {
           const canvas = document.createElement('canvas') // 创建 canvas 元素
@@ -170,7 +170,7 @@ export class SubmitComponent {
           while (length--) {
             bufferArray[length] = buffer.charCodeAt(length)
           }
-          const miniFile = new File([bufferArray], file.name, { type: 'image/jpeg' })
+          const miniFile = new File([bufferArray], file.name, {type: 'image/jpeg'})
 
           console.log('压缩前', file.size / 1024, 'KB')
           console.log('压缩后', miniFile.size / 1024, 'KB')
@@ -241,7 +241,6 @@ export class SubmitComponent {
     this.service.uploadFile(this.tempFile, mime).subscribe(
       {
         next: (data) => {
-
           let resp: Submission = data.data
           this.title = data.message
           this.message = resp.url
@@ -264,9 +263,19 @@ export class SubmitComponent {
     }
     let mime = this.tempFile.type;
     this.service.uploadFile(this.tempFile, mime).subscribe(
-      (data) => {
-        this.title = data.message
-        this.message = "上传成功!😀"
+      {
+        next: (data) => {
+          let resp: Submission = data.data
+          this.title = data.message
+          this.message = resp.url
+        },
+        error: (error) => {
+          this.title = "上传失败"
+          this.message = error.error.message
+        },
+        complete: () => {
+          console.log("complete")
+        }
       }
     )
   }
