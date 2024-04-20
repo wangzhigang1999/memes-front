@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { SubmissionService } from "../../../service/submission.service";
 import { AdminService } from "../../../service/admin.service";
+import { SubmissionService } from "../../../service/submission.service";
 import { copyToClipboard } from "../../../utils";
 
 @Component({
@@ -51,6 +51,10 @@ export class VoteComponent {
   copy() {
     let shareUrl = window.location.origin + "/share/meme/" + this.id
     copyToClipboard(shareUrl)
+  }
+
+  similar() {
+    window.open('/similar/' + this.id, '_blank')
   }
 }
 
