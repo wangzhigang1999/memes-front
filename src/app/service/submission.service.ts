@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { environment } from "../../environments/environment";
+import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
+import { environment } from "../../environments/environment";
 
 
 @Injectable({
@@ -110,6 +110,12 @@ export class SubmissionService {
 
   getById(id: string): Observable<any> {
     let url = this.host + `/submission/id/${id}`;
+    return this.http.get(url);
+  }
+
+
+  getSimilar(id: string, topK: number): Observable<any> {
+    let url = this.host + `/submission/similar/${id}?size=${topK}`;
     return this.http.get(url);
   }
 }

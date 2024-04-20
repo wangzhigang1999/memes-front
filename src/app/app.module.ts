@@ -1,34 +1,35 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
-import { VoteComponent } from './submission/component/vote/vote.component';
-import { HeaderComponent } from './public/header/header.component';
-import { CardComponent } from './submission/component/card/card.component';
-import { RouterModule, RouterOutlet, Routes } from "@angular/router";
-import { TodayComponent } from './submission/today/today.component';
+import { NgOptimizedImage } from "@angular/common";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
-import { SafePipe } from './safe.pipe';
-import { SubmitComponent } from './submission/submit/submit.component';
-import { UUIDInterceptor } from "./uuid.interceptor";
-import { HistoryComponent } from './submission/history/history.component';
-import { ReviewComponent } from './review/review.component';
-import { StatisticComponent } from './statistic/statistic.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, RouterOutlet, Routes } from "@angular/router";
 import { LazyLoadImageModule } from "ng-lazyload-image";
-import { FixMenuComponent } from './public/fix-menu/fix-menu.component';
-import { AuthGuard } from "./auth.guard";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
-import { EndlessComponent } from './submission/endless/endless.component';
-import { TopComponent } from './submission/component/top/top.component';
+import { MarkdownModule } from "ngx-markdown";
+import { AppComponent } from './app.component';
+import { AuthGuard } from "./auth.guard";
 import { NewsCardComponent } from './news/news-card/news-card.component';
 import { NewsHomeComponent } from './news/news-home/news-home.component';
 import { NewsTodayComponent } from './news/news-today/news-today.component';
 import { EndComponent } from './public/end/end.component';
+import { FixMenuComponent } from './public/fix-menu/fix-menu.component';
+import { HeaderComponent } from './public/header/header.component';
+import { ReviewComponent } from './review/review.component';
+import { SafePipe } from './safe.pipe';
 import { SearchComponent } from './search/search.component';
-import { TruncatePipe } from './truncate.pipe';
-import { NgOptimizedImage } from "@angular/common";
-import { MarkdownModule } from "ngx-markdown";
 import { ShareComponent } from "./share/share.component";
+import { StatisticComponent } from './statistic/statistic.component';
+import { CardComponent } from './submission/component/card/card.component';
+import { TopComponent } from './submission/component/top/top.component';
+import { VoteComponent } from './submission/component/vote/vote.component';
+import { EndlessComponent } from './submission/endless/endless.component';
+import { HistoryComponent } from './submission/history/history.component';
+import { SimilarComponent } from "./submission/similar/similar.component";
+import { SubmitComponent } from './submission/submit/submit.component';
+import { TodayComponent } from './submission/today/today.component';
+import { TruncatePipe } from './truncate.pipe';
+import { UUIDInterceptor } from "./uuid.interceptor";
 
 const routes: Routes = [
   { path: '', component: EndlessComponent },
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'review', component: ReviewComponent },
   { path: 'statistic', component: StatisticComponent, canActivate: [AuthGuard] },
   { path: 'share/:type/:id', component: ShareComponent },
+  { path: 'similar/:id', component: SimilarComponent },
   { path: '**', component: EndlessComponent }
 ];
 
@@ -66,7 +68,8 @@ const routes: Routes = [
     EndComponent,
     SearchComponent,
     TruncatePipe,
-    ShareComponent
+    ShareComponent,
+    SimilarComponent
   ],
   imports: [
     BrowserModule,
@@ -83,6 +86,9 @@ const routes: Routes = [
     {
       provide: HTTP_INTERCEPTORS, useClass: UUIDInterceptor, multi: true
     }
+  ],
+  exports: [
+    CardComponent
   ],
   bootstrap: [AppComponent]
 })

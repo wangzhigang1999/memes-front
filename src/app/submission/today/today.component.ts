@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { SubmissionService } from "../../service/submission.service";
 import { Submission } from "../../model/submission";
+import { SubmissionService } from "../../service/submission.service";
 import { authorized } from "../../utils";
 
 @Component({
@@ -19,9 +19,7 @@ export class TodayComponent {
   }
 
   ngOnInit(): void {
-    if (authorized()) {
-      this.adminMode = true
-    }
+    this.adminMode = authorized()
     this.service.getTodaySubmissions().subscribe(data => this.submissions = data.data)
   }
 }
