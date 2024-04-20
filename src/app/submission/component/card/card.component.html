@@ -1,7 +1,7 @@
-<div [id]="submission.id" class="card w-full shadow-lg   my-4">
+<div [id]="submission.id" class="relative card w-full shadow-lg   my-4">
 
-  <a class="absolute top-0 right-0 p-4 hover:cursor-pointer" [routerLink]="['/similar/'+submission.id]" target="_blank">
-    <div class="text-xs text-success tooltip tooltip-bottom bg-none" data-tip="点击查看类似内容">
+  <a [routerLink]="['/similar/'+submission.id]" class="absolute top-10 right-10 hover:cursor-pointer" target="_blank">
+    <div class="text-xs text-success tooltip tooltip-bottom" data-tip="点击查看类似内容">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
         class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round"
