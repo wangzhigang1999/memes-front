@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { AdminService } from "../../../service/admin.service";
-import { SubmissionService } from "../../../service/submission.service";
-import { copyToClipboard } from "../../../utils";
+import {Component, Input} from '@angular/core';
+import {AdminService} from "../../../service/admin.service";
+import {SubmissionService} from "../../../service/submission.service";
+import {copyToClipboard} from "../../../utils";
 
 @Component({
   selector: 'app-vote',
@@ -20,6 +20,8 @@ export class VoteComponent {
 
   activeBtn = "btn-outline btn-success btn-circle"
   deactivateBtn = "btn-circle btn-ghost"
+  isSingleClick: Boolean = true;
+
 
   constructor(private service: SubmissionService, private admin: AdminService) {
   }
@@ -55,6 +57,20 @@ export class VoteComponent {
 
   similar() {
     window.open('/similar/' + this.id, '_blank')
+  }
+
+  single() {
+    this.isSingleClick = true;
+    setTimeout(() => {
+      if (this.isSingleClick) {
+        this.copy();
+      }
+    }, 200)
+  }
+
+  double() {
+    this.isSingleClick = false;
+    this.similar();
   }
 }
 
