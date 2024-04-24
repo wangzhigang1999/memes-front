@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { AdminService } from "../service/admin.service";
-import { Response } from "../model/response";
+import {Component} from '@angular/core';
+import {AdminService} from "../service/admin.service";
+import {Response} from "../model/response";
 
 @Component({
   selector: 'app-statistic',
@@ -125,6 +125,7 @@ export class StatisticComponent {
     merge(/\/submission\/date\/[0-9]{4}-[0-9]{2}-[0-9]{2}/, "/\/submission\/date/", '/submission/date');
     merge(/\/news\/month\/[0-9]{2}/, "/news/date", '/news/date');
     merge(/\/submission\/id\/[0-9a-z]+/, "/submission/id/", '/submission/id');
+    merge(/\/submission\/similar\/[0-9a-z]+/, "/submission/similar/", '/submission/similar');
 
     return list;
   }
