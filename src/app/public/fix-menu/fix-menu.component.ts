@@ -1,6 +1,6 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
-import { scrollToTop } from "../../utils";
-import { NavigationEnd, Router } from "@angular/router";
+import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
+import {copyToClipboard, scrollToTop} from "../../utils";
+import {NavigationEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'app-fix-menu',
@@ -43,5 +43,11 @@ export class FixMenuComponent implements OnInit {
   moveToTop() {
     this.showMenu = !this.showMenu;
     scrollToTop()
+  }
+
+  copyPageLink() {
+    this.showMenu = !this.showMenu;
+    const url = window.location.href;
+    copyToClipboard(url)
   }
 }

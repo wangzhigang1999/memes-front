@@ -35,7 +35,7 @@ export function getUUID() {
 }
 
 export function getToken(): string {
-  let token = '';
+  let token: string;
   try {
     token = localStorage.getItem('token') || '';
   } catch (e) {
@@ -47,11 +47,11 @@ export function getToken(): string {
 
 // write to clipboard
 export function copyToClipboard(text: string) {
-  navigator.clipboard.writeText(text).then(() => alert('复制成功'))
+  navigator.clipboard.writeText(text).then(() => alert('已经成功复制到剪贴板，快去分享吧~')).catch(() => alert('复制失败，请手动复制'))
 }
 
 
 // scroll to top
 export function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
