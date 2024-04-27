@@ -3,7 +3,8 @@ import { ActivatedRoute } from "@angular/router";
 import { Response } from "../../model/response";
 import { Submission } from "../../model/submission";
 import { SubmissionService } from "../../service/submission.service";
-import { authorized } from "../../utils";
+import {authorized, getConfig} from "../../utils";
+import {ConfigItem} from "../../model/config-item";
 
 
 @Component({
@@ -35,4 +36,7 @@ export class SimilarComponent {
       }
     })
   }
+
+  protected readonly getConfig = getConfig;
+  protected readonly ConfigItem = ConfigItem;
 }

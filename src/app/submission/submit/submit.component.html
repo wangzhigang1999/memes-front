@@ -1,4 +1,4 @@
-<div class="h-[80vh] w-full grid grid-cols-1 place-items-center bg-base-100">
+<div class="h-[80vh] w-full grid grid-cols-1 place-items-center bg-base-100 max-w-4xl mx-auto">
   <div (dragover)="onDragOver($event)" (drop)="onDrop($event)" *ngIf="submissionType==='IMAGE'" class="w-full  mx-auto">
     <img [src]="text" alt="" class="rounded-box  mx-auto" id="img" />
   </div>

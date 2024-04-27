@@ -55,3 +55,22 @@ export function copyToClipboard(text: string) {
 export function scrollToTop() {
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
+
+
+export function getConfig(key: string): boolean {
+  try {
+    const item = localStorage.getItem(key);
+    return item === 'true';
+  } catch (e) {
+    return true;
+  }
+}
+
+
+export function setConfig(key: string, value: boolean) {
+  try {
+    localStorage.setItem(key, value ? 'true' : 'false');
+  } catch (e) {
+    alert('设置失败，请稍后再试~')
+  }
+}

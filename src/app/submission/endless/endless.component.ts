@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
-import { Page } from "../../model/page";
-import { Submission } from "../../model/submission";
-import { SubmissionService } from "../../service/submission.service";
-import { authorized } from "../../utils";
+import {Component, HostListener} from '@angular/core';
+import {Page} from "../../model/page";
+import {Submission} from "../../model/submission";
+import {SubmissionService} from "../../service/submission.service";
+import {authorized,getConfig} from "../../utils";
+import {Response} from "../../model/response";
+import {ConfigItem} from "../../model/config-item";
 
 @Component({
   selector: 'app-endless',
@@ -10,21 +12,30 @@ import { authorized } from "../../utils";
   styleUrls: ['./endless.component.css']
 })
 export class EndlessComponent {
+  contentHeight: number = 0; // 存储页面内容高度
+  scrollPosition: number = 0; // 存储页面滚动位置
+  windowHeight: number = window.innerHeight; // 当前窗口高度
 
-  public submissions: Submission[] = [];
-
-  curElement: Set<string> = new Set<string>();
-  pageSize: number = 6;
-  lastId = "";
-
-  adminMode = false;
-  requesting = false
-
-  default: { submissionType: string; url: string } = {
-    url: "assets/brick.jpeg",
-    submissionType: "IMAGE",
+  // 监听窗口滚动事件
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(_: any) {
+    this.scrollPosition = window.scrollY; // 使用 window.scrollY 获取滚动位置
+    this.contentHeight = document.body.scrollHeight;
+    // 计算剩余可滚动距离
+    const remainingScroll = this.contentHeight - (this.scrollPosition + this.windowHeight);
+    // 当剩余可滚动距离小于某个阈值时，触发加载新内容的逻辑
+    if (remainingScroll < 200) { // 这里的 200 是一个示例阈值，可以根据实际情况调整
+      this.loadNewSubmission()
+    }
   }
 
+  public submissions: Submission[] = [];
+  curElement: Set<string> = new Set<string>();
+  pageSize: number = 18;
+  lastId = "";
+  adminMode = false;
+  requesting = false
+  singleMode = false
 
   constructor(private submissionService: SubmissionService) {
     this.init()
@@ -35,25 +46,29 @@ export class EndlessComponent {
 
   init() {
     this.requesting = true
+    this.submissionService.getTop().subscribe(
+      (data: Response) => {
+        let top: Submission[] = data.data
+        this.submissions.push(...top)
+        this.addToSet(top)
+      }
+    )
     this.submissionService.getPage(this.lastId, this.pageSize).subscribe(
       (data: any) => {
         const page: Page<Submission> = data.data
-        this.submissions = page.list
+        this.submissions.push(...page.list)
         this.pageSize = page.pageSize
-
-
-        this.submissions.forEach((submission: Submission) => this.curElement.add(submission.id))
+        this.addToSet(page.list)
         // get lastId
         if (this.submissions.length > 0) {
           this.lastId = this.submissions[this.submissions.length - 1].id
         }
         this.requesting = false
-
       })
 
   }
 
-  onScroll() {
+  loadNewSubmission() {
     if (this.requesting) {
       return
     }
@@ -75,6 +90,16 @@ export class EndlessComponent {
     )
   }
 
+  private addToSet(top: Submission[]) {
+    top.forEach(
+      (submission: Submission) => {
+        this.curElement.add(submission.id)
+      }
+    )
+  }
+
+  protected readonly getConfig = getConfig;
+  protected readonly ConfigItem = ConfigItem;
 }
 
 

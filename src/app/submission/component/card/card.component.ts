@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Submission } from "../../../model/submission";
-import { ReviewService } from "../../../service/review.service";
-import { ImageGroupService } from "../../../service/image-group.service";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Submission} from "../../../model/submission";
+import {ReviewService} from "../../../service/review.service";
+import {ImageGroupService} from "../../../service/image-group.service";
+import {getConfig} from "../../../utils";
+import {ConfigItem} from "../../../model/config-item";
 
 @Component({
   selector: 'app-card',
@@ -15,6 +17,7 @@ export class CardComponent {
   @Input() admin = false;
   @Input() showVoteBar = true;
   @Input() nextID = '';
+  @Input() lazy = false;
   defaultImage = "assets/welcome.webp";
   @Output() private reviewed = new EventEmitter<string[]>();
 
@@ -61,7 +64,10 @@ export class CardComponent {
   center() {
     let dom = document.getElementById(this.submission.id);
     if (dom != null) {
-      dom.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+      dom.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
     }
   }
+
+  protected readonly getConfig = getConfig;
+  protected readonly ConfigItem = ConfigItem;
 }

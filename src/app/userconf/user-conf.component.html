@@ -1,0 +1,12 @@
+<div class="flex justify-around mt-2">
+  <div class="label">
+    <span class="label-text min-w-fit">单栏模式 : </span>
+    <input type="checkbox" class="toggle toggle-success mx-2" [checked]="getConfig(ConfigItem.singleMode)"
+           (click)="setConfig(ConfigItem.singleMode,!getConfig(ConfigItem.singleMode))"/>
+    <p class="ml-4">
+      <small>
+        在浏览 meme 时，以一栏或多栏瀑布流的形式显示，移动端不生效
+      </small>
+    </p>
+  </div>
+</div>
