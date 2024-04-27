@@ -29,6 +29,16 @@ export class EndlessComponent {
     }
   }
 
+  // 监听点击事件
+  @HostListener('click', ['$event'])
+  onClick(event: any) {
+    console.log(event.target.id)
+    // 如果点击的是 modal，关闭 modal
+    if (event.target.id === 'modal') {
+      (window as any).modal.close()
+    }
+  }
+
   public submissions: Submission[] = [];
   curElement: Set<string> = new Set<string>();
   pageSize: number = 18;
