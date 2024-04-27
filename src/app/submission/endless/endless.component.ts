@@ -2,7 +2,7 @@ import {Component, HostListener} from '@angular/core';
 import {Page} from "../../model/page";
 import {Submission} from "../../model/submission";
 import {SubmissionService} from "../../service/submission.service";
-import {authorized,getConfig} from "../../utils";
+import {authorized, getConfig} from "../../utils";
 import {Response} from "../../model/response";
 import {ConfigItem} from "../../model/config-item";
 
@@ -35,7 +35,7 @@ export class EndlessComponent {
   lastId = "";
   adminMode = false;
   requesting = false
-  singleMode = false
+  selectedSubmission: any = null
 
   constructor(private submissionService: SubmissionService) {
     this.init()
@@ -100,6 +100,15 @@ export class EndlessComponent {
 
   protected readonly getConfig = getConfig;
   protected readonly ConfigItem = ConfigItem;
+
+  showSubmissionDetail(sub: Submission) {
+    this.selectedSubmission = sub
+  }
+
+  // is small screen
+  isSmallScreen() {
+    return window.innerWidth < 768
+  }
 }
 
 

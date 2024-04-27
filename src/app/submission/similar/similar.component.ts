@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
-import { Response } from "../../model/response";
-import { Submission } from "../../model/submission";
-import { SubmissionService } from "../../service/submission.service";
-import {authorized, getConfig} from "../../utils";
-import {ConfigItem} from "../../model/config-item";
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {Response} from "../../model/response";
+import {Submission} from "../../model/submission";
+import {SubmissionService} from "../../service/submission.service";
+import {authorized} from "../../utils";
 
 
 @Component({
@@ -12,9 +11,9 @@ import {ConfigItem} from "../../model/config-item";
   templateUrl: './similar.component.html',
   styleUrls: ['./similar.component.css']
 })
-export class SimilarComponent {
+export class SimilarComponent implements OnChanges {
 
-  id: string = ""
+  @Input() id: string = ""
   submissions: Submission[] = []
   adminMode: boolean = false
 
@@ -27,7 +26,14 @@ export class SimilarComponent {
     });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.fetchMeme(this.id)
+  }
+
   fetchMeme(id: string) {
+    if (id == undefined || id == "") {
+      return
+    }
     this.submissions = []
     this.submissionService.getById(id).subscribe((res: Response) => this.submissions.push(res.data))
     this.submissionService.getSimilar(id, 50).subscribe((res: Response) => {
@@ -36,7 +42,4 @@ export class SimilarComponent {
       }
     })
   }
-
-  protected readonly getConfig = getConfig;
-  protected readonly ConfigItem = ConfigItem;
 }
