@@ -1,31 +1,16 @@
 <div class="mx-auto max-w-4xl">
-  <div class="btn-group grid grid-cols-3 w-full lg:mt-0 mt-2 mb-2">
-    <button (click)="setIndex(currentIndex-1)" [disabled]="!hasPrev" class="btn btn-ghost btn-sm">{{ preMessage }}
-    </button>
-    <div class="dropdown w-full">
-      <button class="btn btn-ghost btn-sm w-full" role="button" tabindex="0">{{ currentMessage }}</button>
-      <ul class="dropdown-content z-[1] menu bg-base-100 rounded-box w-full" tabindex="0">
-        @for (date of history.slice().reverse();track date) {
-          <li class="w-full text-center m-1  z-[1]" (click)="setIndex(history.indexOf(date))">
-            <button class="btn btn-ghost btn-sm w-full">{{ date }}</button>
-          </li>
-        }
-      </ul>
+  <div class="btn-group grid grid-cols-3 w-full place-items-center">
+    <button (click)="changeDate(-1)" class="btn btn-ghost btn-sm">{{ preMessage }}</button>
+
+    <div class="text-center">
+      <input (change)="setDate(selectedDate)" [(ngModel)]="selectedDate"
+             [max]="todayDate"
+             class="datepicker text-center rounded max-w-fit p-1.5 btn-ghost outline-none"
+             required type="date">
     </div>
-    <button (click)="setIndex(currentIndex+1)" [disabled]="!hasNext" class="btn btn-ghost btn-sm">{{ nextMessage }}
-    </button>
+
+    <button (click)="changeDate(1)" [disabled]="!hasNext" class="btn btn-ghost btn-sm">{{ nextMessage }}</button>
   </div>
-
-
   <app-card *ngFor="let sub of submissions;" [admin]="adminMode" [submission]="sub" [lazy]='true' class="w-full"/>
   <app-end></app-end>
-
-  <div class="btn-group grid grid-cols-3 w-full my-2">
-    <button (click)="setIndex(currentIndex-1)" [disabled]="!hasPrev" class="btn btn-ghost btn-sm">{{ preMessage }}
-    </button>
-    <button class="btn btn-ghost btn-sm">{{ currentMessage }}</button>
-    <button (click)="setIndex(currentIndex+1)" [disabled]="!hasNext" class="btn btn-ghost btn-sm">{{ nextMessage }}
-    </button>
-  </div>
-
 </div>
