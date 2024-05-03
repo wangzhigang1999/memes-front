@@ -14,7 +14,6 @@ export class VoteComponent {
 
   @Input() adminMode = false
   @Input() id: any
-  @Input() name: any
   @Input() like: any
   @Input() dislike: any
 

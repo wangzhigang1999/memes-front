@@ -74,3 +74,8 @@ export function setConfig(key: string, value: boolean) {
     alert('设置失败，请稍后再试~')
   }
 }
+
+
+export function isSmallScreen() {
+  return window.innerWidth < 768
+}

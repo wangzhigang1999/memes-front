@@ -1,52 +1,60 @@
-<div [id]="submission.id" class="card w-full shadow-lg   my-4">
-  <div (click)="center()">
-    <figure *ngIf="submission.submissionType==='IMAGE'" class="p-2">
-      @if (getConfig(ConfigItem.singleMode) || lazy) {
-        <img [defaultImage]="defaultImage" [lazyLoad]="submission.url" alt="" class="rounded-xl" src=""/>
-      } @else {
-        <img class="rounded-xl" src="{{submission.url}}" alt=""/>
-      }
-    </figure>
-
-    <figure *ngIf="submission.submissionType==='VIDEO'" class="p-2">
-      <video class="rounded-xl" controls>
-        <source src="{{submission.url}}" type="video/mp4">
-      </video>
-    </figure>
-
-    <figure *ngIf="submission.submissionType==='BILIBILI'" class="p-2 rounded">
-      <iframe [src]="submission.url | safe" allowfullscreen class="rounded" height="480px" width="640px"></iframe>
-    </figure>
-
-    <div *ngIf="submission.submissionType=='MARKDOWN'&& (submission.url || submission.content )"
-         class="p-4 md:p-8 max-h-[75vh] xl:max-h-[85vh] overflow-y-scroll">
-      <div *ngIf="submission.url">
-        <markdown [src]="submission.url" class="rounded break-words "/>
+<ng-template #flow>
+  @switch (submission.submissionType) {
+    @case ('IMAGE') {
+      <figure class="p-2">
+        @if (getConfig(ConfigItem.singleMode) || lazy) {
+          <img [defaultImage]="defaultImage" [lazyLoad]="submission.url" alt="" class="rounded-xl" src=""/>
+        } @else {
+          <img class="rounded-xl" src="{{submission.url}}" alt=""/>
+        }
+      </figure>
+    }
+    @case ('VIDEO') {
+      <figure class="p-2">
+        <video class="rounded-xl" controls>
+          <source src="{{submission.url}}" type="video/mp4">
+        </video>
+      </figure>
+    }
+    @case ('BILIBILI') {
+      <figure class="p-2 rounded">
+        <iframe [src]="submission.url | safe" allowfullscreen class="rounded" height="480px" width="640px"></iframe>
+      </figure>
+    }
+    @case ('MARKDOWN') {
+      <div class="p-4 md:p-8 max-h-[75vh] xl:max-h-[85vh] overflow-y-scroll">
+        <div *ngIf="submission.url">
+          <markdown [src]="submission.url" class="rounded break-words "/>
+        </div>
+        <div *ngIf="submission.content">
+          <markdown [data]="submission.content" class="rounded break-words"/>
+        </div>
       </div>
-      <div *ngIf="submission.content">
-        <markdown [data]="submission.content" class="rounded break-words">
-        </markdown>
+    }
+    @case ('BATCH') {
+      <div class="max-h-[70vh] overflow-y-scroll">
+        <div *ngFor="let child of submission.children">
+          <app-card [showVoteBar]="false" [submission]="child" [lazy]="lazy"/>
+        </div>
       </div>
+    }
+  }
+</ng-template>
+
+<div (click)="center()" [id]="submission.id" class="card w-full shadow-lg my-4">
+  @if (getConfig(ConfigItem.singleMode) || isSmallScreen()) {
+    <ng-container *ngTemplateOutlet="flow"></ng-container>
+  } @else {
+    <!--这个 modal 会触发 endless 中的 modal-->
+    <div onclick="modal.showModal()">
+      <ng-container *ngTemplateOutlet="flow"></ng-container>
     </div>
+  }
 
-    <div *ngIf="submission.submissionType=='BATCH'" class="max-h-[70vh] overflow-y-scroll">
-      <div *ngFor="let child of submission.children">
-        <app-card [showVoteBar]="false" [submission]="child"></app-card>
-      </div>
-    </div>
-  </div>
-
-
-  <div *ngIf="!review && showVoteBar">
-    <app-vote [dislike]="submission.down" [id]="submission.id" [like]="submission.up" [name]="submission.name"
-              [adminMode]=admin></app-vote>
-  </div>
-
-  <div *ngIf="review && showVoteBar" class="w-full text-center mt-2">
-    <div class="grid grid-cols-3 place-content-center">
+  @if (review) {
+    <div class="grid grid-cols-3 place-content-center w-full text-center mt-2">
       <button (click)="reject(submission.id)" class="btn w-fit mx-auto btn-sm btn-error">Reject</button>
-      <button (click)="merge(submission.id,nextID)" [disabled]="nextID==''"
-              class="btn w-fit mx-auto btn-sm btn-warning">
+      <button (click)="merge(submission.id,nextID)" [disabled]="nextID==''" class="btn btn-sm btn-warning mx-auto">
         MergeNext
       </button>
       <button (click)="accept(submission.id)" class="btn w-fit btn-sm mx-auto btn-success">Yay!</button>
@@ -55,6 +63,7 @@
       <div class="mx-auto"> {{ submission.timestamp | date:'MM-dd HH:mm' }}</div>
       <div class="mx-auto">{{ submission.uploader }}</div>
     </div>
-  </div>
-
+  } @else if (showVoteBar) {
+    <app-vote [dislike]="submission.down" [id]="submission.id" [like]="submission.up" [adminMode]=admin></app-vote>
+  }
 </div>

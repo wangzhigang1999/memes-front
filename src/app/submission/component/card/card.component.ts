@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Submission} from "../../../model/submission";
 import {ReviewService} from "../../../service/review.service";
 import {ImageGroupService} from "../../../service/image-group.service";
-import {getConfig} from "../../../utils";
+import {getConfig, isSmallScreen} from "../../../utils";
 import {ConfigItem} from "../../../model/config-item";
 
 @Component({
@@ -70,4 +70,5 @@ export class CardComponent {
 
   protected readonly getConfig = getConfig;
   protected readonly ConfigItem = ConfigItem;
+  protected readonly isSmallScreen = isSmallScreen;
 }

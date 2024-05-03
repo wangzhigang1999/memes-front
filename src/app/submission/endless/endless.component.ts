@@ -2,7 +2,7 @@ import {Component, HostListener} from '@angular/core';
 import {Page} from "../../model/page";
 import {Submission} from "../../model/submission";
 import {SubmissionService} from "../../service/submission.service";
-import {authorized, getConfig} from "../../utils";
+import {authorized, getConfig, isSmallScreen} from "../../utils";
 import {Response} from "../../model/response";
 import {ConfigItem} from "../../model/config-item";
 
@@ -32,7 +32,6 @@ export class EndlessComponent {
   // 监听点击事件
   @HostListener('click', ['$event'])
   onClick(event: any) {
-    console.log(event.target.id)
     // 如果点击的是 modal，关闭 modal
     if (event.target.id === 'modal') {
       (window as any).modal.close()
@@ -110,15 +109,12 @@ export class EndlessComponent {
 
   protected readonly getConfig = getConfig;
   protected readonly ConfigItem = ConfigItem;
+  protected readonly isSmallScreen = isSmallScreen;
 
   showSubmissionDetail(sub: Submission) {
     this.selectedSubmission = sub
   }
 
-  // is small screen
-  isSmallScreen() {
-    return window.innerWidth < 768
-  }
 }
 
 
