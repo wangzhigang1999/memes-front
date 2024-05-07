@@ -1,25 +1,26 @@
-<div class=" rounded-xl flex flex-wrap flex-row justify-around bg-zinc-100 dark:bg-zinc-900">
-  <div class="stat place-items-center w-fit">
-    <div class="stat-title">运营天数</div>
-    <div class="stat-value">{{ date }} 天</div>
+<div class="max-w-4xl mb-4 mx-auto">
+  <div class=" rounded-xl flex flex-wrap flex-row justify-around bg-zinc-100 dark:bg-zinc-900">
+    <div class="stat place-items-center w-fit">
+      <div class="stat-title">运营天数</div>
+      <div class="stat-value">{{ date }} 天</div>
+    </div>
+    <div class="stat place-items-center w-fit">
+      <div class="stat-title">有效请求</div>
+      <div class="stat-value">{{ reqNumber }}</div>
+    </div>
+    <div class="stat place-items-center w-fit f">
+      <div class="stat-title">平均耗时</div>
+      <div class="stat-value text-secondary">{{ averageCost }} ms</div>
+    </div>
+    <div class="stat place-items-center w-fit">
+      <div class="stat-title">独立 UUID</div>
+      <div class="stat-value text-success">{{ count(uuidCountList) }} 个</div>
+    </div>
   </div>
-  <div class="stat place-items-center w-fit">
-    <div class="stat-title">有效请求</div>
-    <div class="stat-value">{{ reqNumber }}</div>
-  </div>
-  <div class="stat place-items-center w-fit f">
-    <div class="stat-title">平均耗时</div>
-    <div class="stat-value text-secondary">{{ averageCost }} ms</div>
-  </div>
-  <div class="stat place-items-center w-fit">
-    <div class="stat-title">独立 UUID</div>
-    <div class="stat-value text-success">{{ count(uuidCountList) }} 个</div>
-  </div>
-</div>
 
-<div class="overflow-x-auto mt-4 border rounded-xl border-success">
-  <table class="table  table-zebra w-full text-center">
-    <thead>
+  <div class="overflow-x-auto mt-4 border rounded-xl border-success">
+    <table class="table  table-zebra w-full text-center">
+      <thead>
       <tr>
         <th>uuid</th>
         <th>count</th>
@@ -27,8 +28,8 @@
         <th>first</th>
         <th>last</th>
       </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
       <tr *ngFor="let item of top(10,uuidCountList)">
         <td>{{ item._id.substring(0, 8) }}</td>
         <td>{{ item.count }}</td>
@@ -36,13 +37,13 @@
         <td>{{ timestampToHHMM(item.firstTime) }}</td>
         <td>{{ timestampToHHMM(item.lastTime) }}</td>
       </tr>
-    </tbody>
-  </table>
-</div>
+      </tbody>
+    </table>
+  </div>
 
-<div class="overflow-x-auto mt-4 border rounded-xl border-success">
-  <table class="table table-compact table-zebra w-full text-center">
-    <thead>
+  <div class="overflow-x-auto mt-4 border rounded-xl border-success">
+    <table class="table table-compact table-zebra w-full text-center">
+      <thead>
       <tr>
         <th>url</th>
         <th>count</th>
@@ -50,8 +51,8 @@
         <th>max</th>
         <th>min</th>
       </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
       <tr *ngFor="let item of top(100,urlCountList)">
         <td>{{ item._id }}</td>
         <td>{{ item.count }}</td>
@@ -59,8 +60,7 @@
         <td>{{ msConvert(item.maxTimecost) }}</td>
         <td>{{ msConvert(item.minTimecost) }}</td>
       </tr>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
 </div>
-
-<div class="h-4"></div>

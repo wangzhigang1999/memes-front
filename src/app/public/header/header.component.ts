@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {NavigationEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -18,13 +18,9 @@ export class HeaderComponent implements OnInit {
     "4-4": "🌱",
     "4-22": "🌍",
     "5-1": "🎋",
-    "5-5": "🎏",
-    "6-1": "🏮",
-    "6-21": "🌞",
+    "6-1": "🌞",
     "6-25": "🐉",
-    "7-4": "🎆",
-    "9-7": "📚",
-    "9-10": "🏮",
+    "9-10": "📚",
     "10-1": "🎊",
     "10-31": "🎃",
     "11-11": "🎖️",

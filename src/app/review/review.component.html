@@ -1,69 +1,73 @@
-<div *ngIf="!hasToken" class="text-center mt-40 h-80">
-  <input type="text" placeholder="Token here" [(ngModel)]="token" class="input input-bordered input-success w-2/5" />
-  <input type="text" placeholder="PAT" [(ngModel)]="pat" class="input input-bordered input-success w-1/5 mx-2" />
-  <button class="btn btn-success" (click)="submitToken()">提交</button>
-</div>
+<div class="max-w-4xl mx-auto">
 
-
-<div class=" rounded-xl flex justify-around" *ngIf="hasToken">
-  <div class="stat place-items-center w-fit">
-    <div class="stat-title">审核通过</div>
-    <div class="stat-value">{{ passedNum }}</div>
-  </div>
-  <div class="stat place-items-center w-fit f">
-    <div class="stat-title">待审核</div>
-    <div class="stat-value text-secondary">{{ waitingNum }}</div>
-  </div>
-</div>
-
-<div *ngIf="hasToken">
-  <app-card (reviewed)="onReviewed($event)" *ngFor="let sub of waitingList;"
-    [nextID]="waitingList.indexOf(sub) + 1==waitingList.length?'':waitingList[waitingList.indexOf(sub) + 1].id"
-    [review]="true" [submission]="sub" class="w-full" />
-</div>
-
-
-<div *ngIf="hasToken" class="card w-fit bg-base-100  my-5 mx-auto max-w-4xl">
-  <figure class="figure-padding m-5">
-    <img src="assets/welcome.webp" class="rounded-xl" alt="" />
-  </figure>
-  <div class="mb-5 text-center">
-    <div>🤖 ~没有更多了~ 🤖</div>
-    <div class="flex-auto items-center my-2">
-      <label (click)="triggerCrawler()" class="btn  btn-success btn-outline mx-2 " for="message">🕷 </label>
-      <label (click)="batchAccept()" class="btn   btn-success btn-outline mx-2" for="message">AC</label>
-      <label (click)="batchReject()" class="btn   btn-warning btn-outline mx-2" for="message">NA</label>
-      <button (click)="removeToken()" class="btn  btn-error btn-outline mx-2">清除 token</button>
+  @if (!hasToken) {
+    <div class="text-center mt-40 h-80">
+      <input type="text" placeholder="Token here" [(ngModel)]="token" class="input input-bordered input-success w-2/5"/>
+      <input type="text" placeholder="PAT" [(ngModel)]="pat" class="input input-bordered input-success w-1/5 mx-2"/>
+      <button class="btn btn-success" (click)="submitToken()">提交</button>
     </div>
-
-    <div class="flex justify-around mt-2">
-      <div class="label">
-        <span class="label-text">BOT : </span>
-        <input (change)="updateBot()" [(ngModel)]="botEnable" class="ml-2 toggle toggle-success" type="checkbox" />
+  } @else {
+    <div class="rounded-xl flex justify-around">
+      <div class="stat place-items-center w-fit">
+        <div class="stat-title">审核通过</div>
+        <div class="stat-value text-success">{{ passedNum }}</div>
+      </div>
+      <div class="stat place-items-center w-fit f">
+        <div class="stat-title">待审核</div>
+        <div class="stat-value text-error">{{ waitingNum }}</div>
       </div>
     </div>
 
-    <div class="flex justify-around mt-2">
-      <div class="w-full">
-        <label class="cursor-pointer label ">
-          <span class="label-text w-1/4">MinSub : {{ minValue }} </span>
-          <input (change)="updateMax()" [(ngModel)]="minValue" max="200" min="0" type="range"
-            class="range range-success w-3/4" />
-        </label>
-      </div>
-    </div>
-  </div>
+    <app-card (reviewed)="onReviewed($event)" *ngFor="let sub of waitingList;"
+              [nextID]="waitingList.indexOf(sub) + 1==waitingList.length?'':waitingList[waitingList.indexOf(sub) + 1].id"
+              [review]="true" [submission]="sub" class="w-full"/>
 
 
-  <input type="checkbox" id="message" class="modal-toggle" />
-  <div class="modal">
-    <div class="modal-box text-center">
-      <h3 class="font-bold text-lg">{{ title }}</h3>
-      <p class="py-4">{{ message }}</p>
-      <div class="modal-action">
-        <label for="message" class="btn btn-success btn-sm">Yay!</label>
+    <div class="card w-fit bg-base-100  my-5 mx-auto max-w-4xl">
+      <figure class="figure-padding m-5">
+        <img src="assets/welcome.webp" class="rounded-xl" alt=""/>
+      </figure>
+      <div class="mb-5 text-center">
+        <div>🤖 ~没有更多了~ 🤖</div>
+        <div class="flex-auto items-center my-2">
+          <label (click)="triggerCrawler()" class="btn  btn-success btn-outline mx-2 " for="message">🕷 </label>
+          <label (click)="batchAccept()" class="btn   btn-success btn-outline mx-2" for="message">AC</label>
+          <label (click)="batchReject()" class="btn   btn-warning btn-outline mx-2" for="message">NA</label>
+          <button (click)="removeToken()" class="btn  btn-error btn-outline mx-2">清除 token</button>
+        </div>
+
+        <div class="flex justify-around mt-2">
+          <div class="label">
+            <span class="label-text">BOT : </span>
+            <input (change)="updateBot()" [(ngModel)]="botEnable" class="ml-2 toggle toggle-success" type="checkbox"/>
+          </div>
+        </div>
+
+        <div class="flex justify-around mt-2">
+          <div class="w-full">
+            <label class="cursor-pointer label ">
+              <span class="label-text w-1/4">MinSub : {{ minValue }} </span>
+              <input (change)="updateMax()" [(ngModel)]="minValue" max="200" min="0" type="range"
+                     class="range range-success w-3/4"/>
+            </label>
+          </div>
+        </div>
       </div>
+
+
+      <input type="checkbox" id="message" class="modal-toggle"/>
+      <div class="modal">
+        <div class="modal-box text-center">
+          <h3 class="font-bold text-lg">{{ title }}</h3>
+          <p class="py-4">{{ message }}</p>
+          <div class="modal-action">
+            <label for="message" class="btn btn-success btn-sm">Yay!</label>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </div>
+  }
+
 
 </div>
