@@ -41,15 +41,18 @@
   }
 </ng-template>
 
-<div (click)="center()" [id]="submission.id" class="card w-full shadow-lg my-4">
-  @if (getConfig(ConfigItem.singleMode) || isSmallScreen()) {
-    <ng-container *ngTemplateOutlet="flow"></ng-container>
-  } @else {
-    <!--这个 modal 会触发 endless 中的 modal-->
-    <div onclick="modal.showModal()">
+<div [id]="submission.id" class="card w-full shadow-lg my-4">
+
+  <div (click)="center()">
+    @if (getConfig(ConfigItem.singleMode) || isSmallScreen()) {
       <ng-container *ngTemplateOutlet="flow"></ng-container>
-    </div>
-  }
+    } @else {
+      <!--会触发 endless 中的 modal-->
+      <div onclick="modal.showModal()">
+        <ng-container *ngTemplateOutlet="flow"></ng-container>
+      </div>
+    }
+  </div>
 
   @if (review) {
     <div class="grid grid-cols-3 place-content-center w-full text-center mt-2">
