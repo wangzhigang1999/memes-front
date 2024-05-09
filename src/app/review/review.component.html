@@ -33,6 +33,7 @@
           <label (click)="triggerCrawler()" class="btn  btn-success btn-outline mx-2 " for="message">🕷 </label>
           <label (click)="batchAccept()" class="btn   btn-success btn-outline mx-2" for="message">AC</label>
           <label (click)="batchReject()" class="btn   btn-warning btn-outline mx-2" for="message">NA</label>
+          <button (click)="gc()" class="btn   btn-error btn-outline mx-2" >GC</button>
           <button (click)="removeToken()" class="btn  btn-error btn-outline mx-2">清除 token</button>
         </div>
 
@@ -43,12 +44,28 @@
           </div>
         </div>
 
-        <div class="flex justify-around mt-2">
+        <div class="flex flex-col justify-around mt-2">
           <div class="w-full">
             <label class="cursor-pointer label ">
               <span class="label-text w-1/4">MinSub : {{ minValue }} </span>
               <input (change)="updateMax()" [(ngModel)]="minValue" max="200" min="0" type="range"
-                     class="range range-success w-3/4"/>
+                     class="range range-success mx-2 w-3/4"/>
+            </label>
+          </div>
+
+          <div class="w-full">
+            <label class="cursor-pointer label ">
+              <span class="label-text w-1/4">TopK : {{ topK }} </span>
+              <input  [(ngModel)]="topK" max="100" min="10" type="range" (change)="updateTopK()"
+                     class="range range-success mx-2 w-3/4"/>
+            </label>
+          </div>
+
+          <div class="w-full">
+            <label class="cursor-pointer label ">
+              <span class="label-text w-1/4">Cache : {{ cacheSize }} </span>
+              <input  [(ngModel)]="cacheSize" max="10000" min="500" type="range" (change)="updateCacheSize()"
+                      class="range range-success w-3/4 mx-2"/>
             </label>
           </div>
         </div>

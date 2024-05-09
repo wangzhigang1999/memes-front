@@ -89,4 +89,19 @@ export class AdminService {
     let url = this.host + `/admin/sys`;
     return this.http.get(url);
   }
+
+  setTopK(topK: number) {
+    let url = this.host + `/admin/topK/${topK}`;
+    return this.http.post(url, null);
+  }
+
+  setCacheSize(cacheSize: number) {
+    let url = this.host + `/admin/cacheSize/${cacheSize}`;
+    return this.http.post(url, null);
+  }
+
+  gc() {
+    let url = this.host + `/admin/gc`;
+    return this.http.get(url);
+  }
 }

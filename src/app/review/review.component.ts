@@ -26,6 +26,9 @@ export class ReviewComponent implements OnInit {
 
   minValue = 50;
 
+  topK = 10;
+  cacheSize = 1000;
+
   constructor(private service: ReviewService, private admin: AdminService) {
     this.pat = localStorage.getItem('pat');
     if (this.pat == null) {
@@ -167,6 +170,8 @@ export class ReviewComponent implements OnInit {
       (data: Response) => {
         this.botEnable = data.data["botUp"];
         this.minValue = data.data["min_SUBMISSIONS"];
+        this.cacheSize = data.data["submissionCacheSize"];
+        this.topK = data.data["topK"];
       }
     )
   }
@@ -232,5 +237,21 @@ export class ReviewComponent implements OnInit {
         this.waitingNum = data.data.waitingNum;
       }
     )
+  }
+
+  updateCacheSize() {
+    this.admin.setCacheSize(this.cacheSize).subscribe(() => alert("设置成功"))
+
+  }
+
+  updateTopK() {
+    this.admin.setTopK(this.topK).subscribe(() => alert("设置成功"))
+  }
+
+  gc() {
+    if(!confirm("确定要触发垃圾回收吗？")) {
+      return
+    }
+    this.admin.gc().subscribe(() => alert("GC 成功"))
   }
 }
