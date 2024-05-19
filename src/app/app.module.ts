@@ -33,6 +33,7 @@ import {UUIDInterceptor} from "./uuid.interceptor";
 import {NgxMasonryModule} from "ngx-masonry";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {UserConfComponent} from "./userconf/user-conf.component";
+import {LazyLoadDirective} from "./lazy-load.directive";
 
 const routes: Routes = [
   {path: '', component: EndlessComponent},
@@ -73,7 +74,8 @@ const routes: Routes = [
     SearchComponent,
     TruncatePipe,
     ShareComponent,
-    SimilarComponent
+    SimilarComponent,
+    LazyLoadDirective,
   ],
   imports: [
     BrowserAnimationsModule,

@@ -55,6 +55,13 @@
   </div>
 
   @if (review) {
+    <div class="grid grid-cols-3 place-content-center w-full text-center overflow-x-auto"
+         appLazyLoad (lazyLoad)="loadSimilar()">
+      <div *ngFor="let similar of similarSubmissions" class="w-fit mx-auto" (click)="delete(similar.id)">
+        <img [src]="similar.url" class="h-32 rounded-xl" alt="">
+      </div>
+    </div>
+
     <div class="grid grid-cols-3 place-content-center w-full text-center mt-2">
       <button (click)="reject(submission.id)" class="btn w-fit mx-auto btn-sm btn-error">Reject</button>
       <button (click)="merge(submission.id,nextID)" [disabled]="nextID==''" class="btn btn-sm btn-warning mx-auto">
