@@ -70,7 +70,7 @@ export class CardComponent {
     if (dom != null) {
       dom.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
     }
-    this.loadSimilar()
+    // this.loadSimilar()
   }
 
   loadSimilar(force: boolean = false) {
