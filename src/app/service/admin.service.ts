@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { environment } from "../../environments/environment";
-import { Observable } from "rxjs";
+import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../environments/environment";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -28,23 +28,6 @@ export class AdminService {
 
 
   /**
-   * disable bot
-   */
-  disableBot(): Observable<any> {
-    let url = this.host + `/admin/bot/status/disable`;
-    return this.http.post(url, null);
-  }
-
-  /**
-   * enable bot
-   */
-  enableBot(): Observable<any> {
-    let url = this.host + `/admin/bot/status/enable`;
-    return this.http.post(url, null);
-  }
-
-
-  /**
    * 设置置顶
    */
   setTop(id: string): Observable<any> {
@@ -55,7 +38,7 @@ export class AdminService {
   /**
    * 取消置顶
    */
-  cancelTop(id: string): Observable<any> {
+  removeTop(id: string): Observable<any> {
     let url = this.host + `/admin/submission/top/${id}`;
     return this.http.delete(url);
   }
@@ -70,38 +53,24 @@ export class AdminService {
   }
 
 
-  setMinSubmission(min: number): Observable<any> {
-    let url = this.host + `/admin/submission/minimum/${min}`;
-    return this.http.post(url, null);
-  }
-
-
-  triggerCrawler(msPAT: string): Observable<any> {
+  invokeCrawler(msPAT: string): Observable<any> {
     let url = "https://dev.azure.com/wangzhigang1999-live/HelloWorld/_apis/pipelines/38/runs?api-version=6.1-preview.1"
     let headers = {
       'Authorization': 'Basic ' + msPAT,
       'Content-Type': 'application/json'
     }
-    return this.http.post(url, {}, { headers: headers })
+    return this.http.post(url, {}, {headers: headers})
   }
 
-  getSys(): Observable<any> {
-    let url = this.host + `/admin/sys`;
+  getConfig(): Observable<any> {
+    let url = this.host + `/admin/config`;
     return this.http.get(url);
   }
 
-  setTopK(topK: number) {
-    let url = this.host + `/admin/topK/${topK}`;
-    return this.http.post(url, null);
-  }
-
-  setCacheSize(cacheSize: number) {
-    let url = this.host + `/admin/cacheSize/${cacheSize}`;
-    return this.http.post(url, null);
-  }
-
-  gc() {
-    let url = this.host + `/admin/gc`;
-    return this.http.get(url);
+  setConfig(key: string, value: string) {
+    let url = this.host + `/admin/config`;
+    let param: any = {}
+    param[key] = value;
+    return this.http.post(url, param);
   }
 }

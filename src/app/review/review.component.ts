@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Response } from "../model/response";
-import { AdminService } from "../service/admin.service";
-import { Submission } from "../model/submission";
-import { ReviewService } from "../service/review.service";
+import {Component, OnInit} from '@angular/core';
+import {Response} from "../model/response";
+import {AdminService} from "../service/admin.service";
+import {Submission} from "../model/submission";
+import {ReviewService} from "../service/review.service";
 
 @Component({
   selector: 'app-review',
@@ -156,22 +156,17 @@ export class ReviewComponent implements OnInit {
     this.service.loadWaitingList().subscribe((data: any) => this.waitingList = data.data ? data.data : [])
   }
 
-  updateBot() {
-    if (this.botEnable) {
-      this.admin.enableBot().subscribe(data => console.log(data))
-    } else {
-      this.admin.disableBot().subscribe(data => console.log(data))
-    }
-  }
+
 
 
   getSys() {
-    this.admin.getSys().subscribe(
+    this.admin.getConfig().subscribe(
       (data: Response) => {
-        this.botEnable = data.data["botUp"];
-        this.minValue = data.data["min_SUBMISSIONS"];
-        this.cacheSize = data.data["submissionCacheSize"];
-        this.topK = data.data["topK"];
+        console.log(data.data)
+        this.botEnable = data.data["bot.up"] === "true";
+        this.minValue = data.data["submission.num.min"];
+        this.cacheSize = data.data["cache.size"];
+        this.topK = data.data["topk"];
       }
     )
   }
@@ -182,11 +177,6 @@ export class ReviewComponent implements OnInit {
     this.loadWaitingList()
     this.getStatistic()
     this.getSys()
-  }
-
-
-  updateMax() {
-    this.admin.setMinSubmission(this.minValue).subscribe(() => alert("设置成功"))
   }
 
 
@@ -217,7 +207,7 @@ export class ReviewComponent implements OnInit {
       this.message = '请稍后';
       localStorage.setItem("lastCrawlerTimestamp", new Date().getTime().toString());
 
-      this.admin.triggerCrawler(this.pat).subscribe(
+      this.admin.invokeCrawler(this.pat).subscribe(
         (data: any) => {
           this.title = '触发爬虫成功';
           this.message = data.state;
@@ -239,19 +229,26 @@ export class ReviewComponent implements OnInit {
     )
   }
 
-  updateCacheSize() {
-    this.admin.setCacheSize(this.cacheSize).subscribe(() => alert("设置成功"))
-
+  setCacheSize() {
+    this.admin.setConfig("cache.size", this.cacheSize.toString()).subscribe(() => alert("设置成功"))
   }
 
-  updateTopK() {
-    this.admin.setTopK(this.topK).subscribe(() => alert("设置成功"))
+  setTopK() {
+    this.setConfig("topk", this.topK.toString())
   }
 
-  gc() {
-    if(!confirm("确定要触发垃圾回收吗？")) {
-      return
-    }
-    this.admin.gc().subscribe(() => alert("GC 成功"))
+
+  setConfig(key: string, value: string) {
+    this.admin.setConfig(key, value).subscribe(() => alert("设置成功"))
   }
+
+
+  setMinSub() {
+    this.setConfig("submission.num.min", this.minValue.toString())
+  }
+
+  setBotStatus() {
+    this.setConfig("bot.up", this.botEnable ? "true" : "false")
+  }
+
 }

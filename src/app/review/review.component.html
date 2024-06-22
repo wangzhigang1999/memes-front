@@ -33,14 +33,15 @@
           <label (click)="triggerCrawler()" class="btn  btn-success btn-outline mx-2 " for="message">🕷 </label>
           <label (click)="batchAccept()" class="btn   btn-success btn-outline mx-2" for="message">AC</label>
           <label (click)="batchReject()" class="btn   btn-warning btn-outline mx-2" for="message">NA</label>
-          <button (click)="gc()" class="btn   btn-error btn-outline mx-2" >GC</button>
+          <!--          <button (click)="gc()" class="btn   btn-error btn-outline mx-2" >GC</button>-->
           <button (click)="removeToken()" class="btn  btn-error btn-outline mx-2">清除 token</button>
         </div>
 
         <div class="flex justify-around mt-2">
           <div class="label">
             <span class="label-text">BOT : </span>
-            <input (change)="updateBot()" [(ngModel)]="botEnable" class="ml-2 toggle toggle-success" type="checkbox"/>
+            <input (change)="setBotStatus()" [(ngModel)]="botEnable" class="ml-2 toggle toggle-success"
+                   type="checkbox"/>
           </div>
         </div>
 
@@ -48,7 +49,7 @@
           <div class="w-full">
             <label class="cursor-pointer label ">
               <span class="label-text w-1/4">MinSub : {{ minValue }} </span>
-              <input (change)="updateMax()" [(ngModel)]="minValue" max="200" min="0" type="range"
+              <input (change)="setMinSub()" [(ngModel)]="minValue" max="200" min="0" type="range"
                      class="range range-success mx-2 w-3/4"/>
             </label>
           </div>
@@ -56,7 +57,7 @@
           <div class="w-full">
             <label class="cursor-pointer label ">
               <span class="label-text w-1/4">TopK : {{ topK }} </span>
-              <input  [(ngModel)]="topK" max="100" min="10" type="range" (change)="updateTopK()"
+              <input [(ngModel)]="topK" max="100" min="10" type="range" (change)="setTopK()"
                      class="range range-success mx-2 w-3/4"/>
             </label>
           </div>
@@ -64,7 +65,7 @@
           <div class="w-full">
             <label class="cursor-pointer label ">
               <span class="label-text w-1/4">Cache : {{ cacheSize }} </span>
-              <input  [(ngModel)]="cacheSize" max="10000" min="500" type="range" (change)="updateCacheSize()"
+              <input [(ngModel)]="cacheSize" max="10000" min="500" type="range" (change)="setCacheSize()"
                       class="range range-success w-3/4 mx-2"/>
             </label>
           </div>

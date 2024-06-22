@@ -46,7 +46,7 @@ export class VoteComponent {
   }
 
   removeTop() {
-    this.admin.cancelTop(this.id).subscribe(() => alert("取消置顶成功"))
+    this.admin.removeTop(this.id).subscribe(() => alert("取消置顶成功"))
   }
 
   copy() {
