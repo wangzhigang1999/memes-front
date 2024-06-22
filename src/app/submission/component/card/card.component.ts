@@ -3,7 +3,7 @@ import {Submission} from "../../../model/submission";
 import {ReviewService} from "../../../service/review.service";
 import {ImageGroupService} from "../../../service/image-group.service";
 import {getConfig, isSmallScreen} from "../../../utils";
-import {ConfigItem} from "../../../model/config-item";
+import {UserConfigItem} from "../../../model/user-config-item";
 import {SubmissionService} from "../../../service/submission.service";
 import {Response} from "../../../model/response";
 
@@ -93,6 +93,6 @@ export class CardComponent {
   }
 
   protected readonly getConfig = getConfig;
-  protected readonly ConfigItem = ConfigItem;
+  protected readonly ConfigItem = UserConfigItem;
   protected readonly isSmallScreen = isSmallScreen;
 }

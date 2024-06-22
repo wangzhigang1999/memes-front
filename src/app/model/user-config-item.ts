@@ -1,4 +1,4 @@
-export enum ConfigItem {
+export enum UserConfigItem {
   singleMode = 'singleMode',
 
 }

@@ -3,6 +3,7 @@ import {Response} from "../model/response";
 import {AdminService} from "../service/admin.service";
 import {Submission} from "../model/submission";
 import {ReviewService} from "../service/review.service";
+import {SysConfigItem} from "../model/sys-config-item";
 
 @Component({
   selector: 'app-review',
@@ -12,6 +13,7 @@ import {ReviewService} from "../service/review.service";
 export class ReviewComponent implements OnInit {
 
   hasToken = false;
+  configMap: any = new Map<string, SysConfigItem[]>()
 
   waitingList: Submission[] = []
   token: any;
@@ -24,10 +26,6 @@ export class ReviewComponent implements OnInit {
   waitingNum = 0;
   botEnable = false;
 
-  minValue = 50;
-
-  topK = 10;
-  cacheSize = 1000;
 
   constructor(private service: ReviewService, private admin: AdminService) {
     this.pat = localStorage.getItem('pat');
@@ -37,19 +35,16 @@ export class ReviewComponent implements OnInit {
   }
 
   ngOnInit() {
-
     let token = localStorage.getItem('token');
     if (!token) {
       this.removeToken()
       return
     }
-
     // 说明已经验证过了
     if (localStorage.getItem('token-ok') === "true") {
       this.init()
       return
     }
-
     // 有 token 但是没有验证过，需要验证
     this.admin.verifyToken(token).subscribe(
       {
@@ -157,18 +152,39 @@ export class ReviewComponent implements OnInit {
   }
 
 
-
-
   getSys() {
     this.admin.getConfig().subscribe(
       (data: Response) => {
-        console.log(data.data)
-        this.botEnable = data.data["bot.up"] === "true";
-        this.minValue = data.data["submission.num.min"];
-        this.cacheSize = data.data["cache.size"];
-        this.topK = data.data["topk"];
+        let visData: SysConfigItem[] = data.data.filter((item: SysConfigItem) => item.visible);
+
+        visData.forEach((item: SysConfigItem) => {
+          switch (item.type) {
+            case "BOOLEAN":
+              item.value = item.value == 'true'
+              break
+            case "DOUBLE":
+              item.value = Number.parseFloat(item.value)
+              break
+            case "INTEGER":
+              item.value = Number.parseInt(item.value)
+              break
+            default:
+              console.log("Not match")
+          }
+        })
+
+        for (let item of visData) {
+          if (this.configMap[item.type]) {
+            this.configMap[item.type].push(item)
+          } else {
+            this.configMap[item.type] = [item]
+          }
+        }
+
+        console.log(this.configMap["BOOLEAN"])
       }
     )
+
   }
 
   init() {
@@ -205,12 +221,12 @@ export class ReviewComponent implements OnInit {
     if (this.pat) {
       this.title = '触发爬虫中...';
       this.message = '请稍后';
-      localStorage.setItem("lastCrawlerTimestamp", new Date().getTime().toString());
 
       this.admin.invokeCrawler(this.pat).subscribe(
         (data: any) => {
           this.title = '触发爬虫成功';
           this.message = data.state;
+          localStorage.setItem("lastCrawlerTimestamp", new Date().getTime().toString());
         }
       )
     } else {
@@ -229,26 +245,8 @@ export class ReviewComponent implements OnInit {
     )
   }
 
-  setCacheSize() {
-    this.admin.setConfig("cache.size", this.cacheSize.toString()).subscribe(() => alert("设置成功"))
-  }
-
-  setTopK() {
-    this.setConfig("topk", this.topK.toString())
-  }
-
 
   setConfig(key: string, value: string) {
     this.admin.setConfig(key, value).subscribe(() => alert("设置成功"))
   }
-
-
-  setMinSub() {
-    this.setConfig("submission.num.min", this.minValue.toString())
-  }
-
-  setBotStatus() {
-    this.setConfig("bot.up", this.botEnable ? "true" : "false")
-  }
-
 }

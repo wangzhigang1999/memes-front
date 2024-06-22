@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {getConfig, setConfig} from "../utils";
-import {ConfigItem} from "../model/config-item";
+import {UserConfigItem} from "../model/user-config-item";
 import {ReactiveFormsModule} from "@angular/forms";
 
 @Component({
@@ -15,5 +15,5 @@ export class UserConfComponent {
 
   protected readonly getConfig = getConfig;
   protected readonly setConfig = setConfig;
-  protected readonly ConfigItem = ConfigItem;
+  protected readonly ConfigItem = UserConfigItem;
 }

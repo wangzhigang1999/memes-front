@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {getConfig} from "./utils";
-import {ConfigItem} from "./model/config-item";
+import {UserConfigItem} from "./model/user-config-item";
 
 @Component({
   selector: 'app-root',
@@ -9,5 +9,5 @@ import {ConfigItem} from "./model/config-item";
 })
 export class AppComponent {
   protected readonly getConfig = getConfig;
-  protected readonly ConfigItem = ConfigItem;
+  protected readonly ConfigItem = UserConfigItem;
 }

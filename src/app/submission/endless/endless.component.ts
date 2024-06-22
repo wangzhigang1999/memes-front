@@ -4,7 +4,7 @@ import {Submission} from "../../model/submission";
 import {SubmissionService} from "../../service/submission.service";
 import {authorized, getConfig, isSmallScreen} from "../../utils";
 import {Response} from "../../model/response";
-import {ConfigItem} from "../../model/config-item";
+import {UserConfigItem} from "../../model/user-config-item";
 
 @Component({
   selector: 'app-endless',
@@ -108,7 +108,7 @@ export class EndlessComponent {
   }
 
   protected readonly getConfig = getConfig;
-  protected readonly ConfigItem = ConfigItem;
+  protected readonly ConfigItem = UserConfigItem;
   protected readonly isSmallScreen = isSmallScreen;
 
   showSubmissionDetail(sub: Submission) {
