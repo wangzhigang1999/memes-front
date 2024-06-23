@@ -48,7 +48,7 @@
         <!--integer-->
         <div class="flex flex-col justify-around mt-2">
           <div class="w-full" *ngFor="let item of configMap['INTEGER']">
-            <label class="cursor-pointer label ">
+            <label class="label">
               <span class="label-text w-2/5 overflow-x-auto tece">{{ item.visibleName }} : {{ item.value }} </span>
               <input (change)="setConfig(item.key,item.value.toString())" [(ngModel)]="item.value"
                      [max]="item.value + 10" min="0" type="range"

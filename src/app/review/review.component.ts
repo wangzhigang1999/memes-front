@@ -24,8 +24,6 @@ export class ReviewComponent implements OnInit {
 
   passedNum = 0;
   waitingNum = 0;
-  botEnable = false;
-
 
   constructor(private service: ReviewService, private admin: AdminService) {
     this.pat = localStorage.getItem('pat');
@@ -197,15 +195,9 @@ export class ReviewComponent implements OnInit {
 
 
   triggerCrawler() {
-    if (!confirm("确定要触发爬虫吗？")) {
+    if (!confirm("启动前请先打开Bot，确定要触发爬虫吗？")) {
       this.title = '取消触发爬虫';
       this.message = '任务已取消';
-      return
-    }
-
-    if (!this.botEnable) {
-      this.title = '触发爬虫错误';
-      this.message = '请先启动爬虫';
       return
     }
 
