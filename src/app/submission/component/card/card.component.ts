@@ -30,11 +30,11 @@ export class CardComponent {
 
 
   reject(id: string) {
-    this.service.review(id, "accept").subscribe(() => this.hidden([id], false))
+    this.service.review(id, "reject").subscribe(() => this.hidden([id], false))
   }
 
   accept(id: string) {
-    this.service.review(id, "reject").subscribe(() => this.hidden([id], true))
+    this.service.review(id, "accept").subscribe(() => this.hidden([id], true))
   }
 
   hidden(ids: string[], accept: boolean = true) {
