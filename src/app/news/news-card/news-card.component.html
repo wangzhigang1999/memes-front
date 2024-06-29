@@ -22,7 +22,7 @@
 
     <div class="card-actions justify-end">
       <a class="badge badge-secondary" href="{{news.sourceURL}}" target="_blank">原文</a>
-      <div *ngIf="news.author!=''" class="badge badge-info">{{ news.author }}</div>
+      <div *ngIf="news.author!=''" class="badge badge-info">{{ news.author | truncate:10 }}</div>
       <div class="badge badge-success">{{ news.date }}</div>
     </div>
   </div>

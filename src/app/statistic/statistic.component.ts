@@ -120,7 +120,7 @@ export class StatisticComponent {
       list.push(obj);
     };
 
-    merge(/\/submission\/[0-9a-z]+\/(like|dislike)/, "/https?:\/\/[0-9a-z.:]+/", '/submission/vote');
+    merge(/\/submission\/feedback\/[0-9a-z]+\/(like|dislike)/, "/https?:\/\/[0-9a-z.:]+/", '/submission/feedback');
     merge(/\/post/, '/post', '/submission/post');
     merge(/\/submission\/date\/[0-9]{4}-[0-9]{2}-[0-9]{2}/, "/\/submission\/date/", '/submission/date');
     merge(/\/news\/month\/[0-9]{2}/, "/news/date", '/news/date');

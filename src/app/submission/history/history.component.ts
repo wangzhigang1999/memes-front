@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SubmissionService} from '../../service/submission.service';
 import {Submission} from '../../model/submission';
 import {authorized} from '../../utils';
+import {Response} from "../../model/response";
 
 @Component({
   selector: 'app-history',
@@ -13,6 +14,9 @@ export class HistoryComponent implements OnInit {
   nextMessage = '🙈';
   hasNext = false;
   submissions: Submission[] = [];
+  idSet = new Set<string>();
+  lastID = "";
+
   adminMode = false;
   selectedDate: string;
   todayDate: string;
@@ -39,17 +43,26 @@ export class HistoryComponent implements OnInit {
     if (date == undefined || date === '') {
       return;
     }
+    this.idSet.clear()
+    this.submissions = [];
     this.selectedDate = date;
-    this.service.getSubmissionByDate(date).subscribe((data: any) => {
-      this.submissions = data.data;
-      this.hasNext = date !== this.todayDate;
-      this.nextMessage = this.hasNext ? '👉👉👉' : '🙈🙈🙈';
-    });
+    this.update(this.selectedDate)
   }
 
   changeDate(offset: number): void {
     const date = new Date(this.selectedDate);
     date.setDate(date.getDate() + offset);
     this.setDate(date.toISOString().split('T')[0]);
+  }
+
+  update(date: string = "") {
+    this.service.listSubmissions(this.lastID, 20, date).subscribe((data: Response) => {
+      const uniqueData: Submission[] = data.data.list.filter((item: Submission) => !this.idSet.has(item.id));
+      this.submissions.push(...uniqueData);
+      uniqueData.forEach((item: Submission) => this.idSet.add(item.id));
+      this.lastID = this.submissions[this.submissions.length - 1].id;
+      this.hasNext = date !== this.todayDate;
+      this.nextMessage = this.hasNext ? '👉👉👉' : '🙈🙈🙈';
+    });
   }
 }

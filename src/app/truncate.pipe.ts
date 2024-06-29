@@ -1,11 +1,14 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
   name: 'truncate'
 })
 export class TruncatePipe implements PipeTransform {
 
-  transform(value: string, ...args: any[]): string {
+  transform(value: string | null, ...args: any[]): string {
+    if (value == null) {
+      return "";
+    }
     // get target length
     let targetLength = args[0];
     if (value.length <= targetLength) {

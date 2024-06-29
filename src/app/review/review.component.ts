@@ -99,7 +99,7 @@ export class ReviewComponent implements OnInit {
     this.title = '批量通过中...';
     this.message = '批量通过中...';
     let ids = this.waitingList.map(submission => submission.id);
-    this.service.batchAccept(ids).subscribe((data: Response) => {
+    this.service.batchReview(ids, "accept").subscribe((data: Response) => {
       this.title = '批量通过成功';
       this.message = '批量通过成功';
       this.passedNum += data.data
@@ -118,7 +118,7 @@ export class ReviewComponent implements OnInit {
     this.title = '批量拒绝中...';
     this.message = '批量拒绝中...';
     let ids = this.waitingList.map(submission => submission.id);
-    this.service.batchReject(ids).subscribe((data: Response) => {
+    this.service.batchReview(ids, "reject").subscribe((data: Response) => {
       this.title = '批量拒绝成功';
       this.message = '批量拒绝成功';
       this.waitingNum -= data.data
@@ -229,10 +229,14 @@ export class ReviewComponent implements OnInit {
 
 
   private getStatistic() {
-    this.service.statistics().subscribe(
+    this.service.getStatusNum("submission").subscribe(
       (data: Response) => {
-        this.passedNum = data.data.passedNum;
-        this.waitingNum = data.data.waitingNum;
+        this.passedNum = data.data;
+      }
+    )
+    this.service.getStatusNum("waiting_submission").subscribe(
+      (data: Response) => {
+        this.waitingNum = data.data;
       }
     )
   }

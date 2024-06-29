@@ -4,13 +4,13 @@ import {SubmissionService} from "../../../service/submission.service";
 import {copyToClipboard} from "../../../utils";
 
 @Component({
-  selector: 'app-vote',
-  templateUrl: './vote.component.html',
-  styleUrls: ['./vote.component.css']
+  selector: 'app-feedback',
+  templateUrl: './feedback.component.html',
+  styleUrls: ['./feedback.component.css']
 })
-export class VoteComponent {
-  upBtn = false;
-  downBtn = false;
+export class FeedbackComponent {
+  likeBtn = false;
+  dislikeBtn = false;
 
   @Input() adminMode = false
   @Input() id: any
@@ -26,18 +26,19 @@ export class VoteComponent {
   }
 
   likeClass() {
-    return this.upBtn ? this.activeBtn : this.deactivateBtn;
+    return this.likeBtn ? this.activeBtn : this.deactivateBtn;
   }
 
   dislikeClass() {
-    return this.downBtn ? this.activeBtn : this.deactivateBtn;
+    return this.dislikeBtn ? this.activeBtn : this.deactivateBtn;
   }
 
-  vote(isUpvote: boolean) {
-    this.upBtn = isUpvote;
-    this.downBtn = !isUpvote;
-    isUpvote ? this.like++ : this.dislike++
-    this.service.vote(this.id, isUpvote).subscribe()
+  feedback(like: boolean) {
+    this.likeBtn = like;
+    this.dislikeBtn = !like;
+    like ? this.like++ : this.dislike++
+    const feedback = like ? "like" : "dislike"
+    this.service.feedback(this.id, feedback).subscribe()
   }
 
 

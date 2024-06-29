@@ -8,8 +8,8 @@ export interface Submission {
   "name": string,
   "deleted": boolean,
   "timestamp": number,
-  "up": number,
-  "down": number
+  "like": number,
+  "dislike": number
   "children": Submission[]
 
   // add constructor

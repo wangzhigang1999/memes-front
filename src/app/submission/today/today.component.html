@@ -1,5 +1,8 @@
 <div class="max-w-4xl mx-auto">
   <app-top></app-top>
-  <app-card *ngFor="let sub of submissions;" [admin]="adminMode" [submission]="sub" [lazy]="true" class="w-full"/>
+  <div (scrolled)="this.update()" [infiniteScrollDistance]="3" [infiniteScrollThrottle]="50" class="search-results"
+       infiniteScroll>
+    <app-card *ngFor="let sub of submissions;" [admin]="adminMode" [lazy]="true" [submission]="sub" class="w-full"/>
+  </div>
   <app-end></app-end>
 </div>

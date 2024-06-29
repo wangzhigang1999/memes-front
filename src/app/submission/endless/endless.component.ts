@@ -62,13 +62,12 @@ export class EndlessComponent {
         this.addToSet(top)
       }
     )
-    this.submissionService.getPage(this.lastId, this.pageSize).subscribe(
+    this.submissionService.listSubmissions(this.lastId, this.pageSize).subscribe(
       (data: any) => {
         const page: Page<Submission> = data.data
-        this.submissions.push(...page.list)
+        this.submissions.push(...page.list.filter((submission: Submission) => !this.curElement.has(submission.id)))
         this.pageSize = page.pageSize
         this.addToSet(page.list)
-        // get lastId
         if (this.submissions.length > 0) {
           this.lastId = this.submissions[this.submissions.length - 1].id
         }
@@ -82,7 +81,7 @@ export class EndlessComponent {
       return
     }
     this.requesting = true
-    this.submissionService.getPage(this.lastId, this.pageSize).subscribe(
+    this.submissionService.listSubmissions(this.lastId, this.pageSize).subscribe(
       (data: any) => {
         const page: Page<Submission> = data.data
         page.list.forEach(

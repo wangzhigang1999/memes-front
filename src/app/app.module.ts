@@ -22,7 +22,7 @@ import {ShareComponent} from "./share/share.component";
 import {StatisticComponent} from './statistic/statistic.component';
 import {CardComponent} from './submission/component/card/card.component';
 import {TopComponent} from './submission/component/top/top.component';
-import {VoteComponent} from './submission/component/vote/vote.component';
+import {FeedbackComponent} from './submission/component/feedback/feedback.component';
 import {EndlessComponent} from './submission/endless/endless.component';
 import {HistoryComponent} from './submission/history/history.component';
 import {SimilarComponent} from "./submission/similar/similar.component";
@@ -34,6 +34,7 @@ import {NgxMasonryModule} from "ngx-masonry";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {UserConfComponent} from "./userconf/user-conf.component";
 import {LazyLoadDirective} from "./lazy-load.directive";
+import {SearchCardComponent} from "./search/search-card/search-card.component";
 
 const routes: Routes = [
   {path: '', component: EndlessComponent},
@@ -55,7 +56,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    VoteComponent,
+    FeedbackComponent,
     HeaderComponent,
     CardComponent,
     TodayComponent,
@@ -88,7 +89,8 @@ const routes: Routes = [
     LazyLoadImageModule,
     InfiniteScrollModule,
     NgOptimizedImage,
-    MarkdownModule.forRoot()
+    MarkdownModule.forRoot(),
+    SearchCardComponent
   ],
   providers: [
     {

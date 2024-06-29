@@ -74,6 +74,7 @@
       <div class="mx-auto">{{ submission.uploader }}</div>
     </div>
   } @else if (showVoteBar) {
-    <app-vote [dislike]="submission.down" [id]="submission.id" [like]="submission.up" [adminMode]=admin></app-vote>
+    <app-feedback [dislike]="submission.dislike" [id]="submission.id" [like]="submission.like"
+                  [adminMode]=admin></app-feedback>
   }
 </div>

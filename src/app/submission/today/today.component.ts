@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { Submission } from "../../model/submission";
-import { SubmissionService } from "../../service/submission.service";
-import { authorized } from "../../utils";
+import {Component} from '@angular/core';
+import {Submission} from "../../model/submission";
+import {SubmissionService} from "../../service/submission.service";
+import {authorized} from "../../utils";
+import {Response} from "../../model/response";
 
 @Component({
   selector: 'app-today',
@@ -11,15 +12,34 @@ import { authorized } from "../../utils";
 export class TodayComponent {
 
   public submissions: Submission[] = []
-
-
+  idSet = new Set<string>();
+  lastId = "";
+  date = ""
   adminMode = false;
 
   constructor(private service: SubmissionService) {
+    const today = new Date();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const year = today.getFullYear();
+    this.date = `${year}-${month}-${day}`;
   }
 
   ngOnInit(): void {
+    this.idSet.clear()
+    this.submissions = []
     this.adminMode = authorized()
-    this.service.getTodaySubmissions().subscribe(data => this.submissions = data.data)
+    this.update()
+  }
+
+  update() {
+    this.service.listSubmissions(this.lastId, 20, this.date).subscribe(
+      (data: Response) => {
+        const uniqueData: Submission [] = data.data.list.filter((item: Submission) => !this.idSet.has(item.id))
+        this.submissions.push(...uniqueData)
+        uniqueData.forEach((item: Submission) => this.idSet.add(item.id))
+        this.lastId = this.submissions[this.submissions.length - 1].id
+      }
+    )
   }
 }

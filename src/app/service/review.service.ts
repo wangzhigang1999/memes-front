@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { environment } from "../../environments/environment";
-import { Observable } from "rxjs";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {environment} from "../../environments/environment";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -25,43 +25,23 @@ export class ReviewService {
   }
 
 
-  /**
-   * 接受投稿
-   * @param id
-   */
-  accept(id: string) {
-    let url = this.host + `/admin/review/accept/${id}`;
+  review(id: string, operation: string) {
+    let url = this.host + `/admin/review/${operation}/${id}`;
     return this.http.post(url, null);
   }
 
-  /**
-   * 拒绝投稿
-   * @param id
-   */
-  reject(id: string) {
-    let url = this.host + `/admin/review/reject/${id}`;
-    return this.http.post(url, null);
-  }
-
-  batchAccept(id: string[]): Observable<any> {
-    let url = this.host + `/admin/review/accept/batch`;
+  batchReview(id: string[], operation: string): Observable<any> {
+    let url = this.host + `/admin/review/batch/${operation}`;
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(url, id, { headers: headers });
+    return this.http.post(url, id, {headers: headers});
   }
 
   /**
    * 统计信息
    */
-  statistics(): Observable<any> {
-    let url = this.host + '/admin/review/statistic';
+  getStatusNum(status: string): Observable<any> {
+    let url = this.host + `/admin/review/statistic/${status}`;
     return this.http.get(url);
-  }
-
-  batchReject(ids: string[]): Observable<any> {
-    let url = this.host + `/admin/review/reject/batch`;
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(url, ids, { headers: headers });
   }
 }

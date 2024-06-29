@@ -19,45 +19,12 @@ export class SubmissionService {
   }
 
   /**
-   * get today's submissions
-   */
-  getTodaySubmissions(): Observable<any> {
-    // get today YYYY-MM-DD with timezone shanghai
-    let today = new Date().toLocaleDateString('zh-CN', { timeZone: 'Asia/Shanghai' })
-    // if the day month year is 1,2,3,4,5,6,7,8,9,0,then add 0 before it
-    let todayArray = today.split('/')
-    for (let i = 0; i < todayArray.length; i++) {
-      if (todayArray[i].length == 1) {
-        todayArray[i] = '0' + todayArray[i]
-      }
-    }
-    today = todayArray.join('-')
-    let url = this.host + '/submission/date/' + today
-    return this.http.get(url);
-  }
-
-  /**
-   * get submissions by date
-   * @param date YYYY-MM-DD
-   */
-  getSubmissionByDate(date: string): Observable<any> {
-    let url = this.host + '/submission/date/' + date
-    return this.http.get(url);
-  }
-
-  /**
-   * vote for a submission
+   * feedback for a submission
    * @param id
-   * @param up true for like, false for dislike
+   * @param feedback like or dislike
    */
-  vote(id: string, up: boolean): Observable<any> {
-    let url: string;
-
-    if (up) {
-      url = this.host + `/submission/${id}/like`;
-    } else {
-      url = this.host + `/submission/${id}/dislike`;
-    }
+  feedback(id: string, feedback: string): Observable<any> {
+    let url = this.host + `/submission/feedback/${id}/${feedback}`;
     return this.http.post(url, null);
   }
 
@@ -95,8 +62,8 @@ export class SubmissionService {
   }
 
 
-  getPage(lastId: string, pageSize: number) {
-    let url = this.host + `/submission/page?lastID=${lastId}&pageSize=${pageSize}`;
+  listSubmissions(lastId: string = "", pageSize: number = 18, date: string = ""): Observable<any> {
+    let url = this.host + `/submission?lastID=${lastId}&pageSize=${pageSize}&date=${date}`;
     return this.http.get(url);
   }
 
@@ -122,5 +89,10 @@ export class SubmissionService {
   deleteById(id: string) {
     let url = this.host + `/submission/${id}`;
     return this.http.delete(url);
+  }
+
+  getRandom(): Observable<any> {
+    let url = this.host + `/submission/random`;
+    return this.http.get(url);
   }
 }

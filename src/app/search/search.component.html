@@ -1,8 +1,8 @@
 <div class="max-w-4xl mx-auto">
   <div class="mt-4 mx-2 flex items-center">
-    <input (change)="search(keyword)" [(ngModel)]="keyword"
+    <input (change)="search(true)" [(ngModel)]="keyword"
            class="w-full h-12  md:max-w-5xl border border-success rounded-l-2xl text-center text-sm md:text-lg outline-none"
-           placeholder="Type to search by user, board or keyword." type="text"/>
+           placeholder="Type to search by user, board and keyword." type="text"/>
 
     <!--a search badge-->
     <button class="w-12 h-12  inline-block bg-success rounded-r-2xl">
@@ -11,38 +11,27 @@
         <path d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" stroke-linecap="round"
               stroke-linejoin="round"/>
       </svg>
-      <svg (click)="this.keyword='';getLatest(20)" *ngIf="keyword.length>0" class="w-9 h-9 pl-2" fill="none"
+      <!--close badge-->
+      <svg (click)="this.keyword='';this.search(true)" *ngIf="keyword.length>0" class="w-9 h-9 pl-2" fill="none"
            stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-
     </button>
 
   </div>
 
-  <div class="grid grid-cols-1  gap-2 m-2 place-items-center">
-    <div *ngFor="let post of results" class="bg-base-100 shadow-xl rounded-xl p-4 w-full">
-      <a [href]="post.link" class="font-bold text-lg mb- hover:text-success decoration-dashed" target="_blank">
-        {{ post.title }}
-      </a>
-      <div class="flex items-center gap-2 w-full my-2">
-        <div (click)="searchByAuthor(post.author,true)"
-             class="font-bold w-full underline hover:cursor-pointer  text-left">{{ post.author }}
-        </div>
-        <div (click)="searchByBoard(post.board,true)"
-             class="hover:cursor-pointer  font-bold w-full underline  text-center">{{ post.board }}
-        </div>
-        <div class="font-bold w-full block sm:hidden">{{ post.pubDate.substring(0, 10) }}</div>
-        <div class="font-bold w-full hidden sm:block">{{ post.pubDate }}</div>
-      </div>
-    </div>
-    <p *ngIf="results.length>0" class="my-1">默认只显示 20 条</p>
+  <div (scrolled)="this.search()" [infiniteScrollDistance]="3" [infiniteScrollThrottle]="50" class="search-results"
+       infiniteScroll>
+    <app-search-card (setBoard)="keyword=$event; this.search(true)" (setUser)="keyword=$event; this.search(true)"
+                     *ngFor="let post of posts"
+                     [post]="post">
+    </app-search-card>
   </div>
 
 
   <!-- for empty result-->
 
-  <div class="card w-full text-center" *ngIf="results.length==0 && !loading">
+  <div *ngIf="posts.length==0 && !loading" class="card w-full text-center mt-20">
     <figure>
       <img [src]="randomCode" alt="" class="rounded-xl scale-100 md:scale-75"/>
     </figure>
