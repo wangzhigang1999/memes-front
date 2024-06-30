@@ -21,13 +21,14 @@ export class CardComponent {
   @Input() nextID = '';
   @Input() lazy = false;
   defaultImage = "assets/welcome.webp";
-  @Output() private reviewed = new EventEmitter<string[]>();
-
   similarSubmissions: Submission[] = [];
+  protected readonly getConfig = getConfig;
+  protected readonly ConfigItem = UserConfigItem;
+  protected readonly isSmallScreen = isSmallScreen;
+  @Output() private reviewed = new EventEmitter<string[]>();
 
   constructor(private service: ReviewService, private groupService: ImageGroupService, private submissionService: SubmissionService) {
   }
-
 
   reject(id: string) {
     this.service.review(id, "reject").subscribe(() => this.hidden([id], false))
@@ -91,8 +92,4 @@ export class CardComponent {
     // }
     // this.submissionService.deleteById(id).subscribe(() => this.loadSimilar(true))
   }
-
-  protected readonly getConfig = getConfig;
-  protected readonly ConfigItem = UserConfigItem;
-  protected readonly isSmallScreen = isSmallScreen;
 }

@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { News } from "../../model/news";
-import { NewsService } from "../../service/news.service";
-import { scrollToTop } from "../../utils";
+import {Component} from '@angular/core';
+import {News} from "../../model/news";
+import {NewsService} from "../../service/news.service";
+import {scrollToTop} from "../../utils";
 
 @Component({
   selector: 'app-news-today',

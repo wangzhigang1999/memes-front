@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { Submission } from "../../../model/submission";
-import { authorized } from "../../../utils";
-import { SubmissionService } from "../../../service/submission.service";
+import {Component} from '@angular/core';
+import {Submission} from "../../../model/submission";
+import {authorized} from "../../../utils";
+import {SubmissionService} from "../../../service/submission.service";
 
 @Component({
   selector: 'app-top',

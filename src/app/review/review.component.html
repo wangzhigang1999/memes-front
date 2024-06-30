@@ -22,44 +22,20 @@
               [nextID]="waitingList.indexOf(sub) + 1==waitingList.length?'':waitingList[waitingList.indexOf(sub) + 1].id"
               [review]="true" [submission]="sub" class="w-full"/>
 
-
     <div class="card w-fit bg-base-100  mt-5 mx-auto max-w-4xl mb-20">
       <figure class="figure-padding m-5">
         <img src="assets/welcome.webp" class="rounded-xl" alt=""/>
       </figure>
-      <div class="mb-5 text-center">
-        <div>🤖 ~没有更多了~ 🤖</div>
-        <div class="flex-auto items-center my-2">
+      <div class="my-5 text-center">
+        <div class="my-4">🤖 ~没有更多了~ 🤖</div>
+        <div class="flex-auto items-center my-4">
           <label (click)="triggerCrawler()" class="btn  btn-success btn-outline mx-2 " for="message">🕷 </label>
           <label (click)="batchAccept()" class="btn   btn-success btn-outline mx-2" for="message">AC</label>
           <label (click)="batchReject()" class="btn   btn-warning btn-outline mx-2" for="message">NA</label>
           <button (click)="removeToken()" class="btn  btn-error btn-outline mx-2">清除 token</button>
         </div>
 
-        <!-- bool -->
-        <div class="flex justify-around mt-2">
-          <div class="label" *ngFor="let item of configMap['BOOLEAN']">
-            <span class="label-text">{{ item.visibleName }} : </span>
-            <input (change)="setConfig(item.key,item.value.toString())" [(ngModel)]="item.value"
-                   class="ml-2 toggle toggle-success"
-                   type="checkbox"/>
-          </div>
-        </div>
-        <!--integer-->
-        <div class="flex flex-col justify-around mt-2">
-          <div class="w-full" *ngFor="let item of configMap['INTEGER']">
-            <label class="label">
-              <span class="label-text w-2/5 overflow-x-auto tece">{{ item.visibleName }} : {{ item.value }} </span>
-              <input (change)="setConfig(item.key,item.value.toString())" [(ngModel)]="item.value"
-                     [max]="item.value + 10" min="0" type="range"
-                     class="range range-success mx-2 w-3/4"/>
-            </label>
-          </div>
-        </div>
-
       </div>
-
-
       <input type="checkbox" id="message" class="modal-toggle"/>
       <div class="modal">
         <div class="modal-box text-center">
@@ -70,7 +46,6 @@
           </div>
         </div>
       </div>
-
     </div>
   }
 

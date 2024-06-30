@@ -122,6 +122,16 @@ export class StatisticComponent {
     return list.filter(item => item.count > 0)
   }
 
+  ban(_id: string) {
+    if (confirm("确定要拉黑吗, ID = " + _id + " ?")) {
+      this.service.setBlacklist(_id).subscribe(
+        (response: Response) => {
+          console.log(response)
+        }
+      )
+      alert("拉黑成功")
+    }
+  }
 }
 
 

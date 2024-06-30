@@ -73,4 +73,14 @@ export class AdminService {
     param[key] = value;
     return this.http.post(url, param);
   }
+
+  setBlacklist(uuid: string): Observable<any> {
+    let url = this.host + `/admin/blacklist/${uuid}`;
+    return this.http.post(url, null);
+  }
+
+  removeBlacklist(uuid: string): Observable<any> {
+    let url = this.host + `/admin/blacklist/${uuid}`;
+    return this.http.delete(url);
+  }
 }

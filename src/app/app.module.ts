@@ -32,7 +32,7 @@ import {TruncatePipe} from './truncate.pipe';
 import {UUIDInterceptor} from "./uuid.interceptor";
 import {NgxMasonryModule} from "ngx-masonry";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {UserConfComponent} from "./userconf/user-conf.component";
+import {ConfigComponent} from "./config/config.component";
 import {LazyLoadDirective} from "./lazy-load.directive";
 import {SearchCardComponent} from "./search/search-card/search-card.component";
 
@@ -49,7 +49,7 @@ const routes: Routes = [
   {path: 'statistic', component: StatisticComponent, canActivate: [AuthGuard]},
   {path: 'share/:type/:id', component: ShareComponent},
   {path: 'similar/:id', component: SimilarComponent},
-  {path: 'config', component: UserConfComponent},
+  {path: 'config', component: ConfigComponent},
   {path: '**', component: EndlessComponent}
 ];
 
@@ -98,7 +98,8 @@ const routes: Routes = [
     }
   ],
   exports: [
-    CardComponent
+    CardComponent,
+    TruncatePipe
   ],
   bootstrap: [AppComponent]
 })

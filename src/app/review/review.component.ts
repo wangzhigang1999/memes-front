@@ -3,7 +3,6 @@ import {Response} from "../model/response";
 import {AdminService} from "../service/admin.service";
 import {Submission} from "../model/submission";
 import {ReviewService} from "../service/review.service";
-import {SysConfigItem} from "../model/sys-config-item";
 
 @Component({
   selector: 'app-review',
@@ -13,7 +12,6 @@ import {SysConfigItem} from "../model/sys-config-item";
 export class ReviewComponent implements OnInit {
 
   hasToken = false;
-  configMap: any = new Map<string, SysConfigItem[]>()
 
   waitingList: Submission[] = []
   token: any;
@@ -150,47 +148,11 @@ export class ReviewComponent implements OnInit {
   }
 
 
-  getSys() {
-    this.admin.getConfig().subscribe(
-      (data: Response) => {
-        let visData: SysConfigItem[] = data.data.filter((item: SysConfigItem) => item.visible);
-
-        visData.forEach((item: SysConfigItem) => {
-          switch (item.type) {
-            case "BOOLEAN":
-              item.value = item.value == 'true'
-              break
-            case "DOUBLE":
-              item.value = Number.parseFloat(item.value)
-              break
-            case "INTEGER":
-              item.value = Number.parseInt(item.value)
-              break
-            default:
-              console.log("Not match")
-          }
-        })
-
-        for (let item of visData) {
-          if (this.configMap[item.type]) {
-            this.configMap[item.type].push(item)
-          } else {
-            this.configMap[item.type] = [item]
-          }
-        }
-
-        console.log(this.configMap["BOOLEAN"])
-      }
-    )
-
-  }
-
   init() {
     localStorage.setItem('token-ok', "true")
     this.hasToken = true;
     this.loadWaitingList()
     this.getStatistic()
-    this.getSys()
   }
 
 
@@ -239,10 +201,5 @@ export class ReviewComponent implements OnInit {
         this.waitingNum = data.data;
       }
     )
-  }
-
-
-  setConfig(key: string, value: string) {
-    this.admin.setConfig(key, value).subscribe(() => alert("设置成功"))
   }
 }

@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { News } from "../../model/news";
+import {Component, Input} from '@angular/core';
+import {News} from "../../model/news";
 
 @Component({
   selector: 'app-news-card',
@@ -17,7 +17,7 @@ export class NewsCardComponent {
   center() {
     let dom = document.getElementById(this.news.id + '-');
     if (dom != null) {
-      dom.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+      dom.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
     }
   }
 }

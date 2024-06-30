@@ -12,7 +12,8 @@
     <button (click)="changeDate(1)" [disabled]="!hasNext" class="btn btn-ghost btn-sm">{{ nextMessage }}</button>
   </div>
 
-  <div (scrolled)="this.update(this.selectedDate)" [infiniteScrollDistance]="3" [infiniteScrollThrottle]="50" class="search-results"
+  <div (scrolled)="this.update(this.selectedDate)" [infiniteScrollDistance]="3" [infiniteScrollThrottle]="50"
+       class="search-results"
        infiniteScroll>
     <app-card *ngFor="let sub of submissions;" [admin]="adminMode" [lazy]='true' [submission]="sub" class="w-full"/>
   </div>

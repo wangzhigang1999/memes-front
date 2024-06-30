@@ -15,6 +15,23 @@ export class EndlessComponent {
   contentHeight: number = 0; // 存储页面内容高度
   scrollPosition: number = 0; // 存储页面滚动位置
   windowHeight: number = window.innerHeight; // 当前窗口高度
+  public submissions: Submission[] = [];
+  curElement: Set<string> = new Set<string>();
+  pageSize: number = 18;
+  lastId = "";
+  adminMode = false;
+  requesting = false
+  selectedSubmission: any = null
+  protected readonly getConfig = getConfig;
+  protected readonly ConfigItem = UserConfigItem;
+  protected readonly isSmallScreen = isSmallScreen;
+
+  constructor(private submissionService: SubmissionService) {
+    this.init()
+    if (authorized()) {
+      this.adminMode = true
+    }
+  }
 
   // 监听窗口滚动事件
   @HostListener('window:scroll', ['$event'])
@@ -35,21 +52,6 @@ export class EndlessComponent {
     // 如果点击的是 modal，关闭 modal
     if (event.target.id === 'modal') {
       (window as any).modal.close()
-    }
-  }
-
-  public submissions: Submission[] = [];
-  curElement: Set<string> = new Set<string>();
-  pageSize: number = 18;
-  lastId = "";
-  adminMode = false;
-  requesting = false
-  selectedSubmission: any = null
-
-  constructor(private submissionService: SubmissionService) {
-    this.init()
-    if (authorized()) {
-      this.adminMode = true
     }
   }
 
@@ -98,20 +100,16 @@ export class EndlessComponent {
     )
   }
 
+  showSubmissionDetail(sub: Submission) {
+    this.selectedSubmission = sub
+  }
+
   private addToSet(top: Submission[]) {
     top.forEach(
       (submission: Submission) => {
         this.curElement.add(submission.id)
       }
     )
-  }
-
-  protected readonly getConfig = getConfig;
-  protected readonly ConfigItem = UserConfigItem;
-  protected readonly isSmallScreen = isSmallScreen;
-
-  showSubmissionDetail(sub: Submission) {
-    this.selectedSubmission = sub
   }
 
 }

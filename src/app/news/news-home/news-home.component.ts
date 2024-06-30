@@ -48,7 +48,7 @@ export class NewsHomeComponent {
         }
         this.requesting = false
       })
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({top: 0, behavior: 'smooth'});
 
   }
 
@@ -62,17 +62,17 @@ export class NewsHomeComponent {
         const page: Page<News> = data.data
         page.list.forEach((news: News) => {
             if (!this.idSet.has(news.id)) {
-            for (let i = 0; i < this.tagBlackList.length; i++) {
-              for (let j = 0; j < news.tag.length; j++) {
-                if (news.tag[j] === this.tagBlackList[i]) {
-                  return;
+              for (let i = 0; i < this.tagBlackList.length; i++) {
+                for (let j = 0; j < news.tag.length; j++) {
+                  if (news.tag[j] === this.tagBlackList[i]) {
+                    return;
+                  }
                 }
               }
-            }
-            this.news.push(news)
+              this.news.push(news)
               this.idSet.add(news.id)
+            }
           }
-        }
         )
         this.lastID = this.news[this.news.length - 1].id
         this.requesting = false

@@ -1,6 +1,6 @@
 <div class="h-[80vh] w-full grid grid-cols-1 place-items-center bg-base-100 max-w-4xl mx-auto">
   <div (dragover)="onDragOver($event)" (drop)="onDrop($event)" *ngIf="submissionType==='IMAGE'" class="w-full  mx-auto">
-    <img [src]="text" alt="" class="rounded-box  mx-auto" id="img" />
+    <img [src]="text" alt="" class="rounded-box  mx-auto" id="img"/>
   </div>
 
   <div *ngIf="submissionType==='VIDEO'" class="w-full  mx-auto">
@@ -15,7 +15,7 @@
 
     <div class="border border-success rounded-xl ">
       <textarea (ngModelChange)="detectMD()" [(ngModel)]="text" class="w-full p-4 outline-none bg-transparent h-[40vh]"
-        placeholder="输入 Markdown 源码或者链接~">
+                placeholder="输入 Markdown 源码或者链接~">
       </textarea>
     </div>
     <!--       preview-->
@@ -31,41 +31,41 @@
   <div
     class="flex flex-wrap mt-2 mb-4  items-center justify-center w-full gap-1 border pt-4 md:pt-0 border-success rounded-xl">
     <div (click)="select('VIDEO')"
-      class="flex items-center justify-center  gap-2 p-2 bg-base-200 rounded-xl hover:cursor-pointer"><span
-        class="label-text">Video</span>
-      <input [checked]="submissionType=='VIDEO'" class="radio checked:bg-success" type="radio" />
+         class="flex items-center justify-center  gap-2 p-2 bg-base-200 rounded-xl hover:cursor-pointer"><span
+      class="label-text">Video</span>
+      <input [checked]="submissionType=='VIDEO'" class="radio checked:bg-success" type="radio"/>
     </div>
 
     <div (click)="select('IMAGE')"
-      class="flex items-center justify-center  gap-2 p-2 bg-base-200 rounded-xl hover:cursor-pointer">
+         class="flex items-center justify-center  gap-2 p-2 bg-base-200 rounded-xl hover:cursor-pointer">
       <span class="label-text">Image</span>
-      <input [checked]="submissionType=='IMAGE'" class="radio checked:bg-success" type="radio" />
+      <input [checked]="submissionType=='IMAGE'" class="radio checked:bg-success" type="radio"/>
     </div>
 
     <div (click)="select('BILIBILI')"
-      class="hidden lg:flex items-center justify-center  gap-2 p-2 bg-base-200 rounded-xl hover:cursor-pointer">
+         class="hidden lg:flex items-center justify-center  gap-2 p-2 bg-base-200 rounded-xl hover:cursor-pointer">
       <span class="label-text">Bilibili</span>
-      <input [checked]="submissionType=='BILIBILI'" class="radio checked:bg-success" type="radio" />
+      <input [checked]="submissionType=='BILIBILI'" class="radio checked:bg-success" type="radio"/>
     </div>
 
     <div (click)="select('MARKDOWN')"
-      class="flex items-center justify-center  gap-2 p-2 bg-base-200 rounded-xl hover:cursor-pointer">
+         class="flex items-center justify-center  gap-2 p-2 bg-base-200 rounded-xl hover:cursor-pointer">
       <span class="label-text">Markdown</span>
-      <input [checked]="submissionType=='MARKDOWN'" class="radio checked:bg-success" type="radio" />
+      <input [checked]="submissionType=='MARKDOWN'" class="radio checked:bg-success" type="radio"/>
     </div>
 
     <div class="flex gap-8 items-center justify-center my-4">
       <input (change)="bilibiliChange()" *ngIf="submissionType=='BILIBILI'" [(ngModel)]="iframe" accept="text/plain"
-        class="file-input  w-2/3 max-w-xs text-center  file-input-success" type="text" />
+             class="file-input  w-2/3 max-w-xs text-center  file-input-success" type="text"/>
 
       <input (change)="videoChange()" *ngIf="submissionType=='VIDEO'" accept="video/mp4"
-        class="file-input file-input-bordered file-input-success w-2/3 max-w-xs" id="video-input" type="file" />
+             class="file-input file-input-bordered file-input-success w-2/3 max-w-xs" id="video-input" type="file"/>
 
       <input (change)="imageChange()" *ngIf="submissionType=='IMAGE'" accept="image/*"
-        class="file-input file-input-bordered file-input-success w-2/3 max-w-xs" id="image-input" type="file" />
+             class="file-input file-input-bordered file-input-success w-2/3 max-w-xs" id="image-input" type="file"/>
 
       <input (change)="markdownChange()" *ngIf="submissionType=='MARKDOWN'" accept="text/*"
-        class="file-input file-input-bordered file-input-success w-2/3 max-w-xs" id="md-input" type="file" />
+             class="file-input file-input-bordered file-input-success w-2/3 max-w-xs" id="md-input" type="file"/>
 
       <label (click)="submit()" class="btn  btn-success btn-md" for="my-modal"> 上传 </label>
     </div>
@@ -75,13 +75,13 @@
 
 
   <!-- Put this part before </body> tag -->
-  <input type="checkbox" id="my-modal" class="modal-toggle " />
+  <input class="modal-toggle " id="my-modal" type="checkbox"/>
   <div class="modal place-content-center">
     <div class="modal-box modal-bottom  text-center w-96 md:w-[500px]">
-      <h3 class="font-bold text-lg mb-2" id="title">{{title}}</h3>
-      <div class="py-4">{{message}}</div>
+      <h3 class="font-bold text-lg mb-2" id="title">{{ title }}</h3>
+      <div class="py-4">{{ message }}</div>
       <div class="modal-action">
-        <label for="my-modal" class="btn btn-success btn-sm">OK</label>
+        <label class="btn btn-success btn-sm" for="my-modal">OK</label>
       </div>
     </div>
   </div>

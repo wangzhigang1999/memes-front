@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { NewsService } from "../service/news.service";
-import { ActivatedRoute } from "@angular/router";
-import { SubmissionService } from "../service/submission.service";
-import { Response } from "../model/response";
+import {Component} from '@angular/core';
+import {NewsService} from "../service/news.service";
+import {ActivatedRoute} from "@angular/router";
+import {SubmissionService} from "../service/submission.service";
+import {Response} from "../model/response";
 
 @Component({
   selector: 'app-share',
