@@ -16,14 +16,14 @@ export class HistoryComponent implements OnInit {
   submissions: Submission[] = [];
   idSet = new Set<string>();
   lastID = "";
-
   adminMode = false;
   selectedDate: string;
   todayDate: string;
 
   constructor(private service: SubmissionService) {
-    this.selectedDate = this.today();
-    this.todayDate = this.today();
+    const today = this.formatDate(new Date());
+    this.selectedDate = today;
+    this.todayDate = today;
   }
 
   ngOnInit(): void {
@@ -31,38 +31,39 @@ export class HistoryComponent implements OnInit {
     this.setDate(this.selectedDate);
   }
 
-  today(): string {
-    const today = new Date();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-    const year = today.getFullYear();
-    return `${year}-${month}-${day}`;
-  }
-
   setDate(date: string): void {
-    if (date == undefined || date === '') {
+    if (!date) {
       return;
     }
-    this.idSet.clear()
+    this.idSet.clear();
     this.submissions = [];
     this.selectedDate = date;
-    this.update(this.selectedDate)
+    this.update(this.selectedDate);
+    this.hasNext = date !== this.todayDate;
+    this.nextMessage = this.hasNext ? '👉👉👉' : '🙈🙈🙈';
   }
 
   changeDate(offset: number): void {
     const date = new Date(this.selectedDate);
     date.setDate(date.getDate() + offset);
-    this.setDate(date.toISOString().split('T')[0]);
+    this.setDate(this.formatDate(date));
   }
 
-  update(date: string = "") {
+  update(date: string = ""): void {
     this.service.listSubmissions(this.lastID, 20, date).subscribe((data: Response) => {
-      const uniqueData: Submission[] = data.data.list.filter((item: Submission) => !this.idSet.has(item.id));
+      const uniqueData = data.data.list.filter((item: Submission) => !this.idSet.has(item.id));
       this.submissions.push(...uniqueData);
       uniqueData.forEach((item: Submission) => this.idSet.add(item.id));
-      this.lastID = this.submissions[this.submissions.length - 1].id;
+      this.lastID = this.submissions.length > 0 ? this.submissions[this.submissions.length - 1].id : "";
       this.hasNext = date !== this.todayDate;
       this.nextMessage = this.hasNext ? '👉👉👉' : '🙈🙈🙈';
     });
+  }
+
+  private formatDate(date: Date): string {
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${year}-${month}-${day}`;
   }
 }

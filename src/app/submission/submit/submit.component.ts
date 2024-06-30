@@ -242,12 +242,12 @@ export class SubmitComponent {
       {
         next: (data) => {
           let resp: Submission = data.data
-          this.title = data.message
+          this.title = "上传成功"
           this.message = resp.url
         },
         error: (error) => {
           this.title = "上传失败"
-          this.message = error.error.message
+          this.message = error.message
         }
       }
     )
@@ -266,12 +266,12 @@ export class SubmitComponent {
       {
         next: (data) => {
           let resp: Submission = data.data
-          this.title = data.message
+          this.title = "上传成功"
           this.message = resp.url
         },
         error: (error) => {
           this.title = "上传失败"
-          this.message = error.error.message
+          this.message = error.message
         },
         complete: () => {
           console.log("complete")
@@ -291,9 +291,13 @@ export class SubmitComponent {
     let src = this.iframe.match(/src="(.+?)"/)[1];
     src = src.replace("//player.bilibili.com/player.html", "//www.bilibili.com/blackboard/html5mobileplayer.html");
     this.service.uploadBilibili(src).subscribe(
-      (data: any) => {
-        this.title = data.message
+      data => {
+        this.title = "上传成功"
         this.message = "上传成功!😀"
+      },
+      error => {
+        this.title = "上传失败"
+        this.message = error.message
       }
     )
 
@@ -316,12 +320,14 @@ export class SubmitComponent {
 
     this.service.uploadMarkdown(this.text).subscribe(
       (data: any) => {
-        this.title = data.message
+        this.title = "上传成功"
         this.message = "上传成功!😀"
+      },
+      error => {
+        this.title = "上传失败"
+        this.message = error.message
       }
     )
-
-
   }
 }
 
