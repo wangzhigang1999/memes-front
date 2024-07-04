@@ -155,41 +155,6 @@ export class ReviewComponent implements OnInit {
     this.getStatistic()
   }
 
-
-  triggerCrawler() {
-    if (!confirm("启动前请先打开Bot，确定要触发爬虫吗？")) {
-      this.title = '取消触发爬虫';
-      this.message = '任务已取消';
-      return
-    }
-
-    let lastCrawlerTimestamp = Number.parseInt(localStorage.getItem("lastCrawlerTimestamp") || "0", 10);
-
-    // if the gap between last crawler and now is less than 1 hour, then do not trigger crawler
-    if (new Date().getTime() - lastCrawlerTimestamp < 60 * 60 * 1000) {
-      this.title = '触发爬虫错误';
-      this.message = '1小时内只能触发一次爬虫';
-      return
-    }
-
-    if (this.pat) {
-      this.title = '触发爬虫中...';
-      this.message = '请稍后';
-
-      this.admin.invokeCrawler(this.pat).subscribe(
-        (data: any) => {
-          this.title = '触发爬虫成功';
-          this.message = data.state;
-          localStorage.setItem("lastCrawlerTimestamp", new Date().getTime().toString());
-        }
-      )
-    } else {
-      this.title = '触发爬虫错误';
-      this.message = '缺少 PAT';
-    }
-  }
-
-
   private getStatistic() {
     this.service.getStatusNum("submission").subscribe(
       (data: Response) => {

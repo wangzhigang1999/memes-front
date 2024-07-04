@@ -52,16 +52,6 @@ export class AdminService {
     return this.http.get(url);
   }
 
-
-  invokeCrawler(msPAT: string): Observable<any> {
-    let url = "https://dev.azure.com/wangzhigang1999-live/HelloWorld/_apis/pipelines/38/runs?api-version=6.1-preview.1"
-    let headers = {
-      'Authorization': 'Basic ' + msPAT,
-      'Content-Type': 'application/json'
-    }
-    return this.http.post(url, {}, {headers: headers})
-  }
-
   getConfig(): Observable<any> {
     let url = this.host + `/admin/config`;
     return this.http.get(url);

@@ -30,7 +30,11 @@ export class UUIDInterceptor implements HttpInterceptor {
             observer.next(event);
           },
           error: (error: HttpErrorResponse) => {
-            alert(error.error.message);
+            if (error.error.message) {
+              alert(error.error.message);
+            } else {
+              alert(error.message)
+            }
             observer.error(error);
           },
           complete: () => {
