@@ -16,6 +16,7 @@ export class TodayComponent {
   lastId = "";
   date = ""
   adminMode = false;
+  private requesting: boolean = false
 
   constructor(private service: SubmissionService) {
     const today = new Date();
@@ -33,6 +34,11 @@ export class TodayComponent {
   }
 
   update() {
+    if (this.requesting) {
+      return
+    }
+    this.requesting = true
+    setTimeout(() => this.requesting = false, 5000)
     this.service.listSubmissions(this.lastId, 20, this.date).subscribe(
       (data: Response) => {
         const uniqueData: Submission [] = data.data.list.filter((item: Submission) => !this.idSet.has(item.id))
