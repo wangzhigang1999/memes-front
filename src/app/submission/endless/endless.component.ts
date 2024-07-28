@@ -83,6 +83,7 @@ export class EndlessComponent {
       return
     }
     this.requesting = true
+    setTimeout(() => this.requesting = false, 5000)
     this.submissionService.listSubmissions(this.lastId, this.pageSize).subscribe(
       (data: any) => {
         const page: Page<Submission> = data.data
