@@ -29,6 +29,9 @@
       <div class="my-5 text-center">
         <div class="my-4">🤖 ~没有更多了~ 🤖</div>
         <div class="flex-auto items-center my-4">
+          <label routerLink="/search" class="btn  btn-success btn-outline mx-2" for="message">
+            Search
+          </label>
           <label (click)="batchAccept()" class="btn   btn-success btn-outline mx-2" for="message">AC</label>
           <label (click)="batchReject()" class="btn   btn-warning btn-outline mx-2" for="message">NA</label>
           <button (click)="removeToken()" class="btn  btn-error btn-outline mx-2">清除 token</button>
