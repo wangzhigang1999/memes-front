@@ -50,7 +50,7 @@ export class HistoryComponent implements OnInit {
   }
 
   update(date: string = ""): void {
-    this.service.listSubmissions(this.lastID, 20, date).subscribe((data: Response) => {
+    this.service.listSubmissions("", 200, date).subscribe((data: Response) => {
       const uniqueData = data.data.list.filter((item: Submission) => !this.idSet.has(item.id));
       this.submissions.push(...uniqueData);
       uniqueData.forEach((item: Submission) => this.idSet.add(item.id));
