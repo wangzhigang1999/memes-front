@@ -3,8 +3,7 @@
   @if (!hasToken) {
     <div class="text-center mt-40 h-80">
       <input type="text" placeholder="Token here" [(ngModel)]="token" class="input input-bordered input-success w-2/5"/>
-      <input type="text" placeholder="PAT" [(ngModel)]="pat" class="input input-bordered input-success w-1/5 mx-2"/>
-      <button class="btn btn-success" (click)="submitToken()">提交</button>
+      <button class="btn btn-success mx-4" (click)="submitToken()">提交</button>
     </div>
   } @else {
     <div class="rounded-xl flex justify-around">

@@ -16,7 +16,6 @@ export class ReviewComponent implements OnInit {
   waitingList: Submission[] = []
   token: any;
 
-  pat: any;
   title: any;
   message: any;
 
@@ -24,10 +23,6 @@ export class ReviewComponent implements OnInit {
   waitingNum = 0;
 
   constructor(private service: ReviewService, private admin: AdminService) {
-    this.pat = localStorage.getItem('pat');
-    if (this.pat == null) {
-      this.pat = ''
-    }
   }
 
   ngOnInit() {
@@ -58,7 +53,6 @@ export class ReviewComponent implements OnInit {
   submitToken() {
     if (this.token) {
       localStorage.setItem('token', this.token);
-      localStorage.setItem("pat", this.pat);
       this.admin.verifyToken(this.token).subscribe(
         {
           next: (data: Response) => {
