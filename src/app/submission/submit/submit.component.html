@@ -77,9 +77,13 @@
   <!-- Put this part before </body> tag -->
   <input class="modal-toggle " id="my-modal" type="checkbox"/>
   <div class="modal place-content-center">
-    <div class="modal-box modal-bottom  text-center w-96 md:w-[500px]">
-      <h3 class="font-bold text-lg mb-2" id="title">{{ title }}</h3>
-      <div class="py-4">{{ message }}</div>
+    <div class="modal-box modal-bottom w-96 md:w-[500px]">
+      <h3 class="font-bold text-lg mb-2 text-center w-full" id="title">{{ title }}</h3>
+      @if (message.length < 20) {
+        <div class="py-4 w-full text-center">{{ message }}</div>
+      } @else {
+        <div class="py-4 w-full break-all">{{ message }}</div>
+      }
       <div class="modal-action">
         <label class="btn btn-success btn-sm" for="my-modal">OK</label>
       </div>
