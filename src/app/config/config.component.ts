@@ -19,9 +19,22 @@ export class ConfigComponent {
   configMap: any = new Map<string, SysConfigItem[]>()
   protected readonly getConfig = getConfig;
   protected readonly setConfig = setConfig;
-  protected readonly ConfigItem = UserConfigItem;
   protected readonly authorized = authorized;
   protected readonly JSON = JSON;
+
+  configItems = [
+    {
+      label: '单栏模式',
+      key: UserConfigItem.singleMode,
+      description: '在浏览 meme 时，以一栏或多栏瀑布流的形式显示，移动端不生效',
+    },
+    {
+      label: '隐藏点赞',
+      key: UserConfigItem.disableLikeButton,
+      description: '在浏览 meme 时，显示/隐藏点赞按钮，全局生效',
+    }
+  ];
+
 
   constructor(private admin: AdminService) {
     if (authorized()) {

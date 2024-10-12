@@ -4,8 +4,6 @@ import {ReviewService} from "../../../service/review.service";
 import {ImageGroupService} from "../../../service/image-group.service";
 import {getConfig, isSmallScreen} from "../../../utils";
 import {UserConfigItem} from "../../../model/user-config-item";
-import {SubmissionService} from "../../../service/submission.service";
-import {Response} from "../../../model/response";
 
 @Component({
   selector: 'app-card',
@@ -20,14 +18,14 @@ export class CardComponent {
   @Input() showVoteBar = true;
   @Input() nextID = '';
   @Input() lazy = false;
+  @Input() disableBorder = false;
   defaultImage = "assets/welcome.webp";
-  similarSubmissions: Submission[] = [];
   protected readonly getConfig = getConfig;
   protected readonly ConfigItem = UserConfigItem;
   protected readonly isSmallScreen = isSmallScreen;
   @Output() private reviewed = new EventEmitter<string[]>();
 
-  constructor(private service: ReviewService, private groupService: ImageGroupService, private submissionService: SubmissionService) {
+  constructor(private service: ReviewService, private groupService: ImageGroupService) {
   }
 
   reject(id: string) {
@@ -71,25 +69,5 @@ export class CardComponent {
     if (dom != null) {
       dom.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
     }
-    // this.loadSimilar()
-  }
-
-  loadSimilar(force: boolean = false) {
-    // if loaded before, return
-    if (this.similarSubmissions.length > 0 && !force) {
-      return
-    }
-    this.submissionService.getSimilar(this.submission.id, 3).subscribe((res: Response) => {
-      for (let i = 0; i < res.data.length - 1; i++) {
-        this.similarSubmissions = res.data
-      }
-    })
-  }
-
-  delete(id: string) {
-    // if (!confirm("真的要删除吗？")) {
-    //   return
-    // }
-    // this.submissionService.deleteById(id).subscribe(() => this.loadSimilar(true))
   }
 }

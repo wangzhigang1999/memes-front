@@ -7,7 +7,7 @@
   <ngx-masonry [ordered]="true">
     <div ngxMasonryItem masonryLazy
          class="w-full lg:w-1/2 xl:w-1/4 p-4 rounded-xl
-         hover:bg-base-300 hover:scale-105 hover:cursor-pointer transition duration-300 ease-in-out"
+         hover:scale-105 hover:cursor-pointer transition duration-300 ease-in-out"
          (click)="showSubmissionDetail(sub)"
          *ngFor="let sub of submissions;">
       <app-card [admin]="adminMode" [submission]="sub" class="w-full"/>

@@ -26,7 +26,7 @@ export class SimilarComponent implements OnChanges {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(_: SimpleChanges): void {
     this.fetchMeme(this.id)
   }
 

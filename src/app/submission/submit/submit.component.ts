@@ -29,6 +29,8 @@ export class SubmitComponent {
   message = "";
 
   constructor(private service: SubmissionService) {
+    // @ts-ignore
+    this.text = this.defaultMap[this.submissionType];
   }
 
   @HostListener('paste', ['$event']) onPaste(event: ClipboardEvent) {
@@ -54,11 +56,6 @@ export class SubmitComponent {
       }
     }
 
-  }
-
-  ngOnInit(): void {
-    // @ts-ignore
-    this.text = this.defaultMap[this.submissionType];
   }
 
   select(type: string) {
@@ -255,6 +252,17 @@ export class SubmitComponent {
 
   }
 
+  handleUploadSuccess() {
+    this.title = "上传成功";
+    this.message = "上传成功! 😀";
+  }
+
+  handleUploadError(error: any) {
+    this.title = "上传失败";
+    this.message = error.message || "上传过程中出现未知错误";
+    console.error('Upload error:', error);
+  }
+
   private uploadVideo() {
     if (this.tempFile == null) {
       this.title = "请先选择视频"
@@ -269,10 +277,7 @@ export class SubmitComponent {
           this.title = "上传成功"
           this.message = resp.url
         },
-        error: (error) => {
-          this.title = "上传失败"
-          this.message = error.message
-        },
+        error: (error) => this.handleUploadError(error),
         complete: () => {
           console.log("complete")
         }
@@ -290,17 +295,10 @@ export class SubmitComponent {
     // @ts-ignore
     let src = this.iframe.match(/src="(.+?)"/)[1];
     src = src.replace("//player.bilibili.com/player.html", "//www.bilibili.com/blackboard/html5mobileplayer.html");
-    this.service.uploadBilibili(src).subscribe(
-      data => {
-        this.title = "上传成功"
-        this.message = "上传成功!😀"
-      },
-      error => {
-        this.title = "上传失败"
-        this.message = error.message
-      }
-    )
-
+    this.service.uploadBilibili(src).subscribe({
+      next: (_: any) => this.handleUploadSuccess(),
+      error: (error: any) => this.handleUploadError(error),
+    });
   }
 
   private uploadMarkdown() {
@@ -312,22 +310,16 @@ export class SubmitComponent {
       return
     }
 
-    if (text.length <= 20) {
+    if (text.length <= 5) {
       this.title = "上传失败"
       this.message = "太短啦，再多写点吧~"
       return
     }
 
-    this.service.uploadMarkdown(this.text).subscribe(
-      (data: any) => {
-        this.title = "上传成功"
-        this.message = "上传成功!😀"
-      },
-      error => {
-        this.title = "上传失败"
-        this.message = error.message
-      }
-    )
+    this.service.uploadMarkdown(this.text).subscribe({
+      next: (_: any) => this.handleUploadSuccess(),
+      error: (error: any) => this.handleUploadError(error),
+    });
   }
 }
 

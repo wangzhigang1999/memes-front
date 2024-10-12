@@ -85,14 +85,4 @@ export class SubmissionService {
     let url = this.host + `/submission/similar/${id}?size=${topK}`;
     return this.http.get(url);
   }
-
-  deleteById(id: string) {
-    let url = this.host + `/submission/${id}`;
-    return this.http.delete(url);
-  }
-
-  getRandom(): Observable<any> {
-    let url = this.host + `/submission/random`;
-    return this.http.get(url);
-  }
 }

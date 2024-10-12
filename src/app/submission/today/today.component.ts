@@ -24,9 +24,8 @@ export class TodayComponent {
     const day = String(today.getDate()).padStart(2, '0');
     const year = today.getFullYear();
     this.date = `${year}-${month}-${day}`;
-  }
 
-  ngOnInit(): void {
+
     this.idSet.clear()
     this.submissions = []
     this.adminMode = authorized()

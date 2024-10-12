@@ -1,12 +1,10 @@
-<div class="flex justify-around mt-2">
+<div *ngFor="let config of configItems" class="flex justify-around mt-2">
   <div class="label">
-    <span class="label-text min-w-fit">单栏模式 : </span>
-    <input (click)="setConfig(ConfigItem.singleMode,!getConfig(ConfigItem.singleMode))" [checked]="getConfig(ConfigItem.singleMode)" class="toggle toggle-success mx-2"
-           type="checkbox"/>
+    <span class="label-text min-w-fit mr-auto">{{ config.label }} : </span>
+    <input (click)="setConfig(config.key, !getConfig(config.key))" [checked]="getConfig(config.key)"
+           class="toggle toggle-success mx-2" type="checkbox"/>
     <p class="ml-4">
-      <small>
-        在浏览 meme 时，以一栏或多栏瀑布流的形式显示，移动端不生效
-      </small>
+      <small>{{ config.description }}</small>
     </p>
   </div>
 </div>
