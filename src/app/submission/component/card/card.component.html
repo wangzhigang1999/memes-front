@@ -24,10 +24,10 @@
     @case ('MARKDOWN') {
       <div class="p-4 md:p-8 max-h-[75vh] xl:max-h-[85vh] overflow-y-scroll">
         <div *ngIf="submission.url">
-          <markdown [src]="submission.url" class="rounded break-words "/>
+          <markdown [src]="submission.url" class="prose rounded break-words"/>
         </div>
         <div *ngIf="submission.content">
-          <markdown [data]="submission.content" class="rounded break-words"/>
+          <markdown [data]="submission.content" class="prose rounded break-words"/>
         </div>
       </div>
     }
