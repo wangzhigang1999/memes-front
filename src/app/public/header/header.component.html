@@ -1,6 +1,6 @@
 @if (showHeader) {
   <div class="navbar bg-base-100 px-1 md:px-4 xl:px-8 glass  py-0 mb-4">
-    <div class="dropdown">
+    <div class="dropdown z-10">
       <label class="btn btn-ghost" tabindex="0">
         <span class="text-2xl"> {{ selectedEmoji }} </span>
       </label>
@@ -47,10 +47,10 @@
       </ul>
     </div>
 
-    <div class="flex-1 gap-4">
-      <div class="dropdown">
+    <div class="flex-1 gap-4 z-10">
+      <div class="dropdown z-10">
         <label class="btn btn-ghost normal-case text-xl" tabindex="0">memes</label>
-        <ul class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52" tabindex="0">
+        <ul class="dropdown-content z-10 menu p-2 shadow bg-base-100 rounded-box w-52" tabindex="0">
 
           <li routerLink="/endless">
             <label>
