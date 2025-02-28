@@ -9,16 +9,13 @@ import {InfiniteScrollModule} from "ngx-infinite-scroll";
 import {MarkdownModule} from "ngx-markdown";
 import {AppComponent} from './app.component';
 import {AuthGuard} from "./auth.guard";
-import {NewsCardComponent} from './news/news-card/news-card.component';
-import {NewsHomeComponent} from './news/news-home/news-home.component';
-import {NewsTodayComponent} from './news/news-today/news-today.component';
+
 import {EndComponent} from './public/end/end.component';
 import {FixMenuComponent} from './public/fix-menu/fix-menu.component';
 import {HeaderComponent} from './public/header/header.component';
 import {ReviewComponent} from './review/review.component';
 import {SafePipe} from './safe.pipe';
-import {SearchComponent} from './search/search.component';
-import {ShareComponent} from "./share/share.component";
+
 import {StatisticComponent} from './statistic/statistic.component';
 import {CardComponent} from './submission/component/card/card.component';
 import {TopComponent} from './submission/component/top/top.component';
@@ -34,20 +31,15 @@ import {NgxMasonryModule} from "ngx-masonry";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ConfigComponent} from "./config/config.component";
 import {LazyLoadDirective} from "./lazy-load.directive";
-import {SearchCardComponent} from "./search/search-card/search-card.component";
 
 const routes: Routes = [
   {path: '', component: EndlessComponent},
-  {path: 'search', component: SearchComponent},
-  {path: 'news', component: NewsHomeComponent},
-  {path: 'history-today', component: NewsTodayComponent},
   {path: 'endless', component: EndlessComponent},
   {path: 'today', component: TodayComponent},
   {path: 'submit', component: SubmitComponent},
   {path: 'history', component: HistoryComponent},
   {path: 'review', component: ReviewComponent},
   {path: 'statistic', component: StatisticComponent, canActivate: [AuthGuard]},
-  {path: 'share/:type/:id', component: ShareComponent},
   {path: 'similar/:id', component: SimilarComponent},
   {path: 'config', component: ConfigComponent},
   {path: '**', component: EndlessComponent}
@@ -68,13 +60,8 @@ const routes: Routes = [
     FixMenuComponent,
     EndlessComponent,
     TopComponent,
-    NewsCardComponent,
-    NewsHomeComponent,
-    NewsTodayComponent,
     EndComponent,
-    SearchComponent,
     TruncatePipe,
-    ShareComponent,
     SimilarComponent,
     LazyLoadDirective,
   ],
@@ -89,8 +76,7 @@ const routes: Routes = [
     LazyLoadImageModule,
     InfiniteScrollModule,
     NgOptimizedImage,
-    MarkdownModule.forRoot(),
-    SearchCardComponent
+    MarkdownModule.forRoot()
   ],
   providers: [
     {

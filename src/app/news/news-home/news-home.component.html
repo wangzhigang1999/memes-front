@@ -1,9 +1,0 @@
-<div class="max-w-4xl mx-auto">
-  <div (scrolled)="onScroll()" [infiniteScrollDistance]="3" [infiniteScrollThrottle]="50" class="search-results"
-       infiniteScroll>
-    <app-news-card *ngFor="let item of news" [news]="item"></app-news-card>
-  </div>
-
-  <app-end></app-end>
-</div>
-
