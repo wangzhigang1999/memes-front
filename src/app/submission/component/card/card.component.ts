@@ -70,4 +70,14 @@ export class CardComponent {
       dom.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
     }
   }
+
+  /**
+   * 双击后，跳转到下一个的开始，类似 center
+   */
+  toNext() {
+    let dom = document.getElementById(this.submission.id);
+    if (dom != null) {
+      dom.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+    }
+  }
 }

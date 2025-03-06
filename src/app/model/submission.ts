@@ -9,7 +9,8 @@ export interface Submission {
   "deleted": boolean,
   "timestamp": number,
   "like": number,
-  "dislike": number
+  "dislike": number,
+  "llmDescription": string
   "children": Submission[]
 
   // add constructor

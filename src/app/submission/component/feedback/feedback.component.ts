@@ -9,33 +9,24 @@ import {copyToClipboard} from "../../../utils";
   styleUrls: ['./feedback.component.css']
 })
 export class FeedbackComponent {
-  likeBtn = false;
-  dislikeBtn = false;
+  liked = false;
+  disliked = false;
 
   @Input() adminMode = false
   @Input() id: any
   @Input() like: any
   @Input() dislike: any
 
-  activeBtn = "btn-outline btn-success btn-circle"
-  deactivateBtn = "btn-circle btn-ghost"
   isSingleClick: Boolean = true;
 
 
   constructor(private service: SubmissionService, private admin: AdminService) {
   }
 
-  likeClass() {
-    return this.likeBtn ? this.activeBtn : this.deactivateBtn;
-  }
-
-  dislikeClass() {
-    return this.dislikeBtn ? this.activeBtn : this.deactivateBtn;
-  }
 
   feedback(like: boolean) {
-    this.likeBtn = like;
-    this.dislikeBtn = !like;
+    this.liked = like;
+    this.disliked = !like;
     like ? this.like++ : this.dislike++
     const feedback = like ? "like" : "dislike"
     this.service.feedback(this.id, feedback).subscribe()
