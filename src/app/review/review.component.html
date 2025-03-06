@@ -1,53 +1,60 @@
-<div class="max-w-4xl mx-auto">
+<div class=" w-full md:max-w-4xl mx-auto p-2 ">
 
   @if (!hasToken) {
-    <div class="text-center mt-40 h-80">
-      <input type="text" placeholder="Token here" [(ngModel)]="token" class="input input-bordered input-success w-2/5"/>
-      <button class="btn btn-success mx-4" (click)="submitToken()">提交</button>
+    <div class="flex flex-col items-center justify-center min-h-[40vh] md:min-h-[80vh] gap-4">
+      <input
+        type="text"
+        placeholder="Token here"
+        [(ngModel)]="token"
+        class="input input-bordered input-success w-full md:w-2/5"
+      />
+      <button class="btn btn-success" (click)="submitToken()">提交</button>
     </div>
   } @else {
-    <div class="rounded-xl flex justify-around">
-      <div class="stat place-items-center w-fit">
-        <div class="stat-title">审核通过</div>
-        <div class="stat-value text-success">{{ passedNum }}</div>
+    <div class="grid grid-cols-2 md:grid-cols-2 gap-4 mb-6">
+      <div class="stat place-items-center bg-base-200 rounded-xl shadow-md">
+        <div class="stat-title text-sm md:text-base">审核通过</div>
+        <div class="stat-value text-success text-lg md:text-2xl">{{ passedNum }}</div>
       </div>
-      <div class="stat place-items-center w-fit f">
-        <div class="stat-title">待审核</div>
-        <div class="stat-value text-error">{{ waitingNum }}</div>
+      <div class="stat place-items-center bg-base-200 rounded-xl shadow-md">
+        <div class="stat-title text-sm md:text-base">待审核</div>
+        <div class="stat-value text-error text-lg md:text-2xl">{{ waitingNum }}</div>
       </div>
     </div>
 
-    <app-card (reviewed)="onReviewed($event)" *ngFor="let sub of waitingList;"
-              [nextID]="waitingList.indexOf(sub) + 1==waitingList.length?'':waitingList[waitingList.indexOf(sub) + 1].id"
-              [review]="true" [submission]="sub" class="w-full"/>
+    <app-card
+      (reviewed)="onReviewed($event)"
+      *ngFor="let sub of waitingList; let i = index;"
+      [nextID]="i + 1 < waitingList.length ? waitingList[i + 1].id : ''"
+      [review]="true"
+      [submission]="sub"
+      class="w-full mb-4"
+    />
 
-    <div class="card w-fit bg-base-100  mt-5 mx-auto max-w-4xl mb-20">
-      <figure class="figure-padding m-5">
-        <img src="assets/welcome.webp" class="rounded-xl" alt=""/>
+    <div class="card bg-base-100 shadow-xl mt-5 mx-auto max-w-4xl mb-20">
+      <figure class="p-4">
+        <img src="assets/welcome.webp" class="rounded-xl w-full object-cover" alt="Welcome Image"/>
       </figure>
-      <div class="my-5 text-center">
-        <div class="my-4">🤖 ~没有更多了~ 🤖</div>
-        <div class="flex-auto items-center my-4">
-          <label routerLink="/search" class="btn  btn-success btn-outline mx-2" for="message">
-            Search
-          </label>
-          <label (click)="batchAccept()" class="btn   btn-success btn-outline mx-2" for="message">AC</label>
-          <label (click)="batchReject()" class="btn   btn-warning btn-outline mx-2" for="message">NA</label>
-          <button (click)="removeToken()" class="btn  btn-error btn-outline mx-2">清除 token</button>
-        </div>
-
-      </div>
-      <input type="checkbox" id="message" class="modal-toggle"/>
-      <div class="modal">
-        <div class="modal-box text-center">
-          <h3 class="font-bold text-lg">{{ title }}</h3>
-          <p class="py-4">{{ message }}</p>
-          <div class="modal-action">
-            <label for="message" class="btn btn-success btn-sm">Yay!</label>
-          </div>
+      <div class="card-body text-center">
+        <div class="text-lg font-semibold mb-4">🤖 ~没有更多了~ 🤖</div>
+        <div class="flex flex-wrap justify-center gap-2">
+          <button (click)="batchAccept()" class="btn btn-success btn-outline">AC</button>
+          <button (click)="batchReject()" class="btn btn-warning btn-outline">NA</button>
+          <button (click)="removeToken()" class="btn btn-error btn-outline">清除 token</button>
         </div>
       </div>
     </div>
   }
 
+  <!-- Modal (放在整个 conditional 之外) -->
+  <input class="modal-toggle" id="message" type="checkbox"/>
+  <div class="modal">
+    <div class="modal-box text-center">
+      <h3 class="font-bold text-lg">{{ title }}</h3>
+      <p class="py-4">{{ message }}</p>
+      <div class="modal-action justify-center">
+        <label class="btn btn-success btn-sm" for="message">Yay!</label>
+      </div>
+    </div>
+  </div>
 </div>
