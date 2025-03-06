@@ -43,8 +43,7 @@
   }
 </ng-template>
 
-<div [id]="submission.id" [ngClass]="disableBorder?'':'border-base-400 border'"
-     class="card w-full  rounded-xl bg-base-100 shadow-md pb-2 mb-2">
+<div [id]="submission.id" class="card w-full  rounded-xl bg-base-100 shadow-md pb-2 mb-2">
   <!-- Added rounded-xl, background color, shadow -->
   <div (click)="center()" (dblclick)="toNext()" class="cursor-pointer">  <!-- Added cursor-pointer -->
     @if (getConfig(ConfigItem.singleMode) || isSmallScreen()) {

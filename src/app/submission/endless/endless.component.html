@@ -9,20 +9,7 @@
          hover:scale-105 hover:cursor-pointer transition duration-300 ease-in-out"
          (click)="showSubmissionDetail(sub)"
          *ngFor="let sub of submissions;">
-      <app-card [admin]="adminMode" [submission]="sub" class="w-full my-2"/>
+      <app-card [admin]="adminMode" [submission]="sub" class="w-full my-4"/>
     </div>
   </ngx-masonry>
 }
-
-<dialog class="modal" id="modal">
-  <div class="modal-box h-[70vh] xl:h-screen max-w-3xl">
-    @if (selectedSubmission != null) {
-      <app-similar [id]="selectedSubmission.id"></app-similar>
-    }
-  </div>
-</dialog>
-
-
-
-
-

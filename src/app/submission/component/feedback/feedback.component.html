@@ -52,13 +52,6 @@
           [ngClass]="{'text-blue-600': liked}"
           class="group flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 transition-all duration-200
            hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-400">
-    <svg aria-hidden="true" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"
-         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M14 10h-.769a2 2 0 01-1.937-1.575l-1.384-5.535A2 2 0 019.269 2h5.462a2 2 0 011.937 1.575l1.385 5.535a2 2 0 01-1.938 2.89l-.768.07zM3 12h2.25l3.364 8.41a2.125 2.125 0 00.64 1.493m0-1.493l.014-.034c.047-.118.28-.288.64-.288h5.25m0 0l-.984-2.46a.75.75 0 01-.215-.422m0 0c-.076-.19-.149-.393-.222-.616m0 0 4.493.255M6.575 12V6.72L4.05 4.515M6.575 12v4.533L4.05 19.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"/>
-    </svg>
     <span class="text-sm font-medium transition-colors duration-200 group-hover:text-blue-600">Like</span>
     <span *ngIf="like > 0" class="ml-1 rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700">
       {{ like }}
@@ -71,13 +64,6 @@
     class="group flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 transition-all duration-200
            hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-400"
   >
-    <svg aria-hidden="true" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"
-         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M9.923 3.943c.092-.103.211-.179.344-.222M6.923 3.943c.092-.103.211-.179.344-.222M5.904 18.723l.015-.034c.047-.118.28-.288.64-.288h5.25m-5.25 0h5.25m-4.5 8.25h3.75a2.25 2.25 0 002.25-2.25v-1.372c0-.516.351-.966.852-1.091l4.423-1.106c.44-.11.902.055 1.173.427l.371.557c.374.56.404 1.247.082 1.855l-.311.56c-.087.157-.088.319-.043.465a.48.48 0 00.118.435l.793 1.435c.142.257.142.547 0 .804l-.793 1.435a.48.48 0 00-.118.435c-.045.146-.044.308.043.465l.311.56c.322.608.292 1.295-.082 1.855l-.371.557c-.271.371-.733.537-1.173.427l-4.423-1.106c-.501-.125-.852-.575-.852-1.091V21.75A2.25 2.25 0 0012.75 19.5H9.75m-5.904-1.277l-3.915-1.958a.75.75 0 00-1.102.195m1.102-.195a.75.75 0 011.102.195l3.915 1.958m-3.915-1.958l-.505.252"
-        stroke-linecap="round"
-        stroke-linejoin="round"/>
-    </svg>
     <span class="text-sm font-medium transition-colors duration-200 group-hover:text-red-600">Dislike</span>
     <span *ngIf="dislike > 0" class="ml-1 rounded-full bg-red-100 px-2 py-0.5 text-xs font-medium text-red-700">
       {{ dislike }}

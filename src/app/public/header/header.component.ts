@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {NavigationEnd, Router} from "@angular/router";
+import {Component, HostListener} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   showHeader = true;
 
   holidayEmoji: any = {
@@ -48,17 +48,14 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.handleNavigation();
-      }
-    });
-  }
 
-  handleNavigation() {
-    // if from bbs page to other page, hide header
-    this.showHeader = !this.router.url.includes("bbs");
+  private lastScrollTop = 0;
+
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    const st = window.scrollY || document.documentElement.scrollTop;
+    this.showHeader = st <= this.lastScrollTop || st < 10; // 向上滚动或接近顶部时显示
+    this.lastScrollTop = st;
   }
 
 }

@@ -1,68 +1,99 @@
 <div class="max-w-4xl mb-4 mx-auto">
-  <div class=" rounded-xl flex flex-wrap flex-row justify-around bg-zinc-100 dark:bg-zinc-900">
+
+  <!-- 统计信息 -->
+  <div class="rounded-xl flex flex-wrap justify-between bg-gray-50 dark:bg-zinc-900 p-4 text-sm">
     <div class="stat place-items-center w-fit">
-      <div class="stat-title">运营天数</div>
+      <div class="stat-title text-gray-500 dark:text-gray-400">运营天数</div>
       <div class="stat-value">{{ date }} 天</div>
     </div>
     <div class="stat place-items-center w-fit">
-      <div class="stat-title">有效请求</div>
-      <div class="stat-value">{{ reqNumber }}</div>
+      <div class="stat-title text-gray-500 dark:text-gray-400">有效请求</div>
+      <div class="stat-value">{{ reqNumber | number }}</div>
     </div>
-    <div class="stat place-items-center w-fit f">
-      <div class="stat-title">平均耗时</div>
+    <div class="stat place-items-center w-fit">
+      <div class="stat-title text-gray-500 dark:text-gray-400">平均耗时</div>
       <div class="stat-value text-secondary">{{ averageCost }} ms</div>
     </div>
     <div class="stat place-items-center w-fit">
-      <div class="stat-title">独立 UUID</div>
-      <div class="stat-value text-success">{{ count(uuidCountList) }} 个</div>
+      <div class="stat-title text-gray-500 dark:text-gray-400">独立 UUID</div>
+      <div class="stat-value text-success">{{ uuidCountList ? (uuidCountList.length | number) : '加载中...' }} 个</div>
     </div>
   </div>
 
+  <!-- UUID 统计表格 -->
   <div class="overflow-x-auto mt-4 border rounded-xl border-success">
-    <table class="table  table-zebra w-full text-center">
+    <table class="table table-zebra w-full text-center text-sm">
       <thead>
       <tr>
-        <th>uuid</th>
-        <th>count</th>
-        <th>avg/ms</th>
-        <th>first</th>
-        <th>last</th>
-        <th>opt</th>
+        <th>UUID</th>
+        <th>Count</th>
+        <th>Avg (ms)</th>
+        <th>First</th>
+        <th>Last</th>
+        <th>Opt</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let item of top(10,uuidCountList)">
+      <tr *ngIf="!uuidCountList || uuidCountList.length === 0">
+        <td class="p-4" colspan="6">
+          <div class="alert alert-info">
+            <div>
+              <svg class="stroke-current shrink-0 w-6 h-6" fill="none" viewBox="0 0 24 24"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-width="2"></path>
+              </svg>
+              <span>暂无 UUID 统计数据。</span>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr *ngFor="let item of top(10, uuidCountList)">
         <td>{{ item._id | truncate : 8 }}</td>
-        <td>{{ item.count }}</td>
+        <td>{{ item.count | number }}</td>
         <td>{{ msConvert(item.avg) }}</td>
         <td>{{ timestampToHHMM(item.firstTime) }}</td>
         <td>{{ timestampToHHMM(item.lastTime) }}</td>
         <td>
-          <button (click)="ban(item._id)" class="btn btn-sm btn-error">ban</button>
+          <button (click)="ban(item._id)" class="btn btn-sm btn-error">Ban</button>
         </td>
-
       </tr>
       </tbody>
     </table>
   </div>
 
+  <!-- URL 统计表格 -->
   <div class="overflow-x-auto mt-4 border rounded-xl border-success">
-    <table class="table table-compact table-zebra w-full text-center">
+    <table class="table table-compact table-zebra w-full text-center text-sm">
       <thead>
       <tr>
-        <th>method</th>
-        <th>url</th>
-        <th>count</th>
-        <th>avg</th>
-        <th>max</th>
-        <th>min</th>
+        <th>Method</th>
+        <th>URL</th>
+        <th>Count</th>
+        <th>Avg (ms)</th>
+        <th>Max (ms)</th>
+        <th>Min (ms)</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let item of top(100,urlCountList)">
+      <tr *ngIf="!urlCountList || urlCountList.length === 0">
+        <td class="p-4" colspan="6">
+          <div class="alert alert-info">
+            <div>
+              <svg class="stroke-current shrink-0 w-6 h-6" fill="none" viewBox="0 0 24 24"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-width="2"></path>
+              </svg>
+              <span>暂无 URL 统计数据。</span>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr *ngFor="let item of top(100, urlCountList)">
         <td>{{ item.method }}</td>
         <td>{{ item.url }}</td>
-        <td>{{ item.count }}</td>
+        <td>{{ item.count | number }}</td>
         <td>{{ msConvert(item.avg) }}</td>
         <td>{{ msConvert(item.max) }}</td>
         <td>{{ msConvert(item.min) }}</td>
