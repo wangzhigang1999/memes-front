@@ -85,7 +85,7 @@
       </div>
     </div>
 
-  } @else if (showVoteBar && !getConfig(ConfigItem.disableLikeButton) && admin) {
+  } @else if (showVoteBar && !getConfig(ConfigItem.disableLikeButton)) {
     <app-feedback [dislike]="submission.dislike" [id]="submission.id" [like]="submission.like"
                   [adminMode]=admin></app-feedback>
   }
