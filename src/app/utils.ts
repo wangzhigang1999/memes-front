@@ -57,21 +57,49 @@ export function scrollToTop() {
 }
 
 
-export function getConfig(key: string): boolean {
+export function getConfig(key: string, type?: string): any {
   try {
-    const item = localStorage.getItem(key);
-    return item === 'true';
-  } catch (e) {
-    return true;
+    const storedValue = localStorage.getItem(key);
+
+    if (storedValue === null) {
+      console.warn(`[getConfig] Key not found: ${key}`);
+      return null;
+    }
+
+    console.debug(`[getConfig] Retrieved key=${key}, rawValue=${storedValue}, expectedType=${type}`);
+
+    if (type === 'BOOLEAN') {
+      const parsedValue = storedValue === 'true';
+      console.debug(`[getConfig] Parsed Boolean: ${parsedValue}`);
+      return parsedValue;
+    } else if (type === 'INTEGER') {
+      const parsedValue = Number.parseInt(storedValue, 10) || 0;
+      console.debug(`[getConfig] Parsed Integer: ${parsedValue}`);
+      return parsedValue;
+    }
+
+    console.debug(`[getConfig] Returning as STRING: ${storedValue}`);
+    return storedValue;
+  } catch (error) {
+    console.error(`[getConfig] Error retrieving key=${key}:`, error);
+    return null;
   }
 }
 
-
-export function setConfig(key: string, value: boolean) {
+export function setConfig(key: string, value: any): void {
   try {
-    localStorage.setItem(key, value ? 'true' : 'false');
-  } catch (e) {
-    alert('设置失败，请稍后再试~')
+    let storedValue = value;
+
+    if (typeof value === 'boolean') {
+      storedValue = value ? 'true' : 'false';
+    } else if (typeof value === 'number') {
+      storedValue = value.toString();
+    }
+
+    localStorage.setItem(key, storedValue);
+    console.info(`[setConfig] Successfully set key=${key}, value=${storedValue} (originalType=${typeof value})`);
+  } catch (error) {
+    console.error(`[setConfig] Error setting key=${key} with value=${value}:`, error);
   }
 }
 

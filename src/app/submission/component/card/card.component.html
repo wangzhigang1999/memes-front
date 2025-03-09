@@ -2,7 +2,7 @@
   @switch (submission.submissionType) {
     @case ('IMAGE') {
       <figure class="p-2 rounded-xl overflow-hidden">
-        @if (getConfig(ConfigItem.singleMode) || lazy) {
+        @if (getConfig(ConfigItem.singleColumn, "BOOLEAN") || lazy) {
           <img [defaultImage]="defaultImage" [lazyLoad]="submission.url" alt=""
                class="rounded-xl object-cover w-full h-full" src=""/>
         } @else {
@@ -46,14 +46,7 @@
 <div [id]="submission.id" class="card w-full  rounded-xl bg-base-100 shadow-md pb-2 mb-2">
   <!-- Added rounded-xl, background color, shadow -->
   <div (click)="center()" (dblclick)="toNext()" class="cursor-pointer">  <!-- Added cursor-pointer -->
-    @if (getConfig(ConfigItem.singleMode) || isSmallScreen()) {
-      <ng-container *ngTemplateOutlet="flow"></ng-container>
-    } @else {
-      <!--会触发 endless 中的 modal-->
-      <div onclick="modal.showModal()" class="cursor-pointer">  <!-- Added cursor-pointer -->
-        <ng-container *ngTemplateOutlet="flow"></ng-container>
-      </div>
-    }
+    <ng-container *ngTemplateOutlet="flow"></ng-container>
   </div>
 
   @if (review) {

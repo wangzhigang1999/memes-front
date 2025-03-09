@@ -1,4 +1,4 @@
-@if (curElement.size <= 0 || getConfig(ConfigItem.singleMode) || isSmallScreen()) {
+@if (curElement.size <= 0 || getConfig(ConfigItem.singleColumn, "BOOLEAN") || isSmallScreen()) {
   <div class="max-w-4xl mx-auto">
     <app-card class="w-full my-2" [submission]="sub" *ngFor="let sub of submissions " [admin]="adminMode"></app-card>
     <app-end></app-end>

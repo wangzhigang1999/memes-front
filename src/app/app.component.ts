@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {getConfig} from "./utils";
+import {getConfig, isSmallScreen} from "./utils";
 import {UserConfigItem} from "./model/user-config-item";
 
 @Component({
@@ -10,4 +10,5 @@ import {UserConfigItem} from "./model/user-config-item";
 export class AppComponent {
   protected readonly getConfig = getConfig;
   protected readonly ConfigItem = UserConfigItem;
+  protected readonly isSmallScreen = isSmallScreen;
 }
