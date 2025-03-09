@@ -1,26 +1,46 @@
 <div class=" w-full md:max-w-4xl mx-auto p-2 ">
 
   @if (!hasToken) {
-    <div class="flex flex-col items-center justify-center min-h-[40vh] md:min-h-[80vh] gap-4">
-      <input
-        type="text"
-        placeholder="Token here"
-        [(ngModel)]="token"
-        class="input input-bordered input-success w-full md:w-2/5"
-      />
-      <button class="btn btn-success" (click)="submitToken()">提交</button>
+    <div class="flex items-center justify-center h-[75vh] px-4">
+      <div class="w-full max-w-lg bg-white shadow-lg rounded-2xl p-6 md:p-8 flex flex-col items-center gap-6">
+
+        <!-- 标题 -->
+        <h2 class="text-2xl font-semibold text-gray-700">输入 Token</h2>
+        <p class="text-gray-500 text-sm text-center">请提供有效的 Token 以继续操作</p>
+
+        <!-- 输入框 -->
+        <input
+          type="text"
+          placeholder="粘贴你的 Token..."
+          [(ngModel)]="token"
+          class="input input-bordered w-full text-base px-4 py-3 rounded-lg focus:ring-2 focus:ring-success/50 transition"
+        />
+
+        <!-- 按钮 -->
+        <button
+          class="btn btn-success w-full py-3 rounded-lg shadow hover:shadow-md transition-all"
+          (click)="submitToken()">
+          提交
+        </button>
+
+      </div>
     </div>
+
   } @else {
-    <div class="grid grid-cols-2 md:grid-cols-2 gap-4 mb-6">
-      <div class="stat place-items-center bg-base-200 rounded-xl shadow-md">
-        <div class="stat-title text-sm md:text-base">审核通过</div>
-        <div class="stat-value text-success text-lg md:text-2xl">{{ passedNum }}</div>
+    <div class="grid grid-cols-2 gap-6 mb-8">
+      <!-- 审核通过 -->
+      <div class="stat place-items-center bg-base-100 rounded-xl shadow-lg  hover:shadow-xl p-4">
+        <div class="stat-title text-lg sm:text-xl text-gray-600 font-semibold">审核通过</div>
+        <div class="stat-value text-success text-3xl sm:text-4xl font-bold">{{ passedNum }}</div>
       </div>
-      <div class="stat place-items-center bg-base-200 rounded-xl shadow-md">
-        <div class="stat-title text-sm md:text-base">待审核</div>
-        <div class="stat-value text-error text-lg md:text-2xl">{{ waitingNum }}</div>
+
+      <!-- 待审核 -->
+      <div class="stat place-items-center bg-base-100 rounded-xl shadow-lg  hover:shadow-xl p-4">
+        <div class="stat-title text-lg sm:text-xl text-gray-600 font-semibold">待审核</div>
+        <div class="stat-value text-error text-3xl sm:text-4xl font-bold">{{ waitingNum }}</div>
       </div>
     </div>
+
 
     <app-card
       (reviewed)="onReviewed($event)"
