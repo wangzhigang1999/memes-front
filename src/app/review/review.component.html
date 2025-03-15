@@ -1,79 +1,97 @@
-<div class=" w-full md:max-w-4xl mx-auto p-2 ">
-
+<div class="w-full md:max-w-4xl mx-auto p-4">
+  <!-- 登录页面 -->
   @if (!hasToken) {
-    <div class="flex items-center justify-center h-[75vh] px-4">
-      <div class="w-full max-w-lg bg-white shadow-lg rounded-2xl p-6 md:p-8 flex flex-col items-center gap-6">
-
+    <div class="flex items-center justify-center h-[80vh]">
+      <div class="w-full max-w-lg bg-white dark:bg-zinc-800 shadow-sm rounded-lg p-8 flex flex-col items-center gap-6">
         <!-- 标题 -->
-        <h2 class="text-2xl font-semibold text-gray-700">输入 Token</h2>
-        <p class="text-gray-500 text-sm text-center">请提供有效的 Token 以继续操作</p>
+        <div class="text-center mb-2">
+          <h2 class="text-2xl font-medium text-gray-800 dark:text-gray-200"> 输入 Token </h2>
+          <p class="text-gray-500 dark:text-gray-400 text-sm mt-2"> 请提供有效的 Token 以继续操作 </p>
+        </div>
 
         <!-- 输入框 -->
-        <input
-          type="text"
-          placeholder="粘贴你的 Token..."
-          [(ngModel)]="token"
-          class="input input-bordered w-full text-base px-4 py-3 rounded-lg focus:ring-2 focus:ring-success/50 transition"
-        />
+        <div class="w-full">
+          <input
+            type="text"
+            placeholder="粘贴你的 Token..."
+            [(ngModel)]="token"
+            class="w-full bg-gray-50 dark:bg-zinc-700 border-0 text-base px-4 py-3 rounded-lg focus:ring-2 focus:ring-emerald-400 focus:bg-white dark:focus:bg-zinc-600 transition-all"
+          />
+        </div>
 
         <!-- 按钮 -->
-        <button
-          class="btn btn-success w-full py-3 rounded-lg shadow hover:shadow-md transition-all"
-          (click)="submitToken()">
-          提交
-        </button>
-
+        <button class="w-full bg-emerald-500 hover:bg-emerald-600 text-white py-3 px-4 rounded-lg transition-colors" (click)="submitToken()"> 提交</button>
       </div>
     </div>
-
   } @else {
-    <div class="grid grid-cols-2 gap-6 mb-8">
+    <!-- 统计卡片 -->
+    <div class="grid grid-cols-2 gap-4 mb-8">
       <!-- 审核通过 -->
-      <div class="stat place-items-center bg-base-100 rounded-xl shadow-lg  hover:shadow-xl p-4">
-        <div class="stat-title text-lg sm:text-xl text-gray-600 font-semibold">审核通过</div>
-        <div class="stat-value text-success text-3xl sm:text-4xl font-bold">{{ passedNum }}</div>
+      <div class="bg-white dark:bg-zinc-800 rounded-lg shadow-sm p-5 flex flex-col items-center justify-center">
+        <div class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1"> 审核通过</div>
+        <div class="text-3xl font-bold text-emerald-500">{{ passedNum }}</div>
       </div>
 
       <!-- 待审核 -->
-      <div class="stat place-items-center bg-base-100 rounded-xl shadow-lg  hover:shadow-xl p-4">
-        <div class="stat-title text-lg sm:text-xl text-gray-600 font-semibold">待审核</div>
-        <div class="stat-value text-error text-3xl sm:text-4xl font-bold">{{ waitingNum }}</div>
+      <div class="bg-white dark:bg-zinc-800 rounded-lg shadow-sm p-5 flex flex-col items-center justify-center">
+        <div class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1"> 待审核</div>
+        <div class="text-3xl font-bold text-rose-500">{{ waitingNum }}</div>
       </div>
     </div>
 
+    <!-- 待审核媒体列表 -->
+    <div class="space-y-6">
+      <app-media
+        (reviewed)="onReviewed($event)"
+        *ngFor="let media of waitingList; let i = index"
+        [nextID]="i + 1 < waitingList.length ? waitingList[i + 1].id : -1"
+        [review]="true"
+        [content]="media"
+        class="block w-full"
+      />
+    </div>
 
-    <app-card
-      (reviewed)="onReviewed($event)"
-      *ngFor="let sub of waitingList; let i = index;"
-      [nextID]="i + 1 < waitingList.length ? waitingList[i + 1].id : ''"
-      [review]="true"
-      [submission]="sub"
-      class="w-full mb-4"
-    />
-
-    <div class="card bg-base-100 shadow-xl mt-5 mx-auto max-w-4xl mb-20">
-      <figure class="p-4">
-        <img src="assets/welcome.webp" class="rounded-xl w-full object-cover" alt="Welcome Image"/>
-      </figure>
-      <div class="card-body text-center">
-        <div class="text-lg font-semibold mb-4">🤖 ~没有更多了~ 🤖</div>
+    <!-- 底部卡片 -->
+    <div class="bg-white dark:bg-zinc-800 rounded-lg shadow-sm mt-8 mb-20 overflow-hidden">
+      <div class="p-4">
+        <img src="assets/welcome.webp" class="rounded-lg w-full h-48 object-cover" alt="Welcome Image" />
+      </div>
+      <div class="p-6 text-center">
+        <div class="text-base font-medium text-gray-600 dark:text-gray-300 mb-6"> 🤖 没有更多内容了 🤖</div>
         <div class="flex flex-wrap justify-center gap-2">
-          <button (click)="batchAccept()" class="btn btn-success btn-outline">AC</button>
-          <button (click)="batchReject()" class="btn btn-warning btn-outline">NA</button>
-          <button (click)="removeToken()" class="btn btn-error btn-outline">清除 token</button>
+          <button
+            (click)="batchAccept()"
+            class="px-6 py-2 bg-white dark:bg-zinc-700 border border-emerald-500 text-emerald-600 dark:text-emerald-400 rounded-lg hover:bg-emerald-50 dark:hover:bg-zinc-600 transition-colors"
+          >
+            通过
+          </button>
+          <button
+            (click)="batchReject()"
+            class="px-6 py-2 bg-white dark:bg-zinc-700 border border-amber-500 text-amber-600 dark:text-amber-400 rounded-lg hover:bg-amber-50 dark:hover:bg-zinc-600 transition-colors"
+          >
+            拒绝
+          </button>
+          <button
+            (click)="removeToken()"
+            class="px-6 py-2 bg-white dark:bg-zinc-700 border border-rose-500 text-rose-600 dark:text-rose-400 rounded-lg hover:bg-rose-50 dark:hover:bg-zinc-600 transition-colors"
+          >
+            清除 token
+          </button>
         </div>
       </div>
     </div>
   }
 
-  <!-- Modal (放在整个 conditional 之外) -->
-  <input class="modal-toggle" id="message" type="checkbox"/>
-  <div class="modal">
-    <div class="modal-box text-center">
-      <h3 class="font-bold text-lg">{{ title }}</h3>
-      <p class="py-4">{{ message }}</p>
-      <div class="modal-action justify-center">
-        <label class="btn btn-success btn-sm" for="message">Yay!</label>
+  <!-- Modal -->
+  <input class="modal-toggle" id="message" type="checkbox" />
+  <div class="modal backdrop-blur-sm">
+    <div class="bg-white dark:bg-zinc-800 rounded-lg shadow-md max-w-sm mx-auto p-6 text-center">
+      <h3 class="font-medium text-lg text-gray-800 dark:text-gray-200 mb-2">
+        {{ title }}
+      </h3>
+      <p class="py-4 text-gray-600 dark:text-gray-400">{{ message }}</p>
+      <div class="mt-4 flex justify-center">
+        <label class="px-5 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg cursor-pointer transition-colors" for="message"> 确定 </label>
       </div>
     </div>
   </div>

@@ -1,9 +1,10 @@
-<div *ngIf="configItems?.length" class="bg-white shadow-md rounded-md p-6">
-  <h2 class="text-xl font-semibold mb-4 text-gray-800">配置项</h2>
-  <div *ngFor="let config of configItems" class="mb-4 border-b border-gray-200 pb-4 last:border-b-0 last:pb-0">
+<div *ngIf="localConfigs?.length" class="bg-white shadow-md rounded-md p-6">
+  <h2 class="text-xl font-semibold mb-4 text-gray-800">本地配置项</h2>
+  <div *ngFor="let config of localConfigs" class="mb-4 border-b border-gray-200 pb-4 last:border-b-0 last:pb-0">
+    <!-- 本地配置部分保持不变 -->
     <div class="flex flex-col md:flex-row md:items-center justify-between">
       <div class="flex flex-row md:items-center w-full">
-        <span class="font-medium text-gray-700 mb-2 md:mb-0 md:mr-4 ">{{ config.visibleName }}</span>
+        <span class="font-medium text-gray-700 mb-2 md:mb-0 md:mr-4">{{ config.visibleName }}</span>
 
         @if (config.type === 'INTEGER') {
           <p class="pl-2">
@@ -15,31 +16,34 @@
           <!-- BOOLEAN -->
           <ng-container *ngSwitchCase="'BOOLEAN'">
             <input
-              (click)="setConfig(config.key, !getConfig(config.key, 'BOOLEAN'))"
-              [checked]="getConfig(config.key, 'BOOLEAN')"
+              (click)="setConfig(config.configKey, !getConfig(config.configKey, 'BOOLEAN'))"
+              [checked]="getConfig(config.configKey, 'BOOLEAN')"
               class="toggle toggle-success"
-              id="{{config.key}}"
-              type="checkbox"/>
+              id="{{ config.configKey }}"
+              type="checkbox"
+            />
           </ng-container>
 
           <!-- INTEGER -->
           <ng-container *ngSwitchCase="'INTEGER'">
             <input
-              (change)="setConfig(config.key, config.value)"
+              (change)="setConfig(config.configKey, config.value)"
               [(ngModel)]="config.value"
-              [max]="config.max"
-              [min]="config.min"
+              [max]="config.constraints['max']"
+              [min]="config.constraints['min']"
               class="range range-success w-full sm:w-48"
-              type="range"/>
+              type="range"
+            />
           </ng-container>
 
           <!-- STRING -->
           <ng-container *ngSwitchCase="'STRING'">
             <input
-              (change)="setConfig(config.key, config.value)"
+              (change)="setConfig(config.configKey, config.value)"
               [(ngModel)]="config.value"
               class="input input-bordered input-success w-full sm:w-64"
-              type="text"/>
+              type="text"
+            />
           </ng-container>
 
           <!-- DEFAULT -->
@@ -54,4 +58,65 @@
       </div>
     </div>
   </div>
+
+  @if (authorized()) {
+    <h2 class="text-xl font-semibold mb-4 text-gray-800">配置项</h2>
+    <div *ngFor="let config of remoteConfigs" class="mb-4 border-b border-gray-200 pb-4 last:border-b-0 last:pb-0">
+      <div class="flex flex-col md:flex-row md:items-center justify-between">
+        <div class="flex flex-row md:items-center w-full">
+          <span class="font-medium text-gray-700 mb-2 md:mb-0 md:mr-4">{{ config.visibleName }}</span>
+
+          @if (config.type === 'INTEGER') {
+            <p class="pl-2">
+              {{ config.value }}
+            </p>
+          }
+
+          <div [ngSwitch]="config.type" class="flex-1 pl-8">
+            <!-- BOOLEAN -->
+            <ng-container *ngSwitchCase="'BOOLEAN'">
+              <input
+                (click)="toggleRemoteBoolTypeConfig(config)"
+                [checked]="config.value === 'true'"
+                class="toggle toggle-success"
+                id="{{ config.configKey }}"
+                type="checkbox"
+              />
+            </ng-container>
+
+            <!-- INTEGER -->
+            <ng-container *ngSwitchCase="'INTEGER'">
+              <input
+                (change)="setRemoteConfig(config.id, config.value)"
+                [(ngModel)]="config.value"
+                [max]="config.constraints['max'] || 100"
+                [min]="config.constraints['min'] || 0"
+                class="range range-success w-full sm:w-48"
+                type="range"
+              />
+            </ng-container>
+
+            <!-- STRING -->
+            <ng-container *ngSwitchCase="'STRING'">
+              <input
+                (change)="setRemoteConfig(config.id, config.value)"
+                [(ngModel)]="config.value"
+                class="input input-bordered input-success w-full sm:w-64"
+                type="text"
+              />
+            </ng-container>
+
+            <!-- DEFAULT -->
+            <ng-container *ngSwitchDefault>
+              <span class="text-gray-600">-</span>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="text-gray-500 text-sm italic mt-2 md:mt-0 w-full">
+          <small>{{ config.description }}</small>
+        </div>
+      </div>
+    </div>
+  }
 </div>

@@ -1,80 +1,156 @@
-<div *ngIf="!adminMode" class="flex items-center justify-center gap-4 ">
-  <!-- Like Button -->
-  <button (click)="feedback(true)"
-          [ngClass]="{'text-blue-600': liked}"
-          class="group flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 transition-all duration-200
-           hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-400">
-    <svg aria-hidden="true" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"
-         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M14 10h-.769a2 2 0 01-1.937-1.575l-1.384-5.535A2 2 0 019.269 2h5.462a2 2 0 011.937 1.575l1.385 5.535a2 2 0 01-1.938 2.89l-.768.07zM3 12h2.25l3.364 8.41a2.125 2.125 0 00.64 1.493m0-1.493l.014-.034c.047-.118.28-.288.64-.288h5.25m0 0l-.984-2.46a.75.75 0 01-.215-.422m0 0c-.076-.19-.149-.393-.222-.616m0 0 4.493.255M6.575 12V6.72L4.05 4.515M6.575 12v4.533L4.05 19.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"/>
-    </svg>
-    <span class="text-sm font-medium transition-colors duration-200 group-hover:text-blue-600">Like</span>
-    <span *ngIf="like > 0" class="ml-1 rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700">
-      {{ like }}
-    </span>
-  </button>
-  <!-- Dislike Button -->
-  <button
-    (click)="feedback(false)"
-    [ngClass]="{'text-red-600': disliked}"
-    class="group flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 transition-all duration-200
-           hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-400"
-  >
-    <svg aria-hidden="true" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"
-         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M9.923 3.943c.092-.103.211-.179.344-.222M6.923 3.943c.092-.103.211-.179.344-.222M5.904 18.723l.015-.034c.047-.118.28-.288.64-.288h5.25m-5.25 0h5.25m-4.5 8.25h3.75a2.25 2.25 0 002.25-2.25v-1.372c0-.516.351-.966.852-1.091l4.423-1.106c.44-.11.902.055 1.173.427l.371.557c.374.56.404 1.247.082 1.855l-.311.56c-.087.157-.088.319-.043.465a.48.48 0 00.118.435l.793 1.435c.142.257.142.547 0 .804l-.793 1.435a.48.48 0 00-.118.435c-.045.146-.044.308.043.465l.311.56c.322.608.292 1.295-.082 1.855l-.371.557c-.271.371-.733.537-1.173.427l-4.423-1.106c-.501-.125-.852-.575-.852-1.091V21.75A2.25 2.25 0 0012.75 19.5H9.75m-5.904-1.277l-3.915-1.958a.75.75 0 00-1.102.195m1.102-.195a.75.75 0 011.102.195l3.915 1.958m-3.915-1.958l-.505.252"
-        stroke-linecap="round"
-        stroke-linejoin="round"/>
-    </svg>
-    <span class="text-sm font-medium transition-colors duration-200 group-hover:text-red-600">Dislike</span>
-    <span *ngIf="dislike > 0" class="ml-1 rounded-full bg-red-100 px-2 py-0.5 text-xs font-medium text-red-700">
-      {{ dislike }}
-    </span>
-  </button>
+<!-- 用户反馈区域 -->
+<div *ngIf="!adminMode && !getConfig(UserConfigItem.disableLikeButton, 'BOOLEAN')" class="flex items-center justify-center px-4 py-3">
+  <!-- 左侧反馈按钮 -->
+  <div class="flex items-center gap-3">
+    <!-- 点赞按钮 -->
+    <button
+      (click)="feedback(true)"
+      [class.bg-blue-50]="liked"
+      [class.dark:bg-blue-900]="liked"
+      [class.text-blue-600]="liked"
+      aria-label="Like"
+      class="flex items-center gap-2 rounded-lg px-3.5 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-700 transition-all"
+    >
+      <svg
+        [class.text-blue-500]="liked"
+        aria-hidden="true"
+        class="h-5 w-5"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <span class="text-sm font-medium">Like</span>
+      <span *ngIf="like > 0" class="ml-0.5 px-1.5 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-medium rounded-full">
+        {{ like }}
+      </span>
+    </button>
+
+    <!-- 踩按钮 -->
+    <button
+      (click)="feedback(false)"
+      [class.bg-red-50]="disliked"
+      [class.dark:bg-red-900]="disliked"
+      [class.text-red-600]="disliked"
+      aria-label="Dislike"
+      class="flex items-center gap-2 rounded-lg px-3.5 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-700 transition-all"
+    >
+      <svg
+        [class.text-red-500]="disliked"
+        aria-hidden="true"
+        class="h-5 w-5"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M7.5 15h2.25m8.024-9.75c.011.05.028.1.052.148.591 1.2.924 2.55.924 3.977a8.96 8.96 0 01-.999 4.125m.023-8.25c-.076-.365.183-.75.575-.75h.908c.889 0 1.713.518 1.972 1.368.339 1.11.521 2.287.521 3.507 0 1.553-.295 3.036-.831 4.398C20.613 14.547 19.833 15 19 15h-1.053c-.472 0-.745-.556-.5-.96a8.95 8.95 0 00.303-.54m.023-8.25H16.48a4.5 4.5 0 01-1.423-.23l-3.114-1.04a4.5 4.5 0 00-1.423-.23H6.504c-.618 0-1.217.247-1.605.729A11.95 11.95 0 002.25 12c0 .434.023.863.068 1.285C2.427 14.306 3.346 15 4.372 15h3.126c.618 0 .991.724.725 1.282A7.471 7.471 0 007.5 19.5a2.25 2.25 0 002.25 2.25.75.75 0 00.75-.75v-.633c0-.573.11-1.14.322-1.672.304-.76.93-1.33 1.653-1.715a9.04 9.04 0 002.86-2.4c.498-.634 1.226-1.08 2.032-1.08h.384"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <span class="text-sm font-medium">Dislike</span>
+      <span *ngIf="dislike > 0" class="ml-0.5 px-1.5 py-0.5 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-xs font-medium rounded-full">
+        {{ dislike }}
+      </span>
+    </button>
+  </div>
 </div>
 
-
-<div *ngIf="adminMode" class="grid grid-cols-4 w-full">
-  <div class="w-full flex items-center justify-center">
-    <button (click)="removeTop()"
-            class="group flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 transition-all duration-200
-                   hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400">
-      👇
-    </button>
-  </div>
-
-  <!-- Like Button -->
-  <button (click)="feedback(true)"
-          [ngClass]="{'text-blue-600': liked}"
-          class="group flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 transition-all duration-200
-           hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-400">
-    <span class="text-sm font-medium transition-colors duration-200 group-hover:text-blue-600">Like</span>
-    <span *ngIf="like > 0" class="ml-1 rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700">
-      {{ like }}
-    </span>
-  </button>
-  <!-- Dislike Button -->
+<!-- 管理员操作区域 -->
+<div *ngIf="adminMode && !getConfig(UserConfigItem.disableLikeButton, 'BOOLEAN')" class="flex items-center justify-between px-4 py-3">
+  <!-- 取消置顶按钮 -->
   <button
-    (click)="feedback(false)"
-    [ngClass]="{'text-red-600': disliked}"
-    class="group flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 transition-all duration-200
-           hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-400"
+    (click)="unpin()"
+    aria-label="取消置顶"
+    class="p-1.5 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 rounded-md hover:bg-gray-100 dark:hover:bg-zinc-700 transition-colors"
   >
-    <span class="text-sm font-medium transition-colors duration-200 group-hover:text-red-600">Dislike</span>
-    <span *ngIf="dislike > 0" class="ml-1 rounded-full bg-red-100 px-2 py-0.5 text-xs font-medium text-red-700">
-      {{ dislike }}
-    </span>
+    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+    </svg>
   </button>
 
-  <div class="w-full flex items-center justify-center">
-    <button (click)="addTop()"
-            class="group flex items-center gap-2 rounded-lg px-4 py-2 text-gray-500 transition-all duration-200
-                   hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400">
-      👆
+  <div class="flex items-center gap-3">
+    <!-- 点赞按钮 -->
+    <button
+      (click)="feedback(true)"
+      [class.bg-blue-50]="liked"
+      [class.dark:bg-blue-900]="liked"
+      [class.text-blue-600]="liked"
+      aria-label="Like"
+      class="flex items-center gap-2 rounded-lg px-3.5 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-700 transition-all"
+    >
+      <svg
+        [class.text-blue-500]="liked"
+        aria-hidden="true"
+        class="h-5 w-5"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <span class="text-sm font-medium">Like</span>
+      <span *ngIf="like > 0" class="ml-0.5 px-1.5 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-medium rounded-full">
+        {{ like }}
+      </span>
+    </button>
+
+    <!-- 踩按钮 -->
+    <button
+      (click)="feedback(false)"
+      [class.bg-red-50]="disliked"
+      [class.dark:bg-red-900]="disliked"
+      [class.text-red-600]="disliked"
+      aria-label="Dislike"
+      class="flex items-center gap-2 rounded-lg px-3.5 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-700 transition-all"
+    >
+      <svg
+        [class.text-red-500]="disliked"
+        aria-hidden="true"
+        class="h-5 w-5"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M7.5 15h2.25m8.024-9.75c.011.05.028.1.052.148.591 1.2.924 2.55.924 3.977a8.96 8.96 0 01-.999 4.125m.023-8.25c-.076-.365.183-.75.575-.75h.908c.889 0 1.713.518 1.972 1.368.339 1.11.521 2.287.521 3.507 0 1.553-.295 3.036-.831 4.398C20.613 14.547 19.833 15 19 15h-1.053c-.472 0-.745-.556-.5-.96a8.95 8.95 0 00.303-.54m.023-8.25H16.48a4.5 4.5 0 01-1.423-.23l-3.114-1.04a4.5 4.5 0 00-1.423-.23H6.504c-.618 0-1.217.247-1.605.729A11.95 11.95 0 002.25 12c0 .434.023.863.068 1.285C2.427 14.306 3.346 15 4.372 15h3.126c.618 0 .991.724.725 1.282A7.471 7.471 0 007.5 19.5a2.25 2.25 0 002.25 2.25.75.75 0 00.75-.75v-.633c0-.573.11-1.14.322-1.672.304-.76.93-1.33 1.653-1.715a9.04 9.04 0 002.86-2.4c.498-.634 1.226-1.08 2.032-1.08h.384"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <span class="text-sm font-medium">Dislike</span>
+      <span *ngIf="dislike > 0" class="ml-0.5 px-1.5 py-0.5 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-xs font-medium rounded-full">
+        {{ dislike }}
+      </span>
     </button>
   </div>
+
+  <!-- 置顶按钮 -->
+  <button
+    (click)="pin()"
+    aria-label="置顶"
+    class="p-1.5 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 rounded-md hover:bg-gray-100 dark:hover:bg-zinc-700 transition-colors"
+  >
+    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 10l7-7m0 0l7 7m-7-7v18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+    </svg>
+  </button>
 </div>

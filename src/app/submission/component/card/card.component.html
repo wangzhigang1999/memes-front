@@ -1,87 +1,19 @@
-<ng-template #flow>
-  @switch (submission.submissionType) {
-    @case ('IMAGE') {
-      <figure class="p-2 rounded-xl overflow-hidden">
-        @if (getConfig(ConfigItem.singleColumn, "BOOLEAN") || lazy) {
-          <img [defaultImage]="defaultImage" [lazyLoad]="submission.url" alt=""
-               class="rounded-xl object-cover w-full h-full" src=""/>
-        } @else {
-          <img class="rounded-xl object-cover w-full h-full" src="{{submission.url}}"
-               alt=""/>
-        }
-      </figure>
-    }
-    @case ('VIDEO') {
-      <figure class="p-2 rounded-xl overflow-hidden">
-        <video class="rounded-xl object-cover w-full h-full" controls>
-          <source src="{{submission.url}}" type="video/mp4">
-        </video>
-      </figure>
-    }
-    @case ('BILIBILI') {
-      <figure class="p-2 rounded-xl overflow-hidden">
-        <iframe [src]="submission.url | safe" allowfullscreen class="rounded-xl w-full aspect-video"></iframe>
-      </figure>
-    }
-    @case ('MARKDOWN') {
-      <div class="p-4 md:p-8 max-h-[75vh] xl:max-h-[85vh] overflow-y-scroll rounded-xl bg-base-100">
-        <div *ngIf="submission.url">
-          <markdown [src]="submission.url" class="prose rounded-xl break-words bg-base-100"/>
-        </div>
-        <div *ngIf="submission.content">
-          <markdown [data]="submission.content" class="prose rounded-xl break-words bg-base-100"/>
-        </div>
+<div [id]="submission.id" class="bg-white dark:bg-zinc-800 rounded-lg shadow-sm overflow-hidden mb-6">
+  <!-- 多媒体内容显示区域 -->
+  @if (submission.mediaContentList.length > 1) {
+    <div class="max-h-[75vh] overflow-y-auto custom-scrollbar">
+      <div *ngFor="let media of submission.mediaContentList; trackBy: trackByMediaId" class="p-1 border-b border-gray-100 dark:border-zinc-700 last:border-0">
+        <app-media [content]="media" [admin]="admin"></app-media>
       </div>
-    }
-    @case ('BATCH') {
-      <div class="max-h-[70vh] overflow-y-scroll rounded-xl bg-base-100">
-        <div *ngFor="let child of submission.children">
-          <app-card [showVoteBar]="false" [submission]="child" [lazy]="lazy" [disableBorder]="true"/>
-        </div>
-      </div>
-    }
+    </div>
+  } @else {
+    <div *ngFor="let media of submission.mediaContentList; trackBy: trackByMediaId" class="p-1.5">
+      <app-media [content]="media" [admin]="admin"></app-media>
+    </div>
   }
-</ng-template>
 
-<div [id]="submission.id" class="card w-full  rounded-xl bg-base-100 shadow-md pb-2 mb-2">
-  <!-- Added rounded-xl, background color, shadow -->
-  <div (click)="center()" (dblclick)="toNext()" class="cursor-pointer">  <!-- Added cursor-pointer -->
-    <ng-container *ngTemplateOutlet="flow"></ng-container>
+  <!-- 反馈区域 -->
+  <div class="px-4 border-t border-gray-100 dark:border-zinc-700">
+    <app-feedback [adminMode]="admin" [dislike]="submission.dislikesCount" [id]="submission.id" [like]="submission.likesCount"></app-feedback>
   </div>
-
-  @if (review) {
-    <div class="grid grid-cols-3 gap-2 place-content-center w-full text-center px-2">  <!-- Adjusted mt, added gap -->
-      <button (click)="reject(submission.id)"
-              class="btn btn-sm px-4 py-2 font-medium rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
-        <!-- Customized button styles -->
-        Reject
-      </button>
-      <button (click)="merge(submission.id,nextID)" [disabled]="nextID==''"
-              class="btn btn-sm px-4 py-2 font-medium rounded-md text-gray-700 bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed">
-        <!-- Customized button styles + disabled styles -->
-        MergeNext
-      </button>
-      <button (click)="accept(submission.id)"
-              class="btn btn-sm px-4 py-2 font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
-        <!-- Customized button styles -->
-        Yay!
-      </button>
-    </div>
-
-    <div class="flex items-center justify-center mt-2 text-sm text-gray-500 overflow-hidden">
-      <div
-        class="mx-2 whitespace-nowrap flex items-center justify-center"> {{ submission.timestamp | date:'MM-dd HH:mm' }}
-      </div>
-      <div class="mx-2 whitespace-nowrap overflow-x-auto scrollbar-hide flex items-center justify-center">
-        {{ submission.uploader }}
-      </div>
-    </div>
-
-  } @else if (showVoteBar && !getConfig(ConfigItem.disableLikeButton, "BOOLEAN")) {
-    <app-feedback [dislike]="submission.dislike" [id]="submission.id" [like]="submission.like"
-                  [adminMode]=admin></app-feedback>
-  }
 </div>
-
-
-

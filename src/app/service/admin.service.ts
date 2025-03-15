@@ -1,46 +1,42 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environment";
-import {Observable} from "rxjs";
+import { Injectable } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
+import { environment } from '../../environments/environment'
+import { Observable } from 'rxjs'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdminService {
-
-
-  private http: HttpClient;
-  private readonly host: string;
+  private http: HttpClient
+  private readonly host: string
 
   constructor(http: HttpClient) {
-    this.http = http;
+    this.http = http
     this.host = environment.host
   }
-
 
   /**
    * 获取统计信息
    */
-  getStatistics(): Observable<any> {
-    let url = this.host + `/admin/statistic`;
-    return this.http.get(url);
+  getVisitStatistics(): Observable<any> {
+    let url = this.host + `/api/admin/visit/statistic`
+    return this.http.get(url)
   }
-
 
   /**
    * 设置置顶
    */
-  setTop(id: string): Observable<any> {
-    let url = this.host + `/admin/submission/top/${id}`;
-    return this.http.post(url, null);
+  pin(id: string): Observable<any> {
+    let url = this.host + `/api/submission/${id}/pin`
+    return this.http.post(url, null)
   }
 
   /**
    * 取消置顶
    */
-  removeTop(id: string): Observable<any> {
-    let url = this.host + `/admin/submission/top/${id}`;
-    return this.http.delete(url);
+  unpin(id: string): Observable<any> {
+    let url = this.host + `/api/submission/${id}/pin`
+    return this.http.delete(url)
   }
 
   /**
@@ -48,29 +44,22 @@ export class AdminService {
    */
   verifyToken(token: string): Observable<any> {
     console.log(token)
-    let url = this.host + `/admin/verify`;
-    return this.http.get(url);
+    let url = this.host + `/api/admin/validate`
+    return this.http.get(url)
   }
 
-  getConfig(): Observable<any> {
-    let url = this.host + `/admin/config`;
-    return this.http.get(url);
+  listConfig(): Observable<any> {
+    let url = this.host + `/api/config`
+    return this.http.get(url)
   }
 
-  setConfig(key: string, value: string) {
-    let url = this.host + `/admin/config`;
-    let param: any = {}
-    param[key] = value;
-    return this.http.post(url, param);
+  setConfig(id: number | undefined, value: string): Observable<any> {
+    let url = this.host + `/api/config/${id}/${value}`
+    return this.http.post(url, null)
   }
 
-  setBlacklist(uuid: string): Observable<any> {
-    let url = this.host + `/admin/blacklist/${uuid}`;
-    return this.http.post(url, null);
-  }
-
-  removeBlacklist(uuid: string): Observable<any> {
-    let url = this.host + `/admin/blacklist/${uuid}`;
-    return this.http.delete(url);
+  getReviewStatistics(): Observable<any> {
+    let url = this.host + `/api/admin/review/statistic`
+    return this.http.get(url)
   }
 }

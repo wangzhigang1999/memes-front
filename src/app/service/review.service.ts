@@ -1,47 +1,40 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {environment} from "../../environments/environment";
-import {Observable} from "rxjs";
+import { Injectable } from '@angular/core'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { environment } from '../../environments/environment'
+import { Observable } from 'rxjs'
+import { ContentStatus, MediaContent } from '../model/media-content'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ReviewService {
-
-  private http: HttpClient;
-  private readonly host: string;
+  private http: HttpClient
+  private readonly host: string
 
   constructor(http: HttpClient) {
-    this.http = http;
+    this.http = http
     this.host = environment.host
   }
 
   /**
    * 获取今日提交
    */
-  loadWaitingList() {
-    let url = this.host + '/admin/review';
-    return this.http.get(url);
+  loadWaitingList(): Observable<MediaContent> {
+    let url = this.host + '/api/media/status/PENDING'
+    return this.http.get<MediaContent>(url)
   }
 
-
-  review(id: string, operation: string) {
-    let url = this.host + `/admin/review/${operation}/${id}`;
-    return this.http.post(url, null);
+  review(id: number, operation: ContentStatus) {
+    let url = this.host + `/api/media/${id}/status/${operation}`
+    return this.http.post(url, null)
   }
 
-  batchReview(id: string[], operation: string): Observable<any> {
-    let url = this.host + `/admin/review/batch/${operation}`;
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(url, id, {headers: headers});
-  }
+  batchReview(ids: number[], operation: ContentStatus): Observable<any> {
+    const url = `${this.host}/api/media/batch/status/${operation}`
 
-  /**
-   * 统计信息
-   */
-  getStatusNum(status: string): Observable<any> {
-    let url = this.host + `/admin/review/statistic/${status}`;
-    return this.http.get(url);
+    // 设置 HTTP 请求头
+    const headers = new HttpHeaders().set('Content-Type', 'application/json')
+    // 发送 POST 请求
+    return this.http.post(url, ids, { headers })
   }
 }

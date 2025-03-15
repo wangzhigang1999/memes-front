@@ -1,0 +1,61 @@
+<ng-template #flow>
+  @switch (content.dataType) {
+    @case (DataType.IMAGE) {
+      <figure class="rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+        @if (getConfig(ConfigItem.singleColumn, 'BOOLEAN') || lazy) {
+          <img [defaultImage]="defaultImage" [lazyLoad]="content.dataContent" alt="图片内容" class="rounded-xl object-cover w-full h-full" src="" />
+        } @else {
+          <img class="rounded-xl object-cover w-full h-full" [src]="content.dataContent" alt="图片内容" />
+        }
+      </figure>
+    }
+    @case (DataType.VIDEO) {
+      <figure class="rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+        <video class="rounded-xl object-cover w-full h-full" controls>
+          <source [src]="content.dataContent" type="video/mp4" />
+          您的浏览器不支持视频播放
+        </video>
+      </figure>
+    }
+    @case (DataType.MARKDOWN) {
+      <div class="max-h-[75vh] xl:max-h-[85vh] overflow-y-auto rounded-xl bg-base-100 shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100">
+        <div *ngIf="content.dataContent" class="p-4">
+          <markdown [data]="content.dataContent" class="prose prose-emerald max-w-none rounded-xl break-words bg-base-100" />
+        </div>
+      </div>
+    }
+  }
+</ng-template>
+
+<div [id]="content.id" class="card w-full bg-base-100 rounded-xl">
+  <div (click)="center()" (dblclick)="toNext()" class="cursor-pointer">
+    <ng-container *ngTemplateOutlet="flow"></ng-container>
+  </div>
+
+  @if (review) {
+    <div class="grid grid-cols-2 gap-3 place-content-center w-full text-center px-3 mt-3">
+      <button
+        (click)="reject(content.id)"
+        class="btn btn-sm px-4 py-2 font-medium rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 shadow-sm hover:shadow-md transition-all duration-300"
+      >
+        Reject
+      </button>
+
+      <button
+        (click)="accept(content.id)"
+        class="btn btn-sm px-4 py-2 font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 shadow-sm hover:shadow-md transition-all duration-300"
+      >
+        Yay!
+      </button>
+    </div>
+
+    <div class="flex items-center justify-center mt-3 text-sm text-gray-500 overflow-hidden px-3">
+      <div class="mx-2 whitespace-nowrap flex items-center justify-center">
+        {{ content.createdAt | date: 'MM-dd HH:mm' }}
+      </div>
+      <div class="mx-2 whitespace-nowrap overflow-x-auto scrollbar-hide flex items-center justify-center">
+        {{ content.userId }}
+      </div>
+    </div>
+  }
+</div>

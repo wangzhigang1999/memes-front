@@ -2,46 +2,48 @@
   <div
     class="fixed z-10 bottom-5 right-4 m-4 hover:cursor-pointer bg-base-200 p-2 rounded-xl transition-transform duration-200 hover:scale-110"
     (click)="showMenu = !showMenu"
-    aria-label="显示/隐藏操作菜单">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-         class="w-8 h-8 text-success">
-      <path stroke-linecap="round" stroke-linejoin="round"
-            d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495"/>
+    aria-label="显示/隐藏操作菜单"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-success">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495"
+      />
     </svg>
   </div>
 }
 
 @if (showMenu) {
-  <div class="fixed z-10 bottom-20 right-5 m-3 flex flex-col gap-2 rounded-xl items-center transition-all duration-300"
-       id="feedback"
-       [ngClass]="{'scale-100 opacity-100': showMenu, 'scale-0 opacity-0': !showMenu}"
-       style="transform-origin: bottom right;">
-
+  <div
+    class="fixed z-10 bottom-20 right-5 m-3 flex flex-col gap-2 rounded-xl items-center transition-all duration-300"
+    id="feedback"
+    [ngClass]="{
+      'scale-100 opacity-100': showMenu,
+      'scale-0 opacity-0': !showMenu,
+    }"
+    style="transform-origin: bottom right"
+  >
     <!-- 反馈 -->
     <div class="tooltip hover:tooltip-open tooltip-left bg-none" data-tip="去反馈">
-      <a class="btn btn-square bg-base-200 border-none text-zinc-900 dark:text-zinc-100 hover:bg-base-300"
-         href="https://www.wjx.cn/vm/mbk5k5S.aspx#"
-         aria-label="反馈">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-             class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"/>
+      <a class="btn btn-square bg-base-200 border-none text-zinc-900 dark:text-zinc-100 hover:bg-base-300" href="https://www.wjx.cn/vm/mbk5k5S.aspx#" aria-label="反馈">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"
+          />
         </svg>
       </a>
     </div>
 
     <!-- 回到顶部 -->
     <div class="tooltip hover:tooltip-open tooltip-left bg-none" data-tip="回到顶部">
-      <button (click)="moveToTop()"
-              class="btn btn-square bg-base-200 border-none text-zinc-900 dark:text-zinc-100 hover:bg-base-300"
-              id="to-top"
-              aria-label="回到顶部">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-             class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M5 11l7-7 7 7M5 19l7-7 7 7"/>
+      <button (click)="moveToTop()" class="btn btn-square bg-base-200 border-none text-zinc-900 dark:text-zinc-100 hover:bg-base-300" id="to-top" aria-label="回到顶部">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 11l7-7 7 7M5 19l7-7 7 7" />
         </svg>
       </button>
     </div>
-
   </div>
 }

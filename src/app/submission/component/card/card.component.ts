@@ -1,83 +1,41 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Submission} from "../../../model/submission";
-import {ReviewService} from "../../../service/review.service";
-import {ImageGroupService} from "../../../service/image-group.service";
-import {getConfig, isSmallScreen} from "../../../utils";
-import {UserConfigItem} from "../../../model/user-config-item";
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
+import { MediaContent } from '../../../model/media-content'
+import { Submission } from '../../../model/submission'
+import { getConfig } from '../../../utils'
 
+/**
+ * 卡片组件 - 显示提交内容
+ * 包含内容列表和反馈功能
+ */
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css']
+  styleUrls: ['./card.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush, // 优化性能
 })
 export class CardComponent {
+  /** 提交内容 */
+  @Input() submission!: Submission
 
-  @Input() submission!: Submission;
-  @Input() review!: boolean;
-  @Input() admin = false;
-  @Input() showVoteBar = true;
-  @Input() nextID = '';
-  @Input() lazy = false;
-  @Input() disableBorder = false;
-  defaultImage = "assets/welcome.webp";
-  protected readonly getConfig = getConfig;
-  protected readonly ConfigItem = UserConfigItem;
-  protected readonly isSmallScreen = isSmallScreen;
-  @Output() private reviewed = new EventEmitter<string[]>();
+  /** 是否为管理员模式 */
+  @Input() admin = false
 
-  constructor(private service: ReviewService, private groupService: ImageGroupService) {
-  }
+  /** 是否启用懒加载 */
+  @Input() lazy = false
 
-  reject(id: string) {
-    this.service.review(id, "reject").subscribe(() => this.hidden([id], false))
-  }
+  /** 是否禁用边框 */
+  @Input() disableBorder = false
 
-  accept(id: string) {
-    this.service.review(id, "accept").subscribe(() => this.hidden([id], true))
-  }
-
-  hidden(ids: string[], accept: boolean = true) {
-    let msg: string[] = []
-    ids.forEach(
-      id => {
-        let dom = document.getElementById(id);
-        if (dom != null) {
-          dom.parentElement?.remove();
-          msg.push(id + (accept ? "+" : "-"))
-        }
-      }
-    )
-    this.reviewed.emit(msg)
-    // scroll to top
-    window.scrollTo(0, 0);
-  }
-
-  merge(id: string, nextID: string) {
-    if (!nextID) {
-      return
-    }
-    if (this.submission.submissionType === "BATCH") {
-      this.groupService.addImageToGroup(id, [nextID]).subscribe(() => this.hidden([id, nextID], true))
-    } else {
-      this.groupService.createImageGroup([id, nextID]).subscribe(() => this.hidden([id, nextID], true))
-    }
-
-  }
-
-  center() {
-    let dom = document.getElementById(this.submission.id);
-    if (dom != null) {
-      dom.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
-    }
-  }
+  /** 工具函数 */
+  protected readonly getConfig = getConfig
 
   /**
-   * 双击后，跳转到下一个的开始，类似 center
+   * 为 ngFor 提供 trackBy 函数，优化性能
+   * @param index 索引
+   * @param item 媒体内容
+   * @returns 媒体内容的唯一 ID
    */
-  toNext() {
-    let dom = document.getElementById(this.submission.id);
-    if (dom != null) {
-      dom.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
-    }
+  trackByMediaId(index: number, item: MediaContent): number {
+    return item.id
   }
 }

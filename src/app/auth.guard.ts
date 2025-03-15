@@ -1,18 +1,15 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree} from '@angular/router';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core'
+import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router'
+import { Observable } from 'rxjs'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthGuard {
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     try {
       // 说明已经验证过了
-      if (localStorage.getItem('token-ok') === "true") {
+      if (localStorage.getItem('token-ok') === 'true') {
         return true
       } else {
         // redirect to login page
@@ -25,5 +22,4 @@ export class AuthGuard {
       return false
     }
   }
-
 }
