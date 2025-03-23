@@ -51,11 +51,15 @@ export class StatisticComponent implements OnInit {
   }
 
   shorten(url: string): string {
-    // split by /api
-    const parts = url.split('/api')
-    if (parts.length > 1) {
-      return parts[1]
+    // 查找 /api 的位置
+    const apiIndex = url.indexOf('/api/')
+
+    // 如果找到了 /api
+    if (apiIndex !== -1) {
+      // 返回 /api 及其之后的部分
+      return url.substring(apiIndex)
     } else {
+      // 如果没有找到 /api，返回原始 URL
       return url
     }
   }
