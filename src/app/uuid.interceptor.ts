@@ -12,12 +12,12 @@ export class UUIDInterceptor implements HttpInterceptor {
       })
       next.handle(clonedRequest).subscribe({
         next: (event: HttpEvent<any>) => {
-          if (event instanceof HttpResponse) {
-            const resp: any = event.body
-            if (!event.ok || resp.status !== 200) {
-              alert(resp.message) // Handle error message display (consider a more appropriate UI mechanism)
-            }
-          }
+          // if (event instanceof HttpResponse) {
+          //   const resp: any = event.body
+          //   if (!event.ok || resp.status !== 200) {
+          //     alert(resp.message) // Handle error message display (consider a more appropriate UI mechanism)
+          //   }
+          // }
           observer.next(event)
         },
         error: (error: HttpErrorResponse) => {
