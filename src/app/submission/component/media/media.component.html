@@ -33,13 +33,19 @@
   </div>
 
   @if (review) {
-    <div class="grid grid-cols-2 gap-3 place-content-center w-full text-center px-3 mt-3">
+    <div class="grid grid-cols-3 gap-3 place-content-center w-full text-center px-3 mt-3">
       <button
         (click)="reject(content.id)"
         class="btn btn-sm px-4 py-2 font-medium rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 shadow-sm hover:shadow-md transition-all duration-300"
       >
         Reject
       </button>
+      <label
+        [for]="'llmReviewStatus' + content.id"
+        class="btn btn-sm px-4 py-2 font-medium rounded-md text-white bg-warning focus:outline-none focus:ring-2 focus:ring-opacity-50 shadow-sm hover:shadow-md transition-all duration-300"
+        (click)="fetchMedia(content.id)"
+        >💡</label
+      >
 
       <button
         (click)="accept(content.id)"
@@ -58,4 +64,20 @@
       </div>
     </div>
   }
+</div>
+
+<!-- Put this part before </body> tag -->
+<input type="checkbox" [id]="'llmReviewStatus' + content.id" class="modal-toggle" />
+<div class="modal modal-bottom md:modal-middle" role="dialog">
+  <div class="modal-box">
+    @if (fullMediaContent) {
+      <p class="py-4">{{ fullMediaContent?.llmDescription }}</p>
+      <p class="pb-2">{{ fullMediaContent?.rejectionReason }}</p>
+    } @else {
+      <div class="flex items-center justify-center">
+        <div class="w-16 h-16 border-t-4 border-b-4 border-green-500 rounded-full animate-spin"></div>
+      </div>
+    }
+  </div>
+  <label class="modal-backdrop" [for]="'llmReviewStatus' + content.id">Close</label>
 </div>

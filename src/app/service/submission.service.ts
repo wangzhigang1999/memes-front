@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { environment } from '../../environments/environment'
+import { MediaContent } from '../model/media-content'
 
 @Injectable({
   providedIn: 'root',
@@ -72,8 +73,8 @@ export class SubmissionService {
     return this.http.get(url)
   }
 
-  getById(id: string): Observable<any> {
-    let url = this.host + `/submission/id/${id}`
-    return this.http.get(url)
+  getMediaById(id: number): Observable<MediaContent> {
+    let url = this.host + `/api/media/${id}`
+    return this.http.get<MediaContent>(url)
   }
 }

@@ -1,11 +1,12 @@
 import { DatePipe, NgIf, NgTemplateOutlet } from '@angular/common'
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core'
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core'
 import { LazyLoadImageModule } from 'ng-lazyload-image'
 import { MarkdownModule } from 'ngx-markdown'
 import { ContentStatus, DataType, MediaContent } from '../../../model/media-content'
 import { UserConfigItem } from '../../../model/user-config-item'
 import { ReviewService } from '../../../service/review.service'
 import { getConfig } from '../../../utils'
+import { SubmissionService } from '../../../service/submission.service'
 
 /**
  * 媒体内容组件 - 处理不同类型媒体内容的显示与交互
@@ -37,6 +38,8 @@ export class MediaComponent {
   /** 是否禁用边框 */
   @Input() disableBorder = false
 
+  fullMediaContent: MediaContent | undefined
+
   /** 默认图片 */
   defaultImage = 'assets/welcome.webp'
 
@@ -48,7 +51,11 @@ export class MediaComponent {
   /** 内容审核完成事件 */
   @Output() private reviewed = new EventEmitter<string[]>()
 
-  constructor(private service: ReviewService) {}
+  constructor(
+    private service: ReviewService,
+    private mediaService: SubmissionService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   /**
    * 拒绝内容
@@ -66,27 +73,32 @@ export class MediaComponent {
     this.service.review(id, ContentStatus.APPROVED).subscribe(() => this.hidden([id], true))
   }
 
-  /**
-   * 隐藏已处理的内容并发出事件
-   * @param ids 内容ID数组
-   * @param accept 是否接受
-   */
   hidden(ids: number[], accept: boolean = true): void {
-    const messages: string[] = ids
-      .map(id => {
-        const element = document.getElementById(String(id))
-        if (element?.parentElement) {
-          element.parentElement.remove()
-          return id + (accept ? '+' : '-')
-        }
-        return ''
-      })
-      .filter(msg => msg !== '')
+    const messages: string[] = []
+    const elementsToRemove: HTMLElement[] = []
 
-    if (messages.length > 0) {
-      this.reviewed.emit(messages)
-      // 滚动到顶部
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+    ids.forEach(id => {
+      const element = document.getElementById(String(id))
+      if (element?.parentElement) {
+        const parent = element.parentElement
+        // 添加淡出效果
+        parent.style.transition = 'opacity 0.3s ease'
+        parent.style.opacity = '0'
+
+        elementsToRemove.push(parent)
+        messages.push(id + (accept ? '+' : '-'))
+      }
+    })
+
+    if (elementsToRemove.length > 0) {
+      // 等待过渡效果完成后再删除元素
+      setTimeout(() => {
+        elementsToRemove.forEach(el => el.remove())
+        this.reviewed.emit(messages)
+
+        // 滚动到顶部
+        // window.scrollTo({ top: 0, behavior: 'smooth' })
+      }, 300) // 与过渡时间一致
     }
   }
 
@@ -116,5 +128,17 @@ export class MediaComponent {
         inline: 'nearest',
       })
     }
+  }
+
+  fetchMedia(id: number) {
+    this.mediaService.getMediaById(id).subscribe({
+      next: (res: any) => {
+        this.fullMediaContent = res.data
+        this.cdr.detectChanges()
+      },
+      error: err => {
+        console.error(err)
+      },
+    })
   }
 }
