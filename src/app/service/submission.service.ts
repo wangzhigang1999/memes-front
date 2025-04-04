@@ -60,8 +60,8 @@ export class SubmissionService {
     return this.http.post(url, formData)
   }
 
-  listSubmissions(lastId: number = -1, pageSize: number = 18, date: string = ''): Observable<any> {
-    let url = this.host + `/api/submission?lastId=${lastId}&pageSize=${pageSize}&date=${date}`
+  listSubmissions(lastId: number = -1, pageSize: number = 18, date: string = '', random: boolean = false): Observable<any> {
+    let url = this.host + `/api/submission?lastId=${lastId}&pageSize=${pageSize}&date=${date}&random=${random}`
     return this.http.get(url)
   }
 

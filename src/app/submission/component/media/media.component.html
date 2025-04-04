@@ -2,7 +2,7 @@
   @switch (content.dataType) {
     @case (DataType.IMAGE) {
       <figure class="rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
-        @if (getConfig(ConfigItem.singleColumn, 'BOOLEAN') || lazy) {
+        @if (getConfig(ConfigItem.singleColumnDisplay, 'BOOLEAN') || lazy) {
           <img [defaultImage]="defaultImage" [lazyLoad]="content.dataContent" alt="图片内容" class="rounded-xl object-cover w-full h-full" src="" />
         } @else {
           <img class="rounded-xl object-cover w-full h-full" [src]="content.dataContent" alt="图片内容" />

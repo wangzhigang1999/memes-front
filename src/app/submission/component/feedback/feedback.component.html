@@ -1,5 +1,5 @@
 <!-- 用户反馈区域 -->
-<div *ngIf="!adminMode && !getConfig(UserConfigItem.disableLikeButton, 'BOOLEAN')" class="flex items-center justify-center px-4 py-3">
+<div *ngIf="!adminMode && !getConfig(UserConfigItem.hideLikeButton, 'BOOLEAN')" class="flex items-center justify-center px-4 py-3">
   <!-- 左侧反馈按钮 -->
   <div class="flex items-center gap-3">
     <!-- 点赞按钮 -->
@@ -67,7 +67,7 @@
 </div>
 
 <!-- 管理员操作区域 -->
-<div *ngIf="adminMode && !getConfig(UserConfigItem.disableLikeButton, 'BOOLEAN')" class="flex items-center justify-between px-4 py-3">
+<div *ngIf="adminMode && !getConfig(UserConfigItem.hideLikeButton, 'BOOLEAN')" class="flex items-center justify-between px-4 py-3">
   <!-- 取消置顶按钮 -->
   <button
     (click)="unpin()"

@@ -18,16 +18,23 @@ export class ConfigComponent implements OnInit {
   localConfigs: Config[] = [] // Renamed to configItems, now holds all configs
   configDefinitions: Omit<any, 'value'>[] = [
     {
-      configKey: UserConfigItem.singleColumn,
-      visibleName: '单栏模式',
-      description: '在浏览 meme 时，以一栏或多栏瀑布流的形式显示，移动端不生效',
+      configKey: UserConfigItem.singleColumnDisplay,
+      visibleName: '单栏显示模式',
+      description: '在浏览 meme 时，以一栏或多栏瀑布流的形式显示（移动端不生效）',
       type: 'BOOLEAN',
       visible: true,
     },
     {
-      configKey: UserConfigItem.disableLikeButton,
-      visibleName: '隐藏点赞',
-      description: '在浏览 meme 时，显示/隐藏点赞按钮，全局生效',
+      configKey: UserConfigItem.hideLikeButton,
+      visibleName: '隐藏点赞按钮',
+      description: '在浏览 meme 时，选择是否显示点赞按钮（全局生效）',
+      type: 'BOOLEAN',
+      visible: true,
+    },
+    {
+      configKey: UserConfigItem.randomFetching,
+      visibleName: '随机获取内容',
+      description: '在浏览 meme 时，每次随机获取内容而不是按照时间顺序',
       type: 'BOOLEAN',
       visible: true,
     },

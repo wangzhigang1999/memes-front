@@ -1,4 +1,4 @@
-<ng-container *ngIf="submissionIds.size <= 0 || getConfig(ConfigItem.singleColumn, 'BOOLEAN') || isSmallScreen(); else masonryLayout">
+<ng-container *ngIf="submissionIds.size <= 0 || getConfig(ConfigItem.singleColumnDisplay, 'BOOLEAN') || isSmallScreen(); else masonryLayout">
   <!-- 单列布局 -->
   <div class="max-w-4xl mx-auto">
     <app-card

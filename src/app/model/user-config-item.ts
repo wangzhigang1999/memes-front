@@ -1,4 +1,5 @@
 export enum UserConfigItem {
-  singleColumn = 'singleMode',
-  disableLikeButton = 'disableLikeButton',
+  singleColumnDisplay = 'singleMode',
+  hideLikeButton = 'hideLikeButton',
+  randomFetching = 'randomFetching',
 }

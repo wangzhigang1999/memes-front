@@ -93,7 +93,8 @@ export class EndlessComponent implements OnInit {
     }
 
     this.isLoading = true
-    this.submissionService.listSubmissions(this.lastId, this.pageSize).subscribe({
+
+    this.submissionService.listSubmissions(this.lastId, this.pageSize, '', getConfig(this.ConfigItem.randomFetching, 'BOOLEAN')).subscribe({
       next: ({ data }) => {
         // 过滤掉已存在的提交
         const newSubmissions = data.filter((submission: Submission) => !this.submissionIds.has(submission.id))
