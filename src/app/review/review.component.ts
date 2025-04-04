@@ -20,6 +20,8 @@ export class ReviewComponent implements OnInit {
 
   passedNum = 0
   waitingNum = 0
+  rejectedNum = 0
+  flaggedNum = 0
 
   constructor(
     private service: ReviewService,
@@ -136,6 +138,8 @@ export class ReviewComponent implements OnInit {
         let data = response.data
         this.passedNum = data['APPROVED'] || 0
         this.waitingNum = data['PENDING'] || 0
+        this.rejectedNum = data['REJECTED'] || 0
+        this.flaggedNum = data['FLAGGED'] || 0
       },
       error: (error: any) => {
         console.error('Error fetching statistics:', error)
