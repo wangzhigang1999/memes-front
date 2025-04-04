@@ -25,29 +25,29 @@
     </div>
   } @else {
     <!-- 统计卡片 -->
-    <div class="grid grid-cols-4 gap-4 mb-8">
-      <!-- 待审核 - 放到第一个更符合流程顺序 -->
-      <div class="bg-white dark:bg-zinc-800 rounded-lg shadow-sm p-5 flex flex-col items-center justify-center hover:shadow-md transition-shadow">
-        <div class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">待审核</div>
-        <div class="text-3xl font-bold text-rose-500">{{ waitingNum }}</div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6 md:mb-8">
+      <!-- 待审核 -->
+      <div class="bg-white dark:bg-zinc-800 rounded-lg shadow-sm p-3 md:p-5 flex flex-col items-center justify-center hover:shadow-md transition-shadow">
+        <div class="text-xs md:text-sm font-medium text-gray-500 dark:text-gray-400 mb-1 whitespace-nowrap">待审核</div>
+        <div class="text-xl md:text-2xl lg:text-3xl font-bold text-rose-500">{{ waitingNum }}</div>
       </div>
 
       <!-- 审核通过 -->
-      <div class="bg-white dark:bg-zinc-800 rounded-lg shadow-sm p-5 flex flex-col items-center justify-center hover:shadow-md transition-shadow">
-        <div class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">审核通过</div>
-        <div class="text-3xl font-bold text-emerald-500">{{ passedNum }}</div>
+      <div class="bg-white dark:bg-zinc-800 rounded-lg shadow-sm p-3 md:p-5 flex flex-col items-center justify-center hover:shadow-md transition-shadow">
+        <div class="text-xs md:text-sm font-medium text-gray-500 dark:text-gray-400 mb-1 whitespace-nowrap">审核通过</div>
+        <div class="text-xl md:text-2xl lg:text-3xl font-bold text-emerald-500">{{ passedNum }}</div>
       </div>
 
       <!-- 审核拒绝 -->
-      <div class="bg-white dark:bg-zinc-800 rounded-lg shadow-sm p-5 flex flex-col items-center justify-center hover:shadow-md transition-shadow">
-        <div class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">审核拒绝</div>
-        <div class="text-3xl font-bold text-amber-500">{{ rejectedNum }}</div>
+      <div class="bg-white dark:bg-zinc-800 rounded-lg shadow-sm p-3 md:p-5 flex flex-col items-center justify-center hover:shadow-md transition-shadow">
+        <div class="text-xs md:text-sm font-medium text-gray-500 dark:text-gray-400 mb-1 whitespace-nowrap">审核拒绝</div>
+        <div class="text-xl md:text-2xl lg:text-3xl font-bold text-amber-500">{{ rejectedNum }}</div>
       </div>
 
       <!-- 被标记 -->
-      <div class="bg-white dark:bg-zinc-800 rounded-lg shadow-sm p-5 flex flex-col items-center justify-center hover:shadow-md transition-shadow">
-        <div class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">被标记</div>
-        <div class="text-3xl font-bold text-gray-800 dark:text-gray-200">{{ flaggedNum }}</div>
+      <div class="bg-white dark:bg-zinc-800 rounded-lg shadow-sm p-3 md:p-5 flex flex-col items-center justify-center hover:shadow-md transition-shadow">
+        <div class="text-xs md:text-sm font-medium text-gray-500 dark:text-gray-400 mb-1 whitespace-nowrap">被标记</div>
+        <div class="text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 dark:text-gray-200">{{ flaggedNum }}</div>
       </div>
     </div>
 
