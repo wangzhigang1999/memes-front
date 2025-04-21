@@ -41,6 +41,7 @@ export class FeedbackComponent implements OnInit {
     private adminService: AdminService,
     private modalService: ModalService
   ) {}
+
   protected readonly getConfig = getConfig
   protected readonly Config = Config
   protected readonly UserConfigItem = UserConfigItem
@@ -55,12 +56,15 @@ export class FeedbackComponent implements OnInit {
    */
   showDescription(): void {
     if (this.mediaContentList.length > 0) {
-      const description = this.mediaContentList[0].llmDescription
-      this.modalService.show({
-        title: '图片描述',
-        content: description || '暂无描述',
-        size: '3xl',
-        type: 'info',
+      this.submissionService.getMediaById(this.mediaContentList[0].id).subscribe((res: any) => {
+        console.log(res)
+        const description = res.data.llmDescription
+        this.modalService.show({
+          title: 'LLM 描述',
+          content: description || '暂无描述',
+          size: '3xl',
+          type: 'info',
+        })
       })
     }
   }
