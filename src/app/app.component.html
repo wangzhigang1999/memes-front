@@ -11,15 +11,18 @@
   </div>
 }
 
-<!-- 全局描述模态框 -->
-<input type="checkbox" id="description-modal" class="modal-toggle" [checked]="showDescriptionModal" />
-<div class="modal" role="dialog">
-  <div class="modal-box max-w-3xl">
-    <h3 class="font-bold text-lg">图片描述</h3>
-    <p class="py-4 whitespace-pre-wrap">{{ currentDescription }}</p>
-    <div class="modal-action">
-      <label for="description-modal" class="btn">关闭</label>
-    </div>
+<!-- 全局模态框 -->
+<div class="modal" [class.modal-open]="showModal">
+  <div class="modal-box" [class]="'max-w-' + modalConfig.size">
+    <h3 class="font-bold text-lg">{{ modalConfig.title }}</h3>
+    <p class="py-4 whitespace-pre-wrap">{{ modalConfig.content }}</p>
+    @if (modalConfig.showCloseButton) {
+      <div class="modal-action">
+        <button class="btn" (click)="modalService.hide()">关闭</button>
+      </div>
+    }
   </div>
-  <label class="modal-backdrop" for="description-modal">Close</label>
+  @if (modalConfig.showBackdrop) {
+    <div class="modal-backdrop" (click)="modalService.hide()"></div>
+  }
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { UserConfigItem } from './model/user-config-item'
-import { DescriptionModalService } from './service/description-modal.service'
+import { ModalConfig, ModalService } from './service/modal.service'
 import { getConfig, isSmallScreen } from './utils'
 
 @Component({
@@ -13,22 +13,25 @@ export class AppComponent implements OnInit {
   protected readonly ConfigItem = UserConfigItem
   protected readonly isSmallScreen = isSmallScreen
 
-  showDescriptionModal = false
-  currentDescription = ''
-
-  constructor(private descriptionModalService: DescriptionModalService) {}
-
-  ngOnInit() {
-    this.descriptionModalService.showModal$.subscribe(show => {
-      this.showDescriptionModal = show
-    })
-
-    this.descriptionModalService.description$.subscribe(description => {
-      this.currentDescription = description
-    })
+  showModal = false
+  modalConfig: ModalConfig = {
+    title: '',
+    content: '',
+    showCloseButton: true,
+    showBackdrop: true,
+    size: 'md',
+    type: 'info',
   }
 
-  closeDescription() {
-    this.descriptionModalService.hide()
+  constructor(public modalService: ModalService) {}
+
+  ngOnInit() {
+    this.modalService.showModal$.subscribe(show => {
+      this.showModal = show
+    })
+
+    this.modalService.config$.subscribe(config => {
+      this.modalConfig = config
+    })
   }
 }

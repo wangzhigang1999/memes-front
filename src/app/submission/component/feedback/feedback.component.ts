@@ -3,7 +3,7 @@ import { Config } from '../../../model/config'
 import { MediaContent } from '../../../model/media-content'
 import { UserConfigItem } from '../../../model/user-config-item'
 import { AdminService } from '../../../service/admin.service'
-import { DescriptionModalService } from '../../../service/description-modal.service'
+import { ModalService } from '../../../service/modal.service'
 import { SubmissionService } from '../../../service/submission.service'
 import { getConfig } from '../../../utils'
 
@@ -39,7 +39,7 @@ export class FeedbackComponent implements OnInit {
   constructor(
     private submissionService: SubmissionService,
     private adminService: AdminService,
-    private descriptionModalService: DescriptionModalService
+    private modalService: ModalService
   ) {}
   protected readonly getConfig = getConfig
   protected readonly Config = Config
@@ -56,11 +56,12 @@ export class FeedbackComponent implements OnInit {
   showDescription(): void {
     if (this.mediaContentList.length > 0) {
       const description = this.mediaContentList[0].llmDescription
-      if (description) {
-        this.descriptionModalService.show(description)
-      } else {
-        this.descriptionModalService.show('暂无描述')
-      }
+      this.modalService.show({
+        title: '图片描述',
+        content: description || '暂无描述',
+        size: '3xl',
+        type: 'info',
+      })
     }
   }
 
@@ -134,6 +135,11 @@ export class FeedbackComponent implements OnInit {
    * @param message 消息内容
    */
   private showMessage(message: string): void {
-    alert(message)
+    this.modalService.show({
+      title: '提示',
+      content: message,
+      size: 'sm',
+      type: 'info',
+    })
   }
 }
