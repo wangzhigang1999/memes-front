@@ -71,8 +71,8 @@
 <div class="modal modal-bottom md:modal-middle" role="dialog">
   <div class="modal-box">
     @if (fullMediaContent) {
-      <p class="py-4">{{ fullMediaContent?.llmDescription }}</p>
-      <p class="pb-2">{{ fullMediaContent?.rejectionReason }}</p>
+      <p class="py-4">{{ fullMediaContent.llmDescription }}</p>
+      <p class="pb-2">{{ fullMediaContent.rejectionReason }}</p>
     } @else {
       <div class="flex items-center justify-center">
         <div class="w-16 h-16 border-t-4 border-b-4 border-green-500 rounded-full animate-spin"></div>
