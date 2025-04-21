@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core'
+import { Config } from '../../../model/config'
+import { MediaContent } from '../../../model/media-content'
+import { UserConfigItem } from '../../../model/user-config-item'
 import { AdminService } from '../../../service/admin.service'
+import { DescriptionModalService } from '../../../service/description-modal.service'
 import { SubmissionService } from '../../../service/submission.service'
 import { getConfig } from '../../../utils'
-import { Config } from '../../../model/config'
-import { UserConfigItem } from '../../../model/user-config-item'
 
 /**
  * 反馈组件 - 处理用户对内容的反馈和管理员操作
@@ -22,7 +24,7 @@ export class FeedbackComponent implements OnInit {
   /** 是否为管理员模式 */
   @Input() adminMode = false
 
-  /** 内容ID */
+  /** 内容 ID */
   @Input() id!: string | any
 
   /** 点赞数 */
@@ -31,9 +33,13 @@ export class FeedbackComponent implements OnInit {
   /** 踩数 */
   @Input() dislike!: number
 
+  /** 媒体内容列表 */
+  @Input() mediaContentList: MediaContent[] = []
+
   constructor(
     private submissionService: SubmissionService,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private descriptionModalService: DescriptionModalService
   ) {}
   protected readonly getConfig = getConfig
   protected readonly Config = Config
@@ -45,12 +51,26 @@ export class FeedbackComponent implements OnInit {
   }
 
   /**
+   * 显示图片描述
+   */
+  showDescription(): void {
+    if (this.mediaContentList.length > 0) {
+      const description = this.mediaContentList[0].llmDescription
+      if (description) {
+        this.descriptionModalService.show(description)
+      } else {
+        this.descriptionModalService.show('暂无描述')
+      }
+    }
+  }
+
+  /**
    * 添加置顶
    */
   pin(): void {
     this.adminService.pin(this.id).subscribe({
       next: () => this.showMessage('置顶成功'),
-      error: error => this.showMessage(`置顶失败: ${error.message}`),
+      error: error => this.showMessage(`置顶失败：${error.message}`),
     })
   }
 
@@ -64,7 +84,7 @@ export class FeedbackComponent implements OnInit {
       return
     }
 
-    // 更新UI状态
+    // 更新 UI 状态
     this.liked = like
     this.disliked = !like
 
@@ -90,16 +110,16 @@ export class FeedbackComponent implements OnInit {
   unpin(): void {
     this.adminService.unpin(this.id).subscribe({
       next: () => this.showMessage('取消置顶成功'),
-      error: error => this.showMessage(`取消置顶失败: ${error.message}`),
+      error: error => this.showMessage(`取消置顶失败：${error.message}`),
     })
   }
 
   /**
    * 检查用户之前的反馈状态
-   * 可以从localStorage读取用户对该内容的反馈历史
+   * 可以从 localStorage 读取用户对该内容的反馈历史
    */
   private checkPreviousFeedback(): void {
-    // 实现从localStorage读取用户反馈历史的逻辑
+    // 实现从 localStorage 读取用户反馈历史的逻辑
     // 例如：
     const feedbackHistory = localStorage.getItem(`feedback_${this.id}`)
     if (feedbackHistory === 'like') {

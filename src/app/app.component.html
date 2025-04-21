@@ -10,3 +10,16 @@
     <router-outlet></router-outlet>
   </div>
 }
+
+<!-- 全局描述模态框 -->
+<input type="checkbox" id="description-modal" class="modal-toggle" [checked]="showDescriptionModal" />
+<div class="modal" role="dialog">
+  <div class="modal-box max-w-3xl">
+    <h3 class="font-bold text-lg">图片描述</h3>
+    <p class="py-4 whitespace-pre-wrap">{{ currentDescription }}</p>
+    <div class="modal-action">
+      <label for="description-modal" class="btn">关闭</label>
+    </div>
+  </div>
+  <label class="modal-backdrop" for="description-modal">Close</label>
+</div>
