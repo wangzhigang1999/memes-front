@@ -33,6 +33,7 @@ export interface MediaContent {
   status: ContentStatus
   createdAt: string // Using string as LocalDateTime maps to string
   updatedAt: string // Using string as LocalDateTime maps to string
+  sharpReview: string
 }
 
 export interface MediaContentBuilder {
@@ -50,6 +51,7 @@ export interface MediaContentBuilder {
   status?: ContentStatus
   createdAt?: string
   updatedAt?: string
+  sharpReview?: string
 
   withId(id: number): MediaContentBuilder
 
@@ -79,6 +81,8 @@ export interface MediaContentBuilder {
 
   withUpdatedAt(updatedAt: string): MediaContentBuilder
 
+  withSharpReview(sharpReview: string): MediaContentBuilder
+
   build(): MediaContent
 }
 
@@ -97,6 +101,7 @@ export class MediaContentImpl implements MediaContent {
   status: ContentStatus
   createdAt: string
   updatedAt: string
+  sharpReview: string
 
   constructor(builder: MediaContentBuilder) {
     this.id = builder.id || 0 // Providing default value
@@ -113,6 +118,7 @@ export class MediaContentImpl implements MediaContent {
     this.status = builder.status || ContentStatus.PENDING // Providing default value
     this.createdAt = builder.createdAt || '' // Providing default value
     this.updatedAt = builder.updatedAt || '' // Providing default value
+    this.sharpReview = builder.sharpReview || ''
   }
 }
 
@@ -131,6 +137,7 @@ export class MediaContentBuilderImpl implements MediaContentBuilder {
   status?: ContentStatus
   createdAt?: string
   updatedAt?: string
+  sharpReview?: string
 
   withId(id: number): MediaContentBuilder {
     this.id = id
@@ -199,6 +206,10 @@ export class MediaContentBuilderImpl implements MediaContentBuilder {
 
   withUpdatedAt(updatedAt: string): MediaContentBuilder {
     this.updatedAt = updatedAt
+    return this
+  }
+  withSharpReview(sharpReview: string): MediaContentBuilder {
+    this.sharpReview = sharpReview
     return this
   }
 

@@ -57,11 +57,11 @@ export class FeedbackComponent implements OnInit {
   showDescription(): void {
     if (this.mediaContentList.length > 0) {
       this.submissionService.getMediaById(this.mediaContentList[0].id).subscribe((res: any) => {
-        console.log(res)
-        const description = res.data.llmDescription
+        const mediaContent: MediaContent = res.data
+
         this.modalService.show({
-          title: 'LLM 描述',
-          content: description || '暂无描述',
+          title: 'LLM 锐评',
+          content: mediaContent.sharpReview || mediaContent.llmDescription || '暂无描述',
           size: '3xl',
           type: 'info',
         })
