@@ -38,4 +38,8 @@ export class CardComponent {
   trackByMediaId(index: number, item: MediaContent): number {
     return item.id
   }
+
+  onDeleted($event: string) {
+    console.log($event)
+  }
 }

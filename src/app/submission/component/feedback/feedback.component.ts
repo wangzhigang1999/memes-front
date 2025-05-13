@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core'
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { Config } from '../../../model/config'
 import { MediaContent } from '../../../model/media-content'
 import { UserConfigItem } from '../../../model/user-config-item'
@@ -35,6 +35,9 @@ export class FeedbackComponent implements OnInit {
 
   /** 媒体内容列表 */
   @Input() mediaContentList: MediaContent[] = []
+
+  /** 删除后的事件通知 */
+  @Output() onDeleted = new EventEmitter<string>()
 
   constructor(
     private submissionService: SubmissionService,
@@ -117,6 +120,21 @@ export class FeedbackComponent implements OnInit {
       next: () => this.showMessage('取消置顶成功'),
       error: error => this.showMessage(`取消置顶失败：${error.message}`),
     })
+  }
+
+  /**
+   * 删除提交内容
+   */
+  deleteSubmission(): void {
+    if (confirm('确定要删除这条内容吗？此操作不可撤销。')) {
+      this.adminService.deleteSubmission(this.id).subscribe({
+        next: () => {
+          this.showMessage('删除成功')
+          this.onDeleted.emit(this.id)
+        },
+        error: error => this.showMessage(`删除失败：${error.message}`),
+      })
+    }
   }
 
   /**

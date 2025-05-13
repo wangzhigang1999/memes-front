@@ -20,6 +20,7 @@
       [id]="submission.id"
       [like]="submission.likesCount"
       [mediaContentList]="submission.mediaContentList"
+      (onDeleted)="onDeleted($event)"
     ></app-feedback>
   </div>
 </div>

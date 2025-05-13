@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { environment } from '../../environments/environment'
+import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
+import { environment } from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +36,14 @@ export class AdminService {
    */
   unpin(id: string): Observable<any> {
     let url = this.host + `/api/submission/${id}/pin`
+    return this.http.delete(url)
+  }
+
+  /**
+   * 删除提交内容
+   */
+  deleteSubmission(id: string): Observable<any> {
+    let url = this.host + `/api/submission/${id}`
     return this.http.delete(url)
   }
 
