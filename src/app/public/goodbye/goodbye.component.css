@@ -1,8 +1,7 @@
 /* 中国风字体 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700;900&display=block');
+@import url('https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing:wght@400&display=block');
 
-/* 整体样式优化 */
 .h-screen {
   font-family: 'Noto Serif SC', 'Zhi Mang Xing', serif;
 }
@@ -489,6 +488,60 @@ html {
   100% {
     opacity: 1;
     transform: rotate(-15deg) scale(1);
+  }
+}
+
+/* 底部鼓励文字样式 */
+.chinese-encouragement-text {
+  font-family: 'Zhi Mang Xing', 'Noto Serif SC', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #2d1810;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.1em;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, rgba(245, 242, 232, 0.9) 0%, rgba(232, 220, 192, 0.8) 100%);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(139, 115, 85, 0.3);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  animation: encouragement-fade-in 4s ease-out both;
+  position: relative;
+  overflow: hidden;
+}
+
+.chinese-encouragement-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: text-shimmer 3s ease-in-out infinite;
+  animation-delay: 5s;
+}
+
+@keyframes encouragement-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes text-shimmer {
+  0%, 100% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
   }
 }
 
