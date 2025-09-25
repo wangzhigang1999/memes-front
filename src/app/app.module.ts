@@ -12,27 +12,28 @@ import { AuthGuard } from './auth.guard'
 
 import { EndComponent } from './public/end/end.component'
 import { FixMenuComponent } from './public/fix-menu/fix-menu.component'
+import { GoodbyeComponent } from './public/goodbye/goodbye.component'
 import { HeaderComponent } from './public/header/header.component'
 import { ReviewComponent } from './review/review.component'
 import { SafePipe } from './safe.pipe'
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { NgxMasonryModule } from 'ngx-masonry'
+import { ConfigComponent } from './config/config.component'
+import { LazyLoadDirective } from './lazy-load.directive'
+import { RoundPipe } from './round.pipe'
 import { StatisticComponent } from './statistic/statistic.component'
 import { CardComponent } from './submission/component/card/card.component'
-import { TopComponent } from './submission/component/top/top.component'
 import { FeedbackComponent } from './submission/component/feedback/feedback.component'
+import { MediaComponent } from './submission/component/media/media.component'
+import { TopComponent } from './submission/component/top/top.component'
 import { EndlessComponent } from './submission/endless/endless.component'
 import { SubmitComponent } from './submission/submit/submit.component'
 import { TruncatePipe } from './truncate.pipe'
 import { UUIDInterceptor } from './uuid.interceptor'
-import { NgxMasonryModule } from 'ngx-masonry'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { ConfigComponent } from './config/config.component'
-import { LazyLoadDirective } from './lazy-load.directive'
-import { MediaComponent } from './submission/component/media/media.component'
-import { RoundPipe } from './round.pipe'
 
 const routes: Routes = [
-  { path: '', component: EndlessComponent },
+  { path: '', component: GoodbyeComponent },
   { path: 'endless', component: EndlessComponent },
   { path: 'submit', component: SubmitComponent },
   { path: 'review', component: ReviewComponent },
@@ -42,13 +43,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'config', component: ConfigComponent },
-  { path: '**', component: EndlessComponent },
+  { path: '**', component: GoodbyeComponent },
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
     FeedbackComponent,
+    GoodbyeComponent,
     HeaderComponent,
     CardComponent,
     SafePipe,

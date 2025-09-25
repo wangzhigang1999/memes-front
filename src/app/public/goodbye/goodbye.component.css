@@ -1,0 +1,499 @@
+/* 中国风字体 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing:wght@400&display=swap');
+
+/* 整体样式优化 */
+.h-screen {
+  font-family: 'Noto Serif SC', 'Zhi Mang Xing', serif;
+}
+
+/* 中国风背景 */
+.chinese-bg {
+  background: linear-gradient(135deg, #f5f2e8 0%, #e8dcc0 50%, #d4c4a8 100%);
+}
+
+/* 宣纸纹理 */
+.rice-paper-texture {
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(139, 115, 85, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(139, 115, 85, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(139, 115, 85, 0.04) 0%, transparent 50%);
+  background-size: 300px 300px, 400px 400px, 200px 200px;
+  background-position: 0 0, 100px 100px, 200px 50px;
+}
+
+/* 水墨背景 */
+.ink-wash-bg {
+  background-image:
+    radial-gradient(ellipse 800px 400px at 50% 0%, rgba(101, 67, 33, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 300px at 20% 100%, rgba(85, 51, 17, 0.06) 0%, transparent 80%);
+}
+
+/* 山水背景 */
+.mountain-bg {
+  background-image:
+    linear-gradient(to top, rgba(139, 115, 85, 0.1) 0%, transparent 40%),
+    radial-gradient(ellipse 200px 100px at 30% 80%, rgba(101, 67, 33, 0.15) 0%, transparent 70%),
+    radial-gradient(ellipse 150px 80px at 70% 85%, rgba(85, 51, 17, 0.12) 0%, transparent 70%);
+}
+
+/* 竹影效果 */
+.bamboo-shadow {
+  width: 120px;
+  height: 300px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(85, 51, 17, 0.08) 20%,
+    rgba(85, 51, 17, 0.12) 50%,
+    rgba(85, 51, 17, 0.08) 80%,
+    transparent 100%);
+  clip-path: polygon(30% 0%, 70% 0%, 65% 100%, 35% 100%);
+  animation: bamboo-sway 8s ease-in-out infinite;
+}
+
+/* 墨点效果 */
+.ink-dot {
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, rgba(51, 51, 51, 0.8) 0%, rgba(51, 51, 51, 0.4) 50%, transparent 100%);
+  border-radius: 50%;
+  animation: ink-spread 12s ease-in-out infinite;
+}
+
+.ink-dot-1 {
+  animation-delay: 0s;
+}
+
+.ink-dot-2 {
+  width: 12px;
+  height: 12px;
+  animation-delay: 4s;
+}
+
+.ink-dot-3 {
+  width: 6px;
+  height: 6px;
+  animation-delay: 8s;
+}
+
+/* 云雾效果 */
+.mist {
+  width: 300px;
+  height: 100px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.1) 80%,
+    transparent 100%);
+  border-radius: 50px;
+  animation: mist-flow 25s ease-in-out infinite;
+}
+
+.mist-1 {
+  animation-delay: 0s;
+}
+
+.mist-2 {
+  width: 250px;
+  height: 80px;
+  animation-delay: 12s;
+  animation-direction: reverse;
+}
+
+/* 动画延迟类 */
+.animation-delay-1000 {
+  animation-delay: 1s;
+}
+
+.animation-delay-1500 {
+  animation-delay: 1.5s;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-3000 {
+  animation-delay: 3s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* 中国文字体 */
+.chinese-text {
+  font-family: 'Noto Serif SC', 'Zhi Mang Xing', serif;
+  color: #2d1810;
+  font-weight: 400;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 中国书法字体 */
+.chinese-script {
+  font-family: 'Zhi Mang Xing', 'Noto Serif SC', serif;
+  font-weight: 400;
+}
+
+/* 毛笔画线效果 */
+.ink-brush-stroke {
+  position: relative;
+  background: linear-gradient(90deg, transparent 0%, #8b7355 50%, transparent 100%);
+  height: 2px;
+  border-radius: 1px;
+}
+
+/* 墨水流动动画 */
+.animate-ink-flow {
+  animation: ink-flow 3s ease-out both;
+}
+
+/* 淡入动画 */
+.animate-fade-in {
+  animation: fadeIn 2.5s ease-out both;
+}
+
+
+/* 动画定义 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes ink-flow {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+    filter: blur(2px);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.02) translateY(-5px);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes bamboo-sway {
+  0%, 100% {
+    transform: rotate(0deg) scaleY(1);
+  }
+  25% {
+    transform: rotate(1deg) scaleY(1.02);
+  }
+  50% {
+    transform: rotate(-0.5deg) scaleY(0.98);
+  }
+  75% {
+    transform: rotate(0.8deg) scaleY(1.01);
+  }
+}
+
+@keyframes ink-spread {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.4;
+  }
+}
+
+@keyframes mist-flow {
+  0% {
+    transform: translateX(-100px) scale(0.8);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateX(50px) scale(1.1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(200px) scale(0.9);
+    opacity: 0.2;
+  }
+}
+
+
+/* 响应式设计优化 */
+@media (max-width: 1280px) {
+  .text-7xl {
+    font-size: 4rem;
+  }
+
+  .text-8xl {
+    font-size: 5rem;
+  }
+
+  .text-9xl {
+    font-size: 6rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .text-7xl {
+    font-size: 3.5rem;
+  }
+
+  .text-8xl {
+    font-size: 4.5rem;
+  }
+
+  .text-9xl {
+    font-size: 5.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .text-5xl {
+    font-size: 2.5rem;
+  }
+
+  .text-6xl {
+    font-size: 3rem;
+  }
+
+  .text-7xl {
+    font-size: 3.5rem;
+  }
+
+  .text-8xl {
+    font-size: 4rem;
+  }
+
+  .text-9xl {
+    font-size: 4.5rem;
+  }
+
+  .mb-8 {
+    margin-bottom: 1.5rem;
+  }
+
+  .mb-12 {
+    margin-bottom: 2rem;
+  }
+
+  .mb-16 {
+    margin-bottom: 3rem;
+  }
+
+  .pb-16 {
+    padding-bottom: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .text-5xl {
+    font-size: 2rem;
+  }
+
+  .text-6xl {
+    font-size: 2.5rem;
+  }
+
+  .text-7xl {
+    font-size: 3rem;
+  }
+
+  .text-8xl {
+    font-size: 3.5rem;
+  }
+
+  .text-9xl {
+    font-size: 4rem;
+  }
+
+  .mb-8 {
+    margin-bottom: 1rem;
+  }
+
+  .mb-12 {
+    margin-bottom: 1.5rem;
+  }
+
+  .mb-16 {
+    margin-bottom: 2rem;
+  }
+
+  .pb-16 {
+    padding-bottom: 1.5rem;
+  }
+
+  .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* 移动端优化云朵大小 */
+  .cloud-1 {
+    width: 120px;
+    height: 36px;
+  }
+
+  .cloud-2 {
+    width: 90px;
+    height: 24px;
+  }
+
+  .cloud-3 {
+    width: 108px;
+    height: 30px;
+  }
+}
+
+/* 平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 中国古典诗句样式 */
+.chinese-classical-poetry {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  animation: poetry-fade-in 5s ease-out both;
+}
+
+.chinese-classical-poetry:first-child {
+  animation-delay: 3s;
+}
+
+.chinese-classical-poetry:nth-child(2) {
+  animation-delay: 3.5s;
+}
+
+.chinese-classical-poetry:nth-child(3) {
+  animation-delay: 4s;
+}
+
+/* 古典云纹装饰 */
+.classical-cloud-decoration {
+  width: 24px;
+  height: 12px;
+  background: linear-gradient(45deg,
+    rgba(139, 115, 85, 0.2) 0%,
+    rgba(139, 115, 85, 0.4) 50%,
+    rgba(139, 115, 85, 0.2) 100%);
+  border-radius: 12px 6px 12px 6px;
+  position: relative;
+  animation: cloud-decoration-float 6s ease-in-out infinite;
+}
+
+.classical-cloud-decoration:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.classical-cloud-decoration:nth-child(2) {
+  animation-delay: 2s;
+}
+
+/* 竹叶装饰图案 */
+.bamboo-leaf-motif {
+  width: 60px;
+  height: 20px;
+  background: linear-gradient(135deg,
+    rgba(34, 139, 34, 0.15) 0%,
+    rgba(34, 139, 34, 0.25) 50%,
+    rgba(34, 139, 34, 0.15) 100%);
+  clip-path: polygon(10% 50%, 90% 20%, 90% 80%, 10% 50%);
+  position: relative;
+  animation: bamboo-leaf-sway 8s ease-in-out infinite;
+}
+
+@keyframes poetry-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(15px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes cloud-decoration-float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-3px) scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+@keyframes bamboo-leaf-sway {
+  0%, 100% {
+    transform: rotate(-1deg) scale(1);
+  }
+  25% {
+    transform: rotate(1deg) scale(1.05);
+  }
+  50% {
+    transform: rotate(0deg) scale(1.1);
+  }
+  75% {
+    transform: rotate(-0.5deg) scale(1.05);
+  }
+}
+
+/* 印章效果 */
+.seal-mark {
+  width: 24px;
+  height: 24px;
+  background: radial-gradient(circle, #8b1818 0%, #5a0f0f 70%, #2d0808 100%);
+  border-radius: 2px;
+  transform: rotate(-15deg);
+  position: relative;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  animation: seal-appear 4.5s ease-out both;
+}
+
+.seal-mark::before {
+  content: '印';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Noto Serif SC', serif;
+  font-size: 10px;
+  color: #f5f2e8;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+@keyframes seal-appear {
+  0% {
+    opacity: 0;
+    transform: rotate(-15deg) scale(0.5);
+  }
+  70% {
+    opacity: 0;
+    transform: rotate(-15deg) scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(-15deg) scale(1);
+  }
+}
+
+/* 自定义选择器样式 */
+::selection {
+  background: rgba(255, 255, 255, 0.3);
+}
+
